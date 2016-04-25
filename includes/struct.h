@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 17:47:16 2016 victor sousa
-** Last update Mon Apr 25 02:38:46 2016 victor sousa
+** Last update Mon Apr 25 02:56:39 2016 victor sousa
 */
 
 #ifndef			STRUCT_H_
@@ -33,13 +33,11 @@ typedef struct          s_sphere
   char                  material;
 }                       t_sphere;
 
-typedef struct		s_cone
+typedef struct		s_triangle
 {
-  t_coord		center;
-  int			height;
-  int			radius;
-  char			material;
-}			t_cone;
+  t_coord		angle[3];
+  char                  material;
+}			t_triangle;
 
 typedef struct		s_mat_list
 {
@@ -82,7 +80,6 @@ typedef struct		s_raycast
   t_coord               new_point;
   t_coord               normale;
   t_sphere              *sphere;
-  float                 tmp_float;
   t_light_list          *light_list;
   t_ray                 light_ray;
   int                   in_shadow;

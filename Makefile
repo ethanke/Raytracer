@@ -20,7 +20,7 @@ CFLAGS		=	-L/home/${USER}/.froot/lib/ -llapin 	\
 			-lstdc++ -ldl -lm			\
 			-Iincludes
 
-CFLAGS		+=	-W -Werror -Wall -ansi -pedantic
+CFLAGS		+=	-W -Wall -ansi -pedantic
 
 ##  MAIN  ##
 SRC		=	src/main.c				\
@@ -33,7 +33,8 @@ SRC		+=	src/loading/parsing_scene.c		\
 			src/loading/load_mat_param.c		\
 			src/loading/load_light.c		\
 			src/loading/load_obj.c			\
-			src/loading/load_sphere_param.c
+			src/loading/load_sphere_param.c		\
+			src/loading/load_triangle_param.c
 
 ##  HIT  ##
 SRC		+=	src/hit/sphere.c			\

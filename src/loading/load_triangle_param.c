@@ -5,12 +5,13 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:13:22 2016 victor sousa
-** Last update Mon Apr 25 03:28:53 2016 victor sousa
+** Last update Mon Apr 25 03:31:30 2016 victor sousa
 */
 
 #include	"main.h"
 
-static int		get_center(t_sphere *s, char **file, int id)
+/*
+static int		get_center(t_triangle *t, char **file, int id)
 {
   char			*lf;
   char			*get;
@@ -23,23 +24,24 @@ static int		get_center(t_sphere *s, char **file, int id)
   lf[21] = id + 49;
   if ((get = get_field(file, lf)) == NULL)
     return (1);
-  s->center.x = my_getnbr(get);
+  t->center.x = my_getnbr(get);
   free(get);
   lf[30] = 'y';
   if ((get = get_field(file, lf)) == NULL)
     return (1);
-  s->center.y = my_getnbr(get);
+  t->center.y = my_getnbr(get);
   free(get);
   lf[30] = 'z';
   if ((get = get_field(file, lf)) == NULL)
     return (1);
-  s->center.z = my_getnbr(get);
+  t->center.z = my_getnbr(get);
   free(get);
   free(lf);
   return (0);
 }
-
-static int		get_radius(t_sphere *s, char **file, int id)
+*/
+/*
+static int		get_radius(t_triangle *t, char **file, int id)
 {
   char			*lf;
   char			*get;
@@ -52,13 +54,14 @@ static int		get_radius(t_sphere *s, char **file, int id)
   lf[21] = id + 49;
   if ((get = get_field(file, lf)) == NULL)
     return (1);
-  s->radius = my_getnbr(get);
+  t->radius = my_getnbr(get);
   free(get);
   free(lf);
   return (0);
 }
+*/
 
-static int		get_mat_id(t_sphere *s, char **file, int id)
+static int		get_mat_id(t_triangle *t, char **file, int id)
 {
   char			*lf;
   char			*get;
@@ -71,29 +74,26 @@ static int		get_mat_id(t_sphere *s, char **file, int id)
   lf[21] = id + 49;
   if ((get = get_field(file, lf)) == NULL)
     return (1);
-  s->material = my_getnbr(get);
+  t->material = my_getnbr(get);
   free(get);
   free(lf);
   return (0);
 }
 
-t_obj_list              *add_sphere(t_obj_list *prev, char **file, int id)
+t_obj_list              *add_triangle(t_obj_list *prev, char **file, int id)
 {
   t_obj_list            *new;
-  t_sphere              *s;
+  t_triangle              *t;
 
   if ((new = malloc(sizeof(t_obj_list))) == NULL)
     return (NULL);
-  if ((s = malloc(sizeof(t_sphere))) == NULL)
+  if ((t = malloc(sizeof(t_triangle))) == NULL)
     return (NULL);
-  if (get_center(s, file, id) != 0)
+  printf("triangle\n");
+  if (get_mat_id(t, file, id) != 0)
     return (NULL);
-  if (get_radius(s, file, id) != 0)
-    return (NULL);
-  if (get_mat_id(s, file, id) != 0)
-    return (NULL);
-  new->obj = s;
-  new->type = 's';
+  new->obj = t;
+  new->type = 't';
   new->next = prev;
   return (new);
 }

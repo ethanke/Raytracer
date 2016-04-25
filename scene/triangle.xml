@@ -50,7 +50,7 @@
   </material_list>
 
   <object_list>
-    <count>5</count>
+    <count>6</count>
 
     <obj1>
       <type>sphere</type>
@@ -106,6 +106,26 @@
       <radius>100</radius>
       <material_id>5</material_id>
     </obj5>
+
+    <obj6>
+      <type>triangle</type>
+      <p1>
+	<x>532</x>
+	<y>170</y>
+	<z>0</z>
+      </p1>
+      <p2>
+	<x>420</x>
+	<y>340</y>
+	<z>0</z>
+      </p2>
+      <p3>
+	<x>320</x>
+	<y>130</y>
+	<z>0</z>
+      </p3>
+      <material_id>3</material_id>
+    </obj6>
   </object_list>
 
   <light_list>

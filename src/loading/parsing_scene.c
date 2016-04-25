@@ -1,11 +1,11 @@
 /*
 ** parsing_scene.c for raytracer1 in /home/sousa_v/rendu/lapin/gfx_raytracer1
-** 
+**
 ** Made by victor sousa
 ** Login   <sousa_v@epitech.net>
-** 
+**
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Sun Mar 13 20:21:34 2016 victor sousa
+** Last update Mon Apr 25 02:57:54 2016 victor sousa
 */
 
 #include		"main.h"
@@ -49,12 +49,10 @@ int			load_scene(t_prog *prog, char *scene_path)
     return (-1);
   prog->win_size.x = my_getnbr(get);
   free(get);
-
   if ((get = get_field(file, "scene:view:y_size")) == NULL)
     return (-1);
   prog->win_size.y = my_getnbr(get);
   free(get);
-
   if (load_mat(prog, file) == -1 ||
       load_light(prog, file) == -1 ||
       load_obj(prog, file) == -1)

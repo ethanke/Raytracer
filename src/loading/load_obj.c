@@ -1,11 +1,11 @@
 /*
 ** load_sphere.c for raytracer in /home/sousa_v/rendu/lapin/gfx_raytracer1
-** 
+**
 ** Made by victor sousa
 ** Login   <sousa_v@epitech.net>
-** 
+**
 ** Started on  Thu Mar 10 23:26:06 2016 victor sousa
-** Last update Thu Mar 10 23:54:01 2016 victor sousa
+** Last update Mon Apr 25 02:58:48 2016 victor sousa
 */
 
 #include		"main.h"
@@ -30,6 +30,12 @@ int			while_load_obj(char **file, char *get,
 	      == NULL)
 	    return (-1);
 	}
+      else if (my_strstr(get, "triangle"))
+      	{
+	  if ((prog->obj_list = add_triangle(prog->obj_list, file, i))
+	      == NULL)
+	    return (-1);
+      	}
       else
 	return (-1);
       free(get);
