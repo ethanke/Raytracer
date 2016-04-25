@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Mon Apr 25 23:38:14 2016 Gaëtan Léandre
-** Last update Tue Apr 26 01:25:32 2016 Gaëtan Léandre
+** Last update Tue Apr 26 01:31:37 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -76,7 +76,7 @@ t_obj_list		*create_square(char *str, t_obj_list *prev, t_vtx_list *list)
 
   if ((new = malloc(sizeof(t_obj_list))) == NULL)
     return (NULL);
-  if ((t = malloc(sizeof(t_triangle))) == NULL)
+  if ((t = malloc(sizeof(t_square))) == NULL)
     return (NULL);
   i = (j = 0) * 0;
   pos = 0;
