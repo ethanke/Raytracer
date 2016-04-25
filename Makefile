@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ## 
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Sun Mar 13 22:38:13 2016 victor sousa
+## Last update Mon Apr 25 00:23:03 2016 Kerdelhue Ethan
 ##
 
 NAME		=	raytracer1
@@ -18,7 +18,7 @@ CFLAGS		=	-L/home/${USER}/.froot/lib/ -llapin 	\
 			-lsfml-window 				\
 			-lsfml-system 				\
 			-lstdc++ -ldl -lm			\
-			-Iincludes
+			-Iincludes -g3
 
 CFLAGS		+=	-W -Wall -ansi -pedantic
 
@@ -56,11 +56,14 @@ SRC		+=	src/editeur/editor.c
 ##  UTILS  ##
 SRC		+=	src/utils/my_tablen.c			\
 			src/utils/my_str_to_wordtab.c		\
+			src/utils/str_to_wordtab.c		\
 			src/utils/my_strstr.c			\
+			src/utils/my_strlen.c			\
 			src/utils/my_strcat.c			\
 			src/utils/my_getnbr.c			\
 			src/utils/my_realloc.c			\
 			src/utils/key_handle.c			\
+			src/utils/get_next_line.c		\
 			src/utils/vect_operator.c		\
 			src/utils/vect_operator2.c		\
 			src/utils/wtf.c

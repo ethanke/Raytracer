@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 05:29:22 2016 victor sousa
-** Last update Mon Apr 25 02:26:59 2016 victor sousa
+** Last update Mon Apr 25 05:57:34 2016 Ethan Kerdelhue
 */
 
 #ifndef			UTILS_H_
@@ -18,8 +18,12 @@ int			my_tablen(char **str);
 char			*my_strstr(char *str, char *to_find);
 char			*my_strcat(char *dest, char *src);
 char			**my_str_to_wordtab(char *str, int i, int j);
+char			**str_to_wordtab(char *str, char *delim);
 int			my_getnbr(char *str);
 char			*my_realloc(char *str, int size);
+char			*get_next_line(const int fd);
+int			my_strcmp(char *s1, char *s2);
+int			my_strncmp(char *s1, char *s2, int nb);
 
 /* vector operator */
 float                   mult_vector(const t_coord v1, const t_coord v2);

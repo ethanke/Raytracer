@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 17:47:16 2016 victor sousa
-** Last update Mon Apr 25 04:19:08 2016 Victor Sousa
+** Last update Mon Apr 25 05:55:52 2016 Ethan Kerdelhue
 */
 
 #ifndef			STRUCT_H_
@@ -102,6 +102,8 @@ typedef struct          s_prog
   t_light_list		*light_list;
   t_bunny_window        *win;
   t_bunny_pixelarray    *pix;
+  struct s_cmd		*cmd;
+  char			**arg;
 }                       t_prog;
 
 #endif		      /*STRUCT_H*/

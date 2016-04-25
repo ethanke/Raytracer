@@ -1,8 +1,8 @@
 <scene>
 
   <view>
-    <x_size>640</x_size>
-    <y_size>480</y_size>
+    <x_size>1080</x_size>
+    <y_size>720</y_size>
   </view>
 
   <material_list>
@@ -20,8 +20,8 @@
       <red>255</red>
       <green>255</green>
       <blue>25</blue>
-      <reflect>500</reflect>
-      <power>60</power>
+      <reflect>250</reflect>
+      <power>100</power>
     </mat2>
 
     <mat3>
