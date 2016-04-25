@@ -1,22 +1,28 @@
 /*
 ** main.c for raytracer1 in /home/sousa_v/rendu/lapin/gfx_raytracer1
-** 
+**
 ** Made by victor sousa
 ** Login   <sousa_v@epitech.net>
-** 
+**
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Fri Mar 11 05:03:59 2016 victor sousa
+** Last update Mon Apr 25 04:03:22 2016 victor sousa
 */
 
 #include		"main.h"
 
-int			verif_arg(int ac, char **env)
+int			verif_arg(int ac, char **av, char **env)
 {
   if (env == NULL)
     return (-1);
   if (ac != 2)
     {
       my_putstr("usage: ./raytracer1 [path/to/scene.xml]\n");
+      my_putstr("       ./raytracer1 --edit\n");
+      return (-1);
+    }
+  if (my_strstr("--edit", av[1]))
+    {
+      editor();
       return (-1);
     }
   return (0);
@@ -64,7 +70,7 @@ int			main(int ac, char *av[], char *env[])
 {
   t_prog		prog;
 
-  if (verif_arg(ac, env) != 0 ||
+  if (verif_arg(ac, av, env) != 0 ||
       verif_load(&prog, av) != 0 ||
       create_pix(&prog) != 0 ||
       create_win(&prog) != 0)

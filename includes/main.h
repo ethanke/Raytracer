@@ -1,11 +1,11 @@
 /*
 ** main.h for raytracer1 in /home/sousa_v/rendu/lapin/gfx_raytracer1
-** 
+**
 ** Made by victor sousa
 ** Login   <sousa_v@epitech.net>
-** 
+**
 ** Started on  Tue Feb  9 01:45:54 2016 victor sousa
-** Last update Sun Mar 13 20:22:52 2016 victor sousa
+** Last update Mon Apr 25 04:03:51 2016 victor sousa
 */
 
 #ifndef			MAIN_H_
@@ -24,6 +24,7 @@
 # include		"hit.h"
 # include		"loading.h"
 # include		"utils.h"
+# include		"editor.h"
 # include		"xml.h"
 
 # define		Deg_To_Rad(ang)	((ang) / 180.0 * M_PI)

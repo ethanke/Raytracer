@@ -49,6 +49,9 @@ SRC		+=	src/raytrace/raytrace.c			\
 ##  XML  ##
 SRC		+=	src/xml/get_field.c
 
+##  EDITEUR  ##
+SRC		+=	src/editeur/editor.c
+
 ##  UTILS  ##
 SRC		+=	src/utils/my_tablen.c			\
 			src/utils/my_str_to_wordtab.c		\
