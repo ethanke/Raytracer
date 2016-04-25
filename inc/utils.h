@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 05:29:22 2016 victor sousa
-** Last update Mon Apr 25 06:30:47 2016 Victor Sousa
+** Last update Mon Apr 25 09:24:00 2016 Victor Sousa
 */
 
 #ifndef			UTILS_H_
@@ -20,6 +20,7 @@ char			*my_strcat(char *dest, char *src);
 char			**my_str_to_wordtab(char *str, int i, int j);
 char			**str_to_wordtab(char *str, char *delim);
 int			my_getnbr(char *str);
+float			my_get_float(char *p);
 char			*my_realloc(char *str, int size);
 char			*get_next_line(const int fd);
 int			my_strcmp(char *s1, char *s2);

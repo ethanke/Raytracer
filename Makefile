@@ -53,7 +53,8 @@ SRC		+=	src/loading/parsing_scene.c		\
 			src/loading/load_light.c		\
 			src/loading/load_obj.c			\
 			src/loading/load_sphere_param.c		\
-			src/loading/load_triangle_param.c
+			src/loading/load_triangle_param.c	\
+			src/loading/load_obj_file.c
 
 ##  HIT  ##
 SRC		+=	src/hit/hit.c				\
@@ -94,6 +95,7 @@ SRC		+=	src/utils/my_tablen.c			\
 			src/utils/my_strlen.c			\
 			src/utils/my_strcat.c			\
 			src/utils/my_getnbr.c			\
+			src/utils/my_get_float.c		\
 			src/utils/my_realloc.c			\
 			src/utils/key_handle.c			\
 			src/utils/get_next_line.c		\

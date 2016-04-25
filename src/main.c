@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Mon Apr 25 04:03:22 2016 victor sousa
+** Last update Mon Apr 25 08:35:03 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -16,8 +16,9 @@ int			verif_arg(int ac, char **av, char **env)
     return (-1);
   if (ac != 2)
     {
-      my_putstr("usage: ./raytracer1 [path/to/scene.xml]\n");
-      my_putstr("       ./raytracer1 --edit\n");
+      my_putstr("usage: ./raytracer2 [path/to/scene.xml]\n");
+      my_putstr("  OR   ./raytracer2 [path/to/scene.obj]\n");
+      my_putstr("  OR   ./raytracer2 --edit\n");
       return (-1);
     }
   if (my_strstr("--edit", av[1]))
@@ -30,7 +31,20 @@ int			verif_arg(int ac, char **av, char **env)
 
 int			verif_load(t_prog *prog, char **av)
 {
- if (load_scene(prog, av[1]) == -1)
+  int			ret;
+
+  ret = -1;
+  if (av[1][my_strlen(av[1]) - 1] == 'l' &&
+      av[1][my_strlen(av[1]) - 2] == 'm' &&
+      av[1][my_strlen(av[1]) - 3] == 'x' &&
+      av[1][my_strlen(av[1]) - 4] == '.')
+    ret = load_scene(prog, av[1]);
+  else if (av[1][my_strlen(av[1]) - 1] == 'j' &&
+	   av[1][my_strlen(av[1]) - 2] == 'b' &&
+	   av[1][my_strlen(av[1]) - 3] == 'o' &&
+	   av[1][my_strlen(av[1]) - 4] == '.')
+    ret = load_obj_file(prog, av[1]);
+ if (ret == -1)
     {
       my_putstr("scene   loading  failed... leaving\n");
       return (-1);
