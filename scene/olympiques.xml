@@ -1,8 +1,13 @@
 <scene>
 
   <view>
-    <x_size>1080</x_size>
-    <y_size>720</y_size>
+    <x_size>640</x_size>
+    <y_size>480</y_size>
+    <cam_pos>
+      <x>320</x>
+      <y>240</y>
+      <z>-1000</z>
+    </cam_pos>
   </view>
 
   <material_list>
@@ -13,7 +18,6 @@
       <green>25</green>
       <blue>255</blue>
       <reflect>50</reflect>
-      <power>60</power>
     </mat1>
 
     <mat2>
@@ -21,7 +25,6 @@
       <green>255</green>
       <blue>25</blue>
       <reflect>250</reflect>
-      <power>100</power>
     </mat2>
 
     <mat3>
@@ -29,7 +32,6 @@
       <green>50</green>
       <blue>50</blue>
       <reflect>30</reflect>
-      <power>60</power>
     </mat3>
 
     <mat4>
@@ -37,7 +39,6 @@
       <green>255</green>
       <blue>25</blue>
       <reflect>50</reflect>
-      <power>60</power>
     </mat4>
 
     <mat5>
@@ -45,7 +46,6 @@
       <green>25</green>
       <blue>25</blue>
       <reflect>50</reflect>
-      <power>60</power>
     </mat5>
   </material_list>
 
