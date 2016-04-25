@@ -1,11 +1,11 @@
 /*
 ** utils.h for raytracer in /home/sousa_v/rendu/lapin/gfx_raytracer1
-** 
+**
 ** Made by victor sousa
 ** Login   <sousa_v@epitech.net>
-** 
+**
 ** Started on  Tue Feb  9 05:29:22 2016 victor sousa
-** Last update Fri Mar 11 05:03:13 2016 victor sousa
+** Last update Mon Apr 25 02:26:59 2016 victor sousa
 */
 
 #ifndef			UTILS_H_
@@ -22,12 +22,12 @@ int			my_getnbr(char *str);
 char			*my_realloc(char *str, int size);
 
 /* vector operator */
-float                   mult_vector(const t_coord *v1, const t_coord  *v2);
-t_coord                 minus_vector(const t_coord *v1, const t_coord *v2);
-t_coord                 add_vector(const t_coord *v1, const t_coord *v2);
-t_coord                 float_time_vector(float c, const t_coord *v);
-t_coord                 float_minus_vector(float c, const t_coord *v);
-t_coord                 normalize(t_coord *vec);
+float                   mult_vector(const t_coord v1, const t_coord v2);
+t_coord                 minus_vector(const t_coord v1, const t_coord v2);
+t_coord                 add_vector(const t_coord v1, const t_coord v2);
+t_coord                 float_time_vector(float c, const t_coord v);
+t_coord                 float_minus_vector(float c, const t_coord v);
+t_coord                 normalize(t_coord vec);
 float			min(float a, float b);
 float			max(float a, float b);
 
@@ -36,10 +36,10 @@ float			invsqrt(float number);
 
 /* tcore */
 void                    tekpixel(t_bunny_pixelarray *pix,
-                                 t_bunny_position *pos,
-                                 t_color *color);
+				 t_bunny_position *pos,
+				 t_color *color);
 t_bunny_response	key(t_bunny_event_state state,
-			    t_bunny_keysym      key,
-			    void                *p);
+			    t_bunny_keysym key,
+			    void *p);
 
 #endif		      /*UTILS_H*/

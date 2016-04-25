@@ -1,11 +1,11 @@
 /*
 ** sphere.c for raytracer in /home/sousa_v/rendu/lapin/gfx_raytracer1
-** 
+**
 ** Made by victor sousa
 ** Login   <sousa_v@epitech.net>
-** 
+**
 ** Started on  Tue Mar  8 22:31:26 2016 victor sousa
-** Last update Fri Mar 11 02:30:01 2016 victor sousa
+** Last update Mon Apr 25 02:28:25 2016 victor sousa
 */
 
 #include		"main.h"
@@ -29,9 +29,9 @@ int			hit_sphere(t_ray *r, t_sphere *s, float *t)
   float			t0;
   float			t1;
 
-  dist = minus_vector(&s->center, &r->start);
-  B = mult_vector(&r->dir, &dist);
-  delta = B * B - mult_vector(&dist, &dist) + s->radius * s->radius;
+  dist = minus_vector(s->center, r->start);
+  B = mult_vector(r->dir, dist);
+  delta = B * B - mult_vector(dist, dist) + s->radius * s->radius;
   if (delta < 0)
     return (0);
   t0 = B - sqrt(delta);

@@ -1,11 +1,11 @@
 /*
 ** raytrace.c for raytrace in /home/sousa_v/rendu/lapin/gfx_raytracer1
-** 
+**
 ** Made by victor sousa
 ** Login   <sousa_v@epitech.net>
-** 
+**
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Sun Mar 13 21:51:52 2016 victor sousa
+** Last update Mon Apr 25 02:28:52 2016 victor sousa
 */
 
 #include		"main.h"
@@ -19,7 +19,7 @@ void			init_ray(t_bunny_position *win_size, t_ray *ray,
   ray->dir.x = pos->x - ray->start.x;
   ray->dir.y = pos->y - ray->start.y;
   ray->dir.z = - (ray->start.z - 1);
-  ray->dir = normalize(&ray->dir);
+  ray->dir = normalize(ray->dir);
 }
 
 int			raytrace_loop(t_prog *prog, t_raycast *rcast,
