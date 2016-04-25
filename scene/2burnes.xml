@@ -1,0 +1,59 @@
+<scene>
+
+  <view>
+    <x_size>640</x_size>
+    <y_size>480</y_size>
+  </view>
+
+  <material_list>
+    <count>1</count>
+
+    <mat1>
+      <red>253</red>
+      <green>178</green>
+      <blue>113</blue>
+      <reflect>50</reflect>
+      <power>60</power>
+    </mat1>
+  </material_list>
+
+  <object_list>
+    <count>2</count>
+
+    <obj1>
+      <type>sphere</type>
+      <center>
+	<x>255</x>
+	<y>250</y>
+	<z>0</z>
+      </center>
+      <radius>100</radius>
+      <material_id>1</material_id>
+    </obj1>
+
+    <obj2>
+      <type>sphere</type>
+      <center>
+	<x>395</x>
+	<y>250</y>
+	<z>0</z>
+      </center>
+      <radius>100</radius>
+      <material_id>1</material_id>
+    </obj2>
+  </object_list>
+
+  <light_list>
+    <count>1</count>
+
+    <light1>
+      <center>
+	<x>640</x>
+	<y>0</y>
+	<z>-1000</z>
+      </center>
+      <intensity>250</intensity>
+    </light1>
+  </light_list>
+
+</scene>
