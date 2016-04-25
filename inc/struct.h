@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 17:47:16 2016 victor sousa
-** Last update Mon Apr 25 06:33:26 2016 Victor Sousa
+** Last update Mon Apr 25 21:10:25 2016 Ethan Kerdelhue
 */
 
 #ifndef			STRUCT_H_
@@ -95,6 +95,13 @@ typedef struct		s_raycast
   float                 reflect;
 }			t_raycast;
 
+typedef struct 		s_editor
+{
+  char			**arg;
+  struct s_cmd		*cmd;
+  int			fd;
+}			t_editor;
+
 typedef struct          s_prog
 {
   t_bunny_position      win_size;
@@ -103,8 +110,13 @@ typedef struct          s_prog
   t_light_list		*light_list;
   t_bunny_window        *win;
   t_bunny_pixelarray    *pix;
-  struct s_cmd		*cmd;
-  char			**arg;
+  t_editor		*editor;
 }                       t_prog;
+typedef struct s_cmd
+{
+  char			*index;
+  char			*desc;
+  int 			(*ptr)(t_prog *);
+}			t_cmd;
 
 #endif		      /*STRUCT_H*/
