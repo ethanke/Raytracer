@@ -8,19 +8,36 @@
 ## Last update Mon Apr 25 00:23:03 2016 Kerdelhue Ethan
 ##
 
-NAME		=	raytracer1
+NAME		=	raytracer2
 
-CFLAGS		=	-L/home/${USER}/.froot/lib/ -llapin 	\
-			-I/home/${USER}/.froot/include/		\
-			-L/usr/local/lib 			\
-			-lsfml-audio 				\
-			-lsfml-graphics 			\
-			-lsfml-window 				\
-			-lsfml-system 				\
-			-lstdc++ -ldl -lm			\
-			-Iincludes -g3
+ECHO		=	/bin/echo -e
+DEFAULT		=	"\033[00m"
+GREEN		=	"\033[0;32m"
+TEAL		=	"\033[1;36m"
+RED		=	"\033[0;31m"
 
-CFLAGS		+=	-W -Wall -ansi -pedantic
+SRCDIR		=	src
+
+INCDIR		=	inc
+LIBDIR		=	lib
+
+RM		=	rm -f
+
+CC		=	gcc
+CFLAGS		=	-W -Wall -Wextra -DMACRO	\
+			-ansi -pedantic				\
+			-I/home/${USER}/.froot/include		\
+			-I$(INCDIR)
+
+LDFLAGS		=	-L/home/${USER}/.froot/lib		\
+			-llapin					\
+			-L/usr/local/lib			\
+			-lsfml-audio				\
+			-lsfml-graphics				\
+			-lsfml-window				\
+			-lsfml-system				\
+			-lstdc++ -ldl				\
+			-lm
 
 ##  MAIN  ##
 SRC		=	src/main.c				\
@@ -80,16 +97,27 @@ SRC		+=	tcore/tekpixel.c
 
 OBJ		=	$(SRC:.c=.o)
 
+all:			title $(NAME)
 
-all:			$(NAME)
+title		:
+			@$(ECHO) $(GREEN)Raytracer$(TEAL)2$(DEFAULT)
 
-$(NAME):		$(OBJ)
-			gcc $(OBJ) $(CFLAGS) -o $(NAME)
+$(NAME)		:	$(OBJ)
+			@$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS) &&	\
+			$(ECHO) $(GREEN) "[OK]" $(TEAL) $(NAME) $(DEFAULT) ||	\
+			$(ECHO) $(RED) "[XX]" $(TEAL) $(NAME) $(DEFAULT)
 
-clean:
-			rm -f $(OBJ)
+.c.o		:
+			@$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@ &&		\
+			$(ECHO) $(GREEN) "[OK]" $(TEAL) $< $(DEFAULT) ||	\
+			$(ECHO) $(RED) "[XX]" $(TEAL) $< $(DEFAULT)
 
-fclean:			clean
-			rm -f $(NAME)
+clean		:
+			@$(RM) $(OBJ)
 
-re:			fclean all
+fclean		:	clean
+			@$(RM) $(NAME)
+
+re		:	fclean all
+
+.PHONY		:	all clean fclean re
