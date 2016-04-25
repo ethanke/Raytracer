@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 08:37:20 2016 Victor Sousa
-** Last update Mon Apr 25 09:08:35 2016 Victor Sousa
+** Last update Mon Apr 25 20:55:51 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -70,7 +70,7 @@ int			load_obj_file(t_prog *prog, char *path)
   if ((prog->mat_list = add_empty_mat(prog->mat_list)) == NULL)
     return (-1);
   prog->obj_list = NULL;
-  if ((prog->obj_list = add_fake_triangle(prog->obj_list)) == NULL)
-    return (-1);
+  printf("%f\n", my_get_float(file[5] + 3));
+  exit(1);
   return (0);
 }
