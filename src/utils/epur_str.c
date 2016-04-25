@@ -5,10 +5,10 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Mon Apr 25 22:53:30 2016 Gaëtan Léandre
-** Last update Mon Apr 25 23:14:34 2016 Gaëtan Léandre
+** Last update Mon Apr 25 23:24:31 2016 Gaëtan Léandre
 */
 
-#include	"main.h"
+#include 	"main.h"
 
 int		is_separator(char c, char *separ)
 {
@@ -61,6 +61,7 @@ char		*epur_str(char *str, char *separ)
 	new[j++] = str[i];
      i++;
     }
+  new[j] = '\0';
   free(str);
   return (new);
 }
