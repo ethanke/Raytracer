@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 03:54:51 2016 Ethan Kerdelhue
-** Last update Mon Apr 25 06:26:59 2016 Ethan Kerdelhue
+** Last update Mon Apr 25 06:31:01 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -67,6 +67,7 @@ int			fill_struct(t_prog *prog)
     return (put_error(ERR_NOACC));
   if (load_scene(prog, prog->arg[1]) == 0)
     my_putstr("scene loading success!\n");
+  return (0);
 }
 
 t_cmd			*init_cmd()
@@ -109,10 +110,10 @@ int			check_cmd(t_prog *prog)
 void			editor(void)
 {
   t_prog		prog;
-  t_cmd			*cmd;
+  t_cmd			cmd;
   char			*str;
 
-  prog.cmd = init_cmd(cmd);
+  prog.cmd = init_cmd(&cmd);
   while (1)
     {
       disp_info();
