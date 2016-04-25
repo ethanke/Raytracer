@@ -5,13 +5,20 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 17:47:16 2016 victor sousa
-** Last update Mon Apr 25 02:56:39 2016 victor sousa
+** Last update Mon Apr 25 04:19:08 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
 # define		STRUCT_H_
 
 # include		"main.h"
+
+typedef struct          s_point
+{
+  int  	           	x;
+  int  	           	y;
+  int  	           	z;
+}                       t_point;
 
 typedef struct          s_coord
 {
@@ -35,7 +42,7 @@ typedef struct          s_sphere
 
 typedef struct		s_triangle
 {
-  t_coord		angle[3];
+  t_point		angle[3];
   char                  material;
 }			t_triangle;
 

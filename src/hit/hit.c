@@ -1,11 +1,11 @@
 /*
 ** hit.c for raytracer in /home/sousa_v/rendu/lapin/gfx_raytracer1
-** 
+**
 ** Made by victor sousa
 ** Login   <sousa_v@epitech.net>
-** 
+**
 ** Started on  Tue Mar  8 23:01:14 2016 victor sousa
-** Last update Fri Mar 11 02:27:26 2016 victor sousa
+** Last update Mon Apr 25 04:37:17 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -21,6 +21,12 @@ t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist)
     {
       if (obj_list->type == 's' &&
 	  hit_sphere(ray, (t_sphere *)obj_list->obj, dist))
+	{
+	  out->type = obj_list->type;
+	  out->obj = obj_list->obj;
+      	}
+      if (obj_list->type == 't' &&
+	  hit_triangle(ray, (t_triangle *)obj_list->obj, dist))
 	{
 	  out->type = obj_list->type;
 	  out->obj = obj_list->obj;
