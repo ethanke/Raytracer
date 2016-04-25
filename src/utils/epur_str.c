@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Mon Apr 25 22:53:30 2016 Gaëtan Léandre
-** Last update Mon Apr 25 23:24:31 2016 Gaëtan Léandre
+** Last update Mon Apr 25 23:34:11 2016 Gaëtan Léandre
 */
 
 #include 	"main.h"
@@ -33,8 +33,8 @@ int		count_size(char *str, char *separ)
   size = 0;
   while (str[i])
     {
-      if ((is_separator(str[i], separ) == 1 && i - 1 >= 0
-	   && is_separator(str[i - 1], separ) == -1)
+      if ((is_separator(str[i], separ) == 1 && str[i + 1] != '\0'
+	   && is_separator(str[i + 1], separ) == -1)
 	  || is_separator(str[i], separ) == -1)
 	size++;
       i++;
@@ -54,8 +54,8 @@ char		*epur_str(char *str, char *separ)
   j = 0;
   while (str[i])
     {
-      if ((is_separator(str[i], separ) == 1 && i - 1 >= 0
-	   && is_separator(str[i - 1], separ) == -1))
+      if ((is_separator(str[i], separ) == 1 && str[i + 1] != '\0'
+	   && is_separator(str[i + 1], separ) == -1))
 	new[j++] = ' ';
       else if (is_separator(str[i], separ) == -1)
 	new[j++] = str[i];
