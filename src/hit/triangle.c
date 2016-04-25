@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 04:34:58 2016 Victor Sousa
-** Last update Mon Apr 25 06:26:39 2016 Victor Sousa
+** Last update Mon Apr 25 06:40:36 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -31,7 +31,7 @@ int			hit_triangle(t_ray *r, t_triangle *tr, float *old_dist)
   if (v < 0.0 || u + v > 1.0)
     return (0);
   t = f * mult_vector(e2, q);
-  if (t > 0.00001)
+  if (t > 0.1)
     {
       *old_dist = t;
       return (1);
