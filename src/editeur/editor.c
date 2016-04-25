@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 03:54:51 2016 Ethan Kerdelhue
-** Last update Mon Apr 25 08:19:50 2016 Ethan Kerdelhue
+** Last update Mon Apr 25 08:26:24 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -78,7 +78,7 @@ t_cmd			*init_cmd()
   cmd[0].index = "help";
   cmd[0].ptr = &aff_help;
   cmd[0].desc = "affiche une aide pour l'utilisateur";
-  cmd[1].index = "load_xml \" filepath \" ";
+  cmd[1].index = "load_xml \"filepath\"";
   cmd[1].ptr = &fill_struct;
   cmd[1].desc = "load un fichier .xml dans le shell";
   cmd[2].index = "END";

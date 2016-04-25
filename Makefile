@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ## 
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Mon Apr 25 00:23:03 2016 Kerdelhue Ethan
+## Last update Mon Apr 25 02:46:23 2016 Kerdelhue Ethan
 ##
 
 NAME		=	raytracer2
@@ -17,6 +17,8 @@ TEAL		=	"\033[1;36m"
 RED		=	"\033[0;31m"
 
 SRCDIR		=	src
+
+PRTFDIR		=	src/editeur/my_printf
 
 INCDIR		=	inc
 LIBDIR		=	lib
@@ -69,6 +71,20 @@ SRC		+=	src/xml/get_field.c
 
 ##  EDITEUR  ##
 SRC		+=	src/editeur/editor.c
+
+## PRINTF ##
+
+SRC             +=      $(PRTFDIR)/my_disp_unprintable.c        \
+                        $(PRTFDIR)/my_printf.c                  \
+                        $(PRTFDIR)/my_printf2.c                 \
+                        $(PRTFDIR)/my_printf3.c                 \
+                        $(PRTFDIR)/my_put_nbr.c                 \
+                        $(PRTFDIR)/my_put_u_nbr_base.c          \
+                        $(PRTFDIR)/my_put_unbr.c                \
+                        $(PRTFDIR)/my_putchar.c                 \
+                        $(PRTFDIR)/my_putnbr_base.c             \
+                        $(PRTFDIR)/my_putnbr_base_add.c         \
+                        $(PRTFDIR)/my_putstr.c
 
 ##  UTILS  ##
 SRC		+=	src/utils/my_tablen.c			\

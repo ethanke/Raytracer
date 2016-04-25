@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:45:54 2016 victor sousa
-** Last update Mon Apr 25 05:02:12 2016 Ethan Kerdelhue
+** Last update Mon Apr 25 08:42:43 2016 Ethan Kerdelhue
 */
 
 #ifndef			MAIN_H_
@@ -26,6 +26,7 @@
 # include		"utils.h"
 # include		"editor.h"
 # include		"get_next_line.h"
+# include		"my_printf.h"
 # include		"xml.h"
 
 # define		Deg_To_Rad(ang)	((ang) / 180.0 * M_PI)
