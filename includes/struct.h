@@ -1,11 +1,11 @@
 /*
 ** struct.h for raytracer1 in /home/sousa_v/rendu/lapin/gfx_raytracer1
-** 
+**
 ** Made by victor sousa
 ** Login   <sousa_v@epitech.net>
-** 
+**
 ** Started on  Tue Mar  8 17:47:16 2016 victor sousa
-** Last update Sun Mar 13 22:31:39 2016 victor sousa
+** Last update Mon Apr 25 02:38:46 2016 victor sousa
 */
 
 #ifndef			STRUCT_H_
@@ -80,7 +80,6 @@ typedef struct		s_raycast
   t_obj_list            *obj_touch;
   t_mat_list            *mat_touch;
   t_coord               new_point;
-  t_coord               tmp_coord;
   t_coord               normale;
   t_sphere              *sphere;
   float                 tmp_float;
