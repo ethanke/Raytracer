@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Mon Apr 25 08:35:03 2016 Victor Sousa
+** Last update Mon Apr 25 22:21:42 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -70,7 +70,7 @@ int			create_pix(t_prog *prog)
 int			create_win(t_prog *prog)
 {
   if ((prog->win = bunny_start(prog->win_size.x, prog->win_size.y,
-			      false, "Raytracer 1")) == NULL)
+			      false, "Raytracer 2")) == NULL)
     {
       my_putstr("windows creation failed... leaving\n");
       return (-1);

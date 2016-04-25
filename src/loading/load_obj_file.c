@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 08:37:20 2016 Victor Sousa
-** Last update Mon Apr 25 20:55:51 2016 Victor Sousa
+** Last update Mon Apr 25 22:36:22 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -55,6 +55,35 @@ t_obj_list              *add_fake_triangle(t_obj_list *prev)
   return (new);
 }
 
+int			where_are_vertex(char **file)
+{
+  int			i;
+
+  i = 0;
+  while (file[i][0] != 'v')
+    i++;
+  return (i);
+}
+
+t_coord			get_vertex(char *_str)
+{
+  t_coord		out;
+  char			*str;
+
+  str = _str + 3;
+  out.x = atof(str);
+  while (*str != ' ')
+    str++;
+  str += 2;
+  out.y = my_get_float(str);
+  while (*str != ' ')
+    str++;
+  str += 2;
+  out.z = my_get_float(str);
+  printf("x:%f\ty:%f\tz:%f\n", out.x, out.y, out.z);
+  return (out);
+}
+
 int			load_obj_file(t_prog *prog, char *path)
 {
   char			**file;
@@ -70,7 +99,8 @@ int			load_obj_file(t_prog *prog, char *path)
   if ((prog->mat_list = add_empty_mat(prog->mat_list)) == NULL)
     return (-1);
   prog->obj_list = NULL;
-  printf("%f\n", my_get_float(file[5] + 3));
-  exit(1);
+  get_vertex(file[where_are_vertex(file)]);
+  /*printf("%f\n", my_get_float(file[5] + 3));
+  exit(1);*/
   return (0);
 }
