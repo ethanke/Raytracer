@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 17:47:16 2016 victor sousa
-** Last update Mon Apr 25 06:32:26 2016 Ethan Kerdelhue
+** Last update Mon Apr 25 06:33:26 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -42,7 +42,7 @@ typedef struct          s_sphere
 
 typedef struct		s_triangle
 {
-  t_point		angle[3];
+  t_coord		angle[3];
   char                  material;
 }			t_triangle;
 
@@ -87,6 +87,7 @@ typedef struct		s_raycast
   t_coord               new_point;
   t_coord               normale;
   t_sphere              *sphere;
+  t_triangle		*triangle;
   t_light_list          *light_list;
   t_ray                 light_ray;
   int                   in_shadow;

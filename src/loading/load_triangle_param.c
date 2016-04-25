@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:13:22 2016 victor sousa
-** Last update Mon Apr 25 04:23:12 2016 Victor Sousa
+** Last update Mon Apr 25 05:54:47 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -34,6 +34,7 @@ static int		get_point(t_triangle *t, char **file, int id, int p_id)
 {
   char			*lf;
   char			*get;
+  t_point		tmp;
 
   if ((lf = malloc(sizeof(char) *
 		   my_strlen("scene:object_list:objX:pX:x")
@@ -45,19 +46,22 @@ static int		get_point(t_triangle *t, char **file, int id, int p_id)
   lf[24] = p_id + 49;
   if ((get = get_field(file, lf)) == NULL)
     return (1);
-  t->angle[p_id].x = my_getnbr(get);
+  tmp.x = my_getnbr(get);
   free(get);
   lf[26] = 'y';
   if ((get = get_field(file, lf)) == NULL)
     return (1);
-  t->angle[p_id].y = my_getnbr(get);
+  tmp.y = my_getnbr(get);
   free(get);
   lf[26] = 'z';
   if ((get = get_field(file, lf)) == NULL)
     return (1);
-  t->angle[p_id].z = my_getnbr(get);
+  tmp.z = my_getnbr(get);
   free(get);
   free(lf);
+  t->angle[p_id].x = tmp.x;
+  t->angle[p_id].y = tmp.y;
+  t->angle[p_id].z = tmp.z;
   return (0);
 }
 

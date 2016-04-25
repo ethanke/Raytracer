@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 05:29:22 2016 victor sousa
-** Last update Mon Apr 25 05:57:34 2016 Ethan Kerdelhue
+** Last update Mon Apr 25 06:30:47 2016 Victor Sousa
 */
 
 #ifndef			UTILS_H_
@@ -31,6 +31,7 @@ t_coord                 minus_vector(const t_coord v1, const t_coord v2);
 t_coord                 add_vector(const t_coord v1, const t_coord v2);
 t_coord                 float_time_vector(float c, const t_coord v);
 t_coord                 float_minus_vector(float c, const t_coord v);
+t_coord			crossProduct(t_coord c1, t_coord c2);
 t_coord                 normalize(t_coord vec);
 float			min(float a, float b);
 float			max(float a, float b);

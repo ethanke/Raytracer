@@ -5,12 +5,36 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 04:34:58 2016 Victor Sousa
-** Last update Mon Apr 25 04:35:57 2016 Victor Sousa
+** Last update Mon Apr 25 06:26:39 2016 Victor Sousa
 */
 
 #include		"main.h"
 
-int			hit_triangle(t_ray *r, t_triangle *t, float *old_dist)
+int			hit_triangle(t_ray *r, t_triangle *tr, float *old_dist)
 {
+  t_coord 		e1,e2,h,s,q;
+  float 		a,f,u,v,t;
+
+  e1 = minus_vector(tr->angle[1], tr->angle[0]);
+  e2 = minus_vector(tr->angle[2], tr->angle[0]);
+  h = crossProduct(r->dir, e2);
+  a = mult_vector(e1, h);
+  if (a > -0.00001 && a < 0.00001)
+    return (0);
+  f = 1 / a;
+  s = minus_vector(r->start, tr->angle[0]);
+  u = f * (mult_vector(s, h));
+  if (u < 0.0 || u > 1.0)
+    return (0);
+  q = crossProduct(s, e1);
+  v = f * mult_vector(r->dir, q);
+  if (v < 0.0 || u + v > 1.0)
+    return (0);
+  t = f * mult_vector(e2, q);
+  if (t > 0.00001)
+    {
+      *old_dist = t;
+      return (1);
+    }
   return (0);
 }
