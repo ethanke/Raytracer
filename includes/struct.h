@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 17:47:16 2016 victor sousa
-** Last update Mon Apr 25 05:55:52 2016 Ethan Kerdelhue
+** Last update Mon Apr 25 06:32:26 2016 Ethan Kerdelhue
 */
 
 #ifndef			STRUCT_H_
