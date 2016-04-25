@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 23:13:37 2016 Victor Sousa
-** Last update Mon Apr 25 23:28:34 2016 Victor Sousa
+** Last update Mon Apr 25 23:34:00 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -64,6 +64,7 @@ t_vtx_list		*add_end_vtx(t_vtx_list *head, t_coord vtx)
     }
 }
 
+
 t_vtx_list		*get_vertex(char **file)
 {
   t_vtx_list		*out;
@@ -80,4 +81,19 @@ t_vtx_list		*get_vertex(char **file)
       i++;
     }
   return (out);
+}
+
+t_coord			get_vertex_in_list(t_vtx_list *list, int id)
+{
+  int			i;
+  t_vtx_list		*tmp;
+
+  i = 1;
+  tmp = list;
+  while (i < id)
+    {
+      tmp = tmp->next;
+      i++;
+    }
+  return (tmp->vtx);
 }
