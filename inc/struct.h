@@ -6,10 +6,14 @@
 **
 ** Started on  Tue Mar  8 17:47:16 2016 victor sousa
 <<<<<<< HEAD
+<<<<<<< HEAD
 ** Last update Mon Apr 25 21:10:25 2016 Ethan Kerdelhue
 =======
 ** Last update Mon Apr 25 23:47:47 2016 Victor Sousa
 >>>>>>> b2c88af928fa8690eb52bd4ab845c09215f0cd80
+=======
+** Last update Tue Apr 26 00:00:26 2016 Victor Sousa
+>>>>>>> cd916ddffc62011f7a44ef5a991a1429404439d8
 */
 
 #ifndef			STRUCT_H_
@@ -121,7 +125,8 @@ typedef struct 		s_editor
 typedef struct          s_prog
 {
   t_bunny_position      win_size;
-  t_coord		cam_pos;
+  t_point		cam_pos;
+  t_bunny_position	cam_fov;
   t_obj_list            *obj_list;
   t_mat_list		*mat_list;
   t_light_list		*light_list;

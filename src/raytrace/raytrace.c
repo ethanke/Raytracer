@@ -5,17 +5,17 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Mon Apr 25 09:04:15 2016 Victor Sousa
+** Last update Mon Apr 25 23:54:40 2016 Victor Sousa
 */
 
 #include		"main.h"
 
 void			init_ray(t_bunny_position *win_size, t_ray *ray,
-				 t_bunny_position *pos)
+				 t_bunny_position *pos, t_prog *prog)
 {
-  ray->start.x = win_size->x / 2;
-  ray->start.y = win_size->y / 2;
-  ray->start.z = -1000;
+  ray->start.x = prog->cam_pos.x;
+  ray->start.y = prog->cam_pos.y;
+  ray->start.z = prog->cam_pos.z;
   ray->dir.x = pos->x - ray->start.x;
   ray->dir.y = pos->y - ray->start.y;
   ray->dir.z = - (ray->start.z - 1);
@@ -25,7 +25,7 @@ void			init_ray(t_bunny_position *win_size, t_ray *ray,
 int			raytrace_loop(t_prog *prog, t_raycast *rcast,
 				      t_bunny_position *pos)
 {
-  init_ray(&prog->win_size, &rcast->ray, pos);
+  init_ray(&prog->win_size, &rcast->ray, pos, prog);
   rcast->depth = 0;
   rcast->coef = 1.0f;
   rcast->out_col.full = 0xff000000;
