@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Mon Apr 25 23:12:48 2016 Gaëtan Léandre
+## Last update Tue Apr 26 00:45:46 2016 Gaëtan Léandre
 ##
 
 NAME		=	raytracer2
@@ -55,7 +55,8 @@ SRC		+=	src/loading/parsing_scene.c		\
 			src/loading/load_sphere_param.c		\
 			src/loading/load_triangle_param.c	\
 			src/loading/load_obj_file.c		\
-			src/loading/load_vertex.c
+			src/loading/load_vertex.c		\
+			src/loading/load_forme.c
 
 ##  HIT  ##
 SRC		+=	src/hit/hit.c				\

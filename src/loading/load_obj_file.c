@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 08:37:20 2016 Victor Sousa
-** Last update Mon Apr 25 23:35:09 2016 Victor Sousa
+** Last update Tue Apr 26 01:21:27 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -62,6 +62,9 @@ int			load_obj_file(t_prog *prog, char *path)
 
   prog->win_size.x = 1080;
   prog->win_size.y = 720;
+  prog->cam_pos.x = 320;
+  prog->cam_pos.y = 240;
+  prog->cam_pos.z = -1000;
   if ((file = load_scene_file(path)) == NULL)
     return (-1);
   prog->light_list = NULL;
@@ -70,8 +73,9 @@ int			load_obj_file(t_prog *prog, char *path)
   prog->mat_list = NULL;
   if ((prog->mat_list = add_empty_mat(prog->mat_list)) == NULL)
     return (-1);
-  prog->obj_list = NULL;
   if ((vtx_list = get_vertex(file)) == NULL)
+    return (-1);
+  if ((prog->obj_list = parse_obj_formes(file, vtx_list)) == NULL)
     return (-1);
   return (0);
 }
