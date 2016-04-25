@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 05:29:22 2016 victor sousa
-** Last update Mon Apr 25 09:24:00 2016 Victor Sousa
+** Last update Mon Apr 25 23:19:29 2016 Victor Sousa
 */
 
 #ifndef			UTILS_H_
@@ -25,6 +25,7 @@ char			*my_realloc(char *str, int size);
 char			*get_next_line(const int fd);
 int			my_strcmp(char *s1, char *s2);
 int			my_strncmp(char *s1, char *s2, int nb);
+char			*epur_str(char *str, char *separ);
 
 /* vector operator */
 float                   mult_vector(const t_coord v1, const t_coord v2);

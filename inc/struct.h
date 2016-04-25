@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 17:47:16 2016 victor sousa
-** Last update Mon Apr 25 06:33:26 2016 Victor Sousa
+** Last update Mon Apr 25 23:11:24 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -39,6 +39,12 @@ typedef struct          s_sphere
   int                   radius;
   char                  material;
 }                       t_sphere;
+
+typedef struct		s_vtx_list
+{
+  t_coord		vtx;
+  struct s_vtx_list	*next;
+}			t_vtx_list;
 
 typedef struct		s_triangle
 {

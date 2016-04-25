@@ -54,7 +54,8 @@ SRC		+=	src/loading/parsing_scene.c		\
 			src/loading/load_obj.c			\
 			src/loading/load_sphere_param.c		\
 			src/loading/load_triangle_param.c	\
-			src/loading/load_obj_file.c
+			src/loading/load_obj_file.c		\
+			src/loading/load_vertex.c
 
 ##  HIT  ##
 SRC		+=	src/hit/hit.c				\

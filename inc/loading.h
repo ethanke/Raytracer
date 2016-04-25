@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:38 2016 victor sousa
-** Last update Mon Apr 25 08:45:03 2016 Victor Sousa
+** Last update Mon Apr 25 23:14:44 2016 Victor Sousa
 */
 
 #ifndef			LOADING_H_
@@ -16,6 +16,7 @@
 char			**load_scene_file(char *path);
 int			load_scene(t_prog *prog, char *scene_path);
 int			load_obj_file(t_prog *prog, char *path);
+t_vtx_list		*get_vertex(char **file);
 
 int			load_light(t_prog *prog, char **file);
 int			load_mat(t_prog *prog, char **file);

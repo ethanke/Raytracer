@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Mon Apr 25 02:57:54 2016 victor sousa
+** Last update Mon Apr 25 23:21:49 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -34,6 +34,23 @@ char			**load_scene_file(char *path)
     }
   if ((file = my_str_to_wordtab(file1d, 0, 0)) == NULL)
     return (NULL);
+  printf("BEFORE\n");
+  i = 0;
+  while (file[i])
+    printf("|%s|\n", file[i++]);
+
+  i = 0;
+  while (file[i])
+    {
+      if ((file[i] = epur_str(file[i], " \t\n")) == NULL)
+	return (NULL);
+      i++;
+    }
+
+  printf("\nAFTER\n");
+  i = 0;
+  while (file[i])
+    printf("|%s|\n", file[i++]);
   free(file1d);
   return (file);
 }
