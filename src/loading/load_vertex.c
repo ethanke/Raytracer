@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 23:13:37 2016 Victor Sousa
-** Last update Mon Apr 25 23:14:18 2016 Victor Sousa
+** Last update Mon Apr 25 23:28:34 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -25,15 +25,19 @@ t_coord			get_vertex_line(char *_str)
   t_coord		out;
   char			*str;
 
-  str = _str + 3;
+  str = _str + 1;
+  while (*str == ' ')
+    str++;
   out.x = my_get_float(str);
   while (*str != ' ')
     str++;
-  str += 2;
+  while (*str == ' ')
+    str++;
   out.y = my_get_float(str);
   while (*str != ' ')
     str++;
-  str += 2;
+  while (*str == ' ')
+    str++;
   out.z = my_get_float(str);
   printf("x:%f\ty:%f\tz:%f\n", out.x, out.y, out.z);
   return (out);
