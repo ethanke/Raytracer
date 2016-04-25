@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 08:37:20 2016 Victor Sousa
-** Last update Mon Apr 25 23:19:42 2016 Victor Sousa
+** Last update Mon Apr 25 23:35:09 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -59,7 +59,7 @@ int			load_obj_file(t_prog *prog, char *path)
 {
   char			**file;
   t_vtx_list		*vtx_list;
-  
+
   prog->win_size.x = 1080;
   prog->win_size.y = 720;
   if ((file = load_scene_file(path)) == NULL)
