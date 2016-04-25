@@ -5,8 +5,10 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Mon Apr 25 22:53:30 2016 Gaëtan Léandre
-** Last update Mon Apr 25 23:12:19 2016 Gaëtan Léandre
+** Last update Mon Apr 25 23:14:34 2016 Gaëtan Léandre
 */
+
+#include	"main.h"
 
 int		is_separator(char c, char *separ)
 {
@@ -40,7 +42,7 @@ int		count_size(char *str, char *separ)
   return (size);
 }
 
-char		epur_str(char *str, char *separ)
+char		*epur_str(char *str, char *separ)
 {
   char		*new;
   int		i;
