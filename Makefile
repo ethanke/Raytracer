@@ -1,11 +1,11 @@
 ##
 ## Makefile for raytracer1 in /home/sousa_v/rendu/lapin/gfx_raytracer1
-## 
+##
 ## Made by victor sousa
 ## Login   <sousa_v@epitech.net>
-## 
+##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Mon Apr 25 02:46:23 2016 Kerdelhue Ethan
+## Last update Mon Apr 25 23:12:48 2016 Gaëtan Léandre
 ##
 
 NAME		=	raytracer2
@@ -54,7 +54,8 @@ SRC		+=	src/loading/parsing_scene.c		\
 			src/loading/load_obj.c			\
 			src/loading/load_sphere_param.c		\
 			src/loading/load_triangle_param.c	\
-			src/loading/load_obj_file.c
+			src/loading/load_obj_file.c		\
+			src/loading/load_vertex.c
 
 ##  HIT  ##
 SRC		+=	src/hit/hit.c				\
@@ -101,7 +102,8 @@ SRC		+=	src/utils/my_tablen.c			\
 			src/utils/get_next_line.c		\
 			src/utils/vect_operator.c		\
 			src/utils/vect_operator2.c		\
-			src/utils/wtf.c
+			src/utils/wtf.c				\
+			src/utils/epur_str.c
 
 ##  OUTPUT  ##
 SRC		+=	src/output/my_putchar.c			\

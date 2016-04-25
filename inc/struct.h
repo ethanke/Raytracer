@@ -5,7 +5,11 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 17:47:16 2016 victor sousa
+<<<<<<< HEAD
 ** Last update Mon Apr 25 21:10:25 2016 Ethan Kerdelhue
+=======
+** Last update Mon Apr 25 23:47:47 2016 Victor Sousa
+>>>>>>> b2c88af928fa8690eb52bd4ab845c09215f0cd80
 */
 
 #ifndef			STRUCT_H_
@@ -40,11 +44,23 @@ typedef struct          s_sphere
   char                  material;
 }                       t_sphere;
 
+typedef struct		s_vtx_list
+{
+  t_coord		vtx;
+  struct s_vtx_list	*next;
+}			t_vtx_list;
+
 typedef struct		s_triangle
 {
   t_coord		angle[3];
   char                  material;
 }			t_triangle;
+
+typedef struct		s_square
+{
+  t_coord		angle[4];
+  char                  material;
+}			t_square;
 
 typedef struct		s_mat_list
 {
@@ -105,6 +121,7 @@ typedef struct 		s_editor
 typedef struct          s_prog
 {
   t_bunny_position      win_size;
+  t_coord		cam_pos;
   t_obj_list            *obj_list;
   t_mat_list		*mat_list;
   t_light_list		*light_list;

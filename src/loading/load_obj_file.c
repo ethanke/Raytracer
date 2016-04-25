@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 08:37:20 2016 Victor Sousa
-** Last update Mon Apr 25 09:08:35 2016 Victor Sousa
+** Last update Mon Apr 25 23:35:09 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -58,6 +58,7 @@ t_obj_list              *add_fake_triangle(t_obj_list *prev)
 int			load_obj_file(t_prog *prog, char *path)
 {
   char			**file;
+  t_vtx_list		*vtx_list;
 
   prog->win_size.x = 1080;
   prog->win_size.y = 720;
@@ -70,7 +71,7 @@ int			load_obj_file(t_prog *prog, char *path)
   if ((prog->mat_list = add_empty_mat(prog->mat_list)) == NULL)
     return (-1);
   prog->obj_list = NULL;
-  if ((prog->obj_list = add_fake_triangle(prog->obj_list)) == NULL)
+  if ((vtx_list = get_vertex(file)) == NULL)
     return (-1);
   return (0);
 }
