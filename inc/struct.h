@@ -1,19 +1,11 @@
 /*
-** struct.h for raytracer1 in /home/sousa_v/rendu/lapin/gfx_raytracer1
+** struct.h for  in /Users/ethankerdelhue/Documents/Shared/Raytracer/inc/
 **
-** Made by victor sousa
-** Login   <sousa_v@epitech.net>
+** Made by Ethan Kerdelhue
+** Login   <kerdel_e@epitech.eu>
 **
-** Started on  Tue Mar  8 17:47:16 2016 victor sousa
-<<<<<<< HEAD
-<<<<<<< HEAD
-** Last update Mon Apr 25 21:10:25 2016 Ethan Kerdelhue
-=======
-** Last update Mon Apr 25 23:47:47 2016 Victor Sousa
->>>>>>> b2c88af928fa8690eb52bd4ab845c09215f0cd80
-=======
-** Last update Tue Apr 26 00:00:26 2016 Victor Sousa
->>>>>>> cd916ddffc62011f7a44ef5a991a1429404439d8
+** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
+** Last update Tue Apr 26 01:10:16 2016 Ethan Kerdelhue
 */
 
 #ifndef			STRUCT_H_

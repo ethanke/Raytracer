@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 03:54:51 2016 Ethan Kerdelhue
-** Last update Tue Apr 26 00:32:56 2016 Ethan Kerdelhue
+** Last update Tue Apr 26 02:54:07 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -65,11 +65,14 @@ int			aff_help(t_prog *prog)
 
 int			fill_struct(t_prog *prog)
 {
-  if (my_access(prog->editor->arg[1]) == 0)
+  load_scene(prog, "scene/olympiques.xml");
+  prog->editor->fd = open("scene/olympiques.xml", O_RDONLY);
+  my_putstr("scene loading success!\n");
+  /* if (my_access(prog->editor->arg[1]) == 0)
     return (put_error(ERR_NOACC));
   if (load_scene(prog, prog->editor->arg[1]) == 0)
     my_putstr("scene loading success!\n");
-  prog->editor->fd = open(prog->editor->arg[1], O_RDONLY);
+  prog->editor->fd = open(prog->editor->arg[1], O_RDONLY); */
   return (0);
 }
 
@@ -82,6 +85,9 @@ int			aff_win_prop(int fd, t_prog *prog)
   my_printf(fd, "\t\t<y_size>");
   my_printf(fd, "%d", prog->win_size.y);
   my_printf(fd, "</y_size>\n");
+  my_printf(fd, "\t\t<cam_pos>\n\t\t\t<x>%d</x>\n", prog->cam_pos.x);
+  my_printf(fd, "\t\t\t<y>%d</y>\n\t\t\t<z>%d</z>\n\t\t</cam_pos>\n",
+	    prog->cam_pos.x, prog->cam_pos.y);
   my_printf(fd, "\t</view>\n");
   return (0);
 }
@@ -154,23 +160,23 @@ int			aff_mat_list(int fd, t_prog *prog)
 
 char			*get_type(char c)
 {
-  if (c == 1)
-    return ("sphere");
-  if (c == 2)
-    return ("triangle");
+  if (c == 's')
+    return ("sphere\0");
+  if (c == 't')
+    return ("triangle\0");
   return (NULL);
 }
 
 int			aff_obj(int fd, t_obj_list *obj)
 {
+  t_sphere *tmp;
 
-  if (obj->type == 1)
+  if (obj->type == 's')
     {
-      t_sphere *tmp;
 
-      tmp = (t_sphere*) tmp;
-      my_printf(fd, "\t\t<center>\n\t\t\t<x>%d<x>\n", tmp->center.x);
-      my_printf(fd, "\t\t\t<y>%d</y>\n\t\t\t<z>%d</x>\n", tmp->center.y,
+      tmp = (t_sphere *) obj->obj;
+      my_printf(fd, "\t\t<center>\n\t\t\t<x>%f<x>\n", tmp->center.x);
+      my_printf(fd, "\t\t\t<y>%f</y>\n\t\t\t<z>%f</x>\n", tmp->center.y,
 		tmp->center.z);
       my_printf(fd, "\t\t</center>");
       my_printf(fd, "\t\t<radius>%d</radius>\n", tmp->radius);
@@ -223,7 +229,7 @@ t_cmd			*init_cmd()
   cmd[0].index = "help";
   cmd[0].ptr = &aff_help;
   cmd[0].desc = "affiche une aide pour l'utilisateur";
-  cmd[1].index = "load_xml \"filepath\"";
+  cmd[1].index = "load_xml";
   cmd[1].ptr = &fill_struct;
   cmd[1].desc = "load un fichier .xml dans le shell";
   cmd[2].index = "aff_xml";
@@ -245,7 +251,7 @@ int			check_cmd(t_prog *prog)
   while (my_strncmp(prog->editor->cmd[i].index, "END", 3) && ret == -1)
     {
       if (my_strncmp(prog->editor->cmd[i].index, prog->editor->arg[0],
-		     my_strlen(prog->editor->arg[0])) == 0)
+		     my_strlen(prog->editor->cmd[i].index)) == 0)
 	{
 	  prog->editor->cmd[i].ptr(prog);
 	  ret += 1;
