@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Tue Apr 26 02:37:57 2016 Gaëtan Léandre
+## Last update Tue Apr 26 10:16:49 2016 Ethan Kerdelhue
 ##
 
 NAME		=	raytracer2
@@ -19,6 +19,7 @@ RED		=	"\033[0;31m"
 SRCDIR		=	src
 
 PRTFDIR		=	src/editeur/my_printf
+EDITDIR		=	src/editeur
 
 INCDIR		=	inc
 LIBDIR		=	lib
@@ -88,7 +89,16 @@ SRC             +=      $(PRTFDIR)/my_disp_unprintable.c        \
                         $(PRTFDIR)/my_putnbr_base.c             \
                         $(PRTFDIR)/my_putnbr_base_add.c         \
                         $(PRTFDIR)/my_putstr.c			\
-			$(PRTFDIR)/my_put_fnbr.c
+			$(PRTFDIR)/my_put_fnbr.c		
+
+SRC		+=	$(EDITDIR)/aff_light.c			\
+			$(EDITDIR)/aff_mat.c			\
+			$(EDITDIR)/aff_obj.c			\
+			$(EDITDIR)/aff_win.c			\
+			$(EDITDIR)/cmd.c			\
+			$(EDITDIR)/count.c			\
+			$(EDITDIR)/utils.c			\
+			$(EDITDIR)/write_xml.c
 
 ##  UTILS  ##
 SRC		+=	src/utils/my_tablen.c			\
