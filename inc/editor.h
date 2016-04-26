@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 04:09:19 2016 Ethan Kerdelhue
-** Last update Tue Apr 26 10:20:00 2016 Ethan Kerdelhue
+** Last update Wed Apr 27 09:02:22 2016 Ethan Kerdelhue
 */
 
 #ifndef			EDITOR_H_
@@ -43,5 +43,6 @@ char			*get_type(char c);
 int			fill_struct(t_prog *prog);
 int			aff_help(t_prog *prog);
 int			aff_xml(t_prog *prog);
+int			add_obj(t_prog *prog);
 
 #endif		      /*EDITOR_H_*/

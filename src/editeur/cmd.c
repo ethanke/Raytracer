@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 10:04:58 2016 Ethan Kerdelhue
-** Last update Tue Apr 26 10:05:15 2016 Ethan Kerdelhue
+** Last update Wed Apr 27 09:02:01 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -27,7 +27,10 @@ t_cmd			*init_cmd()
   cmd[3].index = "write_xml";
   cmd[3].ptr = &write_xml;
   cmd[3].desc = "ecrit le contenu actuellement load dans un fichier xml";
-  cmd[4].index = "END";
+  cmd[4].index = "add_obj";
+  cmd[4].ptr = &add_obj;
+  cmd[4].desc = "ajoute un objet selon plusieurs type dans le fichier xml";
+  cmd[5].index = "END";
   return (cmd);
 }
 
