@@ -5,11 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 05:29:22 2016 victor sousa
-<<<<<<< HEAD
-** Last update Mon Apr 25 21:02:54 2016 Ethan Kerdelhue
-=======
-** Last update Mon Apr 25 23:19:29 2016 Victor Sousa
->>>>>>> b2c88af928fa8690eb52bd4ab845c09215f0cd80
+** Last update Tue Apr 26 01:28:14 2016 Victor Sousa
 */
 
 #ifndef			UTILS_H_
@@ -29,12 +25,9 @@ char			*my_realloc(char *str, int size);
 char			*get_next_line(const int fd);
 int			my_strcmp(char *s1, char *s2);
 int			my_strncmp(char *s1, char *s2, int nb);
-<<<<<<< HEAD
 char			*my_itoa(int nb);
 char			*my_strcatpp(char *desc, char *src);
-=======
 char			*epur_str(char *str, char *separ);
->>>>>>> b2c88af928fa8690eb52bd4ab845c09215f0cd80
 
 /* vector operator */
 float                   mult_vector(const t_coord v1, const t_coord v2);

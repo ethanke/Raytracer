@@ -26,7 +26,7 @@ LIBDIR		=	lib
 RM		=	rm -f
 
 CC		=	gcc
-CFLAGS		=	-W -Wall -Wextra -DMACRO	\
+CFLAGS		=	-W -Wall -Wextra -DMACRO -g3 -ggdb \
 			-ansi -pedantic				\
 			-I/home/${USER}/.froot/include		\
 			-I$(INCDIR)
