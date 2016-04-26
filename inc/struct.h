@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 17:47:16 2016 victor sousa
-** Last update Mon Apr 25 23:47:47 2016 Victor Sousa
+** Last update Tue Apr 26 00:00:26 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -110,7 +110,8 @@ typedef struct		s_raycast
 typedef struct          s_prog
 {
   t_bunny_position      win_size;
-  t_coord		cam_pos;
+  t_point		cam_pos;
+  t_bunny_position	cam_fov;
   t_obj_list            *obj_list;
   t_mat_list		*mat_list;
   t_light_list		*light_list;

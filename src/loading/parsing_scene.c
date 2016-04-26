@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Mon Apr 25 23:47:14 2016 Victor Sousa
+** Last update Tue Apr 26 00:01:36 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -49,7 +49,6 @@ static int		get_cam_pos(char **file, t_prog *prog)
 {
   char			*lf;
   char			*get;
-  t_point		tmp;
 
   if ((lf = malloc(sizeof(char) *
 		   my_strlen("scene:view:cam_pos:x")
@@ -59,22 +58,19 @@ static int		get_cam_pos(char **file, t_prog *prog)
   lf = my_strcat(lf, "scene:view:cam_pos:x");
   if ((get = get_field(file, lf)) == NULL)
     return (1);
-  tmp.x = my_getnbr(get);
+  prog->cam_pos.x = my_getnbr(get);
   free(get);
   lf[19] = 'y';
   if ((get = get_field(file, lf)) == NULL)
     return (1);
-  tmp.y = my_getnbr(get);
+  prog->cam_pos.y = my_getnbr(get);
   free(get);
   lf[19] = 'z';
   if ((get = get_field(file, lf)) == NULL)
     return (1);
-  tmp.z = my_getnbr(get);
+  prog->cam_pos.z = my_getnbr(get);
   free(get);
   free(lf);
-  prog->cam_pos.x = tmp.x;
-  prog->cam_pos.y = tmp.y;
-  prog->cam_pos.z = tmp.z;
   return (0);
 }
 
@@ -93,10 +89,10 @@ int			load_scene(t_prog *prog, char *scene_path)
     return (-1);
   prog->win_size.y = my_getnbr(get);
   free(get);
-  if (get_cam_pos(file, prog))
-    return (-1);
-  printf("x:%d, y:%d, z:%d\n", prog->cam_pos.x, prog->cam_pos.y, prog->cam_pos.z);
-  if (load_mat(prog, file) == -1 ||
+  prog->cam_fov.x = 75;
+  prog->cam_fov.y = 50;
+  if (get_cam_pos(file, prog) == 1 ||
+      load_mat(prog, file) == -1 ||
       load_light(prog, file) == -1 ||
       load_obj(prog, file) == -1)
     return (-1);
