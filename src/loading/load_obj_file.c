@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 08:37:20 2016 Victor Sousa
-** Last update Tue Apr 26 01:21:27 2016 Gaëtan Léandre
+** Last update Tue Apr 26 05:49:23 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -16,10 +16,23 @@ static t_light_list	*add_empty_light(t_light_list *prev)
 
   if ((new = malloc(sizeof(t_light_list))) == NULL)
     return (NULL);
-  new->center.x = 0;
-  new->center.y = 100;
+  new->center.x = 320;
+  new->center.y = 240;
+  new->center.z = -10000;
+  new->intensity = 200;
+  new->next = prev;
+  return (new);
+}
+static t_light_list	*add_empty_light2(t_light_list *prev)
+{
+  t_light_list          *new;
+
+  if ((new = malloc(sizeof(t_light_list))) == NULL)
+    return (NULL);
+  new->center.x = 640;
+  new->center.y = 240;
   new->center.z = -1000;
-  new->intensity = 75;
+  new->intensity = 100;
   new->next = prev;
   return (new);
 }
@@ -30,7 +43,7 @@ t_mat_list              *add_empty_mat(t_mat_list *prev)
 
   if ((new = malloc(sizeof(t_mat_list))) == NULL)
     return (NULL);
-  new->color.full = 0xFFFFFA00;
+  new->color.full = 0xFFFFAF00;
   new->id = 1;
   new->next = prev;
   return (new);
@@ -69,6 +82,8 @@ int			load_obj_file(t_prog *prog, char *path)
     return (-1);
   prog->light_list = NULL;
   if ((prog->light_list = add_empty_light(prog->light_list)) == NULL)
+    return (-1);
+  if ((prog->light_list = add_empty_light2(prog->light_list)) == NULL)
     return (-1);
   prog->mat_list = NULL;
   if ((prog->mat_list = add_empty_mat(prog->mat_list)) == NULL)
