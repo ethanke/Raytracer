@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Tue Apr 26 01:10:16 2016 Ethan Kerdelhue
+** Last update Tue Apr 26 03:11:03 2016 Ethan Kerdelhue
 */
 
 #ifndef			STRUCT_H_
