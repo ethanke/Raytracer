@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 23:13:37 2016 Victor Sousa
-** Last update Tue Apr 26 00:33:39 2016 Victor Sousa
+** Last update Tue Apr 26 05:49:46 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -39,7 +39,6 @@ t_coord			get_vertex_line(char *_str)
   while (*str == ' ')
     str++;
   out.z = my_get_float(str);
-  printf("x:%f\ty:%f\tz:%f\n", out.x, out.y, out.z);
   return (out);
 }
 
