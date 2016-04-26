@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Tue Apr 26 00:45:46 2016 Gaëtan Léandre
+## Last update Tue Apr 26 02:37:57 2016 Gaëtan Léandre
 ##
 
 NAME		=	raytracer2
@@ -87,7 +87,8 @@ SRC             +=      $(PRTFDIR)/my_disp_unprintable.c        \
                         $(PRTFDIR)/my_putchar.c                 \
                         $(PRTFDIR)/my_putnbr_base.c             \
                         $(PRTFDIR)/my_putnbr_base_add.c         \
-                        $(PRTFDIR)/my_putstr.c
+                        $(PRTFDIR)/my_putstr.c			\
+			$(PRTFDIR)/my_put_fnbr.c
 
 ##  UTILS  ##
 SRC		+=	src/utils/my_tablen.c			\

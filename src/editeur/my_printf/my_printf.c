@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Thu Nov 12 12:27:44 2015 Gaëtan Léandre
-** Last update Sat Apr 16 06:45:12 2016 Gaëtan Léandre
+** Last update Tue Apr 26 02:35:45 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -36,6 +36,8 @@ t_fonct			*init_struct(t_fonct *tab)
   (tab[9].f) = va_my_disp_unp;
   tab[10].flag = 'p';
   (tab[10].f) = va_my_adress;
+  tab[11].flag = 'f';
+  (tab[11].f) = va_my_putfnbr;
   return (tab);
 }
 
@@ -44,7 +46,7 @@ int			chose_function(char c, t_fonct *tab)
   int			i;
 
   i = 0;
-  while (i < 11)
+  while (i < 12)
     {
       if (c == tab[i].flag)
 	return (i);

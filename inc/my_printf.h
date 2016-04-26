@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Thu Nov 12 14:36:04 2015 Gaëtan Léandre
-** Last update Sat Apr 16 06:43:39 2016 Gaëtan Léandre
+** Last update Tue Apr 26 02:36:54 2016 Gaëtan Léandre
 */
 
 #ifndef		MY_PRINTF_H_
@@ -41,6 +41,7 @@ void		va_my_examin(int fd, va_list ap);
 void		va_my_octal(int fd, va_list ap);
 void		va_my_bin(int fd, va_list ap);
 void		va_my_adress(int fd, va_list ap);
+void		va_my_putfnbr(int fd, va_list ap);
 
 void		my_putstr_in(int fd, char *str);
 
@@ -58,6 +59,7 @@ void		my_putnbr_base_in(int fd, int nbr, char *base, int taille);
 int		big_pow(int nbr, int base_size);
 int		power(int nbr, int pow);
 
+void		my_put_fnbr_in(int fd, float nbr);
 void		my_putnbr_base_u_in(int fd, unsigned int nbr, char *base);
 int		big_pow_u(unsigned int nbr, int base_size);
 unsigned int	power_u(unsigned int nbr, int pow);
