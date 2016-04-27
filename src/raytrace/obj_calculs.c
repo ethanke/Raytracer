@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Tue Apr 26 04:38:14 2016 Victor Sousa
+** Last update Wed Apr 27 18:37:23 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -44,4 +44,15 @@ void			calc_triangle_normale(t_prog *prog, t_raycast *rcast)
 				float_time_vector(rcast->dist,
 						  rcast->ray.dir));
   rcast->normale = triangle_normale(rcast->triangle);
+}
+
+void			calc_plan_normale(t_prog *prog, t_raycast *rcast)
+{
+  rcast->plan = rcast->obj_touch->obj;
+  rcast->mat_touch = get_sphere_color(rcast->plan->material,
+				      prog->mat_list);
+  rcast->new_point = add_vector(rcast->ray.start,
+				float_time_vector(rcast->dist,
+						  rcast->ray.dir));
+  rcast->normale = rcast->plan->dir;
 }

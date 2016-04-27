@@ -1,4 +1,4 @@
-##
+## 
 ## Makefile for raytracer1 in /home/sousa_v/rendu/lapin/gfx_raytracer1
 ##
 ## Made by victor sousa

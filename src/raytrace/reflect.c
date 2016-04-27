@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 04:04:48 2016 victor sousa
-** Last update Mon Apr 25 06:41:51 2016 Victor Sousa
+** Last update Wed Apr 27 18:34:01 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -33,6 +33,8 @@ int                     reflect_loop(t_prog *prog, t_raycast *rcast)
     calc_sphere_normale(prog, rcast);
   else if (rcast->obj_touch->type == 't')
     calc_triangle_normale(prog, rcast);
+  else if (rcast->obj_touch->type == 'p')
+    calc_plan_normale(prog, rcast);
   free(rcast->obj_touch);
   tmp = mult_vector(rcast->normale, rcast->normale);
   if (tmp == 0)

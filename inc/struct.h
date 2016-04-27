@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Wed Apr 27 18:14:07 2016 Victor Sousa
+** Last update Wed Apr 27 18:29:52 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -107,6 +107,7 @@ typedef struct		s_raycast
   t_coord               normale;
   t_sphere              *sphere;
   t_triangle		*triangle;
+  t_plan		*plan;
   t_light_list          *light_list;
   t_ray                 light_ray;
   int                   in_shadow;
