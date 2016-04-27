@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 23:13:37 2016 Victor Sousa
-** Last update Tue Apr 26 05:49:46 2016 Victor Sousa
+** Last update Wed Apr 27 16:42:00 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -72,11 +72,14 @@ t_vtx_list		*get_vertex(char **file)
 
   out = NULL;
   i = where_are_vertex(file);
-  while (file[i][0] == 'v')
-    {
-      cur = get_vertex_line(file[i]);
-      if ((out = add_end_vtx(out, cur)) == NULL)
-	return (NULL);
+  while (file[i])
+     {
+      if (file[i][0] == 'v' && file[i][1] == ' ')
+	{
+	  cur = get_vertex_line(file[i]);
+	  if ((out = add_end_vtx(out, cur)) == NULL)
+	    return (NULL);
+	}
       i++;
     }
   return (out);
