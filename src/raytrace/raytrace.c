@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Wed Apr 27 16:42:19 2016 Victor Sousa
+** Last update Wed Apr 27 19:46:29 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -30,11 +30,11 @@ int			raytrace_loop(t_prog *prog, t_raycast *rcast,
   rcast->depth = 0;
   rcast->coef = 1.0f;
   rcast->out_col.full = 0xff000000;
-  while ((rcast->coef > 0.0) && (rcast->depth < 10))
+  while ((rcast->coef > 0.0f) && (rcast->depth < 50))
     {
       rcast->dist = 20000;
       if (reflect_loop(prog, rcast) != 0)
-	rcast->depth = 10;
+	rcast->depth = 50;
     }
   tekpixel(prog->pix, pos, &rcast->out_col);
   return (0);

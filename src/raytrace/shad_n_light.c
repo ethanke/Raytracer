@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 04:01:20 2016 victor sousa
-** Last update Mon Apr 25 02:31:41 2016 victor sousa
+** Last update Wed Apr 27 20:02:30 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -17,22 +17,28 @@ void                    process_shadow(t_prog *prog, t_raycast *rcast)
                               &rcast->dist)) != NULL &&
       rcast->obj_touch->obj != NULL)
     rcast->in_shadow = 1;
-  if (!rcast->in_shadow) {
+  if (!rcast->in_shadow)
     rcast->lambert = mult_vector(rcast->light_ray.dir, rcast->normale)
       * rcast->coef;
-    rcast->out_col.argb[RED_CMP] =
-      min(rcast->out_col.argb[RED_CMP] + rcast->lambert
-	  * (rcast->light_list->intensity/ 255.0) *
-	  rcast->mat_touch->color.argb[RED_CMP], 255);
-    rcast->out_col.argb[GREEN_CMP] =
-      min(rcast->out_col.argb[GREEN_CMP] + rcast->lambert
-	  * (rcast->light_list->intensity / 255.0) *
-	  rcast->mat_touch->color.argb[GREEN_CMP], 255);
-    rcast->out_col.argb[BLUE_CMP] =
-      min(rcast->out_col.argb[BLUE_CMP] + rcast->lambert *
-	  (rcast->light_list->intensity / 255.0) *
-	  rcast->mat_touch->color.argb[BLUE_CMP], 255);
-  }
+  else
+    rcast->lambert = (mult_vector(rcast->light_ray.dir, rcast->normale)
+		      * rcast->coef) / 2;
+
+  rcast->out_col.argb[RED_CMP] =
+  (rcast->out_col.argb[RED_CMP] +
+   min(rcast->out_col.argb[RED_CMP] + rcast->lambert
+       * (rcast->light_list->intensity/ 255.0) *
+       rcast->mat_touch->color.argb[RED_CMP], 255)) / 2;
+  rcast->out_col.argb[GREEN_CMP] =
+  (rcast->out_col.argb[GREEN_CMP] +
+   min(rcast->out_col.argb[GREEN_CMP] + rcast->lambert
+       * (rcast->light_list->intensity / 255.0) *
+       rcast->mat_touch->color.argb[GREEN_CMP], 255)) / 2;
+  rcast->out_col.argb[BLUE_CMP] =
+  (rcast->out_col.argb[BLUE_CMP] +
+   min(rcast->out_col.argb[BLUE_CMP] + rcast->lambert *
+       (rcast->light_list->intensity / 255.0) *
+       rcast->mat_touch->color.argb[BLUE_CMP], 255)) / 2;
   free(rcast->obj_touch);
 }
 

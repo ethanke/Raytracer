@@ -11,7 +11,7 @@
   </view>
 
   <material_list>
-    <count>5</count>
+    <count>6</count>
 
     <mat1>
       <red>25</red>
@@ -24,7 +24,7 @@
       <red>255</red>
       <green>255</green>
       <blue>25</blue>
-      <reflect>250</reflect>
+      <reflect>50</reflect>
     </mat2>
 
     <mat3>
@@ -47,6 +47,13 @@
       <blue>25</blue>
       <reflect>50</reflect>
     </mat5>
+    
+    <mat6>
+      <red>25</red>
+      <green>210</green>
+      <blue>210</blue>
+      <reflect>10</reflect>
+    </mat6>
   </material_list>
 
   <object_list>
@@ -110,26 +117,26 @@
     <obj6>
       <type>triangle</type>
       <p1>
-	<x>532</x>
-	<y>170</y>
-	<z>-90</z>
+	<x>0</x>
+	<y>400</y>
+	<z>10000</z>
       </p1>
       <p2>
-	<x>420</x>
-	<y>340</y>
-	<z>-90</z>
+	<x>0</x>
+	<y>400</y>
+	<z>-10000</z>
       </p2>
       <p3>
-	<x>320</x>
-	<y>130</y>
-	<z>-90</z>
+	<x>10000</x>
+	<y>400</y>
+	<z>10000</z>
       </p3>
-      <material_id>1</material_id>
+      <material_id>6</material_id>
     </obj6>
   </object_list>
 
   <light_list>
-    <count>2</count>
+    <count>3</count>
 
     <light1>
       <center>
@@ -137,7 +144,7 @@
 	<y>240</y>
 	<z>-10000</z>
       </center>
-      <intensity>200</intensity>
+      <intensity>300</intensity>
     </light1>
 
     <light2>
@@ -146,8 +153,17 @@
 	<y>240</y>
 	<z>-1000</z>
       </center>
-      <intensity>100</intensity>
+      <intensity>200</intensity>
     </light2>
+
+    <light3>
+      <center>
+	<x>320</x>
+	<y>0</y>
+	<z>-100</z>
+      </center>
+      <intensity>100</intensity>
+    </light3>
   </light_list>
 
 </scene>
