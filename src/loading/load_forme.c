@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Mon Apr 25 23:38:14 2016 Gaëtan Léandre
-** Last update Wed Apr 27 16:36:05 2016 Victor Sousa
+** Last update Wed Apr 27 16:41:54 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -124,6 +124,5 @@ t_obj_list		*parse_obj_formes(char **file, t_vtx_list *list)
 	}
       i++;
     }
-  printf("i face : %d\n", i);
   return (prev);
 }
