@@ -84,6 +84,7 @@ int			main(int ac, char *av[], char *env[])
 {
   t_prog		prog;
 
+  set_max_heap_size(256);
   if (verif_arg(ac, av, env) != 0 ||
       verif_load(&prog, av) != 0 ||
       create_pix(&prog) != 0 ||
