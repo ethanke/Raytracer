@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 10:04:58 2016 Ethan Kerdelhue
-** Last update Wed Apr 27 18:05:35 2016 Ethan Kerdelhue
+** Last update Wed Apr 27 18:24:16 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -42,8 +42,11 @@ t_cmd			*init_cmd()
   cmd[5].desc = "ferme un fichier ouvert";
   cmd[6].index = "add_mat";
   cmd[6].ptr = &add_mat_s;
-  cmd[6].desc = "ajoute un materiel selon plusieurs paramètre";
-  cmd[7].index = "END";
+  cmd[6].desc = "ajoute un materiel selon plusieurs paramètres";
+  cmd[7].index = "add_light";
+  cmd[7].ptr = &add_light_s;
+  cmd[7].desc = "ajoute une lumière selon plusieurs paramètres";
+  cmd[8].index = "END";
   return (cmd);
 }
 

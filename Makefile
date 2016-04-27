@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Wed Apr 27 11:05:02 2016 Kerdelhue Ethan
+## Last update Wed Apr 27 11:23:00 2016 Kerdelhue Ethan
 ##
 
 NAME		=	raytracer2
@@ -98,6 +98,7 @@ SRC		+=	$(EDITDIR)/aff_light.c			\
 			$(EDITDIR)/add_mat.c			\
 			$(EDITDIR)/aff_obj.c			\
 			$(EDITDIR)/aff_win.c			\
+			$(EDITDIR)/add_light.c			\
 			$(EDITDIR)/cmd.c			\
 			$(EDITDIR)/count.c			\
 			$(EDITDIR)/utils.c			\
