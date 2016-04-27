@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Wed Apr 27 17:06:03 2016 Victor Sousa
-** Last update Wed Apr 27 17:07:12 2016 Victor Sousa
+** Last update Wed Apr 27 18:24:49 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -30,38 +30,71 @@ static int		get_mat_id(t_plan *p, char **file, int id)
   return (0);
 }
 
-static int		get_point(t_plan *p, char **file, int id, int p_id)
+static int		get_dir(t_plan *p, char **file, int id)
 {
   char			*lf;
   char			*get;
   t_point		tmp;
 
   if ((lf = malloc(sizeof(char) *
-		   my_strlen("scene:object_list:objX:pX:x")
+		   my_strlen("scene:object_list:objX:dir:x")
 		   + 1)) == NULL)
     return (1);
   lf[0] = '\0';
-  lf = my_strcat(lf, "scene:object_list:objX:pX:x");
+  lf = my_strcat(lf, "scene:object_list:objX:dir:x");
   lf[21] = id + 49;
-  lf[24] = p_id + 49;
   if ((get = get_field(file, lf)) == NULL)
     return (1);
   tmp.x = my_getnbr(get);
   free(get);
-  lf[26] = 'y';
+  lf[27] = 'y';
   if ((get = get_field(file, lf)) == NULL)
     return (1);
   tmp.y = my_getnbr(get);
   free(get);
-  lf[26] = 'z';
+  lf[27] = 'z';
   if ((get = get_field(file, lf)) == NULL)
     return (1);
   tmp.z = my_getnbr(get);
   free(get);
   free(lf);
-  p->angle[p_id].x = tmp.x;
-  p->angle[p_id].y = tmp.y;
-  p->angle[p_id].z = tmp.z;
+  p->dir.x = tmp.x;
+  p->dir.y = tmp.y;
+  p->dir.z = tmp.z;
+  return (0);
+}
+
+static int		get_center(t_plan *p, char **file, int id)
+{
+  char			*lf;
+  char			*get;
+  t_point		tmp;
+
+  if ((lf = malloc(sizeof(char) *
+		   my_strlen("scene:object_list:objX:center:x")
+		   + 1)) == NULL)
+    return (1);
+  lf[0] = '\0';
+  lf = my_strcat(lf, "scene:object_list:objX:center:x");
+  lf[21] = id + 49;
+  if ((get = get_field(file, lf)) == NULL)
+    return (1);
+  tmp.x = my_getnbr(get);
+  free(get);
+  lf[30] = 'y';
+  if ((get = get_field(file, lf)) == NULL)
+    return (1);
+  tmp.y = my_getnbr(get);
+  free(get);
+  lf[30] = 'z';
+  if ((get = get_field(file, lf)) == NULL)
+    return (1);
+  tmp.z = my_getnbr(get);
+  free(get);
+  free(lf);
+  p->center.x = tmp.x;
+  p->center.y = tmp.y;
+  p->center.z = tmp.z;
   return (0);
 }
 
@@ -69,19 +102,15 @@ t_obj_list              *add_plan(t_obj_list *prev, char **file, int id)
 {
   t_obj_list            *new;
   t_plan           	*p;
-  int			pointi;
 
   if ((new = malloc(sizeof(t_obj_list))) == NULL)
     return (NULL);
   if ((p = malloc(sizeof(t_plan))) == NULL)
     return (NULL);
-  pointi = 0;
-  while (pointi < 3)
-    {
-      if (get_point(p, file, id, pointi) != 0)
-	return (NULL);
-      pointi++;
-    }
+  if (get_center(p, file, id) != 0)
+    return (NULL);
+  if (get_dir(p, file, id) != 0)
+    return (NULL);
   if (get_mat_id(p, file, id) != 0)
     return (NULL);
   new->obj = p;

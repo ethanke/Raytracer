@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Wed Apr 27 17:08:46 2016 Victor Sousa
+** Last update Wed Apr 27 18:14:07 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -48,7 +48,8 @@ typedef struct		s_vtx_list
 
 typedef struct		s_plan
 {
-  t_coord		angle[3];
+  t_coord		center;
+  t_coord		dir;
   char                  material;
 }			t_plan;
 

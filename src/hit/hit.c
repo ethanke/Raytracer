@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 23:01:14 2016 victor sousa
-** Last update Mon Apr 25 04:37:17 2016 Victor Sousa
+** Last update Wed Apr 27 18:26:03 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -27,6 +27,12 @@ t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist)
       	}
       if (obj_list->type == 't' &&
 	  hit_triangle(ray, (t_triangle *)obj_list->obj, dist))
+  	{
+  	  out->type = obj_list->type;
+  	  out->obj = obj_list->obj;
+  	}
+      if (obj_list->type == 'p' &&
+	  hit_plan(ray, (t_plan *)obj_list->obj, dist))
 	{
 	  out->type = obj_list->type;
 	  out->obj = obj_list->obj;

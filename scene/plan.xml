@@ -1,0 +1,65 @@
+<scene>
+
+  <view>
+    <x_size>640</x_size>
+    <y_size>480</y_size>
+    <cam_pos>
+      <x>320</x>
+      <y>240</y>
+      <z>-1000</z>
+    </cam_pos>
+  </view>
+
+  <material_list>
+    <count>1</count>
+
+    <mat1>
+      <red>25</red>
+      <green>25</green>
+      <blue>255</blue>
+      <reflect>50</reflect>
+    </mat1>
+  </material_list>
+
+  <object_list>
+    <count>1</count>
+
+    <obj1>
+      <type>plan</type>
+      <center>
+	<x>0</x>
+	<y>0</y>
+	<z>0</z>
+      </center>
+      <dir>
+	<x>0</x>
+	<y>1</y>
+	<z>0</z>
+      </dir>
+      <material_id>1</material_id>
+    </obj1>
+  </object_list>
+
+  <light_list>
+    <count>2</count>
+
+    <light1>
+      <center>
+	<x>320</x>
+	<y>240</y>
+	<z>-10000</z>
+      </center>
+      <intensity>200</intensity>
+    </light1>
+
+    <light2>
+      <center>
+	<x>640</x>
+	<y>240</y>
+	<z>-1000</z>
+      </center>
+      <intensity>100</intensity>
+    </light2>
+  </light_list>
+
+</scene>

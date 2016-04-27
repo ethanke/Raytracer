@@ -63,7 +63,8 @@ SRC		+=	src/loading/parsing_scene.c		\
 ##  HIT  ##
 SRC		+=	src/hit/hit.c				\
 			src/hit/sphere.c			\
-			src/hit/triangle.c
+			src/hit/triangle.c			\
+			src/hit/plan.c
 
 ##  RAYTRACE  ##
 SRC		+=	src/raytrace/raytrace.c			\
