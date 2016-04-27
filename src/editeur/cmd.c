@@ -5,10 +5,17 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 10:04:58 2016 Ethan Kerdelhue
-** Last update Wed Apr 27 09:02:01 2016 Ethan Kerdelhue
+** Last update Wed Apr 27 14:16:35 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
+
+int			close_xml(t_prog *prog)
+{
+  (void) prog;
+  my_printf(0, "let's close!\n");
+  return (0);
+}
 
 t_cmd			*init_cmd()
 {
@@ -30,7 +37,10 @@ t_cmd			*init_cmd()
   cmd[4].index = "add_obj";
   cmd[4].ptr = &add_obj;
   cmd[4].desc = "ajoute un objet selon plusieurs type dans le fichier xml";
-  cmd[5].index = "END";
+  cmd[5].index = "close_xml";
+  cmd[5].ptr = &close_xml;
+  cmd[5].desc = "ferme un fichier ouvert";
+  cmd[6].index = "END";
   return (cmd);
 }
 

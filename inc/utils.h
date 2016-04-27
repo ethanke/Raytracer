@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 05:29:22 2016 victor sousa
-** Last update Tue Apr 26 01:28:14 2016 Victor Sousa
+** Last update Wed Apr 27 14:26:41 2016 Ethan Kerdelhue
 */
 
 #ifndef			UTILS_H_
@@ -39,6 +39,7 @@ t_coord			crossProduct(t_coord c1, t_coord c2);
 t_coord                 normalize(t_coord vec);
 float			min(float a, float b);
 float			max(float a, float b);
+double			my_atof(char *str);
 
 /* WTF */
 float			invsqrt(float number);
