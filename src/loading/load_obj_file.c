@@ -36,6 +36,19 @@ static t_light_list	*add_empty_light2(t_light_list *prev)
   new->next = prev;
   return (new);
 }
+static t_light_list	*add_empty_light3(t_light_list *prev)
+{
+  t_light_list          *new;
+
+  if ((new = malloc(sizeof(t_light_list))) == NULL)
+    return (NULL);
+  new->center.x = 320;
+  new->center.y = -300;
+  new->center.z = 100;
+  new->intensity = 75;
+  new->next = prev;
+  return (new);
+}
 
 t_mat_list              *add_empty_mat(t_mat_list *prev)
 {
@@ -44,6 +57,7 @@ t_mat_list              *add_empty_mat(t_mat_list *prev)
   if ((new = malloc(sizeof(t_mat_list))) == NULL)
     return (NULL);
   new->color.full = 0xFFFFAF00;
+  new->reflect = 10;
   new->id = 1;
   new->next = prev;
   return (new);
@@ -84,6 +98,8 @@ int			load_obj_file(t_prog *prog, char *path)
   if ((prog->light_list = add_empty_light(prog->light_list)) == NULL)
     return (-1);
   if ((prog->light_list = add_empty_light2(prog->light_list)) == NULL)
+    return (-1);
+  if ((prog->light_list = add_empty_light3(prog->light_list)) == NULL)
     return (-1);
   prog->mat_list = NULL;
   if ((prog->mat_list = add_empty_mat(prog->mat_list)) == NULL)
