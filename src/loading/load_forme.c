@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Mon Apr 25 23:38:14 2016 Gaëtan Léandre
-** Last update Tue Apr 26 03:00:00 2016 Victor Sousa
+** Last update Wed Apr 27 16:36:05 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -114,14 +114,16 @@ t_obj_list		*parse_obj_formes(char **file, t_vtx_list *list)
 
   prev = NULL;
   i = where_are_formes(file);
-  while (file[i] && file[i][0] == 'f')
+  while (file[i])
     {
-      prev = associate_obj(file[i], prev, list);
-      if (prev == NULL)
-	return (NULL);
+      if (file[i][0] == 'f')
+	{
+	  prev = associate_obj(file[i], prev, list);
+	  if (prev == NULL)
+	    return (NULL);
+	}
       i++;
-      while (file[i] && file[i][0] == '\0')
-	i++;
     }
+  printf("i face : %d\n", i);
   return (prev);
 }
