@@ -5,39 +5,80 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Tue Apr 26 00:01:36 2016 Victor Sousa
+** Last update Thu Apr 28 06:40:46 2016 Victor Sousa
 */
 
 #include		"main.h"
 
-#define			READ_LENGHT	4096
+t_line_list		*add_line_list(t_line_list *head, char *str)
+{
+  t_line_list		*new;
+  t_line_list		*tmp;
+
+  if ((new = malloc(sizeof(t_line_list))) == NULL)
+    return (NULL);
+  new->str = str;
+  new->next = NULL;
+  if (head == NULL)
+    return new;
+  else
+    {
+      tmp = head;
+      while(tmp->next != NULL)
+	tmp = tmp->next;
+      tmp->next = new;
+      return (head);
+    }
+}
+
+int			list_len(t_line_list *list)
+{
+  int			i;
+  t_line_list		*tmp;
+
+  i = 0;
+  tmp = list;
+  while (tmp != NULL)
+    {
+      i++;
+      tmp = tmp->next;
+    }
+  return (i);
+}
+
+char			**my_list_to_wordtab(t_line_list *list)
+{
+  char			**out;
+  t_line_list		*tmp;
+  int			i;
+
+  if ((out = malloc(sizeof(char *) * list_len(list) + 1)) == NULL)
+    return (NULL);
+  tmp = list;
+  i = 0;
+  while (tmp != NULL)
+    {
+      out[i] = tmp->str;
+      tmp = tmp->next;
+      i++;
+    }
+  return (out);
+}
 
 char			**load_scene_file(char *path)
 {
   int			fd;
   char			*str;
-  char			*file1d;
-  int			i;
   char			**file;
+  int			i;
+  t_line_list		*file_list;
 
   if ((fd = open(path, O_RDONLY)) == -1)
     return (NULL);
-  if ((file1d = malloc(READ_LENGHT + 1)) == NULL)
-    return (NULL);
-  if ((str = malloc(READ_LENGHT + 1)) == NULL)
-    return (NULL);
-  file1d[0] = '\0';
-  i = 0;
-  while (read(fd, str, 4096) > 0)
-    {
-      str[4096] = '\0';
-      file1d = my_strcat(file1d, str);
-      if ((file1d = my_realloc(file1d, my_strlen(file1d) + READ_LENGHT + 1)) == NULL)
-	return (NULL);
-      i++;
-    }
-
-  if ((file = my_str_to_wordtab(file1d, 0, 0)) == NULL)
+  file_list = NULL;
+  while ((str = get_next_line(fd)) != NULL)
+    file_list = add_line_list(file_list, str);
+  if ((file = my_list_to_wordtab(file_list)) == NULL)
     return (NULL);
   i = 0;
   while (file[i])
@@ -46,7 +87,6 @@ char			**load_scene_file(char *path)
 	return (NULL);
       i++;
     }
-  free(file1d);
   return (file);
 }
 
@@ -79,6 +119,35 @@ static int		get_cam_pos(char **file, t_prog *prog)
   return (0);
 }
 
+static int		get_cam_look_at(char **file, t_prog *prog)
+{
+  char			*lf;
+  char			*get;
+
+  if ((lf = malloc(sizeof(char) *
+		   my_strlen("scene:view:look_at:x")
+		   + 1)) == NULL)
+    return (1);
+  lf[0] = '\0';
+  lf = my_strcat(lf, "scene:view:look_at:x");
+  if ((get = get_field(file, lf)) == NULL)
+    return (1);
+  prog->look_at.x = my_getnbr(get);
+  free(get);
+  lf[19] = 'y';
+  if ((get = get_field(file, lf)) == NULL)
+    return (1);
+  prog->look_at.y = my_getnbr(get);
+  free(get);
+  lf[19] = 'z';
+  if ((get = get_field(file, lf)) == NULL)
+    return (1);
+  prog->look_at.z = my_getnbr(get);
+  free(get);
+  free(lf);
+  return (0);
+}
+
 int			load_scene(t_prog *prog, char *scene_path)
 {
   char			**file;
@@ -94,12 +163,19 @@ int			load_scene(t_prog *prog, char *scene_path)
     return (-1);
   prog->win_size.y = my_getnbr(get);
   free(get);
-  prog->cam_fov.x = 75;
-  prog->cam_fov.y = 50;
   if (get_cam_pos(file, prog) == 1 ||
+      get_cam_look_at(file, prog) == 1 ||
       load_mat(prog, file) == -1 ||
       load_light(prog, file) == -1 ||
       load_obj(prog, file) == -1)
     return (-1);
+  if (prog->look_at.x == prog->cam_pos.x &&
+      prog->look_at.y == prog->cam_pos.y &&
+      prog->look_at.z == prog->cam_pos.z)
+    {
+      my_putstr("Wrong camera placement\n");
+      return (-1);
+    }
+  prog->cam_dir = normalize(minus_point(prog->look_at, prog->cam_pos));
   return (0);
 }

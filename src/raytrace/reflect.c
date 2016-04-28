@@ -5,14 +5,14 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 04:04:48 2016 victor sousa
-** Last update Wed Apr 27 18:34:01 2016 Victor Sousa
+** Last update Thu Apr 28 08:01:50 2016 Victor Sousa
 */
 
 #include		"main.h"
 
 void                    process_reflect(t_raycast *rcast)
 {
-  rcast->coef *= rcast->mat_touch->reflect / 100.0;
+  rcast->coef = rcast->coef * (rcast->mat_touch->reflect / 100.0);
   rcast->reflect = 2.0 * mult_vector(rcast->ray.dir, rcast->normale);
   rcast->ray.start = rcast->new_point;
   rcast->ray.dir = minus_vector(rcast->ray.dir,
@@ -35,6 +35,8 @@ int                     reflect_loop(t_prog *prog, t_raycast *rcast)
     calc_triangle_normale(prog, rcast);
   else if (rcast->obj_touch->type == 'p')
     calc_plan_normale(prog, rcast);
+  else
+    return (-1);
   free(rcast->obj_touch);
   tmp = mult_vector(rcast->normale, rcast->normale);
   if (tmp == 0)

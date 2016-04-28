@@ -5,13 +5,15 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 23:17:13 2016 victor sousa
-** Last update Wed Apr 27 17:12:46 2016 Victor Sousa
+** Last update Thu Apr 28 04:25:26 2016 Victor Sousa
 */
 
 #ifndef			HIT_H_
 # define		HIT_H_
 
 # include		"main.h"
+
+# define		USE_CMYK		0
 
 int                     hit_sphere(t_ray *r, t_sphere *s, float *t);
 int			hit_triangle(t_ray *r, t_triangle *t, float *old_dist);

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:08:40 2016 victor sousa
-** Last update Mon Apr 25 02:27:38 2016 victor sousa
+** Last update Thu Apr 28 05:40:01 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -17,6 +17,16 @@ t_coord                 normalize(t_coord vec)
   out.x = vec.x / sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
   out.y = vec.y / sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
   out.z = vec.z / sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
+  return (out);
+}
+
+t_coord                 normalize_p(t_point vec)
+{
+  t_coord               out;
+
+  out.x = (float)vec.x / sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
+  out.y = (float)vec.y / sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
+  out.z = (float)vec.z / sqrt(pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2));
   return (out);
 }
 

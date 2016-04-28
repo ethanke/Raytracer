@@ -5,25 +5,30 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Wed Apr 27 16:59:30 2016 Victor Sousa
-** Last update Wed Apr 27 18:27:21 2016 Victor Sousa
+** Last update Thu Apr 28 02:41:16 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
 
 int			hit_plan(t_ray *r, t_plan *p, float *t)
 {
-  float			denom;
+  float			a;
+  float			b;
   float			dist;
 
-  denom = mult_vector(p->dir, r->dir);
-  if (ABS(denom) > 0.1f)
+  a = p->dir.x * r->dir.x +
+      p->dir.y * r->dir.y + p->dir.z * r->dir.z;
+  b = p->dir.x * (r->start.x - p->center.x) +
+      p->dir.y * (r->start.y - p->center.y) +
+  p->dir.z * (r->start.z - p->center.z) - (p->dir.x * p->center.x +
+	      p->dir.y * p->center.y + p->dir.z * p->center.z);
+  if (a == 0)
+    return (0);
+  dist = -(b / a);
+  if (dist > 0.1 && *t > dist)
     {
-      dist = mult_vector(minus_vector(p->center, r->start), p->dir) / denom;
-      if (dist >= 0 && dist < *t)
-	{
-	  *t = dist;
-	  return (1);
-	}
+      *t = dist;
+      return (1);
     }
   return (0);
 }

@@ -28,7 +28,7 @@
       <type>plan</type>
       <center>
 	<x>0</x>
-	<y>0</y>
+	<y>400</y>
 	<z>0</z>
       </center>
       <dir>
@@ -45,9 +45,9 @@
 
     <light1>
       <center>
-	<x>320</x>
-	<y>240</y>
-	<z>-10000</z>
+	<x>0</x>
+	<y>0</y>
+	<z>0</z>
       </center>
       <intensity>200</intensity>
     </light1>

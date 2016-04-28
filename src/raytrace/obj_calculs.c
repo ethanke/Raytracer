@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Wed Apr 27 18:37:23 2016 Victor Sousa
+** Last update Wed Apr 27 20:11:48 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -30,7 +30,7 @@ t_coord			triangle_normale(t_triangle *tr)
   e1 = minus_vector(tr->angle[1], tr->angle[0]);
   e2 = minus_vector(tr->angle[2], tr->angle[0]);
   h = crossProduct(e2, e1);
-  if (h.z >= 0)
+  if (h.x >= 0 || h.y >= 0 || h.z >= 0)
     h = crossProduct(e1, e2);
   return (h);
 }
