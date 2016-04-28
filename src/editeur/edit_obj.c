@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed Apr 27 18:31:29 2016 Ethan Kerdelhue
-** Last update Thu Apr 28 11:32:05 2016 Ethan Kerdelhue
+** Last update Thu Apr 28 17:43:50 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -59,14 +59,12 @@ t_obj_list		*get_obj_ptr(t_prog *prog, int id)
 
   i = 0;
   tmp = prog->obj_list;
-  while (tmp != NULL)
+  while (id != i)
     {
       i++;
-      if (id == i)
-	return (tmp);
       tmp = tmp->next;
     }
-  return (NULL);
+  return (tmp);
 }
 
 int			edit_coord(t_coord *tmp)
@@ -75,15 +73,15 @@ int			edit_coord(t_coord *tmp)
 
   my_printf(0, "x :\n");
   str = get_next_line(0);
-  tmp->x = ((str != NULL) ? (my_atof(str)) : (tmp->x));
+  tmp->x = ((str[0] != '\0') ? (my_atof(str)) : (tmp->x));
   free(str);
   my_printf(0, "y :\n");
   str = get_next_line(0);
-  tmp->y = ((str != NULL) ? (my_atof(str)) : (tmp->y));
+  tmp->y = ((str[0] != '\0') ? (my_atof(str)) : (tmp->y));
   free(str);
   my_printf(0, "z :\n");
   str = get_next_line(0);
-  tmp->z = ((str != NULL) ? (my_atof(str)) : (tmp->z));
+  tmp->z = ((str[0] != '\0') ? (my_atof(str)) : (tmp->z));
   return (0);
 }
 
@@ -98,9 +96,9 @@ char			edit_material_id(t_prog *prog, char mat)
     {
       my_printf(0, "material id :\n");
       str = get_next_line(0);
-      if ((check_material_id(prog, (char) my_getnbr(str)) == 1) || str == NULL)
+      if ((check_material_id(prog, (char) my_getnbr(str)) == 1) || str[0] != '\0')
 	{
-	  if (str == NULL)
+	  if (str[0] != '\0')
 	    tmp = mat;
 	  else
 	    tmp = (char) my_getnbr(str);
@@ -121,7 +119,7 @@ int			edit_sphere(t_prog *prog, t_sphere *sph)
   edit_coord(&sph->center);
   my_printf(0, "radius :\n");
   str = get_next_line(0);
-  sph->radius = ((str != NULL) ? (my_getnbr(str)) : (sph->radius));
+  sph->radius = ((str[0] != '\0') ? (my_getnbr(str)) : (sph->radius));
   free(str);
   sph->material = edit_material_id(prog, sph->material);
   return (0);
@@ -130,6 +128,10 @@ int			edit_sphere(t_prog *prog, t_sphere *sph)
 
 int			edit_triangle(t_prog *prog, t_triangle *tri)
 {
+  char			*str;
+
+  my_printf(0, "Laissez vide si vous voulez concerver la valeur\n");
+  str = get_next_line(0);
   (void) prog;
   (void) tri;
   return (0);
