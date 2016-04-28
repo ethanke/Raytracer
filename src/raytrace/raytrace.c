@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Thu Apr 28 07:06:25 2016 Victor Sousa
+** Last update Thu Apr 28 07:52:51 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -19,9 +19,9 @@ void			init_ray(t_bunny_position *win_size, t_ray *ray,
   ray->start.x = prog->cam_pos.x;
   ray->start.y = prog->cam_pos.y;
   ray->start.z = prog->cam_pos.z;
-  center.x = ray->start.x + 1000 * prog->cam_dir.x;
-  center.y = ray->start.y + 1000 * prog->cam_dir.y;
-  center.z = ray->start.z + 1000 * prog->cam_dir.z;
+  center.x = ray->start.x + 900 * prog->cam_dir.x;
+  center.y = ray->start.y + 900 * prog->cam_dir.y;
+  center.z = ray->start.z + 900 * prog->cam_dir.z;
   point.x = center.x - (win_size->x / 2);
   point.y = center.y - (win_size->y / 2);
   point.z = center.z;
