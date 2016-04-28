@@ -5,13 +5,15 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 05:29:22 2016 victor sousa
-** Last update Wed Apr 27 14:26:41 2016 Ethan Kerdelhue
+** Last update Thu Apr 28 06:37:24 2016 Victor Sousa
 */
 
 #ifndef			UTILS_H_
 # define		UTILS_H_
 
 # include		"main.h"
+
+#define 		DTR(angle) ((angle) / 180.0 * M_PI)
 
 int			my_strlen(char *str);
 int			my_tablen(char **str);
@@ -32,11 +34,13 @@ char			*epur_str(char *str, char *separ);
 /* vector operator */
 float                   mult_vector(const t_coord v1, const t_coord v2);
 t_coord                 minus_vector(const t_coord v1, const t_coord v2);
+t_coord                 minus_point(const t_point v1, const t_point v2);
 t_coord                 add_vector(const t_coord v1, const t_coord v2);
 t_coord                 float_time_vector(float c, const t_coord v);
 t_coord                 float_minus_vector(float c, const t_coord v);
 t_coord			crossProduct(t_coord c1, t_coord c2);
 t_coord                 normalize(t_coord vec);
+t_coord                 normalize_p(t_point vec);
 float			min(float a, float b);
 float			max(float a, float b);
 double			my_atof(char *str);

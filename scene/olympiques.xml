@@ -8,6 +8,11 @@
       <y>240</y>
       <z>-1000</z>
     </cam_pos>
+    <look_at>
+      <x>320</x>
+      <y>240</y>
+      <z>0</z>
+    </look_at>
   </view>
 
   <material_list>
@@ -57,7 +62,7 @@
   </material_list>
 
   <object_list>
-    <count>6</count>
+    <count>5</count>
 
     <obj1>
       <type>sphere</type>
@@ -113,26 +118,6 @@
       <radius>100</radius>
       <material_id>5</material_id>
     </obj5>
-
-    <obj6>
-      <type>triangle</type>
-      <p1>
-	<x>0</x>
-	<y>400</y>
-	<z>5000</z>
-      </p1>
-      <p2>
-	<x>0</x>
-	<y>400</y>
-	<z>-5000</z>
-      </p2>
-      <p3>
-	<x>5000</x>
-	<y>400</y>
-	<z>5000</z>
-      </p3>
-      <material_id>6</material_id>
-    </obj6>
   </object_list>
 
   <light_list>

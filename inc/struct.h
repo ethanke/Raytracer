@@ -5,13 +5,21 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Wed Apr 27 18:29:52 2016 Victor Sousa
+** Last update Thu Apr 28 05:46:48 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
 # define		STRUCT_H_
 
 # include		"main.h"
+
+typedef struct          s_cmyk
+{
+  float                 c;
+  float                 m;
+  float                 y;
+  float                 k;
+}                       t_cmyk;
 
 typedef struct          s_point
 {
@@ -110,7 +118,6 @@ typedef struct		s_raycast
   t_plan		*plan;
   t_light_list          *light_list;
   t_ray                 light_ray;
-  int                   in_shadow;
   float                 lambert;
   float                 reflect;
 }			t_raycast;
@@ -126,7 +133,8 @@ typedef struct          s_prog
 {
   t_bunny_position      win_size;
   t_point		cam_pos;
-  t_bunny_position	cam_fov;
+  t_point		look_at;
+  t_coord		cam_dir;
   t_obj_list            *obj_list;
   t_mat_list		*mat_list;
   t_light_list		*light_list;
