@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 10:04:58 2016 Ethan Kerdelhue
-** Last update Wed Apr 27 18:27:55 2016 Ethan Kerdelhue
+** Last update Fri Apr 29 22:00:21 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -21,7 +21,7 @@ t_cmd			*init_cmd()
 {
   t_cmd			*cmd;
 
-  cmd = malloc(sizeof(t_cmd) * 10);
+  cmd = malloc(sizeof(t_cmd) * 20);
   cmd[0].index = "help";
   cmd[0].ptr = &aff_help;
   cmd[0].desc = "affiche une aide pour l'utilisateur";
@@ -49,7 +49,10 @@ t_cmd			*init_cmd()
   cmd[8].index = "edit_obj";
   cmd[8].ptr = &edit_obj;
   cmd[8].desc = "edite les paramètres de l'objet selectionner";
-  cmd[9].index = "END";
+  cmd[9].index = "edit_mat";
+  cmd[9].ptr = &edit_mat;
+  cmd[9].desc = "edite les paramètres du matériau selectionner";
+  cmd[10].index = "END";
   return (cmd);
 }
 

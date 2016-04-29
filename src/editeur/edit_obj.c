@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed Apr 27 18:31:29 2016 Ethan Kerdelhue
-** Last update Fri Apr 29 17:30:00 2016 Ethan Kerdelhue
+** Last update Fri Apr 29 19:48:33 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -96,7 +96,7 @@ char			edit_material_id(t_prog *prog, char mat)
     {
       my_printf(0, "material id :\n");
       str = get_next_line(0);
-      if ((check_material_id(prog, (char) my_getnbr(str)) == 1) || str[0] == '\0')
+      if ((check_material_id(prog, my_getnbr(str)) == 1) || str[0] == '\0')
 	{
 	  if (str[0] == '\0')
 	    tmp = mat;
