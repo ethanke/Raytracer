@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:28:00 2016 Victor Sousa
-** Last update Fri Apr 29 18:11:24 2016 Victor Sousa
+** Last update Fri Apr 29 18:47:23 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -14,7 +14,7 @@ int 			hit_circle(t_ray *r, t_circle *c, float *t, t_raycast *rcast)
 {
   float			dist;
 
-  dist = 20000;
+  dist = *t;
   if (hit_plan(r, &c->plan, &dist))
     {
       t_coord p = add_vector(r->start, float_time_vector(dist, r->dir));
@@ -60,12 +60,15 @@ int			hit_cone(t_ray *r, t_cone *c, float *t)
       dist[1] = (-x.y + sqrt(d)) / (2 * x.x);
       while (i < 2)
 	{
-	  t_coord temp;
-	  temp = add_vector(r->start, float_time_vector(dist[i], r->dir));
-	  if (temp.y <= c->height && temp.y >= 0 && dist[i] < *t)
+	  if (dist[i] > 0.1)
 	    {
-	      *t = dist[i];
-	      return (1);
+	      t_coord temp;
+	      temp = add_vector(r->start, float_time_vector(dist[i], r->dir));
+	      if (temp.y <= c->height && temp.y >= 0 && dist[i] < *t)
+		{
+		  *t = dist[i];
+		  return (1);
+		}
 	    }
 	  i++;
 	}
