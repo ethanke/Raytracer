@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 08:37:20 2016 Victor Sousa
-** Last update Thu Apr 28 23:41:30 2016 Victor Sousa
+** Last update Fri Apr 29 04:42:28 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -99,15 +99,21 @@ int			load_obj_file(t_prog *prog, char *path)
 {
   char			**file;
   t_vtx_list		*vtx_list;
+  t_coord		dir;
 
   prog->win_size.x = 1080;
   prog->win_size.y = 720;
-  prog->cam_pos.x = 0;
-  prog->cam_pos.y = -500;
-  prog->cam_pos.z = -1000;
+  prog->cam_pos.x = -500;
+  prog->cam_pos.y = 0;
+  prog->cam_pos.z = -500;
+  prog->cam_fov.x = 75;
+  prog->cam_fov.y = prog->cam_fov.x * ((prog->win_size.x / prog->win_size.y) / 1.5);
   prog->look_at.x = 0;
   prog->look_at.y = 0;
   prog->look_at.z = 0;
+  dir = normalize(minus_point(prog->look_at, prog->cam_pos));
+  prog->cam_rot.x = RTD(acos(-(dir.z / sqrt(pow(dir.x, 2) + pow(dir.z, 2))))) - 90;
+  prog->cam_rot.y = RTD((M_PI / 2 - acos(dir.y)));
   prog->cam_dir = normalize(minus_point(prog->look_at, prog->cam_pos));
   if ((file = load_scene_file(path)) == NULL)
     return (-1);
