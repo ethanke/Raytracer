@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 10:04:58 2016 Ethan Kerdelhue
-** Last update Fri Apr 29 22:00:21 2016 Ethan Kerdelhue
+** Last update Fri Apr 29 22:51:34 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -52,7 +52,10 @@ t_cmd			*init_cmd()
   cmd[9].index = "edit_mat";
   cmd[9].ptr = &edit_mat;
   cmd[9].desc = "edite les paramètres du matériau selectionner";
-  cmd[10].index = "END";
+  cmd[10].index = "edit_cam";
+  cmd[10].ptr = &edit_cam;
+  cmd[10].desc = "edite les paramètrs de la caméra";
+  cmd[11].index = "END";
   return (cmd);
 }
 
