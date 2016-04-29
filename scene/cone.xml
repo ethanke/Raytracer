@@ -54,7 +54,7 @@
       <blue>25</blue>
       <reflect>50</reflect>
     </mat5>
-    
+
     <mat6>
       <red>25</red>
       <green>210</green>
@@ -64,64 +64,9 @@
   </material_list>
 
   <object_list>
-    <count>7</count>
+    <count>2</count>
 
     <obj1>
-      <type>sphere</type>
-      <center>
-	<x>-225</x>
-	<y>100</y>
-	<z>0</z>
-      </center>
-      <radius>100</radius>
-      <material_id>1</material_id>
-    </obj1>
-
-    <obj2>
-      <type>sphere</type>
-      <center>
-	<x>-112</x>
-	<y>-100</y>
-	<z>0</z>
-      </center>
-      <radius>100</radius>
-      <material_id>2</material_id>
-    </obj2>
-
-    <obj3>
-      <type>sphere</type>
-      <center>
-	<x>0</x>
-	<y>100</y>
-	<z>0</z>
-      </center>
-      <radius>100</radius>
-      <material_id>3</material_id>
-    </obj3>
-
-    <obj4>
-      <type>sphere</type>
-      <center>
-	<x>112</x>
-	<y>-100</y>
-	<z>0</z>
-      </center>
-      <radius>100</radius>
-      <material_id>4</material_id>
-    </obj4>
-
-    <obj5>
-      <type>sphere</type>
-      <center>
-	<x>225</x>
-	<y>100</y>
-	<z>0</z>
-      </center>
-      <radius>100</radius>
-      <material_id>5</material_id>
-    </obj5>
-
-    <obj6>
       <type>plan</type>
       <center>
 	<x>0</x>
@@ -134,24 +79,24 @@
 	<z>0</z>
       </dir>
       <material_id>6</material_id>
-    </obj6>
+    </obj1>
 
-    <obj7>
+    <obj2>
       <type>cone</type>
       <center>
 	<x>0</x>
-	<y>0</y>
-	<z>-75</z>
+	<y>-50</y>
+	<z>0</z>
       </center>
       <dir>
 	<x>0</x>
 	<y>1</y>
 	<z>0</z>
       </dir>
-      <radius>100</radius>
-      <height>100</height>
+      <radius>75</radius>
+      <height>125</height>
       <material_id>4</material_id>
-    </obj7>
+    </obj2>
   </object_list>
 
   <light_list>

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:05:12 2016 victor sousa
-** Last update Wed Apr 27 18:34:15 2016 Victor Sousa
+** Last update Fri Apr 29 06:07:46 2016 Victor Sousa
 */
 
 #ifndef			RAYTRACE_H_
@@ -23,5 +23,6 @@ int                     reflect_loop(t_prog *prog, t_raycast *rcast);
 void			calc_sphere_normale(t_prog *prog, t_raycast *rcast);
 void			calc_triangle_normale(t_prog *prog, t_raycast *rcast);
 void			calc_plan_normale(t_prog *prog, t_raycast *rcast);
+void			calc_cone_normale(t_prog *prog, t_raycast *rcast);
 
 #endif		      /*RAYTRACE_H*/

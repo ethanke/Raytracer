@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 04:04:48 2016 victor sousa
-** Last update Thu Apr 28 08:01:50 2016 Victor Sousa
+** Last update Fri Apr 29 06:05:34 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -35,6 +35,8 @@ int                     reflect_loop(t_prog *prog, t_raycast *rcast)
     calc_triangle_normale(prog, rcast);
   else if (rcast->obj_touch->type == 'p')
     calc_plan_normale(prog, rcast);
+  else if (rcast->obj_touch->type == 'c')
+    calc_cone_normale(prog, rcast);
   else
     return (-1);
   free(rcast->obj_touch);

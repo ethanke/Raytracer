@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Fri Apr 29 01:35:17 2016 Victor Sousa
+** Last update Fri Apr 29 06:06:27 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -61,6 +61,15 @@ typedef struct		s_plan
   char                  material;
 }			t_plan;
 
+typedef struct		s_cone
+{
+  t_coord		center;
+  t_coord		dir;
+  int			radius;
+  int			height;
+  char                  material;
+}			t_cone;
+
 typedef struct		s_triangle
 {
   t_coord		angle[3];
@@ -114,6 +123,7 @@ typedef struct		s_raycast
   t_coord               new_point;
   t_coord               normale;
   t_sphere              *sphere;
+  t_cone              	*cone;
   t_triangle		*triangle;
   t_plan		*plan;
   t_light_list          *light_list;
