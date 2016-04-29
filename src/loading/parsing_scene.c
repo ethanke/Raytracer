@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Fri Apr 29 04:23:28 2016 Victor Sousa
+** Last update Fri Apr 29 04:33:50 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -185,7 +185,6 @@ int			load_scene(t_prog *prog, char *scene_path)
   dir = normalize(minus_point(prog->look_at, prog->cam_pos));
   prog->cam_rot.x = RTD(acos(-(dir.z / sqrt(pow(dir.x, 2) + pow(dir.z, 2))))) - 90;
   prog->cam_rot.y = RTD((M_PI / 2 - acos(dir.y)));
-  printf("rot.x:%d\trot.y%d\n", prog->cam_rot.x, prog->cam_rot.y);
   prog->cam_dir = normalize(minus_point(prog->look_at, prog->cam_pos));
   return (0);
 }
