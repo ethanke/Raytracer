@@ -5,24 +5,32 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:28:00 2016 Victor Sousa
-** Last update Fri Apr 29 09:30:47 2016 Victor Sousa
+** Last update Fri Apr 29 15:14:35 2016 Victor Sousa
 */
 
 #include		"main.h"
 
-bool intersect_circle(t_ray *r, t_circle *c)
+bool 			intersect_circle(t_ray *r, t_circle *c, float *t, t_raycast *rcast)
 {
-  float t = 2000;
+  float			dist;
 
-  if (hit_plan(r, &c->plan, &t))
+  dist = 20000;
+  if (hit_plan(r, &c->plan, &dist))
     {
-      t_coord p = add_vector(r->start, float_time_vector(t, r->dir));
+      t_coord p = add_vector(r->start, float_time_vector(dist, r->dir));
       t_coord v = minus_vector(c->plan.center, p);
       float d2 = mult_vector(v, v);
       if (d2 <= c->radius * c->radius)
-	return (t);
+	{
+	  if (dist < *t)
+	    {
+	      *t = dist;
+	      rcast->touch_circle = 1;
+	      return (1);
+	    }
+	}
     }
-  return (-1);
+  return (0);
 }
 
 int			hit_cone(t_ray *r, t_cone *c, float *t, t_raycast *rcast)
@@ -70,14 +78,5 @@ int			hit_cone(t_ray *r, t_cone *c, float *t, t_raycast *rcast)
   base.plan.dir.y = c->dir.y;
   base.plan.dir.z = c->dir.z;
   base.radius = c->radius;
-  if ((dist[0] = intersect_circle(r, &base)) > 0)
-    {
-      if (dist[0] < *t)
-	{
-	  *t = dist[0];
-	  rcast->touch_circle = 1;
-	  return (1);
-	}
-    }
-  return (0);
+  return(intersect_circle(r, &base, t, rcast));
 }
