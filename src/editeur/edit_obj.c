@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed Apr 27 18:31:29 2016 Ethan Kerdelhue
-** Last update Thu Apr 28 17:43:50 2016 Ethan Kerdelhue
+** Last update Fri Apr 29 17:30:00 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -96,9 +96,9 @@ char			edit_material_id(t_prog *prog, char mat)
     {
       my_printf(0, "material id :\n");
       str = get_next_line(0);
-      if ((check_material_id(prog, (char) my_getnbr(str)) == 1) || str[0] != '\0')
+      if ((check_material_id(prog, (char) my_getnbr(str)) == 1) || str[0] == '\0')
 	{
-	  if (str[0] != '\0')
+	  if (str[0] == '\0')
 	    tmp = mat;
 	  else
 	    tmp = (char) my_getnbr(str);
@@ -128,12 +128,14 @@ int			edit_sphere(t_prog *prog, t_sphere *sph)
 
 int			edit_triangle(t_prog *prog, t_triangle *tri)
 {
-  char			*str;
-
   my_printf(0, "Laissez vide si vous voulez concerver la valeur\n");
-  str = get_next_line(0);
-  (void) prog;
-  (void) tri;
+  my_printf(0, "Premier point du triangle :\n");
+  edit_coord(&tri->angle[0]);
+  my_printf(0, "Second point du triangle :\n");
+  edit_coord(&tri->angle[1]);
+  my_printf(0, "Troisième point du triangle :\n");
+  edit_coord(&tri->angle[2]);
+  tri->material = edit_material_id(prog, tri->material);
   return (0);
 }
 int			edit_obj(t_prog *prog)

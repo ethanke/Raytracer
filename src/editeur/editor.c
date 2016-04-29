@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 03:54:51 2016 Ethan Kerdelhue
-** Last update Thu Apr 28 17:45:15 2016 Ethan Kerdelhue
+** Last update Thu Apr 28 17:45:59 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -28,10 +28,10 @@ int			aff_help(t_prog *prog)
 
 int			fill_struct(t_prog *prog)
 {
- /* load_scene(prog, "scene/olympiques.xml");
+  load_scene(prog, "scene/olympiques.xml");
   prog->editor->fd = open("scene/olympiques.xml", O_RDONLY);
-  my_putstr("scene loading success!\n"); */
-   if (my_access(prog->editor->arg[1]) == 0)
+  my_putstr("scene loading success!\n");
+   /* if (my_access(prog->editor->arg[1]) == 0)
     return (put_error(ERR_NOACC));
   if (prog->editor->arg[1][my_strlen(prog->editor->arg[1]) - 1] == 'l' &&
       prog->editor->arg[1][my_strlen(prog->editor->arg[1]) - 2] == 'm' &&
@@ -43,7 +43,7 @@ int			fill_struct(t_prog *prog)
 	   prog->editor->arg[1][my_strlen(prog->editor->arg[1]) - 3] == 'o' &&
 	   prog->editor->arg[1][my_strlen(prog->editor->arg[1]) - 4] == '.')
     load_obj_file(prog, prog->editor->arg[1]);
-  prog->editor->fd = open(prog->editor->arg[1], O_RDONLY);
+  prog->editor->fd = open(prog->editor->arg[1], O_RDONLY); */
   return (0);
 }
 
