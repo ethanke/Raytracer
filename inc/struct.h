@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Fri Apr 29 06:06:27 2016 Victor Sousa
+** Last update Fri Apr 29 08:51:46 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -82,6 +82,12 @@ typedef struct		s_square
   char                  material;
 }			t_square;
 
+typedef struct		s_circle
+{
+  t_plan		plan;
+  float			radius;
+}			t_circle;
+
 typedef struct		s_mat_list
 {
   int			id;
@@ -124,6 +130,7 @@ typedef struct		s_raycast
   t_coord               normale;
   t_sphere              *sphere;
   t_cone              	*cone;
+  int			touch_circle;
   t_triangle		*triangle;
   t_plan		*plan;
   t_light_list          *light_list;
@@ -154,6 +161,7 @@ typedef struct          s_prog
   t_bunny_pixelarray    *pix;
   t_editor		*editor;
 }                       t_prog;
+
 typedef struct s_cmd
 {
   char			*index;

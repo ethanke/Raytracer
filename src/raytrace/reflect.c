@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 04:04:48 2016 victor sousa
-** Last update Fri Apr 29 06:05:34 2016 Victor Sousa
+** Last update Fri Apr 29 08:12:34 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -26,7 +26,7 @@ int                     reflect_loop(t_prog *prog, t_raycast *rcast)
   float			tmp;
 
   if ((rcast->obj_touch = hit(prog->obj_list,
-                              &rcast->ray, &rcast->dist)) == NULL ||
+                              &rcast->ray, &rcast->dist, rcast)) == NULL ||
       rcast->obj_touch->obj == NULL)
     return (-1);
   if (rcast->obj_touch->type == 's')

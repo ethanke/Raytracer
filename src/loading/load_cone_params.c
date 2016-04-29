@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:54:30 2016 Victor Sousa
-** Last update Fri Apr 29 06:00:59 2016 Victor Sousa
+** Last update Fri Apr 29 08:25:30 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -34,6 +34,35 @@ static int		get_center(t_cone *c, char **file, int id)
   if ((get = get_field(file, lf)) == NULL)
     return (1);
   c->center.z = my_getnbr(get);
+  free(get);
+  free(lf);
+  return (0);
+}
+
+static int		get_dir(t_cone *c, char **file, int id)
+{
+  char			*lf;
+  char			*get;
+
+  if ((lf = malloc(sizeof(char) *
+		   my_strlen("scene:object_list:objX:dir:x") + 1)) == NULL)
+    return (1);
+  lf[0] = '\0';
+  lf = my_strcat(lf, "scene:object_list:objX:dir:x");
+  lf[21] = id + 49;
+  if ((get = get_field(file, lf)) == NULL)
+    return (1);
+  c->dir.x = my_getnbr(get);
+  free(get);
+  lf[27] = 'y';
+  if ((get = get_field(file, lf)) == NULL)
+    return (1);
+  c->dir.y = my_getnbr(get);
+  free(get);
+  lf[27] = 'z';
+  if ((get = get_field(file, lf)) == NULL)
+    return (1);
+  c->dir.z = my_getnbr(get);
   free(get);
   free(lf);
   return (0);
@@ -106,6 +135,8 @@ t_obj_list              *add_cone(t_obj_list *prev, char **file, int id)
   if ((c = malloc(sizeof(t_cone))) == NULL)
     return (NULL);
   if (get_center(c, file, id) != 0)
+    return (NULL);
+  if (get_dir(c, file, id) != 0)
     return (NULL);
   if (get_radius(c, file, id) != 0)
     return (NULL);

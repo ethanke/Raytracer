@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 04:01:20 2016 victor sousa
-** Last update Thu Apr 28 04:26:15 2016 Victor Sousa
+** Last update Fri Apr 29 08:12:30 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -80,7 +80,7 @@ void                    process_shadow(t_prog *prog, t_raycast *rcast)
 
   in_shadow = 0;
   if ((rcast->obj_touch = hit(prog->obj_list, &rcast->light_ray,
-                              &rcast->dist)) != NULL &&
+                              &rcast->dist, rcast)) != NULL &&
       rcast->obj_touch->obj != NULL)
     in_shadow = 1;
   if (!in_shadow)

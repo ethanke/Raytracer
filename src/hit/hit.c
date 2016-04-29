@@ -5,12 +5,12 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 23:01:14 2016 victor sousa
-** Last update Fri Apr 29 05:54:10 2016 Victor Sousa
+** Last update Fri Apr 29 08:07:19 2016 Victor Sousa
 */
 
 #include	"main.h"
 
-t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist)
+t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist, t_raycast *rcast)
 {
   t_obj_list	*out;
 
@@ -38,7 +38,7 @@ t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist)
   	  out->obj = obj_list->obj;
   	}
       if (obj_list->type == 'c' &&
-	  hit_cone(ray, (t_cone *)obj_list->obj, dist))
+	  hit_cone(ray, (t_cone *)obj_list->obj, dist, rcast))
   	{
   	  out->type = obj_list->type;
   	  out->obj = obj_list->obj;

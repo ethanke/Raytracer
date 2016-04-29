@@ -5,12 +5,27 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:28:00 2016 Victor Sousa
-** Last update Fri Apr 29 06:21:12 2016 Victor Sousa
+** Last update Fri Apr 29 09:30:47 2016 Victor Sousa
 */
 
 #include		"main.h"
 
-int			hit_cone(t_ray *r, t_cone *c, float *t)
+bool intersect_circle(t_ray *r, t_circle *c)
+{
+  float t = 2000;
+
+  if (hit_plan(r, &c->plan, &t))
+    {
+      t_coord p = add_vector(r->start, float_time_vector(t, r->dir));
+      t_coord v = minus_vector(c->plan.center, p);
+      float d2 = mult_vector(v, v);
+      if (d2 <= c->radius * c->radius)
+	return (t);
+    }
+  return (-1);
+}
+
+int			hit_cone(t_ray *r, t_cone *c, float *t, t_raycast *rcast)
 {
   double 		dist[2];
   double		fac;
@@ -18,6 +33,7 @@ int			hit_cone(t_ray *r, t_cone *c, float *t)
   t_coord		y;
   double		d;
   int			i;
+  t_circle		base;
 
   fac = (c->radius * c->radius) / (double) (c->height * c->height);
   y.x = (fac) * r->dir.y * r->dir.y;
@@ -45,6 +61,22 @@ int			hit_cone(t_ray *r, t_cone *c, float *t)
 	      return (1);
 	    }
 	  i++;
+	}
+    }
+  base.plan.center.x = c->center.x;
+  base.plan.center.y = c->center.y;
+  base.plan.center.z = c->center.z;
+  base.plan.dir.x = c->dir.x;
+  base.plan.dir.y = c->dir.y;
+  base.plan.dir.z = c->dir.z;
+  base.radius = c->radius;
+  if ((dist[0] = intersect_circle(r, &base)) > 0)
+    {
+      if (dist[0] < *t)
+	{
+	  *t = dist[0];
+	  rcast->touch_circle = 1;
+	  return (1);
 	}
     }
   return (0);

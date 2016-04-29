@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <scene>
-
+  
   <view>
     <x_size>1080</x_size>
     <y_size>720</y_size>
     <cam_pos>
       <x>-600</x>
-      <y>0</y>
+      <y>-200</y>
       <z>-600</z>
     </cam_pos>
     <look_at>
@@ -85,7 +84,7 @@
       <type>cone</type>
       <center>
 	<x>0</x>
-	<y>-50</y>
+	<y>0</y>
 	<z>0</z>
       </center>
       <dir>
