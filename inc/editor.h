@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 04:09:19 2016 Ethan Kerdelhue
-** Last update Wed Apr 27 18:24:20 2016 Ethan Kerdelhue
+** Last update Thu Apr 28 16:58:10 2016 Ethan Kerdelhue
 */
 
 #ifndef			EDITOR_H_
@@ -50,5 +50,8 @@ int			add_obj_sphere(t_prog *prog);
 int			add_mat_s(t_prog *prog);
 int			add_light_s(t_prog *prog);
 t_coord			get_coord();
+int			edit_obj(t_prog *prog);
+char			edit_material_id(t_prog *prog, char mat);
+int			edit_sphere(t_prog *prog, t_sphere *sph);
 
 #endif		      /*EDITOR_H_*/

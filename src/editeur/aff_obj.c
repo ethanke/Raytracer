@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 09:58:54 2016 Ethan Kerdelhue
-** Last update Tue Apr 26 10:19:30 2016 Ethan Kerdelhue
+** Last update Thu Apr 28 17:39:26 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -15,13 +15,13 @@ int			aff_obj_list(int fd, t_prog *prog)
   int			i;
   t_obj_list		*tmp;
 
-  i = 0;
+  i = count_object(prog) + 1;
   tmp = prog->obj_list;
   my_printf(fd, "\t<object_list>\n");
   my_printf(fd, "\t\t<count>%d</count>\n", count_object(prog));
   while (tmp != NULL)
     {
-      i++;
+      i--;
       my_printf(fd, "\t<obj%d>\n", i);
       my_printf(fd, "\t\t<type>%s</type>\n", get_type(tmp->type));
       aff_obj(fd, tmp);
