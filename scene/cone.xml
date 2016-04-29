@@ -69,7 +69,7 @@
       <type>plan</type>
       <center>
 	<x>0</x>
-	<y>-100</y>
+	<y>0</y>
 	<z>0</z>
       </center>
       <dir>
@@ -83,7 +83,7 @@
     <obj2>
       <type>cone</type>
       <center>
-	<x>100</x>
+	<x>0</x>
 	<y>0</y>
 	<z>0</z>
       </center>

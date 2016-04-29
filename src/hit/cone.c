@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:28:00 2016 Victor Sousa
-** Last update Fri Apr 29 18:47:23 2016 Victor Sousa
+** Last update Fri Apr 29 19:40:54 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -40,37 +40,40 @@ int			hit_cone(t_ray *r, t_cone *c, float *t)
   t_coord		x;
   t_coord		y;
   double		d;
-  int			i;
+  t_coord		temp;
 
   fac = (c->radius * c->radius) / (double) (c->height * c->height);
   y.x = (fac) * r->dir.y * r->dir.y;
-  y.y = (2 * fac * r->start.y * r->dir.y) - (2 *
+  y.y = (2.0 * fac * r->start.y * r->dir.y) - (2.0 *
 	 (c->radius * c->radius) / c->height) * r->dir.y;
-  y.z = (fac * r->start.y * r->start.y) - ((2 * (c->radius * c->radius) /
+  y.z = (fac * r->start.y * r->start.y) - ((2.0 * (c->radius * c->radius) /
 					   c->height) * r->start.y) +
   (c->radius * c->radius);
   x.x = (r->dir.x * r->dir.x) + (r->dir.z * r->dir.z) - y.x;
-  x.y = (2 * r->start.x * r->dir.x) + (2 * r->start.z * r->dir.z) - y.y;
+  x.y = (2.0 * r->start.x * r->dir.x) + (2.0 * r->start.z * r->dir.z) - y.y;
   x.z = (r->start.x * r->start.x) + (r->start.z * r->start.z) - y.z;
-  d = (x.y * x.y) - (4 * x.x * x.z);
-  i = 0;
+  d = (x.y * x.y) - (4.0 * x.x * x.z);
   if (d >= 0)
     {
-      dist[0] = (-x.y - sqrt(d)) / (2 * x.x);
-      dist[1] = (-x.y + sqrt(d)) / (2 * x.x);
-      while (i < 2)
+      dist[0] = (-x.y - sqrt(d)) / (2.0 * x.x);
+      dist[1] = (-x.y + sqrt(d)) / (2.0 * x.x);
+      if (dist[1] < dist[0] && dist[1] > 0.1)
 	{
-	  if (dist[i] > 0.1)
+	  temp = add_vector(r->start, float_time_vector(dist[1], r->dir));
+	  if (temp.y <= c->height && temp.y >= 0.0 && dist[1] < *t)
 	    {
-	      t_coord temp;
-	      temp = add_vector(r->start, float_time_vector(dist[i], r->dir));
-	      if (temp.y <= c->height && temp.y >= 0 && dist[i] < *t)
-		{
-		  *t = dist[i];
-		  return (1);
-		}
+	      *t = dist[1];
+	      return (1);
 	    }
-	  i++;
+	}
+      else if (dist[1] > dist[0] && dist[0] > 0.1)
+	{
+	  temp = add_vector(r->start, float_time_vector(dist[0], r->dir));
+	  if (temp.y <= c->height && temp.y >= 0.0 && dist[0] < *t)
+	    {
+	      *t = dist[0];
+	      return (1);
+	    }
 	}
     }
   return(0);

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Fri Apr 29 18:23:41 2016 Victor Sousa
+** Last update Fri Apr 29 19:36:45 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -78,8 +78,8 @@ void			calc_cone_normale(t_prog *prog, t_raycast *rcast)
       mag = sqrt(rcast->new_point.x * rcast->new_point.x + rcast->new_point.z *
 		 rcast->new_point.z);
       costheta = rcast->new_point.x / mag;
-      rcast->normale.x = 1 / sqrt(2) * costheta;
-      rcast->normale.y = 1 / sqrt(2);
-      rcast->normale.z = 1 / sqrt(2) * (1 - costheta);
+      rcast->normale.x = 1.0f / sqrt(2.0f) * costheta;
+      rcast->normale.y = 1.0f / sqrt(2.0f);
+      rcast->normale.z = 1.0f / sqrt(2.0f) * (1.0 - costheta);
     }
 }
