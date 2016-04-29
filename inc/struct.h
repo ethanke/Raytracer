@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Thu Apr 28 05:46:48 2016 Victor Sousa
+** Last update Fri Apr 29 01:35:17 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -134,6 +134,8 @@ typedef struct          s_prog
   t_bunny_position      win_size;
   t_point		cam_pos;
   t_point		look_at;
+  t_pos			cam_rot;
+  t_pos			cam_fov;
   t_coord		cam_dir;
   t_obj_list            *obj_list;
   t_mat_list		*mat_list;

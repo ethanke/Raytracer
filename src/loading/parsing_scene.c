@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Thu Apr 28 06:40:46 2016 Victor Sousa
+** Last update Fri Apr 29 04:23:28 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -152,6 +152,7 @@ int			load_scene(t_prog *prog, char *scene_path)
 {
   char			**file;
   char			*get;
+  t_coord		dir;
 
   if ((file = load_scene_file(scene_path)) == NULL)
     return (-1);
@@ -163,6 +164,11 @@ int			load_scene(t_prog *prog, char *scene_path)
     return (-1);
   prog->win_size.y = my_getnbr(get);
   free(get);
+  if ((get = get_field(file, "scene:view:fov")) == NULL)
+    return (-1);
+  prog->cam_fov.x = my_getnbr(get);
+  free(get);
+  prog->cam_fov.y = prog->cam_fov.x * ((prog->win_size.x / prog->win_size.y) / 1.5);
   if (get_cam_pos(file, prog) == 1 ||
       get_cam_look_at(file, prog) == 1 ||
       load_mat(prog, file) == -1 ||
@@ -176,6 +182,10 @@ int			load_scene(t_prog *prog, char *scene_path)
       my_putstr("Wrong camera placement\n");
       return (-1);
     }
+  dir = normalize(minus_point(prog->look_at, prog->cam_pos));
+  prog->cam_rot.x = RTD(acos(-(dir.z / sqrt(pow(dir.x, 2) + pow(dir.z, 2))))) - 90;
+  prog->cam_rot.y = RTD((M_PI / 2 - acos(dir.y)));
+  printf("rot.x:%d\trot.y%d\n", prog->cam_rot.x, prog->cam_rot.y);
   prog->cam_dir = normalize(minus_point(prog->look_at, prog->cam_pos));
   return (0);
 }

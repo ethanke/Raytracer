@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Thu Apr 28 07:52:51 2016 Victor Sousa
+** Last update Fri Apr 29 03:23:11 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -13,24 +13,18 @@
 void			init_ray(t_bunny_position *win_size, t_ray *ray,
 				 t_bunny_position *pos, t_prog *prog)
 {
-  t_coord		center;
   t_coord		point;
+  t_coord 		ang;
 
   ray->start.x = prog->cam_pos.x;
   ray->start.y = prog->cam_pos.y;
   ray->start.z = prog->cam_pos.z;
-  center.x = ray->start.x + 900 * prog->cam_dir.x;
-  center.y = ray->start.y + 900 * prog->cam_dir.y;
-  center.z = ray->start.z + 900 * prog->cam_dir.z;
-  point.x = center.x - (win_size->x / 2);
-  point.y = center.y - (win_size->y / 2);
-  point.z = center.z;
-  point.x += pos->x;
-  point.y += pos->y;
-  ray->dir.x = point.x - ray->start.x;
-  ray->dir.y = point.y - ray->start.y;
-  ray->dir.z = point.z - ray->start.z;
-  ray->dir = normalize(ray->dir);
+  ang.x = prog->cam_rot.x - ((float)prog->cam_fov.x / (float)win_size->x) * (pos->x - win_size->x / 2);
+  ang.y = prog->cam_rot.y - ((float)prog->cam_fov.y / (float)win_size->y) * (pos->y - win_size->y / 2);
+  point.x = ray->start.x + cos(DTR(ang.x));
+  point.y = ray->start.y + sin(DTR(ang.y));
+  point.z = ray->start.z + sin(DTR(ang.x));
+  ray->dir = normalize(minus_vector(point, ray->start));
 }
 
 int			raytrace_loop(t_prog *prog, t_raycast *rcast,

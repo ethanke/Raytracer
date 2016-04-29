@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 05:29:22 2016 victor sousa
-** Last update Thu Apr 28 06:37:24 2016 Victor Sousa
+** Last update Fri Apr 29 04:04:03 2016 Victor Sousa
 */
 
 #ifndef			UTILS_H_
@@ -13,7 +13,8 @@
 
 # include		"main.h"
 
-#define 		DTR(angle) ((angle) / 180.0 * M_PI)
+# define 		DTR(ang) ((ang) / 180.0 * M_PI)
+# define		RTD(rad) ((rad) * (180.0 / M_PI))
 
 int			my_strlen(char *str);
 int			my_tablen(char **str);
