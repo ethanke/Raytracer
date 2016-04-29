@@ -5,22 +5,22 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:28:00 2016 Victor Sousa
-** Last update Fri Apr 29 15:14:35 2016 Victor Sousa
+** Last update Fri Apr 29 18:47:23 2016 Victor Sousa
 */
 
 #include		"main.h"
 
-bool 			intersect_circle(t_ray *r, t_circle *c, float *t, t_raycast *rcast)
+int 			hit_circle(t_ray *r, t_circle *c, float *t, t_raycast *rcast)
 {
   float			dist;
 
-  dist = 20000;
+  dist = *t;
   if (hit_plan(r, &c->plan, &dist))
     {
       t_coord p = add_vector(r->start, float_time_vector(dist, r->dir));
-      t_coord v = minus_vector(c->plan.center, p);
+      t_coord v = minus_vector(p, c->plan.center);
       float d2 = mult_vector(v, v);
-      if (d2 <= c->radius * c->radius)
+      if (d2 < c->radius * c->radius)
 	{
 	  if (dist < *t)
 	    {
@@ -33,7 +33,7 @@ bool 			intersect_circle(t_ray *r, t_circle *c, float *t, t_raycast *rcast)
   return (0);
 }
 
-int			hit_cone(t_ray *r, t_cone *c, float *t, t_raycast *rcast)
+int			hit_cone(t_ray *r, t_cone *c, float *t)
 {
   double 		dist[2];
   double		fac;
@@ -41,7 +41,6 @@ int			hit_cone(t_ray *r, t_cone *c, float *t, t_raycast *rcast)
   t_coord		y;
   double		d;
   int			i;
-  t_circle		base;
 
   fac = (c->radius * c->radius) / (double) (c->height * c->height);
   y.x = (fac) * r->dir.y * r->dir.y;
@@ -61,22 +60,18 @@ int			hit_cone(t_ray *r, t_cone *c, float *t, t_raycast *rcast)
       dist[1] = (-x.y + sqrt(d)) / (2 * x.x);
       while (i < 2)
 	{
-	  t_coord temp;
-	  temp = add_vector(r->start, float_time_vector(dist[i], r->dir));
-	  if (temp.y <= c->height && temp.y >= 0 && dist[i] < *t)
+	  if (dist[i] > 0.1)
 	    {
-	      *t = dist[i];
-	      return (1);
+	      t_coord temp;
+	      temp = add_vector(r->start, float_time_vector(dist[i], r->dir));
+	      if (temp.y <= c->height && temp.y >= 0 && dist[i] < *t)
+		{
+		  *t = dist[i];
+		  return (1);
+		}
 	    }
 	  i++;
 	}
     }
-  base.plan.center.x = c->center.x;
-  base.plan.center.y = c->center.y;
-  base.plan.center.z = c->center.z;
-  base.plan.dir.x = c->dir.x;
-  base.plan.dir.y = c->dir.y;
-  base.plan.dir.z = c->dir.z;
-  base.radius = c->radius;
-  return(intersect_circle(r, &base, t, rcast));
+  return(0);
 }

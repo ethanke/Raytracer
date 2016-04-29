@@ -5,7 +5,7 @@
     <y_size>720</y_size>
     <cam_pos>
       <x>-600</x>
-      <y>-200</y>
+      <y>200</y>
       <z>-600</z>
     </cam_pos>
     <look_at>
@@ -83,13 +83,13 @@
     <obj2>
       <type>cone</type>
       <center>
-	<x>0</x>
+	<x>100</x>
 	<y>0</y>
 	<z>0</z>
       </center>
       <dir>
 	<x>0</x>
-	<y>0</y>
+	<y>1</y>
 	<z>0</z>
       </dir>
       <radius>75</radius>

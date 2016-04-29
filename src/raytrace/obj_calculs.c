@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Fri Apr 29 09:03:15 2016 Victor Sousa
+** Last update Fri Apr 29 18:23:41 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -59,8 +59,8 @@ void			calc_plan_normale(t_prog *prog, t_raycast *rcast)
 
 void			calc_cone_normale(t_prog *prog, t_raycast *rcast)
 {
-  double		mag;
-  double		costheta;
+  float			mag;
+  float			costheta;
 
   rcast->cone = rcast->obj_touch->obj;
   rcast->mat_touch = get_sphere_color(rcast->cone->material,
@@ -77,7 +77,7 @@ void			calc_cone_normale(t_prog *prog, t_raycast *rcast)
    {
       mag = sqrt(rcast->new_point.x * rcast->new_point.x + rcast->new_point.z *
 		 rcast->new_point.z);
-      costheta = rcast->new_point.x / (double) (mag);
+      costheta = rcast->new_point.x / mag;
       rcast->normale.x = 1 / sqrt(2) * costheta;
       rcast->normale.y = 1 / sqrt(2);
       rcast->normale.z = 1 / sqrt(2) * (1 - costheta);
