@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Fri Apr 29 08:51:46 2016 Victor Sousa
+** Last update Sat Apr 30 16:37:49 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -93,6 +93,7 @@ typedef struct		s_mat_list
   int			id;
   t_color		color;
   int			reflect;
+  int			transpa;
   struct s_mat_list	*next;
 }			t_mat_list;
 
