@@ -5,18 +5,21 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 22:31:26 2016 victor sousa
-** Last update Mon Apr 25 02:28:25 2016 victor sousa
+** Last update Sun May  1 22:03:20 2016 Victor Sousa
 */
 
 #include		"main.h"
 
-t_mat_list		*get_sphere_color(int mat_id, t_mat_list *mat)
+t_mat_list		*get_color(int mat_id, t_mat_list *mat)
 {
-  while (mat != NULL)
+  t_mat_list		*tmp;
+
+  tmp = mat;
+  while (tmp != NULL)
     {
-      if (mat->id == mat_id)
-	return (mat);
-      mat = mat->next;
+      if (tmp->id == mat_id)
+	return (tmp);
+      tmp = tmp->next;
     }
   return (NULL);
 }

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Sun May  1 16:48:59 2016 Victor Sousa
+** Last update Sun May  1 22:35:42 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -29,30 +29,32 @@ void			init_ray(t_bunny_position *win_size, t_ray *ray,
 
 t_color			raytrace_loop(t_prog *prog, t_ray *ray, t_bunny_position pos, int depth)
 {
-  t_raycast		rc;
+  t_raycast		rcast;
+  t_ray			new_ray;
+  t_color		new_col;
   t_color		out_col;
   t_light_list		*light_list;
 
   out_col.full = 0xFF000000;
-  rc.hit_dist = 20000;
+  rcast.hit_dist = 20000;
   if (depth > MAX_DEPTH)
     return (out_col);
-  if ((rc.obj_touch = hit(prog->obj_list, ray, &rc.hit_dist, &rc)) != NULL &&
-      rc.obj_touch->obj != NULL)
+  if ((rcast.obj_touch = hit(prog->obj_list, ray, &rcast.hit_dist, &rcast)) != NULL &&
+      rcast.obj_touch->obj != NULL)
     {
-      if (calc_normale(prog, &rc, ray) == -1)
+      if (calc_normale(prog, &rcast, ray, &out_col) == -1)
 	return (out_col);
-      /*t_coord hitTexCoord;
-      isect.hitObject->getSurfaceProperties(hitPoint, dir, isect.index, isect.uv, hitNormal, hitTexCoordinates);*/
-      if (rc.mat_touch->transpa == 0 && rc.mat_touch->reflect == 0)
+      if (rcast.mat_touch->transpa == 0 && rcast.mat_touch->reflect == 0)
 	{
+	  out_col.argb[ALPHA_CMP] = 255;
 	  light_list = prog->light_list;
 	  while (light_list != NULL)
 	    {
+
 	      light_list = light_list->next;
 	    }
-	  /*
-	      Vec3f lightDir, lightIntensity;
+	  /*  Vec3f lightDir, light
+	      Intensity;
 	      IsectInfo isectShad;
 	      lights[i]->illuminate(hitPoint, lightDir, lightIntensity, isectShad.tNear);
 	      bool vis = !trace(hitPoint + hitNormal * options.bias, -lightDir, objects, isectShad, kShadowRay);
@@ -62,17 +64,24 @@ t_color			raytrace_loop(t_prog *prog, t_ray *ray, t_bunny_position pos, int dept
 	      float scaleS = 20, scaleT = 20;
 	      float pattern = (cos(hitTexCoordinates.y * 2 * M_PI * scaleT) * sin(hitTexCoordinates.x * 2 * M_PI * scaleS) + 1) * 0.5; // isect.hitObject->albedo
 		  float pattern = (modulo(s * scaleS) < 0.5) ^ (modulo(t * scaleT) < 0.5);
-	      float pattern = (modulo(s * scaleS) < 0.5);
-	      hitColor += vis * pattern * lightIntensity * std::max(0.f, hitNormal.dotProduct(-lightDir));
-	    }*/
-	}
-      else if (rc.mat_touch->transpa == 0 && rc.mat_touch->reflect > 0)
-  	{
+	  float pattern = (modulo(s * scaleS) < 0.5);
+	  hitColor += vis * pattern * lightIntensity * std::max(0.f, hitNormal.dotProduct(-lightDir));*/
+	    }
+      else if (rcast.mat_touch->transpa == 0 && rcast.mat_touch->reflect > 0)
+	{
+	  out_col.argb[ALPHA_CMP] = 255;
 	  /*Vec3f R = reflect(dir, hitNormal);
 	  R.normalize();*/
 	}
-      else if (rc.mat_touch->transpa > 0 && rc.mat_touch->reflect > 0)
+      else if (rcast.mat_touch->transpa > 0 && rcast.mat_touch->reflect > 0)
 	{
+	  new_ray.dir = ray->dir;
+	  new_ray.start = rcast.hit_point;
+	  new_col= raytrace_loop(prog, &new_ray, pos, depth + 1);
+	  out_col.argb[RED_CMP] = (new_col.argb[RED_CMP] * (1 - (rcast.mat_touch->transpa / 100))) / 2 + (out_col.argb[RED_CMP] * (rcast.mat_touch->transpa / 100)) / 2;
+	  out_col.argb[GREEN_CMP] = (new_col.argb[GREEN_CMP] * (1 - (rcast.mat_touch->transpa / 100))) / 2 + (out_col.argb[GREEN_CMP] * (rcast.mat_touch->transpa / 100)) / 2;
+	  out_col.argb[BLUE_CMP] = (new_col.argb[BLUE_CMP] * (1 - (rcast.mat_touch->transpa / 100))) / 2 + (out_col.argb[BLUE_CMP] * (rcast.mat_touch->transpa / 100)) / 2;
+	  out_col.argb[ALPHA_CMP] = 255;
 	  /*Vec3f refractionColor = 0, reflectionColor = 0;
 	  float kr;
 	  fresnel(dir, hitNormal, isect.hitObject->ior, kr);
@@ -116,8 +125,6 @@ int			raytrace(t_prog *prog)
 	  tekpixel(prog->pix, &pos, &pix);
 	}
     }
-  pos.x = 0;
-  pos.y = 0;
   bunny_blit(&prog->win->buffer, &prog->pix->clipable, &pos);
   bunny_display(prog->win);
   my_putstr("Raytracing successfull\n");

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Sun May  1 15:00:34 2016 Victor Sousa
+** Last update Sun May  1 22:08:29 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -79,9 +79,6 @@ int			create_win(t_prog *prog)
     my_putstr("windows creation successfull\n");
   return (0);
 }
-
-t_cmyk			convert_to_cmyk(t_color in);
-float			max_rgb(float a, float b, float c);
 
 int			main(int ac, char *av[], char *env[])
 {

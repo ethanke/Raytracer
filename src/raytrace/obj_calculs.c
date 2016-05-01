@@ -5,12 +5,12 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Sun May  1 16:40:02 2016 Victor Sousa
+** Last update Sun May  1 22:17:42 2016 Victor Sousa
 */
 
 #include		"main.h"
 
-int			calc_normale(t_prog *prog, t_raycast *rcast, t_ray *ray)
+int			calc_normale(t_prog *prog, t_raycast *rcast, t_ray *ray, t_color *col)
 {
   if (rcast->obj_touch->type == 's')
     calc_sphere_normale(prog, rcast, ray);
@@ -22,14 +22,14 @@ int			calc_normale(t_prog *prog, t_raycast *rcast, t_ray *ray)
     calc_cone_normale(prog, rcast, ray);
   else
     return (-1);
+  col->full = rcast->mat_touch->color.full;
   return (0);
 }
 
 void			calc_sphere_normale(t_prog *prog, t_raycast *rcast, t_ray *ray)
 {
   rcast->sphere = rcast->obj_touch->obj;
-  rcast->mat_touch = get_sphere_color(rcast->sphere->material,
-				      prog->mat_list);
+  rcast->mat_touch = get_color(rcast->sphere->material, prog->mat_list);
   rcast->hit_point = add_vector(ray->start,
 				float_time_vector(rcast->hit_dist,
 						  ray->dir));
@@ -43,7 +43,7 @@ void			calc_triangle_normale(t_prog *prog, t_raycast *rcast, t_ray *ray)
   t_coord 		h;
 
   rcast->triangle = rcast->obj_touch->obj;
-  rcast->mat_touch = get_sphere_color(rcast->triangle->material,
+  rcast->mat_touch = get_color(rcast->triangle->material,
 				      prog->mat_list);
   rcast->hit_point = add_vector(ray->start,
 				float_time_vector(rcast->hit_dist,
@@ -59,8 +59,7 @@ void			calc_triangle_normale(t_prog *prog, t_raycast *rcast, t_ray *ray)
 void			calc_plan_normale(t_prog *prog, t_raycast *rcast, t_ray *ray)
 {
   rcast->plan = rcast->obj_touch->obj;
-  rcast->mat_touch = get_sphere_color(rcast->plan->material,
-				      prog->mat_list);
+  rcast->mat_touch = get_color(rcast->plan->material, prog->mat_list);
   rcast->hit_point = add_vector(ray->start,
 				float_time_vector(rcast->hit_dist,
 						  ray->dir));
@@ -73,8 +72,7 @@ void			calc_cone_normale(t_prog *prog, t_raycast *rcast, t_ray *ray)
   float			costheta;
 
   rcast->cone = rcast->obj_touch->obj;
-  rcast->mat_touch = get_sphere_color(rcast->cone->material,
-				      prog->mat_list);
+  rcast->mat_touch = get_color(rcast->cone->material, prog->mat_list);
   rcast->hit_point = add_vector(ray->start,
 				float_time_vector(rcast->hit_dist,
 						  ray->dir));

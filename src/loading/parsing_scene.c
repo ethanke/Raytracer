@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Sun May  1 15:54:48 2016 Victor Sousa
+** Last update Sun May  1 21:45:14 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -52,7 +52,7 @@ char			**my_list_to_wordtab(t_line_list *list)
   t_line_list		*tmp;
   int			i;
 
-  if ((out = malloc(sizeof(char *) * list_len(list) + 1)) == NULL)
+  if ((out = malloc(sizeof(char *) * (list_len(list) + 1))) == NULL)
     return (NULL);
   tmp = list;
   i = 0;
@@ -62,6 +62,7 @@ char			**my_list_to_wordtab(t_line_list *list)
       tmp = tmp->next;
       i++;
     }
+  out[i] = '\0';
   return (out);
 }
 
