@@ -1,11 +1,11 @@
 /*
 ** load_mat.c for raytracer in /home/sousa_v/rendu/lapin/gfx_raytracer1
-** 
+**
 ** Made by victor sousa
 ** Login   <sousa_v@epitech.net>
-** 
+**
 ** Started on  Thu Mar 10 23:59:29 2016 victor sousa
-** Last update Fri Mar 11 00:33:36 2016 victor sousa
+** Last update Sun May  1 15:03:49 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -17,7 +17,10 @@ int                     load_mat(t_prog *prog, char **file)
   char                  *get;
 
   if ((get = get_field(file, "scene:material_list:count")) == NULL)
-    return (-1);
+    {
+      my_printf(1, "did not found scene:material_list:count\n");
+      return (-1);
+    }
   mat_count = my_getnbr(get);
   free(get);
   prog->mat_list = NULL;

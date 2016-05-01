@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Sun May  1 14:47:11 2016 Victor Sousa
+** Last update Sun May  1 15:54:48 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -168,7 +168,6 @@ int			load_scene(t_prog *prog, char *scene_path)
     return (-1);
   prog->cam_fov.x = my_getnbr(get);
   free(get);
-
   if ((get = get_field(file, "scene:view:background")) == NULL)
     return (-1);
   if (my_strcmp(get, "NULL") == 0)
@@ -180,6 +179,8 @@ int			load_scene(t_prog *prog, char *scene_path)
     {
       if ((prog->background = load_image(get)) == NULL)
 	return (-1);
+      place_into_hitbox(prog->background, prog->background,
+			create_hitbox(0, 0, prog->win_size.x, prog->win_size.y));
     }
   free(get);
   prog->cam_fov.y = prog->cam_fov.x * ((prog->win_size.x / prog->win_size.y) / 1.5);

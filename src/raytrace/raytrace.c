@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Sun May  1 14:43:07 2016 Victor Sousa
+** Last update Sun May  1 15:56:35 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -39,9 +39,12 @@ t_color			raytrace_loop(t_prog *prog, t_raycast *rcast, int depth)
   t_color		out;
 
   out.full = 0xFF0F0F0F;
+  rcast->dist = 20000;
   if (depth > MAX_DEPTH)
     return (out);
-  if (hit(prog->obj_list, &rcast->ray, &rcast->dist, rcast))
+  if ((rcast->obj_touch = hit(prog->obj_list,
+			      &rcast->ray, &rcast->dist, rcast)) != NULL &&
+      rcast->obj_touch->obj != NULL)
     {
       /*Vec3f hitPoint = orig + dir * isect.tNear;
       Vec3f hitNormal;

@@ -15,8 +15,8 @@
       <z>0</z>
     </look_at>
     <fov>75</fov>
-    <background>NULL</background>
-  </view>
+    <background>sprites/image/sky1.png</background>
+    </view>
 
   <material_list>
     <count>6</count>
