@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 10:03:21 2016 Ethan Kerdelhue
-** Last update Tue Apr 26 10:03:28 2016 Ethan Kerdelhue
+** Last update Sat Apr 30 22:39:37 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -24,16 +24,16 @@ int			aff_light_list(int fd, t_prog *prog)
   int			i;
   t_light_list		*tmp;
 
-  i = 0;
+  i = count_light(prog);
   tmp = prog->light_list;
   my_printf(fd, "\t<light_list>\n");
   my_printf(fd, "\t\t<count>%d</count>\n", count_light(prog));
   while (tmp != NULL)
     {
-      i++;
       my_printf(fd, "\t<light%d>\n", i);
       aff_light(fd, tmp);
       my_printf(fd, "\t</light%d>\n", i);
+      i--;
       tmp = tmp->next;
     }
   my_printf(fd, "\t</light_list>\n");
