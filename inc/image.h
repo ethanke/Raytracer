@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri Apr 15 03:26:21 2016 Gaëtan Léandre
-** Last update Sun May  1 14:44:44 2016 Victor Sousa
+** Last update Sun May  1 15:30:51 2016 Gaëtan Léandre
 */
 
  #ifndef   _IMAGE_H_
@@ -42,4 +42,7 @@
 				    t_bunny_pixelarray *pix);
 t_texture		*create_text_uni(int width, int height,
 					 unsigned int col);
+void			place_into_hitbox(t_texture *dest, t_texture *src,
+					  t_hitbox hit);
+
  #endif   /*_IMAGE_H_*/

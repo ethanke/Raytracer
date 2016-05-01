@@ -1,11 +1,11 @@
-## 
+##
 ## Makefile for raytracer1 in /home/sousa_v/rendu/lapin/gfx_raytracer1
 ##
 ## Made by victor sousa
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Sat Apr 30 16:20:31 2016 Kerdelhue Ethan
+## Last update Sun May  1 15:27:28 2016 Gaëtan Léandre
 ##
 
 NAME		=	raytracer2
@@ -93,7 +93,7 @@ SRC             +=      $(PRTFDIR)/my_disp_unprintable.c        \
                         $(PRTFDIR)/my_putnbr_base.c             \
                         $(PRTFDIR)/my_putnbr_base_add.c         \
                         $(PRTFDIR)/my_putstr.c			\
-			$(PRTFDIR)/my_put_fnbr.c		
+			$(PRTFDIR)/my_put_fnbr.c
 
 SRC		+=	$(EDITDIR)/aff_light.c			\
 			$(EDITDIR)/aff_mat.c			\
@@ -113,7 +113,8 @@ SRC		+=	$(EDITDIR)/aff_light.c			\
 
 ##  IMAGE  ##
 SRC		+=	src/image/load_image.c			\
-			src/image/disp_image.c
+			src/image/disp_image.c			\
+			src/image/hitbox_creator.c
 
 
 ##  UTILS  ##
