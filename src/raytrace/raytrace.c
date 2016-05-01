@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Sat Apr 30 16:38:25 2016 Victor Sousa
+** Last update Sun May  1 14:17:36 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -34,48 +34,77 @@ void			init_ray_for_transpa(t_prog *prog, t_raycast *rcast)
     rcast->ray.start = add_vector(rcast->ray.start, float_time_vector(rcast->dist + 0.1, rcast->ray.dir));
 }
 
-void			raytrace_loop(t_prog *prog, t_raycast *rcast)
+t_color			raytrace_loop(t_prog *prog, t_raycast *rcast, int depth)
 {
-  float			tmp;
+  t_color		out;
 
-  rcast->depth = 0;
-  rcast->coef = 1.0f;
-  rcast->out_col.full = 0xff000000;
-  rcast->mat_touch = NULL;
-  while ((rcast->coef > 0.0f) && (rcast->depth < 10))
+  out.full = 0xFF0F0F0F;
+  if (depth > MAX_DEPTH)
+    return (out);
+  /*Vec3f hitColor = 0;
+  IsectInfo isect;
+  if (trace(orig, dir, objects, isect))
     {
-      rcast->dist = 20000;
-      if ((rcast->obj_touch = hit(prog->obj_list,
-                                  &rcast->ray, &rcast->dist, rcast)) == NULL ||
-          rcast->obj_touch->obj == NULL)
-        break;
-      if (rcast->obj_touch->type == 's')
-        calc_sphere_normale(prog, rcast);
-      else if (rcast->obj_touch->type == 't')
-        calc_triangle_normale(prog, rcast);
-      else if (rcast->obj_touch->type == 'p')
-        calc_plan_normale(prog, rcast);
-      else if (rcast->obj_touch->type == 'c')
-        calc_cone_normale(prog, rcast);
-      else
-        break;
-      free(rcast->obj_touch);
-      tmp = mult_vector(rcast->normale, rcast->normale);
-      if (tmp == 0)
-	break;
-      tmp = 1.0 / sqrt(tmp);
-      rcast->normale = float_time_vector(tmp, rcast->normale);
-      rcast->light_list = prog->light_list;
-      while (rcast->light_list != NULL)
-        process_light(prog, rcast);
-      process_reflect(rcast);
-    }
-}
+      Vec3f hitPoint = orig + dir * isect.tNear;
+      Vec3f hitNormal;
+      Vec2f hitTexCoordinates;
+      isect.hitObject->getSurfaceProperties(hitPoint, dir, isect.index, isect.uv, hitNormal, hitTexCoordinates);
+      switch (isect.hitObject->type)
+	{
+	  case kDiffuse:
+	    {
+	      for (uint32_t i = 0; i < lights.size(); ++i)
+		{
+		  Vec3f lightDir, lightIntensity;
+		  IsectInfo isectShad;
+		  lights[i]->illuminate(hitPoint, lightDir, lightIntensity, isectShad.tNear);
+		  bool vis = !trace(hitPoint + hitNormal * options.bias, -lightDir, objects, isectShad, kShadowRay);
+		  float angle = deg2rad(45);
+		  float s = hitTexCoordinates.x * cos(angle) - hitTexCoordinates.y * sin(angle);
+		  float t = hitTexCoordinates.y * cos(angle) + hitTexCoordinates.x * sin(angle);
+		  float scaleS = 20, scaleT = 20;
+		  float pattern = (cos(hitTexCoordinates.y * 2 * M_PI * scaleT) * sin(hitTexCoordinates.x * 2 * M_PI * scaleS) + 1) * 0.5; // isect.hitObject->albedo
+		      float pattern = (modulo(s * scaleS) < 0.5) ^ (modulo(t * scaleT) < 0.5);
+			  float pattern = (modulo(s * scaleS) < 0.5);
+		      hitColor += vis * pattern * lightIntensity * std::max(0.f, hitNormal.dotProduct(-lightDir));
+		    }
+		  break;
+		}
+	      case kReflection:
+		{
+		  Vec3f R = reflect(dir, hitNormal);
+		  R.normalize();
+		  break;
+		}
+	      case kReflectionAndRefraction:
+		{
+		  Vec3f refractionColor = 0, reflectionColor = 0;
+		  float kr;
+		  fresnel(dir, hitNormal, isect.hitObject->ior, kr);
+		  bool outside = dir.dotProduct(hitNormal) < 0;
+		  Vec3f bias = options.bias * hitNormal;
+		  if (kr < 1)
+		    {
+		      Vec3f refractionDirection = refract(dir, hitNormal, isect.hitObject->ior).normalize();
+		      Vec3f refractionRayOrig = outside ? hitPoint - bias : hitPoint + bias;
+		      refractionColor = castRay(refractionRayOrig, refractionDirection, objects, lights, options, depth + 1);
+		    }
+		  Vec3f reflectionDirection = reflect(dir, hitNormal).normalize();
+		  Vec3f reflectionRayOrig = outside ? hitPoint + bias : hitPoint - bias;
+		  reflectionColor = castRay(reflectionRayOrig, reflectionDirection, objects, lights, options, depth + 1);
 
-void			process_transpa(t_prog *prog, t_raycast *rcast)
-{
-  init_ray_for_transpa(prog, rcast);
-  raytrace_loop(prog, rcast);
+		  hitColor += reflectionColor * kr + refractionColor * (1 - kr);
+		  break;
+		}
+	      default:
+	      break;
+	    }
+	}
+      else
+	{
+	  hitColor = options.backgroundColor;
+  }*/
+  return (out);
 }
 
 int			raytrace(t_prog *prog)
@@ -92,7 +121,7 @@ int			raytrace(t_prog *prog)
       while (++pos.x < prog->win_size.x)
 	{
 	  init_ray(&prog->win_size, &raycast.ray, &pos, prog);
-	  raytrace_loop(prog, &raycast);
+	  raytrace_loop(prog, &raycast, 0);
 	  tekpixel(prog->pix, &pos, &raycast.out_col);
 	}
       bunny_blit(&prog->win->buffer, &prog->pix->clipable, &pos);

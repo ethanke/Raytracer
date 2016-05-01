@@ -111,6 +111,11 @@ SRC		+=	$(EDITDIR)/aff_light.c			\
 			$(EDITDIR)/edit_mat.c			\
 			$(EDITDIR)/write_xml.c
 
+##  IMAGE  ##
+SRC		+=	src/image/load_image.c			\
+			src/image/disp_image.c
+
+
 ##  UTILS  ##
 SRC		+=	src/utils/my_tablen.c			\
 			src/utils/my_str_to_wordtab.c		\

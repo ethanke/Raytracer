@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed Apr 27 14:14:15 2016 Ethan Kerdelhue
-** Last update Sun May  1 13:25:54 2016 Victor Sousa
+** Last update Sun May  1 14:19:53 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -171,8 +171,8 @@ int			add_obj(t_prog *prog)
     add_obj_sphere(prog);
   else if (my_strcmp(str, "2") == 0)
     add_obj_triangle(prog);
-  else if (my_strcmp(str, "3") == 0)
-    add_obj_plan(prog);
+  /*else if (my_strcmp(str, "3") == 0)
+    add_obj_plan(prog);*/
   else
     my_printf(0, "Error : Your choice has no result\n");
   return (0);
