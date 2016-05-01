@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri Apr 15 03:26:21 2016 Gaëtan Léandre
-** Last update Sun May  1 14:31:51 2016 Victor Sousa
+** Last update Sun May  1 14:42:15 2016 Gaëtan Léandre
 */
 
  #ifndef   _IMAGE_H_
@@ -40,4 +40,6 @@
  void   		redim_image(t_hitbox *pos,
 				    t_texture *tex,
 				    t_bunny_pixelarray *pix);
+t_texture		*create_text_uni(int width, int height,
+					 unsigned int col);
  #endif   /*_IMAGE_H_*/
