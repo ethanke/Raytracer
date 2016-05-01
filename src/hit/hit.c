@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 23:01:14 2016 victor sousa
-** Last update Sun May  1 15:31:11 2016 Victor Sousa
+** Last update Sun May  1 16:19:56 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -13,7 +13,7 @@
 t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist, t_raycast *rcast)
 {
   t_obj_list	*out;
-    t_obj_list	*tmp;
+  t_obj_list	*tmp;
   t_circle	base;
   t_cone	*cone;
 
