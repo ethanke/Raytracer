@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Fri Apr 29 04:33:50 2016 Victor Sousa
+** Last update Sun May  1 14:47:11 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -167,6 +167,20 @@ int			load_scene(t_prog *prog, char *scene_path)
   if ((get = get_field(file, "scene:view:fov")) == NULL)
     return (-1);
   prog->cam_fov.x = my_getnbr(get);
+  free(get);
+
+  if ((get = get_field(file, "scene:view:background")) == NULL)
+    return (-1);
+  if (my_strcmp(get, "NULL") == 0)
+    {
+      if ((prog->background = create_text_uni(prog->win_size.x, prog->win_size.x, 0xff000000)) == NULL)
+	return (-1);
+    }
+  else
+    {
+      if ((prog->background = load_image(get)) == NULL)
+	return (-1);
+    }
   free(get);
   prog->cam_fov.y = prog->cam_fov.x * ((prog->win_size.x / prog->win_size.y) / 1.5);
   if (get_cam_pos(file, prog) == 1 ||

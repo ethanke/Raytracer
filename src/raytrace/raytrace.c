@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Sun May  1 14:17:36 2016 Victor Sousa
+** Last update Sun May  1 14:43:07 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -41,11 +41,9 @@ t_color			raytrace_loop(t_prog *prog, t_raycast *rcast, int depth)
   out.full = 0xFF0F0F0F;
   if (depth > MAX_DEPTH)
     return (out);
-  /*Vec3f hitColor = 0;
-  IsectInfo isect;
-  if (trace(orig, dir, objects, isect))
+  if (hit(prog->obj_list, &rcast->ray, &rcast->dist, rcast))
     {
-      Vec3f hitPoint = orig + dir * isect.tNear;
+      /*Vec3f hitPoint = orig + dir * isect.tNear;
       Vec3f hitNormal;
       Vec2f hitTexCoordinates;
       isect.hitObject->getSurfaceProperties(hitPoint, dir, isect.index, isect.uv, hitNormal, hitTexCoordinates);
@@ -98,35 +96,37 @@ t_color			raytrace_loop(t_prog *prog, t_raycast *rcast, int depth)
 		}
 	      default:
 	      break;
-	    }
-	}
-      else
-	{
-	  hitColor = options.backgroundColor;
-  }*/
+      }*/
+    }
+  else
+    {
+      out = prog->background->color[rcast->pos.y][rcast->pos.x];
+    }
   return (out);
 }
 
 int			raytrace(t_prog *prog)
 {
-  t_bunny_position      pos;
   t_raycast		raycast;
+  t_color		pix;
 
   my_putstr("\nRaytracing started\n");
   raycast.touch_circle = 0;
-  pos.y = -1;
-  while (++pos.y < prog->win_size.y)
+  raycast.pos.y = -1;
+  while (++raycast.pos.y < prog->win_size.y)
     {
-      pos.x = -1;
-      while (++pos.x < prog->win_size.x)
+      raycast.pos.x = -1;
+      while (++raycast.pos.x < prog->win_size.x)
 	{
-	  init_ray(&prog->win_size, &raycast.ray, &pos, prog);
-	  raytrace_loop(prog, &raycast, 0);
-	  tekpixel(prog->pix, &pos, &raycast.out_col);
+	  init_ray(&prog->win_size, &raycast.ray, &raycast.pos, prog);
+	  pix = raytrace_loop(prog, &raycast, 0);
+	  tekpixel(prog->pix, &raycast.pos, &pix);
 	}
-      bunny_blit(&prog->win->buffer, &prog->pix->clipable, &pos);
-      bunny_display(prog->win);
     }
+  raycast.pos.x = 0;
+  raycast.pos.y = 0;
+  bunny_blit(&prog->win->buffer, &prog->pix->clipable, &raycast.pos);
+  bunny_display(prog->win);
   my_putstr("Raytracing successfull\n");
   return (0);
 }

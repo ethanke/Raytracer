@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Sun May  1 14:22:33 2016 Victor Sousa
+** Last update Sun May  1 14:41:36 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -119,6 +119,8 @@ typedef struct		s_ray
 
 typedef struct		s_raycast
 {
+  t_bunny_position	pos;
+
   t_ray			ray;
   t_color               out_col;
   int                   depth;
