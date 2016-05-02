@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Fri Apr 29 23:03:14 2016 Ethan Kerdelhue
-** Last update Sat Apr 30 22:38:13 2016 Ethan Kerdelhue
+** Last update Mon May  2 22:48:43 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -48,15 +48,15 @@ int			select_light(t_prog *prog)
   char			*str;
   int			id;
 
-  my_printf(0, "Selectionnez la lumière :\n");
+  my_printf(1, "Selectionnez la lumière :\n");
   flag = 0;
   while (flag != 1)
     {
-      my_printf(0, "Entrez l'id de l'objet a modifier (ex : 1 pour obj1):\n");
+      my_printf(1, "Entrez l'id de l'objet a modifier (ex : 1 pour obj1):\n");
       str = get_next_line(0);
       id = count_light(prog) - my_getnbr(str);
       if (check_light_id(prog, id) != 1)
-	my_printf(0, "l'id %d n'existe pas !", (count_object(prog) - id));
+	my_printf(1, "l'id %d n'existe pas !", (count_object(prog) - id));
       else
        flag = 1;
     }
@@ -71,13 +71,13 @@ int			edit_light(t_prog *prog)
 
   if (prog->editor->fd == -1)
     return (put_error(ERR_NOFD));
-  my_printf(0, "Entrez l'id de la lumière a modifier\n");
+  my_printf(1, "Entrez l'id de la lumière a modifier\n");
   id = count_material(prog) - select_light(prog);
   if ((light = get_ptr_light(prog, id)) == NULL)
     return (-1);
   aff_light(0, light);
   edit_coord(&light->center);
-  my_printf(0, "Intensiter :\n");
+  my_printf(1, "Intensiter :\n");
   str = get_next_line(0);
   light->intensity = (str[0] != '\0') ? (my_getnbr(str)) : (light->intensity);
   return (-1);

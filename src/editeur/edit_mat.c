@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Fri Apr 29 19:34:34 2016 Ethan Kerdelhue
-** Last update Fri Apr 29 22:03:58 2016 Ethan Kerdelhue
+** Last update Mon May  2 22:48:41 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -46,7 +46,7 @@ int			edit_color(int old)
 	  flag = 1;
 	}
       else
-	my_printf(0, "Error : la valeur doit être comprise entre 0 et 255\n");
+	my_printf(1, "Error : la valeur doit être comprise entre 0 et 255\n");
       free (str);
     }
   return (val);
@@ -54,11 +54,11 @@ int			edit_color(int old)
 
 int			edit_rgb(t_color *color)
 {
-  my_printf(0, "Rouge :\n");
+  my_printf(1, "Rouge :\n");
   color->argb[RED_CMP] = edit_color(color->argb[RED_CMP]);
-  my_printf(0, "Vert :\n");
+  my_printf(1, "Vert :\n");
   color->argb[GREEN_CMP] = edit_color(color->argb[GREEN_CMP]);
-  my_printf(0, "Bleue :\n");
+  my_printf(1, "Bleue :\n");
   color->argb[BLUE_CMP] = edit_color(color->argb[BLUE_CMP]);
   return (0);
 }
@@ -69,7 +69,7 @@ int			select_mat(t_prog *prog)
   char			*str;
   int			val;
 
-  my_printf(0, "Selectionnez le matériaux :\n");
+  my_printf(1, "Selectionnez le matériaux :\n");
   flag = 0;
   while (flag != 1)
     {
@@ -81,7 +81,7 @@ int			select_mat(t_prog *prog)
 	  return (val);
 	}
       else
-	my_printf(0, "Error : id du matériaux inexistant\n");
+	my_printf(1, "Error : id du matériaux inexistant\n");
       free(str);
     }
   return (0);
@@ -95,13 +95,13 @@ int			edit_mat(t_prog *prog)
 
   if (prog->editor->fd == -1)
     return (put_error(ERR_NOFD));
-  my_printf(0, "Entrez l'id du matériaux a modifier\n");
+  my_printf(1, "Entrez l'id du matériaux a modifier\n");
   id = count_material(prog) - select_mat(prog);
   if ((mat = get_ptr_mat(prog, id)) == NULL)
     return (-1);
   aff_mat(0, mat);
   edit_rgb(&mat->color);
-  my_printf(0, "Reflection :\n");
+  my_printf(1, "Reflection :\n");
   str = get_next_line(0);
   mat->reflect = ((str[0] != '\0') ? (my_getnbr(str)) : (mat->reflect));
   return (0);
