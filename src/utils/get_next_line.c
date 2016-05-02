@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Mon Jan  4 15:56:23 2016 Gaëtan Léandre
-** Last update Sat Apr  9 04:09:42 2016 Gaëtan Léandre
+** Last update Mon May  2 11:25:02 2016 Gaëtan Léandre
 */
 
 #include 		"get_next_line.h"
@@ -92,13 +92,13 @@ char			*get_next_line(const int fd)
       add_end(&text, stock);
       stock = text.stock;
     }
-  while (text.i == 0 && (beread = read(fd, iread, READ_SIZE)) != 0)
+  while (text.i == 0 && (beread = read(fd, iread, READ_SIZE)) > 0)
     {
       iread[beread] = '\0';
       add_end(&text, iread);
       stock = text.stock;
     }
-  if (text.result[0] == '\0' && beread == 0)
+  if ((text.result[0] == '\0' && beread == 0) || beread < 0)
     return (NULL);
   return (text.result);
 }
