@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Mon May  2 22:33:10 2016 Victor Sousa
+** Last update Mon May  2 22:54:27 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -27,20 +27,13 @@ void			init_ray(t_bunny_position *win_size, t_ray *ray,
   ray->dir = normalize(minus_vector(point, ray->start));
 }
 
-void			init_ray_for_transpa(t_prog *prog, t_raycast *rcast)
-{
-  rcast->ray.start = add_vector(rcast->ray.start, float_time_vector(rcast->dist + 0.1, rcast->ray.dir));
-  if (hit(prog->obj_list, &rcast->ray, &rcast->dist, rcast))
-    rcast->ray.start = add_vector(rcast->ray.start, float_time_vector(rcast->dist + 0.1, rcast->ray.dir));
-}
-
-void			raytrace_loop(t_prog *prog, t_raycast *rcast)
+void			raytrace_loop(t_prog *prog, t_raycast *rcast, t_bunny_position pos)
 {
   float			tmp;
 
   rcast->depth = 0;
   rcast->coef = 1.0f;
-  rcast->out_col.full = 0xff000000;
+  rcast->out_col = prog->background->color[pos.y][pos.x];
   rcast->mat_touch = NULL;
   while ((rcast->coef > 0.0f) && (rcast->depth < 10))
     {
@@ -49,6 +42,8 @@ void			raytrace_loop(t_prog *prog, t_raycast *rcast)
                                   &rcast->ray, &rcast->dist, rcast)) == NULL ||
           rcast->obj_touch->obj == NULL)
         break;
+      if (rcast->depth == 0 && rcast->coef == 1.0)
+	rcast->out_col.full = 0xFF000000;
       if (rcast->obj_touch->type == 's')
         calc_sphere_normale(prog, rcast);
       else if (rcast->obj_touch->type == 't')
@@ -72,12 +67,6 @@ void			raytrace_loop(t_prog *prog, t_raycast *rcast)
     }
 }
 
-void			process_transpa(t_prog *prog, t_raycast *rcast)
-{
-  init_ray_for_transpa(prog, rcast);
-  raytrace_loop(prog, rcast);
-}
-
 int			raytrace(t_prog *prog)
 {
   t_bunny_position      pos;
@@ -92,7 +81,7 @@ int			raytrace(t_prog *prog)
       while (++pos.x < prog->win_size.x)
 	{
 	  init_ray(&prog->win_size, &raycast.ray, &pos, prog);
-	  raytrace_loop(prog, &raycast);
+	  raytrace_loop(prog, &raycast, pos);
 	  tekpixel(prog->pix, &pos, &raycast.out_col);
 	}
       bunny_blit(&prog->win->buffer, &prog->pix->clipable, &pos);
