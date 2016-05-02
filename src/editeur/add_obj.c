@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon May  2 17:19:25 2016 Ethan Kerdelhue
-** Last update Mon May  2 22:30:45 2016 Ethan Kerdelhue
+** Last update Mon May  2 23:17:54 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -100,17 +100,17 @@ t_coord			*get_coord(t_coord *tmp)
 {
   char			*str;
 
-  my_printf(0, "x :\n");
+  my_printf(1, "x :\n");
   if ((str = get_next_line(0)) == NULL)
     return (NULL);
   tmp->x = my_atof(str);
   free(str);
-  my_printf(0, "y :\n");
+  my_printf(1, "y :\n");
   if ((str = get_next_line(0)) == NULL)
     return (NULL);
   tmp->y = my_atof(str);
   free(str);
-  my_printf(0, "z :\n");
+  my_printf(1, "z :\n");
   if ((str = get_next_line(0)) == NULL)
     return (NULL);
   tmp->z = my_atof(str);
@@ -118,33 +118,40 @@ t_coord			*get_coord(t_coord *tmp)
   return (tmp);
 }
 
+char			get_material(t_prog *prog)
+{
+  char			*str;
+  int			flag;
+  int			val;
+
+  flag = 0;
+  while (flag != 1)
+    {
+      my_printf(1, "material id :\n");
+      if ((str = get_next_line(0)) == NULL)
+	return (-1);
+      val = (char) my_getnbr(str);
+      if (check_material_id(prog, (char) val) == 1)
+	flag = 1;
+      else
+	my_printf(1, "material_id %d do not exist !\n", (int) val);
+    }
+  return (val);
+}
+
 int			add_obj_triangle(t_prog *prog)
 {
   t_triangle 		tmp;
-  char			*str;
-  int			flag;
 
-  flag = 0;
-  my_printf(0, "Coordonée du premier point du triangle\n");
+  my_printf(1, "Coordonée du premier point du triangle\n");
   if ((get_coord(&tmp.angle[0])) == NULL)
     return (-1);
-  my_printf(0, "Coordonée du deuxième point du triangle\nx:\n");
+  my_printf(1, "Coordonée du deuxième point du triangle\n");
   if ((get_coord(&tmp.angle[1])) == NULL)
     return (-1);
-  my_printf(0, "Coordonée du troisième point du triangle\nx:\n");
+  my_printf(1, "Coordonée du troisième point du triangle\n");
   if ((get_coord(&tmp.angle[2])) == NULL)
     return (-1);
-  while (flag != 1)
-    {
-      my_printf(0, "material id :\n");
-      if ((str = get_next_line(0)) == NULL)
-	return (-1);
-      tmp.material = (char) my_getnbr(str);
-      if (check_material_id(prog, tmp.material) == 1)
-	flag = 1;
-      else
-	my_printf(0, "material_id %d do not exist !\n", (int) tmp.material);
-    }
   push_triangle(prog, tmp);
   return (0);
 }
@@ -153,27 +160,14 @@ int			add_obj_sphere(t_prog *prog)
 {
   t_sphere		tmp;
   char			*str;
-  int			flag;
 
-  flag = 0;
-  my_printf(0, "Coordonée du point central :\n");
+  my_printf(1, "Coordonée du point central :\n");
   get_coord(&tmp.center);
-  my_printf(0, "rayon :\n");
+  my_printf(1, "rayon :\n");
   str = get_next_line(0);
   tmp.radius = my_getnbr(str);
   free(str);
-  while (flag != 1)
-    {
-      my_printf(0, "material id :\n");
-      if ((str = get_next_line(0)) == NULL)
-	return (-1);
-      tmp.material = (char) my_getnbr(str);
-      if (check_material_id(prog, tmp.material) == 1)
-	flag = 1;
-      else
-	my_printf(0, "material_id %d do not exist !\n", (int) tmp.material);
-      free(str);
-    }
+  tmp.material = get_material(prog);
   if ((push_sphere(prog, tmp)) == -1)
     return (-1);
   return (0);
@@ -182,26 +176,13 @@ int			add_obj_sphere(t_prog *prog)
 int			add_obj_plan(t_prog *prog)
 {
   t_plan		plan;
-  int			flag;
-  char			*str;
 
   my_printf(1, "Entrez les coordonées centre du plan :\n");
   get_coord(&plan.center);
   my_printf(1, "Entrez les coordonées de direction du plan :\n");
   get_coord(&plan.dir);
-  flag = 0;
-  while (flag != 1)
-    {
-      my_printf(0, "material id :\n");
-      if ((str = get_next_line(0)) == NULL)
-	return (-1);
-      plan.material = (char) my_getnbr(str);
-      if (check_material_id(prog, plan.material) == 1)
-	flag = 1;
-      else
-	my_printf(0, "material_id %d do not exist !\n", (int) plan.material);
-      free(str);
-    }
+  if ((plan.material = get_material(prog)) == -1)
+    return (-1);
   push_plan(prog, plan);
   return (0);
 }
@@ -212,8 +193,8 @@ int			add_obj(t_prog *prog)
 
   if (prog->editor->fd == -1)
     return (put_error(ERR_NOFD));
-  my_printf(0, "Quelle objet voulez-vous rajoutez ?\n");
-  my_printf(0, "\n 1 - Sphere\n 2 - Triangle\n 3 - Plan\n");
+  my_printf(1, "Quelle objet voulez-vous rajoutez ?\n");
+  my_printf(1, "\n 1 - Sphere\n 2 - Triangle\n 3 - Plan\n");
   str = get_next_line(0);
   if (my_strcmp(str, "1") == 0)
     add_obj_sphere(prog);
@@ -222,6 +203,6 @@ int			add_obj(t_prog *prog)
   else if (my_strcmp(str, "3") == 0)
     add_obj_plan(prog);
   else
-    my_printf(0, "Error : Your choice has no result\n");
+    my_printf(1, "Error : Your choice has no result\n");
   return (0);
 }

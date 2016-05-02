@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed Apr 27 18:31:29 2016 Ethan Kerdelhue
-** Last update Fri Apr 29 19:48:33 2016 Ethan Kerdelhue
+** Last update Mon May  2 22:48:35 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -24,14 +24,14 @@ int			aff_obj_spec(t_prog *prog, int id)
 	tmp = tmp->next;
       else
 	{
-	  my_printf(0, "Error : id %d don't found", id);
+	  my_printf(1, "Error : id %d don't found", id);
 	  return (-1);
 	}
     }
-  my_printf(0, "\t<obj%d>\n", (count_object(prog) - id));
-  my_printf(0, "\t\t<type>%s</type>\n", get_type(tmp->type));
+  my_printf(1, "\t<obj%d>\n", (count_object(prog) - id));
+  my_printf(1, "\t\t<type>%s</type>\n", get_type(tmp->type));
   aff_obj(0, tmp);
-  my_printf(0, "\t</obj%d>\n", (count_object(prog) - id));
+  my_printf(1, "\t</obj%d>\n", (count_object(prog) - id));
   return (0);
 }
 
@@ -71,15 +71,15 @@ int			edit_coord(t_coord *tmp)
 {
   char			*str;
 
-  my_printf(0, "x :\n");
+  my_printf(1, "x :\n");
   str = get_next_line(0);
   tmp->x = ((str[0] != '\0') ? (my_atof(str)) : (tmp->x));
   free(str);
-  my_printf(0, "y :\n");
+  my_printf(1, "y :\n");
   str = get_next_line(0);
   tmp->y = ((str[0] != '\0') ? (my_atof(str)) : (tmp->y));
   free(str);
-  my_printf(0, "z :\n");
+  my_printf(1, "z :\n");
   str = get_next_line(0);
   tmp->z = ((str[0] != '\0') ? (my_atof(str)) : (tmp->z));
   return (0);
@@ -94,7 +94,7 @@ char			edit_material_id(t_prog *prog, char mat)
   flag = 0;
   while (flag != 1)
     {
-      my_printf(0, "material id :\n");
+      my_printf(1, "material id :\n");
       str = get_next_line(0);
       if ((check_material_id(prog, my_getnbr(str)) == 1) || str[0] == '\0')
 	{
@@ -105,7 +105,7 @@ char			edit_material_id(t_prog *prog, char mat)
 	  flag = 1;
 	}
       else
-	my_printf(0, "Error : material id %d don't exist\n", my_getnbr(str));
+	my_printf(1, "Error : material id %d don't exist\n", my_getnbr(str));
       free(str);
     }
   return (tmp);
@@ -115,9 +115,9 @@ int			edit_sphere(t_prog *prog, t_sphere *sph)
 {
   char 			*str;
 
-  my_printf(0, "Laissez vide si vous voulez concerver la valeur\nPoint du centre :\n");
+  my_printf(1, "Laissez vide si vous voulez concerver la valeur\nPoint du centre :\n");
   edit_coord(&sph->center);
-  my_printf(0, "radius :\n");
+  my_printf(1, "radius :\n");
   str = get_next_line(0);
   sph->radius = ((str[0] != '\0') ? (my_getnbr(str)) : (sph->radius));
   free(str);
@@ -128,12 +128,12 @@ int			edit_sphere(t_prog *prog, t_sphere *sph)
 
 int			edit_triangle(t_prog *prog, t_triangle *tri)
 {
-  my_printf(0, "Laissez vide si vous voulez concerver la valeur\n");
-  my_printf(0, "Premier point du triangle :\n");
+  my_printf(1, "Laissez vide si vous voulez concerver la valeur\n");
+  my_printf(1, "Premier point du triangle :\n");
   edit_coord(&tri->angle[0]);
-  my_printf(0, "Second point du triangle :\n");
+  my_printf(1, "Second point du triangle :\n");
   edit_coord(&tri->angle[1]);
-  my_printf(0, "Troisième point du triangle :\n");
+  my_printf(1, "Troisième point du triangle :\n");
   edit_coord(&tri->angle[2]);
   tri->material = edit_material_id(prog, tri->material);
   return (0);
@@ -150,11 +150,11 @@ int			edit_obj(t_prog *prog)
     return (put_error(ERR_NOFD));
   while (flag != 1)
     {
-      my_printf(0, "Entrez l'id de l'objet a modifier (ex : 1 pour obj1):\n");
+      my_printf(1, "Entrez l'id de l'objet a modifier (ex : 1 pour obj1):\n");
       str = get_next_line(0);
       id = count_object(prog) - my_getnbr(str);
       if (check_obj_id(prog, id) != 1)
-	my_printf(0, "l'id %d n'existe pas !", (count_object(prog) - id));
+	my_printf(1, "l'id %d n'existe pas !", (count_object(prog) - id));
       else
 	flag = 1;
     }

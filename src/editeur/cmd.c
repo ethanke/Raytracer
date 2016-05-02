@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 10:04:58 2016 Ethan Kerdelhue
-** Last update Mon May  2 18:00:46 2016 Ethan Kerdelhue
+** Last update Mon May  2 22:48:32 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -13,7 +13,7 @@
 int			close_xml(t_prog *prog)
 {
   (void) prog;
-  my_printf(0, "let's close!\n");
+  my_printf(1, "let's close!\n");
   return (0);
 }
 
