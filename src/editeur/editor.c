@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 03:54:51 2016 Ethan Kerdelhue
-** Last update Sat Apr 30 22:47:48 2016 Ethan Kerdelhue
+** Last update Tue May  3 00:28:34 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -55,6 +55,8 @@ char			*get_type(char c)
     return ("triangle\0");
   if (c == 'p')
     return ("plan\0");
+  if (c == 'c')
+    return ("cone\0");
   return (NULL);
 }
 

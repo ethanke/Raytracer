@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?> 
+<?xml version="1.0" encoding="utf-8"?>
 <scene>
 
   <view>
@@ -61,7 +61,7 @@
       <reflect>50</reflect>
       <transpa>0</transpa>
     </mat5>
-    
+
     <mat6>
       <red>25</red>
       <green>210</green>
@@ -72,7 +72,7 @@
   </material_list>
 
   <object_list>
-    <count>6</count>
+    <count>7</count>
 
     <obj1>
       <type>sphere</type>
@@ -130,18 +130,14 @@
     </obj5>
 
     <obj6>
-      <type>plan</type>
+      <type>sphere</type>
       <center>
-	<x>0</x>
-	<y>-100</y>
+	<x>9</x>
+	<y>100</y>
 	<z>0</z>
       </center>
-      <dir>
-	<x>0</x>
-	<y>1</y>
-	<z>0</z>
-      </dir>
-      <material_id>6</material_id>
+      <radius>100</radius>
+      <material_id>5</material_id>
     </obj6>
 
     <obj7>

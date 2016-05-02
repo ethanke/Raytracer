@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed Apr 27 18:31:29 2016 Ethan Kerdelhue
-** Last update Mon May  2 22:48:35 2016 Ethan Kerdelhue
+** Last update Tue May  3 00:38:22 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -24,7 +24,7 @@ int			aff_obj_spec(t_prog *prog, int id)
 	tmp = tmp->next;
       else
 	{
-	  my_printf(1, "Error : id %d don't found", id);
+	  my_printf(1, "Error : id %d don't found\n", id);
 	  return (-1);
 	}
     }
@@ -44,11 +44,13 @@ int			check_obj_id(t_prog *prog, int id)
   tmp = prog->obj_list;
   while (tmp != NULL)
     {
-      i++;
-      if (id == i)
+      if (i == id)
 	return (1);
+      i++;
       tmp = tmp->next;
     }
+  if (i == id)
+    return (1);
   return (0);
 }
 
@@ -125,6 +127,16 @@ int			edit_sphere(t_prog *prog, t_sphere *sph)
   return (0);
 }
 
+int			edit_plan(t_prog *prog, t_plan *pla)
+{
+  my_printf(1, "Laissez vide si vous voulez concerver la valeur\n");
+  my_printf(1, "Point central du plan :\n");
+  edit_coord(&pla->center);
+  my_printf(1, "Direction du plan :\n");
+  edit_coord(&pla->dir);
+  pla->material = edit_material_id(prog, pla->material);
+  return (0);
+}
 
 int			edit_triangle(t_prog *prog, t_triangle *tri)
 {
@@ -151,18 +163,22 @@ int			edit_obj(t_prog *prog)
   while (flag != 1)
     {
       my_printf(1, "Entrez l'id de l'objet a modifier (ex : 1 pour obj1):\n");
-      str = get_next_line(0);
-      id = count_object(prog) - my_getnbr(str);
-      if (check_obj_id(prog, id) != 1)
+      if ((str = get_next_line(0)) == NULL)
+	return (-1);
+      id = (count_object(prog)) - my_getnbr(str);
+      if (check_obj_id(prog, id) != 1 && id != count_object(prog))
 	my_printf(1, "l'id %d n'existe pas !", (count_object(prog) - id));
       else
 	flag = 1;
     }
-  aff_obj_spec(prog, id);
+  if ((aff_obj_spec(prog, id)))
+    return (-1);
   obj = get_obj_ptr(prog, id);
   if (obj->type == 's')
     edit_sphere(prog, (t_sphere *)obj->obj);
   if (obj->type == 't')
     edit_triangle(prog, (t_triangle *)obj->obj);
+  if (obj->type == 'p')
+    edit_plan(prog, (t_plan *)obj->obj);
   return (0);
 }

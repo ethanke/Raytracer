@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 04:09:19 2016 Ethan Kerdelhue
-** Last update Mon May  2 17:42:42 2016 Ethan Kerdelhue
+** Last update Mon May  2 23:27:30 2016 Ethan Kerdelhue
 */
 
 #ifndef			EDITOR_H_
@@ -58,5 +58,6 @@ int			edit_cam(t_prog *prog);
 int			edit_point(t_point *tmp);
 int			edit_light(t_prog *prog);
 int			edit_coord(t_coord *tmp);
+char			get_material(t_prog *prog);
 
 #endif		      /*EDITOR_H_*/
