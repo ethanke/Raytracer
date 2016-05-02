@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 04:04:48 2016 victor sousa
-** Last update Sat Apr 30 16:38:46 2016 Victor Sousa
+** Last update Sun May  1 23:48:10 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -21,7 +21,7 @@ void                    process_reflect(t_raycast *rcast)
   rcast->depth++;
 }
 
-int                     reflect_loop(t_prog *prog, t_raycast *rcast)
+int                     reflect_loop(t_prog *prog, t_raycast *rcast, t_ray *ray, t_color *col)
 {
   float			tmp;
 
@@ -29,15 +29,7 @@ int                     reflect_loop(t_prog *prog, t_raycast *rcast)
                               &rcast->ray, &rcast->dist, rcast)) == NULL ||
       rcast->obj_touch->obj == NULL)
     return (-1);
-  if (rcast->obj_touch->type == 's')
-    calc_sphere_normale(prog, rcast);
-  else if (rcast->obj_touch->type == 't')
-    calc_triangle_normale(prog, rcast);
-  else if (rcast->obj_touch->type == 'p')
-    calc_plan_normale(prog, rcast);
-  else if (rcast->obj_touch->type == 'c')
-    calc_cone_normale(prog, rcast);
-  else
+  if (calc_normale(prog, rcast, ray, col) == -1)
     return (-1);
   free(rcast->obj_touch);
   tmp = mult_vector(rcast->normale, rcast->normale);

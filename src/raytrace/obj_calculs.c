@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Sun May  1 22:17:42 2016 Victor Sousa
+** Last update Sun May  1 23:58:55 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -23,6 +23,7 @@ int			calc_normale(t_prog *prog, t_raycast *rcast, t_ray *ray, t_color *col)
   else
     return (-1);
   col->full = rcast->mat_touch->color.full;
+  col->argb[ALPHA_CMP] = 255;
   return (0);
 }
 

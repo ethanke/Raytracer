@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Sun May  1 22:35:42 2016 Victor Sousa
+** Last update Sun May  1 23:58:41 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -33,7 +33,9 @@ t_color			raytrace_loop(t_prog *prog, t_ray *ray, t_bunny_position pos, int dept
   t_ray			new_ray;
   t_color		new_col;
   t_color		out_col;
+  int			i_cmp;
   t_light_list		*light_list;
+  float			tmp;
 
   out_col.full = 0xFF000000;
   rcast.hit_dist = 20000;
@@ -46,7 +48,6 @@ t_color			raytrace_loop(t_prog *prog, t_ray *ray, t_bunny_position pos, int dept
 	return (out_col);
       if (rcast.mat_touch->transpa == 0 && rcast.mat_touch->reflect == 0)
 	{
-	  out_col.argb[ALPHA_CMP] = 255;
 	  light_list = prog->light_list;
 	  while (light_list != NULL)
 	    {
@@ -69,21 +70,22 @@ t_color			raytrace_loop(t_prog *prog, t_ray *ray, t_bunny_position pos, int dept
 	    }
       else if (rcast.mat_touch->transpa == 0 && rcast.mat_touch->reflect > 0)
 	{
-	  out_col.argb[ALPHA_CMP] = 255;
-	  /*Vec3f R = reflect(dir, hitNormal);
-	  R.normalize();*/
+	  new_ray.start = rcast.hit_point;
+	  new_ray.dir = ray->dir;
 	}
       else if (rcast.mat_touch->transpa > 0 && rcast.mat_touch->reflect > 0)
 	{
 	  new_ray.dir = ray->dir;
 	  new_ray.start = rcast.hit_point;
-	  new_col= raytrace_loop(prog, &new_ray, pos, depth + 1);
-	  out_col.argb[RED_CMP] = (new_col.argb[RED_CMP] * (1 - (rcast.mat_touch->transpa / 100))) / 2 + (out_col.argb[RED_CMP] * (rcast.mat_touch->transpa / 100)) / 2;
-	  out_col.argb[GREEN_CMP] = (new_col.argb[GREEN_CMP] * (1 - (rcast.mat_touch->transpa / 100))) / 2 + (out_col.argb[GREEN_CMP] * (rcast.mat_touch->transpa / 100)) / 2;
-	  out_col.argb[BLUE_CMP] = (new_col.argb[BLUE_CMP] * (1 - (rcast.mat_touch->transpa / 100))) / 2 + (out_col.argb[BLUE_CMP] * (rcast.mat_touch->transpa / 100)) / 2;
-	  out_col.argb[ALPHA_CMP] = 255;
-	  /*Vec3f refractionColor = 0, reflectionColor = 0;
-	  float kr;
+	  new_col= raytrace_loop(prog, &new_ray, pos, 0);
+	  i_cmp = -1;
+	  while (++i_cmp < 3)
+	    {
+	      out_col.argb[i_cmp] =
+	      (new_col.argb[i_cmp] * (1 - (rcast.mat_touch->transpa / 100))) / 2 +
+	      (out_col.argb[i_cmp] * (rcast.mat_touch->transpa / 100)) / 2;
+	    }
+	  /*float kr;
 	  fresnel(dir, hitNormal, isect.hitObject->ior, kr);
 	  bool outside = dir.dotProduct(hitNormal) < 0;
 	  Vec3f bias = options.bias * hitNormal;
