@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 23:01:14 2016 victor sousa
-** Last update Fri Apr 29 18:11:32 2016 Victor Sousa
+** Last update Sun May  1 16:19:56 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -13,36 +13,38 @@
 t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist, t_raycast *rcast)
 {
   t_obj_list	*out;
+  t_obj_list	*tmp;
   t_circle	base;
   t_cone	*cone;
 
   if ((out = malloc(sizeof(t_obj_list))) == NULL)
     return (NULL);
   out->obj = NULL;
-  while (obj_list != NULL)
+  tmp = obj_list;
+  while (tmp != NULL)
     {
-      if (obj_list->type == 's' &&
-	  hit_sphere(ray, (t_sphere *)obj_list->obj, dist))
+      if (tmp->type == 's' &&
+	  hit_sphere(ray, (t_sphere *)tmp->obj, dist))
 	{
-	  out->type = obj_list->type;
-	  out->obj = obj_list->obj;
+	  out->type = tmp->type;
+	  out->obj = tmp->obj;
       	}
-      if (obj_list->type == 't' &&
-	  hit_triangle(ray, (t_triangle *)obj_list->obj, dist))
+      if (tmp->type == 't' &&
+	  hit_triangle(ray, (t_triangle *)tmp->obj, dist))
   	{
-  	  out->type = obj_list->type;
-  	  out->obj = obj_list->obj;
+  	  out->type = tmp->type;
+  	  out->obj = tmp->obj;
   	}
-        if (obj_list->type == 'p' &&
-  	  hit_plan(ray, (t_plan *)obj_list->obj, dist))
+        if (tmp->type == 'p' &&
+  	  hit_plan(ray, (t_plan *)tmp->obj, dist))
   	{
-  	  out->type = obj_list->type;
-  	  out->obj = obj_list->obj;
+  	  out->type = tmp->type;
+  	  out->obj = tmp->obj;
   	}
-      if (obj_list->type == 'c' &&
-	  hit_cone(ray, (t_cone *)obj_list->obj, dist))
+      if (tmp->type == 'c' &&
+	  hit_cone(ray, (t_cone *)tmp->obj, dist))
   	{
-	  cone = (t_cone *)obj_list->obj;
+	  cone = (t_cone *)tmp->obj;
 	  base.plan.center.x = cone->center.x;
 	  base.plan.center.y = cone->center.y;
 	  base.plan.center.z = cone->center.z;
@@ -51,10 +53,10 @@ t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist, t_raycast *rcast)
 	  base.plan.dir.z = cone->dir.z;
 	  base.radius = cone->radius;
 	  hit_circle(ray, &base, dist, rcast);
-  	  out->type = obj_list->type;
-  	  out->obj = obj_list->obj;
+  	  out->type = tmp->type;
+  	  out->obj = tmp->obj;
   	}
-      obj_list = obj_list->next;
+      tmp = tmp->next;
     }
   out->next = NULL;
   return (out);

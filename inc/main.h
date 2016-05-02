@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:45:54 2016 victor sousa
-** Last update Mon Apr 25 08:42:43 2016 Ethan Kerdelhue
+** Last update Sun May  1 14:29:50 2016 Victor Sousa
 */
 
 #ifndef			MAIN_H_
@@ -18,6 +18,7 @@
 # include               <fcntl.h>
 
 # include		"lapin.h"
+# include		"image.h"
 # include		"struct.h"
 # include		"output.h"
 # include		"raytrace.h"

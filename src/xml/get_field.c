@@ -1,11 +1,11 @@
 /*
 ** get_field.c for raytracer.c in /home/sousa_v/rendu/lapin/gfx_raytracer1
-** 
+**
 ** Made by victor sousa
 ** Login   <sousa_v@epitech.net>
-** 
+**
 ** Started on  Tue Feb  9 05:02:48 2016 victor sousa
-** Last update Fri Mar 11 00:30:12 2016 victor sousa
+** Last update Sun May  1 15:23:37 2016 Victor Sousa
 */
 
 # include	"main.h"
@@ -43,7 +43,10 @@ char		*get_next_occurence(char *str, char separator)
   while (str[i] && str[i] != separator)
     i++;
   if ((out = malloc(sizeof(char) * (i + 1))) == NULL)
-    return (NULL);
+	    {
+	      my_printf(1, "Malloc failed..\n");
+	      return (NULL);
+	    }
   i = 0;
   while (str[i] && str[i] != separator)
     {
@@ -64,14 +67,21 @@ char		*parse_value(char *str)
   while (str[i] && str[i] != '>')
     i++;
   if ((out = malloc(sizeof(char) * 2)) == NULL)
-    return (NULL);
+    {
+      my_printf(1, "Malloc failed..\n");
+      return (NULL);
+    }
   j = 0;
   i++;
   while (str[i] && str[i] != '<')
     {
       out[j] = str[i];
       out[j++ + 1] = 0;
-      out = realloc(out, sizeof(char) * (my_strlen(out) + 2));
+      if ((out = realloc(out, sizeof(char) * (my_strlen(out) + 2))) == NULL)
+	{
+	  my_printf(1, "Malloc failed..\n");
+	  return (NULL);
+	}
       i++;
     }
   return (out);
@@ -85,7 +95,10 @@ char		*get_field(char **scene, char *field)
   int		i;
 
   if ((parent = malloc(8 * (how_much_char(field, ':') + 1))) == NULL)
-    return (NULL);
+    {
+      my_printf(1, "Malloc failed..\n");
+      return (NULL);
+    }
   i = 0;
   field_decal = 0;
   while (contains_char(field + field_decal, ':') != -1)
