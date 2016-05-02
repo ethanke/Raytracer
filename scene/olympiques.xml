@@ -25,6 +25,7 @@
       <green>25</green>
       <blue>255</blue>
       <reflect>50</reflect>
+      <transpa>0</transpa>
     </mat1>
 
     <mat2>
@@ -32,6 +33,7 @@
       <green>255</green>
       <blue>25</blue>
       <reflect>50</reflect>
+      <transpa>50</transpa>
     </mat2>
 
     <mat3>
@@ -39,6 +41,7 @@
       <green>50</green>
       <blue>50</blue>
       <reflect>30</reflect>
+      <transpa>0</transpa>
     </mat3>
 
     <mat4>
@@ -46,6 +49,7 @@
       <green>255</green>
       <blue>25</blue>
       <reflect>50</reflect>
+      <transpa>0</transpa>
     </mat4>
 
     <mat5>
@@ -53,6 +57,7 @@
       <green>25</green>
       <blue>25</blue>
       <reflect>50</reflect>
+      <transpa>0</transpa>
     </mat5>
     
     <mat6>
@@ -60,6 +65,7 @@
       <green>210</green>
       <blue>210</blue>
       <reflect>10</reflect>
+      <transpa>0</transpa>
     </mat6>
   </material_list>
 

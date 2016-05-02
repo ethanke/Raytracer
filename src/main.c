@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Wed Apr 27 23:07:30 2016 Victor Sousa
+** Last update Sat Apr 30 15:29:23 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -95,7 +95,6 @@ int			main(int ac, char *av[], char *env[])
     return (-1);
   bunny_set_key_response(key);
   raytrace(&prog);
-  my_putstr("\nStarting the loop display\n");
   bunny_set_loop_main_function(mainloop);
   bunny_loop(prog.win, 30, &prog);
   free_stuff(&prog);

@@ -1,11 +1,11 @@
 /*
 ** load_material.c for raytracer in /home/sousa_v/rendu/lapin/gfx_raytracer1
-** 
+**
 ** Made by victor sousa
 ** Login   <sousa_v@epitech.net>
-** 
+**
 ** Started on  Thu Mar 10 23:55:20 2016 victor sousa
-** Last update Fri Mar 11 00:09:04 2016 victor sousa
+** Last update Fri Apr 29 20:19:17 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -86,6 +86,25 @@ int			get_mat_reflect(t_mat_list *new, char **file, int id)
   return (0);
 }
 
+int			get_mat_transpa(t_mat_list *new, char **file, int id)
+{
+  char			*lf;
+  char			*get;
+
+  if ((lf = malloc(sizeof(char) *
+		   my_strlen("scene:material_list:matX:transpa") + 1)) == NULL)
+    return (1);
+  lf[0] = '\0';
+  lf = my_strcat(lf, "scene:material_list:matX:transpa");
+  lf[23] = id + 49;
+  if ((get = get_field(file, lf)) == NULL)
+    return (1);
+  new->transpa = my_getnbr(get);
+  free(get);
+  free(lf);
+  return (0);
+}
+
 t_mat_list              *add_mat(t_mat_list *prev, char **file, int id)
 {
   t_mat_list            *new;
@@ -99,6 +118,8 @@ t_mat_list              *add_mat(t_mat_list *prev, char **file, int id)
   if (get_mat_blue(new, file, id) != 0)
     return (NULL);
   if (get_mat_reflect(new, file, id) != 0)
+    return (NULL);
+  if (get_mat_transpa(new, file, id) != 0)
     return (NULL);
   new->id = id + 1;
   new->next = prev;

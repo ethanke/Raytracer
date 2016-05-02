@@ -5,28 +5,24 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 04:01:20 2016 victor sousa
-** Last update Fri Apr 29 08:12:30 2016 Victor Sousa
+** Last update Sat Apr 30 15:59:09 2016 Victor Sousa
 */
 
 #include		"main.h"
 
 void			argb_calcul(t_raycast *rcast)
 {
-  rcast->out_col.argb[RED_CMP] =
-  (rcast->out_col.argb[RED_CMP] +
-   min(rcast->out_col.argb[RED_CMP] + rcast->lambert
-       * (rcast->light_list->intensity/ 255.0) *
-       rcast->mat_touch->color.argb[RED_CMP], 255)) / 2;
-  rcast->out_col.argb[GREEN_CMP] =
-  (rcast->out_col.argb[GREEN_CMP] +
-   min(rcast->out_col.argb[GREEN_CMP] + rcast->lambert
-       * (rcast->light_list->intensity / 255.0) *
-       rcast->mat_touch->color.argb[GREEN_CMP], 255)) / 2;
-  rcast->out_col.argb[BLUE_CMP] =
-  (rcast->out_col.argb[BLUE_CMP] +
-   min(rcast->out_col.argb[BLUE_CMP] + rcast->lambert *
-       (rcast->light_list->intensity / 255.0) *
-       rcast->mat_touch->color.argb[BLUE_CMP], 255)) / 2;
+  int			i;
+
+  i = -1;
+  while (++i < 3)
+    {
+      rcast->out_col.argb[i] =
+      (rcast->out_col.argb[i] +
+       min(rcast->out_col.argb[i] + rcast->lambert
+	   * (rcast->light_list->intensity/ 255.0) *
+	   rcast->mat_touch->color.argb[i], 255)) / 2;
+    }
 }
 
 float			max_rgb(float a, float b, float c)
