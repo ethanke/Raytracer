@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 04:04:48 2016 victor sousa
-** Last update Sun May  1 23:48:10 2016 Victor Sousa
+** Last update Mon May  2 22:44:40 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -21,7 +21,7 @@ void                    process_reflect(t_raycast *rcast)
   rcast->depth++;
 }
 
-int                     reflect_loop(t_prog *prog, t_raycast *rcast, t_ray *ray, t_color *col)
+int                     reflect_loop(t_prog *prog, t_raycast *rcast)
 {
   float			tmp;
 
@@ -29,7 +29,7 @@ int                     reflect_loop(t_prog *prog, t_raycast *rcast, t_ray *ray,
                               &rcast->ray, &rcast->dist, rcast)) == NULL ||
       rcast->obj_touch->obj == NULL)
     return (-1);
-  if (calc_normale(prog, rcast, ray, col) == -1)
+  if (calc_normale(prog, rcast) == -1)
     return (-1);
   free(rcast->obj_touch);
   tmp = mult_vector(rcast->normale, rcast->normale);

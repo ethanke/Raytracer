@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:05:12 2016 victor sousa
-** Last update Sun May  1 23:50:00 2016 Victor Sousa
+** Last update Mon May  2 22:44:45 2016 Victor Sousa
 */
 
 #ifndef			RAYTRACE_H_
@@ -20,13 +20,13 @@ void                    process_shadow(t_prog *prog, t_raycast *rcast);
 int                     process_light(t_prog *prog, t_raycast *rcast);
 void                    process_reflect(t_raycast *rcast);
 /*int                     reflect_loop(t_prog *prog, t_raycast *rcast);*/
-int                     reflect_loop(t_prog *prog, t_raycast *rcast, t_ray *ray, t_color *col);
+int                     reflect_loop(t_prog *prog, t_raycast *rcast);
 
 /*OBJECT CALCULS*/
-int			calc_normale(t_prog *prog, t_raycast *rcast, t_ray *ray, t_color *col);
-void			calc_sphere_normale(t_prog *prog, t_raycast *rcast, t_ray *ray);
-void			calc_triangle_normale(t_prog *prog, t_raycast *rcast, t_ray *ray);
-void			calc_plan_normale(t_prog *prog, t_raycast *rcast, t_ray *ray);
-void			calc_cone_normale(t_prog *prog, t_raycast *rcast, t_ray *ray);
+int			calc_normale(t_prog *prog, t_raycast *rcast);
+void			calc_sphere_normale(t_prog *prog, t_raycast *rcast);
+void			calc_triangle_normale(t_prog *prog, t_raycast *rcast);
+void			calc_plan_normale(t_prog *prog, t_raycast *rcast);
+void			calc_cone_normale(t_prog *prog, t_raycast *rcast);
 
 #endif		      /*RAYTRACE_H*/
