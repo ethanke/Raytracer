@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Sun May  1 23:58:41 2016 Victor Sousa
+** Last update Mon May  2 22:54:27 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -27,108 +27,66 @@ void			init_ray(t_bunny_position *win_size, t_ray *ray,
   ray->dir = normalize(minus_vector(point, ray->start));
 }
 
-t_color			raytrace_loop(t_prog *prog, t_ray *ray, t_bunny_position pos, int depth)
+void			raytrace_loop(t_prog *prog, t_raycast *rcast, t_bunny_position pos)
 {
-  t_raycast		rcast;
-  t_ray			new_ray;
-  t_color		new_col;
-  t_color		out_col;
-  int			i_cmp;
-  t_light_list		*light_list;
   float			tmp;
 
-  out_col.full = 0xFF000000;
-  rcast.hit_dist = 20000;
-  if (depth > MAX_DEPTH)
-    return (out_col);
-  if ((rcast.obj_touch = hit(prog->obj_list, ray, &rcast.hit_dist, &rcast)) != NULL &&
-      rcast.obj_touch->obj != NULL)
+  rcast->depth = 0;
+  rcast->coef = 1.0f;
+  rcast->out_col = prog->background->color[pos.y][pos.x];
+  rcast->mat_touch = NULL;
+  while ((rcast->coef > 0.0f) && (rcast->depth < 10))
     {
-      if (calc_normale(prog, &rcast, ray, &out_col) == -1)
-	return (out_col);
-      if (rcast.mat_touch->transpa == 0 && rcast.mat_touch->reflect == 0)
-	{
-	  light_list = prog->light_list;
-	  while (light_list != NULL)
-	    {
-
-	      light_list = light_list->next;
-	    }
-	  /*  Vec3f lightDir, light
-	      Intensity;
-	      IsectInfo isectShad;
-	      lights[i]->illuminate(hitPoint, lightDir, lightIntensity, isectShad.tNear);
-	      bool vis = !trace(hitPoint + hitNormal * options.bias, -lightDir, objects, isectShad, kShadowRay);
-	      float angle = deg2rad(45);
-	      float s = hitTexCoordinates.x * cos(angle) - hitTexCoordinates.y * sin(angle);
-	      float t = hitTexCoordinates.y * cos(angle) + hitTexCoordinates.x * sin(angle);
-	      float scaleS = 20, scaleT = 20;
-	      float pattern = (cos(hitTexCoordinates.y * 2 * M_PI * scaleT) * sin(hitTexCoordinates.x * 2 * M_PI * scaleS) + 1) * 0.5; // isect.hitObject->albedo
-		  float pattern = (modulo(s * scaleS) < 0.5) ^ (modulo(t * scaleT) < 0.5);
-	  float pattern = (modulo(s * scaleS) < 0.5);
-	  hitColor += vis * pattern * lightIntensity * std::max(0.f, hitNormal.dotProduct(-lightDir));*/
-	    }
-      else if (rcast.mat_touch->transpa == 0 && rcast.mat_touch->reflect > 0)
-	{
-	  new_ray.start = rcast.hit_point;
-	  new_ray.dir = ray->dir;
-	}
-      else if (rcast.mat_touch->transpa > 0 && rcast.mat_touch->reflect > 0)
-	{
-	  new_ray.dir = ray->dir;
-	  new_ray.start = rcast.hit_point;
-	  new_col= raytrace_loop(prog, &new_ray, pos, 0);
-	  i_cmp = -1;
-	  while (++i_cmp < 3)
-	    {
-	      out_col.argb[i_cmp] =
-	      (new_col.argb[i_cmp] * (1 - (rcast.mat_touch->transpa / 100))) / 2 +
-	      (out_col.argb[i_cmp] * (rcast.mat_touch->transpa / 100)) / 2;
-	    }
-	  /*float kr;
-	  fresnel(dir, hitNormal, isect.hitObject->ior, kr);
-	  bool outside = dir.dotProduct(hitNormal) < 0;
-	  Vec3f bias = options.bias * hitNormal;
-	  if (kr < 1)
-	    {
-	      Vec3f refractionDirection = refract(dir, hitNormal, isect.hitObject->ior).normalize();
-	      Vec3f refractionRayOrig = outside ? hitPoint - bias : hitPoint + bias;
-	      refractionColor = castRay(refractionRayOrig, refractionDirection, objects, lights, options, depth + 1);
-	    }
-	  Vec3f reflectionDirection = reflect(dir, hitNormal).normalize();
-	  Vec3f reflectionRayOrig = outside ? hitPoint + bias : hitPoint - bias;
-	  reflectionColor = castRay(reflectionRayOrig, reflectionDirection, objects, lights, options, depth + 1);
-
-	  hitColor += reflectionColor * kr + refractionColor * (1 - kr);*/
-	}
+      rcast->dist = 20000;
+      if ((rcast->obj_touch = hit(prog->obj_list,
+                                  &rcast->ray, &rcast->dist, rcast)) == NULL ||
+          rcast->obj_touch->obj == NULL)
+        break;
+      if (rcast->depth == 0 && rcast->coef == 1.0)
+	rcast->out_col.full = 0xFF000000;
+      if (rcast->obj_touch->type == 's')
+        calc_sphere_normale(prog, rcast);
+      else if (rcast->obj_touch->type == 't')
+        calc_triangle_normale(prog, rcast);
+      else if (rcast->obj_touch->type == 'p')
+        calc_plan_normale(prog, rcast);
+      else if (rcast->obj_touch->type == 'c')
+        calc_cone_normale(prog, rcast);
+      else
+        break;
+      free(rcast->obj_touch);
+      tmp = mult_vector(rcast->normale, rcast->normale);
+      if (tmp == 0)
+	break;
+      tmp = 1.0 / sqrt(tmp);
+      rcast->normale = float_time_vector(tmp, rcast->normale);
+      rcast->light_list = prog->light_list;
+      while (rcast->light_list != NULL)
+        process_light(prog, rcast);
+      process_reflect(rcast);
     }
-  else
-    {
-      out_col = prog->background->color[pos.y][pos.x];
-    }
-  return (out_col);
 }
 
 int			raytrace(t_prog *prog)
 {
-  t_ray			ray;
-  t_bunny_position	pos;
-  t_color		pix;
+  t_bunny_position      pos;
+  t_raycast		raycast;
 
   my_putstr("\nRaytracing started\n");
+  raycast.touch_circle = 0;
   pos.y = -1;
   while (++pos.y < prog->win_size.y)
     {
       pos.x = -1;
       while (++pos.x < prog->win_size.x)
 	{
-	  init_ray(&prog->win_size, &ray, &pos, prog);
-	  pix = raytrace_loop(prog, &ray, pos, 0);
-	  tekpixel(prog->pix, &pos, &pix);
+	  init_ray(&prog->win_size, &raycast.ray, &pos, prog);
+	  raytrace_loop(prog, &raycast, pos);
+	  tekpixel(prog->pix, &pos, &raycast.out_col);
 	}
+      bunny_blit(&prog->win->buffer, &prog->pix->clipable, &pos);
+      bunny_display(prog->win);
     }
-  bunny_blit(&prog->win->buffer, &prog->pix->clipable, &pos);
-  bunny_display(prog->win);
   my_putstr("Raytracing successfull\n");
   return (0);
 }

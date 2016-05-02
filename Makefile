@@ -70,8 +70,6 @@ SRC		+=	src/hit/hit.c				\
 
 ##  RAYTRACE  ##
 SRC		+=	src/raytrace/raytrace.c			\
-			src/raytrace/obj_calculs.c		\
-#			\
 			src/raytrace/shad_n_light.c		\
 			src/raytrace/reflect.c			\
 			src/raytrace/obj_calculs.c

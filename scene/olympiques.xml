@@ -33,8 +33,8 @@
       <red>255</red>
       <green>255</green>
       <blue>25</blue>
-      <reflect>50</reflect>
-      <transpa>50</transpa>
+      <reflect>25</reflect>
+      <transpa>100</transpa>
     </mat2>
 
     <mat3>

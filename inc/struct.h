@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Sun May  1 16:37:10 2016 Victor Sousa
+** Last update Mon May  2 22:43:46 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -119,27 +119,33 @@ typedef struct		s_ray
 
 typedef struct		s_raycast
 {
+  t_ray			ray;
+  t_color               out_col;
   int                   depth;
-
-  float                 hit_dist;
-  t_coord		hit_point;
+  float                 coef;
+  float                 dist;
+  t_coord               dist_vector;
   t_obj_list            *obj_touch;
   t_mat_list            *mat_touch;
-  int			touch_circle;
-
-  /*normale*/
-  t_sphere		*sphere;
+  t_coord               new_point;
+  t_coord               normale;
+  t_sphere              *sphere;
   t_triangle		*triangle;
   t_cone		*cone;
   t_plan		*plan;
-  t_coord		normale;
+  t_light_list          *light_list;
+  t_ray                 light_ray;
+  int                   in_shadow;
+  float                 lambert;
+  float                 reflect;
+  char			touch_circle;
 }			t_raycast;
 
 typedef struct 		s_editor
 {
-  char			**arg;
-  struct s_cmd		*cmd;
-  int			fd;
+        char			**arg;
+        struct s_cmd		*cmd;
+        int			fd;
 }			t_editor;
 
 typedef struct          s_prog
@@ -147,9 +153,9 @@ typedef struct          s_prog
   t_bunny_position      win_size;
   t_point		cam_pos;
   t_point		look_at;
-  t_pos			cam_rot;
-  t_pos			cam_fov;
   t_coord		cam_dir;
+  t_bunny_position	cam_fov;
+  t_bunny_position	cam_rot;
   t_obj_list            *obj_list;
   t_mat_list		*mat_list;
   t_light_list		*light_list;
