@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 10:04:58 2016 Ethan Kerdelhue
-** Last update Sat Apr 30 22:51:24 2016 Ethan Kerdelhue
+** Last update Mon May  2 18:00:46 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -58,7 +58,7 @@ t_cmd			*init_cmd()
   cmd[11].index = "edit_light";
   cmd[11].ptr = &edit_light;
   cmd[11].desc = "edite les paramètres d'une lumière";
-  cmd[13].index = "END";
+  cmd[12].index = "END";
   return (cmd);
 }
 

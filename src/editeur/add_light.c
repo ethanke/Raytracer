@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed Apr 27 18:13:39 2016 Ethan Kerdelhue
-** Last update Wed Apr 27 18:24:11 2016 Ethan Kerdelhue
+** Last update Mon May  2 17:42:34 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -33,7 +33,7 @@ int			add_light_s(t_prog *prog)
   char 			*str;
 
   my_printf(0, "Entrez le point de la camera:\n");
-  tmp.center = get_coord();
+  get_coord(&tmp.center);
   my_printf(0, "Intensiter :\n");
   str = get_next_line(0);
   tmp.intensity = my_getnbr(str);
