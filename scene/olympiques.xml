@@ -130,14 +130,18 @@
     </obj5>
 
     <obj6>
-      <type>sphere</type>
+      <type>plan</type>
       <center>
-	<x>9</x>
-	<y>100</y>
-	<z>0</z>
+    <x>0</x>
+    <y>-100</y>
+    <z>0</z>
       </center>
-      <radius>100</radius>
-      <material_id>5</material_id>
+      <dir>
+    <x>0</x>
+    <y>1</y>
+    <z>0</z>
+      </dir>
+      <material_id>6</material_id>
     </obj6>
 
     <obj7>
