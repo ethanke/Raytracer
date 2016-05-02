@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 08:37:20 2016 Victor Sousa
-** Last update Fri Apr 29 04:42:28 2016 Victor Sousa
+** Last update Mon May  2 23:32:48 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -126,6 +126,9 @@ int			load_obj_file(t_prog *prog, char *path)
     return (-1);
   if ((prog->light_list = add_empty_light4(prog->light_list)) == NULL)
     return (-1);
+  if ((prog->background = create_text_uni(prog->win_size.x, prog->win_size.x, 0xff000000)) == NULL)
+    return (-1);
+  prog->anti_alias = 1;
   prog->mat_list = NULL;
   if ((prog->mat_list = add_empty_mat(prog->mat_list)) == NULL)
     return (-1);

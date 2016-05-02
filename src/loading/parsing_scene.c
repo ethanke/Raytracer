@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Sun May  1 21:45:14 2016 Victor Sousa
+** Last update Mon May  2 23:30:47 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -168,6 +168,10 @@ int			load_scene(t_prog *prog, char *scene_path)
   if ((get = get_field(file, "scene:view:fov")) == NULL)
     return (-1);
   prog->cam_fov.x = my_getnbr(get);
+  free(get);
+  if ((get = get_field(file, "scene:view:alias")) == NULL)
+    return (-1);
+  prog->anti_alias = my_getnbr(get);
   free(get);
   if ((get = get_field(file, "scene:view:background")) == NULL)
     return (-1);
