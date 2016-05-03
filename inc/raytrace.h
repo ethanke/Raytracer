@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:05:12 2016 victor sousa
-** Last update Tue May  3 00:11:38 2016 Victor Sousa
+** Last update Tue May  3 02:43:19 2016 Victor Sousa
 */
 
 #ifndef			RAYTRACE_H_
@@ -14,6 +14,7 @@
 # include		"main.h"
 
 # define		MAX_DEPTH		10
+#define			SIZE_TILE		75
 
 int                     raytrace(t_prog *prog);
 void                    process_shadow(t_prog *prog, t_raycast *rcast);
