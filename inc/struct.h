@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Tue May  3 02:44:15 2016 Ethan Kerdelhue
+** Last update Tue May  3 04:01:39 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -48,6 +48,15 @@ typedef struct          s_sphere
   char                  material;
   char                  material2;
 }                       t_sphere;
+
+typedef struct          s_cylin
+{
+  t_coord               center;
+  t_coord               dir;
+  int                   radius;
+  int                   height;
+  char                  material;
+}                       t_cylin;
 
 typedef struct		s_vtx_list
 {
@@ -136,6 +145,7 @@ typedef struct		s_raycast
   t_triangle		*triangle;
   t_cone		*cone;
   t_plan		*plan;
+  t_cylin		*cyl;
   t_light_list          *light_list;
   t_ray                 light_ray;
   int                   in_shadow;

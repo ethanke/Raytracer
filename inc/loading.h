@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:38 2016 victor sousa
-** Last update Fri Apr 29 05:58:33 2016 Victor Sousa
+** Last update Tue May  3 03:46:37 2016 Victor Sousa
 */
 
 #ifndef			LOADING_H_
@@ -28,5 +28,6 @@ t_obj_list		*add_sphere(t_obj_list *prev, char **file, int id);
 t_obj_list              *add_triangle(t_obj_list *prev, char **file, int id);
 t_obj_list              *add_plan(t_obj_list *prev, char **file, int id);
 t_obj_list              *add_cone(t_obj_list *prev, char **file, int id);
+t_obj_list              *add_cyl(t_obj_list *prev, char **file, int id);
 
 #endif		      /*LOADING_H*/

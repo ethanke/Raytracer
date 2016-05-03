@@ -72,7 +72,7 @@
   </material_list>
 
   <object_list>
-    <count>6</count>
+    <count>7</count>
 
     <obj1>
       <type>sphere</type>
@@ -146,6 +146,23 @@
     </obj6>
 
     <obj7>
+      <type>cylinder</type>
+      <center>
+	<x>0</x>
+	<y>-150</y>
+	<z>-200</z>
+      </center>
+      <dir>
+	<x>0</x>
+	<y>1</y>
+	<z>0</z>
+      </dir>
+      <radius>75</radius>
+      <height>100</height>
+      <material_id>5</material_id>
+    </obj7>
+    
+    <obj8>
       <type>cone</type>
       <center>
 	<x>0</x>
@@ -160,7 +177,7 @@
       <radius>100</radius>
       <height>100</height>
       <material_id>4</material_id>
-    </obj7>
+    </obj8>
   </object_list>
 
   <light_list>

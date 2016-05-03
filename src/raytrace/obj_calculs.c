@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Tue May  3 02:43:04 2016 Victor Sousa
+** Last update Tue May  3 04:09:21 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -20,6 +20,8 @@ int			calc_normale(t_prog *prog, t_raycast *rcast)
     calc_plan_normale(prog, rcast);
   else if (rcast->obj_touch->type == 'c')
     calc_cone_normale(prog, rcast);
+  else if (rcast->obj_touch->type == 'y')
+    calc_cyl_normale(prog, rcast);
   else
     return (-1);
   return (0);
@@ -120,4 +122,19 @@ void			calc_cone_normale(t_prog *prog, t_raycast *rcast)
       rcast->normale.y = 1.0f / sqrt(2.0f);
       rcast->normale.z = 1.0f / sqrt(2.0f) * (1.0 - costheta);
     }
+}
+
+void			calc_cyl_normale(t_prog *prog, t_raycast *rcast)
+{
+  t_coord		co;
+  
+  rcast->cyl = rcast->obj_touch->obj;
+  rcast->mat_touch = get_color(rcast->cyl->material, prog->mat_list);
+  rcast->new_point = add_vector(rcast->ray.start,
+				float_time_vector(rcast->dist,
+						  rcast->ray.dir));
+  co = minus_vector(rcast->new_point, rcast->cyl->center);
+  rcast->normale = minus_vector(co, (float_time_vector((mult_vector(co, rcast->cyl->dir) /
+							mult_vector(rcast->cyl->dir, rcast->cyl->dir)),
+						       rcast->cyl->dir)));
 }

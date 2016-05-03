@@ -57,6 +57,7 @@ SRC		+=	src/loading/parsing_scene.c		\
 			src/loading/load_sphere_param.c		\
 			src/loading/load_triangle_param.c	\
 			src/loading/load_cone_params.c		\
+			src/loading/load_cyl_params.c		\
 			src/loading/load_plan_params.c		\
 			src/loading/load_obj_file.c		\
 			src/loading/load_vertex.c		\
@@ -67,6 +68,7 @@ SRC		+=	src/hit/hit.c				\
 			src/hit/sphere.c			\
 			src/hit/triangle.c			\
 			src/hit/cone.c				\
+			src/hit/cylinder.c			\
 			src/hit/plan.c
 
 ##  RAYTRACE  ##

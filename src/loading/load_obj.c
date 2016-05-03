@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:26:06 2016 victor sousa
-** Last update Fri Apr 29 05:58:58 2016 Victor Sousa
+** Last update Tue May  3 03:46:20 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -43,11 +43,17 @@ int			while_load_obj(char **file, char *get,
   	    return (-1);
   	}
       else if (my_strstr(get, "cone"))
-  	{
-  	  if ((prog->obj_list = add_cone(prog->obj_list, file, i))
-  	      == NULL)
-  	    return (-1);
-  	}
+	{
+    	  if ((prog->obj_list = add_cone(prog->obj_list, file, i))
+    	      == NULL)
+    	    return (-1);
+    	}
+      else if (my_strstr(get, "cylinder"))
+	{
+	  if ((prog->obj_list = add_cyl(prog->obj_list, file, i))
+	      == NULL)
+	    return (-1);
+	}
       else
 	return (-1);
       free(get);
