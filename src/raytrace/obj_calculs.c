@@ -5,12 +5,10 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Tue May  3 02:30:40 2016 Victor Sousa
+** Last update Tue May  3 02:43:04 2016 Victor Sousa
 */
 
 #include		"main.h"
-
-#define			SIZE_TILE		75
 
 int			calc_normale(t_prog *prog, t_raycast *rcast)
 {
@@ -29,30 +27,23 @@ int			calc_normale(t_prog *prog, t_raycast *rcast)
 
 int			damier(t_coord *pos)
 {
-  /*int jump = ((int)(A + x/s.x) + (int)(A + y/s.y)) % 2;
-  if (jump == 0)
-    return (1);
-  else
-    return (0);*/
-  int			x1;
-  int			y1;
-  int			z1;
+  t_point		tmp;
 
-  x1 = (int)(pos->x / SIZE_TILE);
-  y1 = (int)(pos->y / SIZE_TILE);
-  z1 = (int)(pos->z / SIZE_TILE);
-  if (x1 % 2 == 0)
+  tmp.x = (int)((pos->x + 13272) / SIZE_TILE);
+  tmp.y = (int)(pos->y / SIZE_TILE);
+  tmp.z = (int)((pos->z + 13272) / SIZE_TILE);
+  if (tmp.x % 2 == 0)
     {
-      if (((y1 % 2 == 0) && (z1 % 2 == 0)) ||
-	  (((y1 % 2 != 0) && (z1 % 2 != 0))))
+      if (((tmp.y % 2 == 0) && (tmp.z % 2 == 0)) ||
+	  (((tmp.y % 2 != 0) && (tmp.z % 2 != 0))))
 	return (0);
       else
 	return (1);
     }
   else
     {
-      if ((((y1 % 2 == 0) && (z1 % 2 == 0))) ||
-	  (((y1 % 2 != 0) && (z1 % 2 != 0))))
+      if ((((tmp.y % 2 == 0) && (tmp.z % 2 == 0))) ||
+	  (((tmp.y % 2 != 0) && (tmp.z % 2 != 0))))
 	return (1);
       else
 	return (0);
