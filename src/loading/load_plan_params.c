@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Wed Apr 27 17:06:03 2016 Victor Sousa
-** Last update Wed Apr 27 18:24:49 2016 Victor Sousa
+** Last update Tue May  3 01:00:54 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -16,15 +16,20 @@ static int		get_mat_id(t_plan *p, char **file, int id)
   char			*get;
 
  if ((lf = malloc(sizeof(char) *
-		  my_strlen("scene:object_list:objX:material_id")
+		  my_strlen("scene:object_list:objX:material_id1")
 		  + 1)) == NULL)
     return (1);
   lf[0] = '\0';
-  lf = my_strcat(lf, "scene:object_list:objX:material_id");
+  lf = my_strcat(lf, "scene:object_list:objX:material_id1");
   lf[21] = id + 49;
   if ((get = get_field(file, lf)) == NULL)
     return (1);
   p->material = my_getnbr(get);
+  free(get);
+  lf[34] = '2';
+  if ((get = get_field(file, lf)) == NULL)
+    return (1);
+  p->material2 = my_getnbr(get);
   free(get);
   free(lf);
   return (0);

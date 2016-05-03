@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Mon May  2 23:30:47 2016 Victor Sousa
+** Last update Tue May  3 02:17:46 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -88,6 +88,7 @@ char			**load_scene_file(char *path)
 	return (NULL);
       i++;
     }
+  close(fd);
   return (file);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:13:22 2016 victor sousa
-** Last update Mon Apr 25 03:28:53 2016 victor sousa
+** Last update Tue May  3 02:09:25 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -72,6 +72,7 @@ static int		get_mat_id(t_sphere *s, char **file, int id)
   if ((get = get_field(file, lf)) == NULL)
     return (1);
   s->material = my_getnbr(get);
+  s->material2 = 1;
   free(get);
   free(lf);
   return (0);

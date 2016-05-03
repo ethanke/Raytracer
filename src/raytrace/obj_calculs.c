@@ -5,10 +5,12 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Mon May  2 22:44:27 2016 Victor Sousa
+** Last update Tue May  3 02:30:40 2016 Victor Sousa
 */
 
 #include		"main.h"
+
+#define			SIZE_TILE		75
 
 int			calc_normale(t_prog *prog, t_raycast *rcast)
 {
@@ -23,6 +25,38 @@ int			calc_normale(t_prog *prog, t_raycast *rcast)
   else
     return (-1);
   return (0);
+}
+
+int			damier(t_coord *pos)
+{
+  /*int jump = ((int)(A + x/s.x) + (int)(A + y/s.y)) % 2;
+  if (jump == 0)
+    return (1);
+  else
+    return (0);*/
+  int			x1;
+  int			y1;
+  int			z1;
+
+  x1 = (int)(pos->x / SIZE_TILE);
+  y1 = (int)(pos->y / SIZE_TILE);
+  z1 = (int)(pos->z / SIZE_TILE);
+  if (x1 % 2 == 0)
+    {
+      if (((y1 % 2 == 0) && (z1 % 2 == 0)) ||
+	  (((y1 % 2 != 0) && (z1 % 2 != 0))))
+	return (0);
+      else
+	return (1);
+    }
+  else
+    {
+      if ((((y1 % 2 == 0) && (z1 % 2 == 0))) ||
+	  (((y1 % 2 != 0) && (z1 % 2 != 0))))
+	return (1);
+      else
+	return (0);
+  }
 }
 
 void			calc_sphere_normale(t_prog *prog, t_raycast *rcast)
@@ -57,12 +91,18 @@ void			calc_triangle_normale(t_prog *prog, t_raycast *rcast)
 
 void			calc_plan_normale(t_prog *prog, t_raycast *rcast)
 {
+  t_coord		dist_to_center;
+
   rcast->plan = rcast->obj_touch->obj;
-  rcast->mat_touch = get_color(rcast->plan->material, prog->mat_list);
   rcast->new_point = add_vector(rcast->ray.start,
 				float_time_vector(rcast->dist,
 						  rcast->ray.dir));
   rcast->normale = rcast->plan->dir;
+  dist_to_center = minus_vector(rcast->new_point, rcast->plan->center);
+  if (damier(&dist_to_center) == 0)
+    rcast->mat_touch = get_color(rcast->plan->material, prog->mat_list);
+  else
+    rcast->mat_touch = get_color(rcast->plan->material2, prog->mat_list);
 }
 
 void			calc_cone_normale(t_prog *prog, t_raycast *rcast)

@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Mon May  2 23:29:39 2016 Victor Sousa
+** Last update Tue May  3 02:09:11 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -46,6 +46,7 @@ typedef struct          s_sphere
   t_coord               center;
   int                   radius;
   char                  material;
+  char                  material2;
 }                       t_sphere;
 
 typedef struct		s_vtx_list
@@ -59,6 +60,7 @@ typedef struct		s_plan
   t_coord		center;
   t_coord		dir;
   char                  material;
+  char                  material2;
 }			t_plan;
 
 typedef struct		s_cone
@@ -143,9 +145,9 @@ typedef struct		s_raycast
 
 typedef struct 		s_editor
 {
-        char			**arg;
-        struct s_cmd		*cmd;
-        int			fd;
+  char			**arg;
+  struct s_cmd		*cmd;
+  int			fd;
 }			t_editor;
 
 typedef struct          s_prog
