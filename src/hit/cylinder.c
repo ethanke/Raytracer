@@ -5,12 +5,12 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Tue May  3 02:58:39 2016 Victor Sousa
-** Last update Tue May  3 10:09:16 2016 Victor Sousa
+** Last update Tue May  3 11:34:16 2016 Victor Sousa
 */
 
 #include		"main.h"
 
-int 			hit_cylin(t_ray *r, t_cylin *cy, float *t, t_raycast *rcast)
+int 			hit_cylin(t_ray *r, t_cylin *cy, float *t)
 {
   t_coord alpha = float_time_vector(mult_vector(r->dir, cy->dir), cy->dir);
   t_coord deltaP = minus_vector(r->start, cy->center);

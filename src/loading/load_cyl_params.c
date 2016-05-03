@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:54:30 2016 Victor Sousa
-** Last update Tue May  3 10:12:42 2016 Victor Sousa
+** Last update Tue May  3 10:39:58 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -148,6 +148,7 @@ t_obj_list              *add_cyl(t_obj_list *prev, char **file, int id)
     return (NULL);
   if (get_cone_height(c, file, id) != 0)
     return (NULL);
+  c->center = minus_vector(c->center, float_time_vector(c->height / 2.0 , c->dir));
   new->obj = c;
   new->type = 'y';
   new->next = prev;
@@ -155,9 +156,7 @@ t_obj_list              *add_cyl(t_obj_list *prev, char **file, int id)
     return (NULL);
   if ((base_bot = malloc(sizeof(t_circle))) == NULL)
     return (NULL);
-  base_bot->plan.center.x = c->center.x;
-  base_bot->plan.center.y = c->center.y;
-  base_bot->plan.center.z = c->center.z;
+  base_bot->plan.center = minus_vector(c->center, float_time_vector(c->height / 2.0 , c->dir));
   base_bot->plan.dir.x = -c->dir.x;
   base_bot->plan.dir.y = -c->dir.y;
   base_bot->plan.dir.z = -c->dir.z;
@@ -170,7 +169,7 @@ t_obj_list              *add_cyl(t_obj_list *prev, char **file, int id)
     return (NULL);
   if ((base_top = malloc(sizeof(t_circle))) == NULL)
     return (NULL);
-  base_top->plan.center = add_vector(c->center, float_time_vector(c->height , c->dir));
+  base_top->plan.center = add_vector(c->center, float_time_vector(c->height / 2.0 , c->dir));
   base_top->plan.dir.x = c->dir.x;
   base_top->plan.dir.y = c->dir.y;
   base_top->plan.dir.z = c->dir.z;
