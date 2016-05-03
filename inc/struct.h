@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Tue May  3 04:01:39 2016 Victor Sousa
+** Last update Tue May  3 09:50:59 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -97,6 +97,7 @@ typedef struct		s_circle
 {
   t_plan		plan;
   float			radius;
+  char			material;
 }			t_circle;
 
 typedef struct		s_mat_list
@@ -146,6 +147,7 @@ typedef struct		s_raycast
   t_cone		*cone;
   t_plan		*plan;
   t_cylin		*cyl;
+  t_circle		*circle;
   t_light_list          *light_list;
   t_ray                 light_ray;
   int                   in_shadow;

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:28:00 2016 Victor Sousa
-** Last update Fri Apr 29 19:40:54 2016 Victor Sousa
+** Last update Tue May  3 10:03:05 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -25,7 +25,6 @@ int 			hit_circle(t_ray *r, t_circle *c, float *t, t_raycast *rcast)
 	  if (dist < *t)
 	    {
 	      *t = dist;
-	      rcast->touch_circle = 1;
 	      return (1);
 	    }
 	}

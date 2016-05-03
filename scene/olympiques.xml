@@ -6,7 +6,7 @@
     <y_size>720</y_size>
     <cam_pos>
       <x>-600</x>
-      <y>0</y>
+      <y>200</y>
       <z>-600</z>
     </cam_pos>
     <look_at>
@@ -72,7 +72,7 @@
   </material_list>
 
   <object_list>
-    <count>7</count>
+    <count>9</count>
 
     <obj1>
       <type>sphere</type>
@@ -148,21 +148,43 @@
     <obj7>
       <type>cylinder</type>
       <center>
-	<x>0</x>
-	<y>-150</y>
-	<z>-200</z>
+	<x>300</x>
+	<y>-75</y>
+	<z>-300</z>
       </center>
       <dir>
 	<x>0</x>
 	<y>1</y>
 	<z>0</z>
       </dir>
-      <radius>75</radius>
-      <height>100</height>
-      <material_id>5</material_id>
+      <radius>100</radius>
+      <height>150</height>
+      <material_id>1</material_id>
     </obj7>
     
     <obj8>
+      <type>sphere</type>
+      <center>
+	<x>300</x>
+	<y>-75</y>
+	<z>-300</z>
+      </center>
+      <radius>100</radius>
+      <material_id>1</material_id>
+    </obj8>
+
+    <obj9>
+      <type>sphere</type>
+      <center>
+	<x>300</x>
+	<y>75</y>
+	<z>-300</z>
+      </center>
+      <radius>100</radius>
+      <material_id>1</material_id>
+    </obj9>
+
+    <obj10>
       <type>cone</type>
       <center>
 	<x>0</x>
@@ -177,11 +199,11 @@
       <radius>100</radius>
       <height>100</height>
       <material_id>4</material_id>
-    </obj8>
+    </obj10>
   </object_list>
 
   <light_list>
-    <count>4</count>
+    <count>5</count>
 
     <light1>
       <center>
@@ -218,6 +240,15 @@
       </center>
       <intensity>125</intensity>
     </light4>
+    
+    <light5>
+      <center>
+	<x>0</x>
+	<y>500</y>
+	<z>0</z>
+      </center>
+      <intensity>125</intensity>
+    </light5>
   </light_list>
 
 </scene>

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 23:01:14 2016 victor sousa
-** Last update Tue May  3 04:13:33 2016 Victor Sousa
+** Last update Tue May  3 09:45:09 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -42,11 +42,17 @@ t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist, t_raycast *rcast)
     	  out->obj = tmp->obj;
     	}
       if (tmp->type == 'y' &&
-    	  hit_cylin(ray, (t_cylin *)tmp->obj, dist, rcast))
-    	{
-    	  out->type = tmp->type;
-    	  out->obj = tmp->obj;
-    	}
+	  hit_cylin(ray, (t_cylin *)tmp->obj, dist, rcast))
+      	{
+      	  out->type = tmp->type;
+      	  out->obj = tmp->obj;
+      	}
+      if (tmp->type == 'i' &&
+	  hit_circle(ray, (t_circle *)tmp->obj, dist, rcast))
+	{
+	  out->type = tmp->type;
+	  out->obj = tmp->obj;
+	}
       if (tmp->type == 'c' &&
 	  hit_cone(ray, (t_cone *)tmp->obj, dist))
   	{
