@@ -5,10 +5,35 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon May  2 17:19:25 2016 Ethan Kerdelhue
-** Last update Mon May  2 23:17:54 2016 Ethan Kerdelhue
+** Last update Tue May  3 01:03:26 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
+
+int			push_cone(t_prog *prog, t_cone con)
+{
+  t_obj_list		*tmp;
+  t_obj_list		*new_obj;
+  t_cone		*new;
+
+  if ((new = malloc(sizeof(t_cone))) == NULL)
+    return (-1);
+  if ((new_obj = malloc(sizeof(t_obj_list))) == NULL)
+    return (-1);
+  new->center = con.center;
+  new->dir = con.dir;
+  new->radius = con.radius;
+  new->height = con.height;
+  new->material = con.material;
+  tmp = prog->obj_list;
+  while (tmp->next != NULL)
+    tmp = tmp->next;
+  new_obj->type = 'c';
+  new_obj->obj = (void *) new;
+  new_obj->next = NULL;
+  tmp->next = new_obj;
+  return (0);
+}
 
 int			push_plan(t_prog *prog, t_plan pla)
 {
@@ -187,6 +212,29 @@ int			add_obj_plan(t_prog *prog)
   return (0);
 }
 
+int			add_obj_cone(t_prog *prog)
+{
+  t_cone		cone;
+  char			*str;
+
+  my_printf(1, "Entrez les coordonées centre du cone :\n");
+  get_coord(&cone.center);
+  my_printf(1, "Entrez les coordonées de direction du cone :\n");
+  get_coord(&cone.dir);
+  if ((str = get_next_line(0)) == NULL)
+    return (-1);
+  cone.radius = my_getnbr(str);
+  free(str);
+  if ((str = get_next_line(0)) == NULL)
+    return (-1);
+  cone.height = my_getnbr(str);
+  free(str);
+  if ((cone.material = get_material(prog)) == -1)
+    return (-1);
+  push_cone(prog, cone);
+  return (0);
+}
+
 int			add_obj(t_prog *prog)
 {
   char			*str;
@@ -202,6 +250,8 @@ int			add_obj(t_prog *prog)
     add_obj_triangle(prog);
   else if (my_strcmp(str, "3") == 0)
     add_obj_plan(prog);
+  else if (my_strcmp(str, "3") == 0)
+    add_obj_cone(prog);
   else
     my_printf(1, "Error : Your choice has no result\n");
   return (0);
