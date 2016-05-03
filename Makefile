@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Sun May  1 15:27:28 2016 Gaëtan Léandre
+## Last update Mon May  2 20:35:18 2016 Kerdelhue Ethan
 ##
 
 NAME		=	raytracer2
@@ -50,6 +50,7 @@ SRC		=	src/main.c				\
 ## LOADING ##
 SRC		+=	src/loading/parsing_scene.c		\
 			src/loading/load_mat.c			\
+			src/loading/load_mtl.c			\
 			src/loading/load_mat_param.c		\
 			src/loading/load_light.c		\
 			src/loading/load_obj.c			\

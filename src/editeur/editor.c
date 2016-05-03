@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 03:54:51 2016 Ethan Kerdelhue
-** Last update Tue May  3 00:28:34 2016 Ethan Kerdelhue
+** Last update Tue May  3 01:16:29 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -86,12 +86,12 @@ void			editor(void)
   prog->editor = malloc(sizeof(t_editor));
   prog->editor->cmd = init_cmd(&cmd);
   prog->editor->fd = -1;
-  while (1)
+  while ((str = get_next_line(0)) == NULL)
     {
       disp_info();
       str = get_next_line(0);
       prog->editor->arg = str_to_wordtab(str, " ");
       put_error(check_cmd(prog));
+      free(str);
     }
-  free(str);
 }
