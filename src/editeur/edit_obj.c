@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed Apr 27 18:31:29 2016 Ethan Kerdelhue
-** Last update Tue May  3 00:38:22 2016 Ethan Kerdelhue
+** Last update Wed May  4 18:53:57 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -150,6 +150,49 @@ int			edit_triangle(t_prog *prog, t_triangle *tri)
   tri->material = edit_material_id(prog, tri->material);
   return (0);
 }
+
+int			edit_cylindre(t_prog *prog, t_cylin *cyl)
+{
+  char			*str;
+
+  my_printf(1, "Laissez vide si vous voulez concerver la valeur\n");
+  my_printf(1, "Coordonées de centre\n");
+  edit_coord(&cyl->center);
+  my_printf(1, "Coordonées de direction\n");
+  edit_coord(&cyl->dir);
+  my_printf(1, "Entrez le rayon");
+  str = get_next_line(0);
+  cyl->radius = ((str[0] != 0) ? (my_getnbr(str)) : (cyl->radius));
+  free(str);
+  my_printf(1, "Entrez la hauteur");
+  str = get_next_line(0);
+  cyl->height = ((str[0] != 0) ? (my_getnbr(str)) : (cyl->height));
+  free(str);
+  cyl->material = edit_material_id(prog, cyl->material);
+  return (0);
+}
+
+int			edit_cone(t_prog *prog, t_cone *con)
+{
+  char			*str;
+
+  my_printf(1, "Laissez vide si vous voulez concerver la valeur\n");
+  my_printf(1, "Coordonées de centre\n");
+  edit_coord(&con->center);
+  my_printf(1, "Coordonées de direction\n");
+  edit_coord(&con->dir);
+  my_printf(1, "Entrez le rayon");
+  str = get_next_line(0);
+  con->radius = ((str[0] != 0) ? (my_getnbr(str)) : (con->radius));
+  free(str);
+  my_printf(1, "Entrez la hauteur");
+  str = get_next_line(0);
+  con->height = ((str[0] != 0) ? (my_getnbr(str)) : (con->height));
+  free(str);
+  con->material = edit_material_id(prog, con->material);
+  return (0);
+}
+
 int			edit_obj(t_prog *prog)
 {
   int			id;
@@ -180,5 +223,9 @@ int			edit_obj(t_prog *prog)
     edit_triangle(prog, (t_triangle *)obj->obj);
   if (obj->type == 'p')
     edit_plan(prog, (t_plan *)obj->obj);
+  if (obj->type == 'c')
+    edit_cone(prog, (t_cone *)obj->obj);
+  if (obj->type == 'y')
+    edit_cylindre(prog, (t_cylin *)obj->obj);
   return (0);
 }

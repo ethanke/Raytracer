@@ -5,10 +5,36 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon May  2 17:19:25 2016 Ethan Kerdelhue
-** Last update Tue May  3 01:03:26 2016 Ethan Kerdelhue
+** Last update Wed May  4 18:59:06 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
+
+int			push_cylindre(t_prog *prog, t_cylin cyl)
+{
+  t_obj_list		*tmp;
+  t_obj_list		*new_obj;
+  t_cylin		*new;
+
+  if ((new = malloc(sizeof(t_cylin))) == NULL)
+    return (-1);
+  if ((new_obj = malloc(sizeof(t_obj_list))) == NULL)
+    return (-1);
+  new->center = cyl.center;
+  new->dir = cyl.dir;
+  new->radius = cyl.radius;
+  new->height = cyl.height;
+  new->material = cyl.material;
+  tmp = prog->obj_list;
+  while (tmp->next != NULL)
+    tmp = tmp->next;
+  new_obj->type = 'c';
+  new_obj->obj = (void *) new;
+  new_obj->next = NULL;
+  tmp->next = new_obj;
+  return (0);
+}
+
 
 int			push_cone(t_prog *prog, t_cone con)
 {
@@ -235,14 +261,37 @@ int			add_obj_cone(t_prog *prog)
   return (0);
 }
 
+int			add_obj_cylindre(t_prog *prog)
+{
+  t_cylin		cylindre;
+  char			*str;
+
+  my_printf(1, "Entrez les coordonées centre du cylindre :\n");
+  get_coord(&cylindre.center);
+  my_printf(1, "Entrez les coordonées de direction du cylindre :\n");
+  get_coord(&cylindre.dir);
+  if ((str = get_next_line(0)) == NULL)
+    return (-1);
+  cylindre.radius = my_getnbr(str);
+  free(str);
+  if ((str = get_next_line(0)) == NULL)
+    return (-1);
+  cylindre.height = my_getnbr(str);
+  free(str);
+  if ((cylindre.material = get_material(prog)) == -1)
+    return (-1);
+  push_cylindre(prog, cylindre);
+  return (0);
+}
+
 int			add_obj(t_prog *prog)
 {
   char			*str;
 
   if (prog->editor->fd == -1)
     return (put_error(ERR_NOFD));
-  my_printf(1, "Quelle objet voulez-vous rajoutez ?\n");
-  my_printf(1, "\n 1 - Sphere\n 2 - Triangle\n 3 - Plan\n");
+  my_printf(1, "Quelle objet voulez-vous rajoutez ?\n\n 1 - Sphere\n");
+  my_printf(1, " 2 - Triangle\n 3 - Plan\n 4 - Cone\n 5 - Cylindre");
   str = get_next_line(0);
   if (my_strcmp(str, "1") == 0)
     add_obj_sphere(prog);
@@ -250,8 +299,10 @@ int			add_obj(t_prog *prog)
     add_obj_triangle(prog);
   else if (my_strcmp(str, "3") == 0)
     add_obj_plan(prog);
-  else if (my_strcmp(str, "3") == 0)
+  else if (my_strcmp(str, "4") == 0)
     add_obj_cone(prog);
+  else if (my_strcmp(str, "5") == 0)
+    add_obj_cylindre(prog);
   else
     my_printf(1, "Error : Your choice has no result\n");
   return (0);
