@@ -20,7 +20,7 @@
     </view>
 
   <material_list>
-    <count>6</count>
+    <count>7</count>
 
     <mat1>
       <red>25</red>
@@ -69,10 +69,18 @@
       <reflect>10</reflect>
       <transpa>0</transpa>
     </mat6>
+
+    <mat7>
+      <red>25</red>
+      <green>25</green>
+      <blue>255</blue>
+      <reflect>5</reflect>
+      <transpa>0</transpa>
+    </mat7>
   </material_list>
 
   <object_list>
-    <count>7</count>
+    <count>9</count>
 
     <obj1>
       <type>sphere</type>
@@ -161,8 +169,30 @@
       <height>250</height>
       <material_id>1</material_id>
     </obj7>
-    
-    <obj10>
+
+    <obj8>
+      <type>sphere</type>
+      <center>
+	<x>300</x>
+	<y>125</y>
+	<z>-300</z>
+      </center>
+      <radius>100</radius>
+      <material_id>1</material_id>
+    </obj8>
+
+    <obj9>
+      <type>sphere</type>
+      <center>
+	<x>300</x>
+	<y>-125</y>
+	<z>-300</z>
+      </center>
+      <radius>100</radius>
+      <material_id>1</material_id>
+    </obj9>
+
+    <obj11>
       <type>cone</type>
       <center>
 	<x>0</x>
@@ -177,7 +207,7 @@
       <radius>100</radius>
       <height>100</height>
       <material_id>4</material_id>
-    </obj10>
+    </obj11>
   </object_list>
 
   <light_list>

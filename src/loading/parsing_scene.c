@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Tue May  3 02:17:46 2016 Victor Sousa
+** Last update Tue May  3 23:43:18 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -104,17 +104,26 @@ static int		get_cam_pos(char **file, t_prog *prog)
   lf[0] = '\0';
   lf = my_strcat(lf, "scene:view:cam_pos:x");
   if ((get = get_field(file, lf)) == NULL)
-    return (1);
+    {
+      my_putstr("Could not find scene:view:cam_pos:x\n");
+      return (-1);
+    }
   prog->cam_pos.x = my_getnbr(get);
   free(get);
   lf[19] = 'y';
   if ((get = get_field(file, lf)) == NULL)
-    return (1);
+    {
+      my_putstr("Could not find scene:view:cam_pos:y\n");
+      return (-1);
+    }
   prog->cam_pos.y = my_getnbr(get);
   free(get);
   lf[19] = 'z';
   if ((get = get_field(file, lf)) == NULL)
-    return (1);
+    {
+      my_putstr("Could not find scene:view:cam_pos:z\n");
+      return (-1);
+    }
   prog->cam_pos.z = my_getnbr(get);
   free(get);
   free(lf);
@@ -133,17 +142,26 @@ static int		get_cam_look_at(char **file, t_prog *prog)
   lf[0] = '\0';
   lf = my_strcat(lf, "scene:view:look_at:x");
   if ((get = get_field(file, lf)) == NULL)
-    return (1);
+    {
+      my_putstr("Could not find scene:view:look_at:x\n");
+      return (-1);
+    }
   prog->look_at.x = my_getnbr(get);
   free(get);
   lf[19] = 'y';
   if ((get = get_field(file, lf)) == NULL)
-    return (1);
+    {
+      my_putstr("Could not find scene:view:look_at:y\n");
+      return (-1);
+    }
   prog->look_at.y = my_getnbr(get);
   free(get);
   lf[19] = 'z';
   if ((get = get_field(file, lf)) == NULL)
-    return (1);
+    {
+      my_putstr("Could not find scene:view:look_at:z\n");
+      return (-1);
+    }
   prog->look_at.z = my_getnbr(get);
   free(get);
   free(lf);
@@ -159,23 +177,38 @@ int			load_scene(t_prog *prog, char *scene_path)
   if ((file = load_scene_file(scene_path)) == NULL)
     return (-1);
   if ((get = get_field(file, "scene:view:x_size")) == NULL)
-    return (-1);
+    {
+      my_putstr("Could not find scene:view:x_size\n");
+      return (-1);
+    }
   prog->win_size.x = my_getnbr(get);
   free(get);
   if ((get = get_field(file, "scene:view:y_size")) == NULL)
-    return (-1);
+    {
+      my_putstr("Could not find scene:view:y_size\n");
+      return (-1);
+    }
   prog->win_size.y = my_getnbr(get);
   free(get);
   if ((get = get_field(file, "scene:view:fov")) == NULL)
-    return (-1);
+    {
+      my_putstr("Could not find scene:view:fov\n");
+      return (-1);
+    }
   prog->cam_fov.x = my_getnbr(get);
   free(get);
   if ((get = get_field(file, "scene:view:alias")) == NULL)
-    return (-1);
+    {
+      my_putstr("Could not find scene:view:alias\n");
+      return (-1);
+    }
   prog->anti_alias = my_getnbr(get);
   free(get);
   if ((get = get_field(file, "scene:view:background")) == NULL)
-    return (-1);
+    {
+      my_putstr("Could not find scene:view:background\n");
+      return (-1);
+    }
   if (my_strcmp(get, "NULL") == 0)
     {
       if ((prog->background = create_text_uni(prog->win_size.x, prog->win_size.x, 0xff000000)) == NULL)

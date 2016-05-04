@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:26:06 2016 victor sousa
-** Last update Tue May  3 03:46:20 2016 Victor Sousa
+** Last update Tue May  3 23:51:44 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -23,7 +23,10 @@ int			while_load_obj(char **file, char *get,
     {
       type_lf[21] = i + 49;
       if ((get = get_field(file, type_lf)) == NULL)
-        return (-1);
+	{
+	  my_printf(1, "Could not find scene:object_list:obj%d:type\n", i + 1);
+	  return (-1);
+	}
       if (my_strstr(get, "sphere"))
 	{
 	  if ((prog->obj_list = add_sphere(prog->obj_list, file, i))
@@ -68,7 +71,10 @@ int                     load_obj(t_prog *prog, char **file)
   char                  *get;
 
   if ((get = get_field(file, "scene:object_list:count")) == NULL)
-    return (-1);
+    {
+      my_printf(1, "Could not find scene:object_list:count\n");
+      return (-1);
+    }
   prog->obj_list = NULL;
   if ((type_lf = malloc(sizeof(char) *
 			my_strlen("scene:object_list:objX:type") + 1)) == NULL)

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:59:29 2016 victor sousa
-** Last update Sun May  1 15:03:49 2016 Victor Sousa
+** Last update Tue May  3 23:44:15 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -18,7 +18,7 @@ int                     load_mat(t_prog *prog, char **file)
 
   if ((get = get_field(file, "scene:material_list:count")) == NULL)
     {
-      my_printf(1, "did not found scene:material_list:count\n");
+      my_putstr("Could not find scene:material_list:count\n");
       return (-1);
     }
   mat_count = my_getnbr(get);

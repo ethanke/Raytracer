@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:55:20 2016 victor sousa
-** Last update Fri Apr 29 20:19:17 2016 Victor Sousa
+** Last update Tue May  3 23:47:54 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -22,7 +22,10 @@ int			get_mat_red(t_mat_list *new, char **file, int id)
   lf = my_strcat(lf, "scene:material_list:matX:red");
   lf[23] = id + 49;
   if ((get = get_field(file, lf)) == NULL)
-    return (1);
+    {
+      my_printf(1, "Could not find scene:material_list:mat%d:red\n", id + 1);
+      return (-1);
+    }
   new->color.argb[RED_CMP] = my_getnbr(get);
   free(get);
   free(lf);
@@ -41,7 +44,10 @@ int			get_mat_green(t_mat_list *new, char **file, int id)
   lf = my_strcat(lf, "scene:material_list:matX:green");
   lf[23] = id + 49;
   if ((get = get_field(file, lf)) == NULL)
-    return (1);
+    {
+      my_printf(1, "Could not find scene:material_list:mat%d:green\n", id + 1);
+      return (-1);
+    }
   new->color.argb[GREEN_CMP] = my_getnbr(get);
   free(get);
   free(lf);
@@ -60,7 +66,10 @@ int			get_mat_blue(t_mat_list *new, char **file, int id)
   lf = my_strcat(lf, "scene:material_list:matX:blue");
   lf[23] = id + 49;
   if ((get = get_field(file, lf)) == NULL)
-    return (1);
+    {
+      my_printf(1, "Could not find scene:material_list:mat%d:blue\n", id + 1);
+      return (-1);
+    }
   new->color.argb[BLUE_CMP] = my_getnbr(get);
   free(get);
   free(lf);
@@ -79,7 +88,10 @@ int			get_mat_reflect(t_mat_list *new, char **file, int id)
   lf = my_strcat(lf, "scene:material_list:matX:reflect");
   lf[23] = id + 49;
   if ((get = get_field(file, lf)) == NULL)
-    return (1);
+    {
+      my_printf(1, "Could not find scene:material_list:mat%d:reflect\n", id + 1);
+      return (-1);
+    }
   new->reflect = my_getnbr(get);
   free(get);
   free(lf);
@@ -98,7 +110,10 @@ int			get_mat_transpa(t_mat_list *new, char **file, int id)
   lf = my_strcat(lf, "scene:material_list:matX:transpa");
   lf[23] = id + 49;
   if ((get = get_field(file, lf)) == NULL)
-    return (1);
+    {
+      my_printf(1, "Could not find scene:material_list:mat%d:transpa\n", id + 1);
+      return (-1);
+    }
   new->transpa = my_getnbr(get);
   free(get);
   free(lf);
