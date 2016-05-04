@@ -5,12 +5,12 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 23:01:14 2016 victor sousa
-** Last update Tue May  3 11:34:51 2016 Victor Sousa
+** Last update Wed May  4 00:05:27 2016 Victor Sousa
 */
 
 #include	"main.h"
 
-t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist, t_raycast *rcast)
+t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist)
 {
   t_obj_list	*out;
   t_obj_list	*tmp;
@@ -48,7 +48,7 @@ t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist, t_raycast *rcast)
       	  out->obj = tmp->obj;
       	}
       if (tmp->type == 'i' &&
-	  hit_circle(ray, (t_circle *)tmp->obj, dist, rcast))
+	  hit_circle(ray, (t_circle *)tmp->obj, dist))
 	{
 	  out->type = tmp->type;
 	  out->obj = tmp->obj;
@@ -64,7 +64,7 @@ t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist, t_raycast *rcast)
 	  base.plan.dir.y = cone->dir.y;
 	  base.plan.dir.z = cone->dir.z;
 	  base.radius = cone->radius;
-	  hit_circle(ray, &base, dist, rcast);
+	  hit_circle(ray, &base, dist);
   	  out->type = tmp->type;
   	  out->obj = tmp->obj;
   	}

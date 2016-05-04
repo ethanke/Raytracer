@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Tue May  3 00:17:30 2016 Victor Sousa
+** Last update Wed May  4 00:29:24 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -31,7 +31,7 @@ void			init_ray(t_bunny_position *win_size, t_ray *ray,
   ray->dir = normalize(minus_vector(point, ray->start));
 }
 
-void			raytrace_loop(t_prog *prog,
+t_color			raytrace_loop(t_prog *prog,
 				      t_raycast *rcast,
 				      t_bunny_position pos)
 {
@@ -44,6 +44,7 @@ void			raytrace_loop(t_prog *prog,
       if (reflect_loop(prog, rcast) == -1)
 	rcast->depth = MAX_DEPTH;
     }
+  return (rcast->out_col);
 }
 
 void			alias_loop(t_prog *prog,

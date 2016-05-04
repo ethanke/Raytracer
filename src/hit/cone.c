@@ -5,12 +5,12 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:28:00 2016 Victor Sousa
-** Last update Tue May  3 10:03:05 2016 Victor Sousa
+** Last update Wed May  4 00:04:22 2016 Victor Sousa
 */
 
 #include		"main.h"
 
-int 			hit_circle(t_ray *r, t_circle *c, float *t, t_raycast *rcast)
+int 			hit_circle(t_ray *r, t_circle *c, float *t)
 {
   float			dist;
 

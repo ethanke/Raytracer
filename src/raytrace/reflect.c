@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 04:04:48 2016 victor sousa
-** Last update Tue May  3 22:39:02 2016 Victor Sousa
+** Last update Wed May  4 00:29:28 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -27,7 +27,7 @@ int                     reflect_loop(t_prog *prog, t_raycast *rcast)
 
   rcast->dist = 20000;
   if ((rcast->obj_touch = hit(prog->obj_list,
-                              &rcast->ray, &rcast->dist, rcast)) == NULL ||
+                              &rcast->ray, &rcast->dist)) == NULL ||
       rcast->obj_touch->obj == NULL)
     return (-1);
   if (rcast->depth == 0 && rcast->coef == 1.0)
