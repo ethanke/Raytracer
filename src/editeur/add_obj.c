@@ -5,109 +5,10 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon May  2 17:19:25 2016 Ethan Kerdelhue
-** Last update Wed May  4 18:59:06 2016 Ethan Kerdelhue
+** Last update Wed May  4 19:37:09 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
-
-int			push_cylindre(t_prog *prog, t_cylin cyl)
-{
-  t_obj_list		*tmp;
-  t_obj_list		*new_obj;
-  t_cylin		*new;
-
-  if ((new = malloc(sizeof(t_cylin))) == NULL)
-    return (-1);
-  if ((new_obj = malloc(sizeof(t_obj_list))) == NULL)
-    return (-1);
-  new->center = cyl.center;
-  new->dir = cyl.dir;
-  new->radius = cyl.radius;
-  new->height = cyl.height;
-  new->material = cyl.material;
-  tmp = prog->obj_list;
-  while (tmp->next != NULL)
-    tmp = tmp->next;
-  new_obj->type = 'c';
-  new_obj->obj = (void *) new;
-  new_obj->next = NULL;
-  tmp->next = new_obj;
-  return (0);
-}
-
-
-int			push_cone(t_prog *prog, t_cone con)
-{
-  t_obj_list		*tmp;
-  t_obj_list		*new_obj;
-  t_cone		*new;
-
-  if ((new = malloc(sizeof(t_cone))) == NULL)
-    return (-1);
-  if ((new_obj = malloc(sizeof(t_obj_list))) == NULL)
-    return (-1);
-  new->center = con.center;
-  new->dir = con.dir;
-  new->radius = con.radius;
-  new->height = con.height;
-  new->material = con.material;
-  tmp = prog->obj_list;
-  while (tmp->next != NULL)
-    tmp = tmp->next;
-  new_obj->type = 'c';
-  new_obj->obj = (void *) new;
-  new_obj->next = NULL;
-  tmp->next = new_obj;
-  return (0);
-}
-
-int			push_plan(t_prog *prog, t_plan pla)
-{
-  t_obj_list		*tmp;
-  t_obj_list		*new_obj;
-  t_plan		*new;
-
-  if ((new = malloc(sizeof(t_plan))) == NULL)
-    return (-1);
-  if ((new_obj = malloc(sizeof(t_obj_list))) == NULL)
-    return (-1);
-  new->center = pla.center;
-  new->dir = pla.dir;
-  new->material = pla.material;
-  tmp = prog->obj_list;
-  while (tmp->next != NULL)
-    tmp = tmp->next;
-  new_obj->type = 'p';
-  new_obj->obj = (void *) new;
-  new_obj->next = NULL;
-  tmp->next = new_obj;
-  return (0);
-}
-
-int			push_sphere(t_prog *prog, t_sphere sph)
-{
-  t_obj_list		*tmp;
-  t_obj_list		*new_obj;
-  t_sphere		*new;
-
-  if ((new = malloc(sizeof(t_sphere))) == NULL)
-    return (-1);
-  if ((new_obj = malloc(sizeof(t_obj_list))) == NULL)
-    return (-1);
-  new->center.x = sph.center.x;
-  new->center.y = sph.center.y;
-  new->center.z = sph.center.z;
-  new->radius = sph.radius;
-  new->material = sph.material;
-  tmp = prog->obj_list;
-  while (tmp->next != NULL)
-    tmp = tmp->next;
-  new_obj->type = 's';
-  new_obj->obj = (void *) new;
-  new_obj->next = NULL;
-  tmp->next = new_obj;
-  return (0);
-}
 
 int			check_material_id(t_prog *prog, char m_id)
 {
@@ -120,30 +21,6 @@ int			check_material_id(t_prog *prog, char m_id)
 	return (1);
       tmp = tmp->next;
     }
-  return (0);
-}
-
-int			push_triangle(t_prog *prog, t_triangle tri)
-{
-  t_obj_list		*tmp;
-  t_obj_list		*new_obj;
-  t_triangle		*new;
-
-  if ((new = malloc(sizeof(t_triangle))) == NULL)
-    return (-1);
-  if ((new_obj = malloc(sizeof(t_obj_list))) == NULL)
-    return (-1);
-  tmp = prog->obj_list;
-  while (tmp->next != NULL)
-    tmp = tmp->next;
-  new->angle[0] = tri.angle[0];
-  new->angle[1] = tri.angle[1];
-  new->angle[2] = tri.angle[2];
-  new->material = tri.material;
-  new_obj->type = 't';
-  new_obj->obj = (void *) new;
-  new_obj->next = NULL;
-  tmp->next = new_obj;
   return (0);
 }
 
@@ -270,6 +147,7 @@ int			add_obj_cylindre(t_prog *prog)
   get_coord(&cylindre.center);
   my_printf(1, "Entrez les coordonées de direction du cylindre :\n");
   get_coord(&cylindre.dir);
+  my_printf(1, "Entrez le rayon:\n");
   if ((str = get_next_line(0)) == NULL)
     return (-1);
   cylindre.radius = my_getnbr(str);
@@ -284,6 +162,27 @@ int			add_obj_cylindre(t_prog *prog)
   return (0);
 }
 
+int			add_obj_circle(t_prog *prog)
+{
+  t_circle		circle;
+  char			*str;
+
+
+  my_printf(1, "Entrez les coordonées du centre du cylindre :\n");
+  edit_coord(&circle.plan.center);
+  my_printf(1, "Entrez les coordonées de direction du cylindre :\n");
+  edit_coord(&circle.plan.dir);
+  my_printf(1, "Entrez le rayon:\n");
+  if ((str = get_next_line(0)) == NULL)
+    return (-1);
+  circle.radius = my_getnbr(str);
+  free(str);
+  if ((circle.material = get_material(prog)) == -1)
+      return (-1);
+  push_circle(prog, circle);
+  return (0);
+}
+
 int			add_obj(t_prog *prog)
 {
   char			*str;
@@ -291,7 +190,7 @@ int			add_obj(t_prog *prog)
   if (prog->editor->fd == -1)
     return (put_error(ERR_NOFD));
   my_printf(1, "Quelle objet voulez-vous rajoutez ?\n\n 1 - Sphere\n");
-  my_printf(1, " 2 - Triangle\n 3 - Plan\n 4 - Cone\n 5 - Cylindre");
+  my_printf(1, " 2 - Triangle\n 3 - Plan\n 4 - Cone\n 5 - Cylindre\n 6 - Cercle\n");
   str = get_next_line(0);
   if (my_strcmp(str, "1") == 0)
     add_obj_sphere(prog);
@@ -303,6 +202,8 @@ int			add_obj(t_prog *prog)
     add_obj_cone(prog);
   else if (my_strcmp(str, "5") == 0)
     add_obj_cylindre(prog);
+  else if (my_strcmp(str, "6") == 0)
+    add_obj_circle(prog);
   else
     my_printf(1, "Error : Your choice has no result\n");
   return (0);

@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 03:54:51 2016 Ethan Kerdelhue
-** Last update Wed May  4 18:08:01 2016 Ethan Kerdelhue
+** Last update Wed May  4 20:17:59 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -50,13 +50,17 @@ int			fill_struct(t_prog *prog)
 char			*get_type(char c)
 {
   if (c == 's')
-    return ("sphere\0");
+    return ("sphere");
   if (c == 't')
-    return ("triangle\0");
+    return ("triangle");
   if (c == 'p')
-    return ("plan\0");
+    return ("plan");
   if (c == 'c')
-    return ("cone\0");
+    return ("cone");
+  if (c == 'y')
+    return ("cylindre");
+  if (c == 'i')
+    return ("circle");
   return (NULL);
 }
 

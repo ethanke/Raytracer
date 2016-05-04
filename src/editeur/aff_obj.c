@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 09:58:54 2016 Ethan Kerdelhue
-** Last update Wed May  4 18:38:18 2016 Ethan Kerdelhue
+** Last update Wed May  4 20:35:19 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -88,8 +88,8 @@ int			aff_obj_cone(int fd, t_obj_list *obj)
   my_printf(fd, "\t\t<dir>\n\t\t\t<x>%f<x>\n", tmp->dir.x);
   my_printf(fd, "\t\t\t<y>%f</y>\n\t\t\t<z>%f</z>\n\t\t</dir>\n"
 	    ,tmp->dir.y, tmp->dir.z);
-  my_printf(fd, "\t\t<radius>%c</radius>\n", tmp->radius);
-  my_printf(fd, "\t\t<height>%c</height>\n", tmp->height);
+  my_printf(fd, "\t\t<radius>%d</radius>\n", tmp->radius);
+  my_printf(fd, "\t\t<height>%d</height>\n", tmp->height);
   my_printf(fd, "\t\t<material_id>%c</matierial_id>\n", tmp->material + 48);
   return (0);
 }
@@ -105,8 +105,24 @@ int			aff_obj_cylindre(int fd, t_obj_list *obj)
   my_printf(fd, "\t\t<dir>\n\t\t\t<x>%f<x>\n", tmp->dir.x);
   my_printf(fd, "\t\t\t<y>%f</y>\n\t\t\t<z>%f</z>\n\t\t</dir>\n"
 	    ,tmp->dir.y, tmp->dir.z);
-  my_printf(fd, "\t\t<radius>%c</radius>\n", tmp->radius);
-  my_printf(fd, "\t\t<height>%c</height>\n", tmp->height);
+  my_printf(fd, "\t\t<radius>%d</radius>\n", tmp->radius);
+  my_printf(fd, "\t\t<height>%d</height>\n", tmp->height);
+  my_printf(fd, "\t\t<material_id>%c</matierial_id>\n", tmp->material + 48);
+  return (0);
+}
+
+int			aff_obj_circle(int fd, t_obj_list *obj)
+{
+  t_circle		*tmp;
+
+  tmp = (t_circle *) obj->obj;
+  my_printf(fd, "\t\t<center>\n\t\t\t<x>%f<x>\n", tmp->plan.center.x);
+  my_printf(fd, "\t\t\t<y>%f</y>\n\t\t\t<z>%f</z>\n\t\t</center>\n"
+	    ,tmp->plan.center.y, tmp->plan.center.z);
+  my_printf(fd, "\t\t<dir>\n\t\t\t<x>%f<x>\n", tmp->plan.dir.x);
+  my_printf(fd, "\t\t\t<y>%f</y>\n\t\t\t<z>%f</z>\n\t\t</dir>\n"
+	    ,tmp->plan.dir.y, tmp->plan.dir.z);
+  my_printf(fd, "\t\t<radius>%d</radius>\n", (int) tmp->radius);
   my_printf(fd, "\t\t<material_id>%c</matierial_id>\n", tmp->material + 48);
   return (0);
 }
@@ -123,5 +139,7 @@ int			aff_obj(int fd, t_obj_list *obj)
     aff_obj_cone(fd, obj);
   if (obj->type == 'y')
     aff_obj_cylindre(fd, obj);
+  if (obj->type == 'i')
+    aff_obj_circle(fd, obj);
   return (0);
 }
