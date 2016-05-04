@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:54:30 2016 Victor Sousa
-** Last update Tue May  3 10:39:58 2016 Victor Sousa
+** Last update Wed May  4 19:25:35 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -128,11 +128,7 @@ static int		get_cone_height(t_cylin *c, char **file, int id)
 t_obj_list              *add_cyl(t_obj_list *prev, char **file, int id)
 {
   t_obj_list            *new;
-  t_obj_list            *new_base_bot;
-  t_obj_list            *new_base_top;
   t_cylin             	*c;
-  t_circle		*base_bot;
-  t_circle		*base_top;
 
   if ((new = malloc(sizeof(t_obj_list))) == NULL)
     return (NULL);
@@ -148,35 +144,25 @@ t_obj_list              *add_cyl(t_obj_list *prev, char **file, int id)
     return (NULL);
   if (get_cone_height(c, file, id) != 0)
     return (NULL);
+  if ((c->cap[0] = malloc(sizeof(t_circle))) == NULL)
+    return (NULL);
+  c->cap[0]->plan.center = minus_vector(c->center, float_time_vector(c->height / 2.0, c->dir));
+  c->cap[0]->plan.dir.x = -c->dir.x;
+  c->cap[0]->plan.dir.y = -c->dir.y;
+  c->cap[0]->plan.dir.z = -c->dir.z;
+  c->cap[0]->material = c->material;
+  c->cap[0]->radius = c->radius;
+  if ((c->cap[1] = malloc(sizeof(t_circle))) == NULL)
+    return (NULL);
+  c->cap[1]->plan.center = add_vector(c->center, float_time_vector(c->height / 2.0, c->dir));
+  c->cap[1]->plan.dir.x = c->dir.x;
+  c->cap[1]->plan.dir.y = c->dir.y;
+  c->cap[1]->plan.dir.z = c->dir.z;
+  c->cap[1]->material = c->material;
+  c->cap[1]->radius = c->radius;
   c->center = minus_vector(c->center, float_time_vector(c->height / 2.0 , c->dir));
   new->obj = c;
   new->type = 'y';
   new->next = prev;
-  if ((new_base_bot = malloc(sizeof(t_obj_list))) == NULL)
-    return (NULL);
-  if ((base_bot = malloc(sizeof(t_circle))) == NULL)
-    return (NULL);
-  base_bot->plan.center = minus_vector(c->center, float_time_vector(c->height / 2.0 , c->dir));
-  base_bot->plan.dir.x = -c->dir.x;
-  base_bot->plan.dir.y = -c->dir.y;
-  base_bot->plan.dir.z = -c->dir.z;
-  base_bot->material = c->material;
-  base_bot->radius = c->radius;
-  new_base_bot->obj = base_bot;
-  new_base_bot->type = 'i';
-  new_base_bot->next = new;
-  if ((new_base_top = malloc(sizeof(t_obj_list))) == NULL)
-    return (NULL);
-  if ((base_top = malloc(sizeof(t_circle))) == NULL)
-    return (NULL);
-  base_top->plan.center = add_vector(c->center, float_time_vector(c->height / 2.0 , c->dir));
-  base_top->plan.dir.x = c->dir.x;
-  base_top->plan.dir.y = c->dir.y;
-  base_top->plan.dir.z = c->dir.z;
-  base_top->material = c->material;
-  base_top->radius = c->radius;
-  new_base_top->obj = base_top;
-  new_base_top->type = 'i';
-  new_base_top->next = new_base_bot;
-  return (new_base_top);
+  return (new);
 }
