@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:08:40 2016 victor sousa
-** Last update Thu Apr 28 05:40:01 2016 Victor Sousa
+** Last update Wed May  4 19:34:23 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -37,6 +37,16 @@ t_coord                 float_minus_vector(float c, const t_coord v)
   out.x = v.x - c;
   out.y = v.y - c;
   out.z = v.z - c;
+  return (out);
+}
+
+t_coord                 float_plus_vector(float c, const t_coord v)
+{
+  t_coord               out;
+
+  out.x = v.x + c;
+  out.y = v.y + c;
+  out.z = v.z + c;
   return (out);
 }
 
