@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Wed May  4 22:34:36 2016 Victor Sousa
+** Last update Wed May  4 22:44:34 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -71,6 +71,7 @@ typedef struct          s_cylin
   int                   radius;
   int                   height;
   char                  material;
+  t_circle		*cap[2];
 }                       t_cylin;
 
 typedef struct		s_vtx_list
