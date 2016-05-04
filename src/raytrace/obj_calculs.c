@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Wed May  4 02:38:02 2016 Victor Sousa
+** Last update Wed May  4 18:01:13 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -102,20 +102,20 @@ void			calc_plan_normale(t_prog *prog, t_raycast *rcast)
 
 void			calc_cone_normale(t_prog *prog, t_raycast *rcast)
 {
-  float			mag;
-  float			costheta;
+  t_coord		top;
+  t_coord		perp;
 
   rcast->cone = rcast->obj_touch->obj;
   rcast->mat_touch = get_color(rcast->cone->material, prog->mat_list);
   rcast->new_point = add_vector(rcast->ray.start,
 				float_time_vector(rcast->dist,
 						  rcast->ray.dir));
-  mag = sqrt(rcast->new_point.x * rcast->new_point.x + rcast->new_point.z *
-	     rcast->new_point.z);
-  costheta = rcast->new_point.x / mag;
-  rcast->normale.x = 1.0f / sqrt(2.0f) * costheta;
-  rcast->normale.y = 1.0f / sqrt(2.0f);
-  rcast->normale.z = 1.0f / sqrt(2.0f) * (1.0 - costheta);
+
+  top = add_vector(rcast->cone->center, float_time_vector(rcast->cone->height,
+							  rcast->cone->dir));
+  perp = crossProduct(rcast->cone->dir, minus_vector(rcast->new_point, top));
+  rcast->normale = normalize(crossProduct(minus_vector(rcast->new_point, top),
+					  perp));
 }
 
 void			calc_cyl_normale(t_prog *prog, t_raycast *rcast)
