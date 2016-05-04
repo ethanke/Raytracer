@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Thu Nov 12 12:27:44 2015 Gaëtan Léandre
-** Last update Wed May  4 04:19:19 2016 Gaëtan Léandre
+** Last update Wed May  4 04:34:04 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -101,7 +101,6 @@ char			*my_sprintf(char *str, ...)
   tab = init_sstruct(tab);
   if ((result = malloc_and_init()) == NULL)
     return (NULL);
-  str[0] = '\0';
   i = 0;
   if (str == NULL || tab == NULL)
     return (NULL);
