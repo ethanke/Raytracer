@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Fri Apr 29 22:08:18 2016 Ethan Kerdelhue
-** Last update Mon May  2 22:48:33 2016 Ethan Kerdelhue
+** Last update Wed May  4 17:29:16 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -131,5 +131,9 @@ int			edit_cam(t_prog *prog)
       prog->cam_fov.y = prog->cam_fov.x *
 	  ((prog->win_size.x / prog->win_size.y) / 1.5);
     }
+  my_printf(1, "Anti-aliasing :\n");
+  if ((str = get_next_line(0)) == NULL)
+    return (-1);
+  prog->anti_alias = ((str[0] != 0) ? (my_getnbr(str)) : (prog->anti_alias));
   return (0);
 }
