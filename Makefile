@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Mon May  2 20:35:18 2016 Kerdelhue Ethan
+## Last update Wed May  4 04:23:47 2016 Gaëtan Léandre
 ##
 
 NAME		=	raytracer2
@@ -19,6 +19,7 @@ RED		=	"\033[0;31m"
 SRCDIR		=	src
 
 PRTFDIR		=	src/editeur/my_printf
+SPRTFDIR	=	src/editeur/my_sprintf
 EDITDIR		=	src/editeur
 
 INCDIR		=	inc
@@ -97,6 +98,19 @@ SRC             +=      $(PRTFDIR)/my_disp_unprintable.c        \
                         $(PRTFDIR)/my_putnbr_base_add.c         \
                         $(PRTFDIR)/my_putstr.c			\
 			$(PRTFDIR)/my_put_fnbr.c
+
+## SPRINTF ##
+SRC             +=      $(SPRTFDIR)/my_disp_unprintable.c    	\
+                        $(SPRTFDIR)/my_sprintf.c               	\
+                        $(SPRTFDIR)/my_sprintf2.c              	\
+                        $(SPRTFDIR)/my_sprintf3.c              	\
+                        $(SPRTFDIR)/my_put_nbr.c              	\
+                        $(SPRTFDIR)/my_put_u_nbr_base.c        	\
+                        $(SPRTFDIR)/my_put_unbr.c               \
+                        $(SPRTFDIR)/my_putnbr_base.c            \
+                        $(SPRTFDIR)/my_putnbr_base_add.c        \
+			$(SPRTFDIR)/my_put_fnbr.c		\
+			$(SPRTFDIR)/my_strcat.c
 
 SRC		+=	$(EDITDIR)/aff_light.c			\
 			$(EDITDIR)/aff_mat.c			\
