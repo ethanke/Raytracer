@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Tue May  3 10:10:08 2016 Victor Sousa
+** Last update Wed May  4 02:38:02 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -110,20 +110,12 @@ void			calc_cone_normale(t_prog *prog, t_raycast *rcast)
   rcast->new_point = add_vector(rcast->ray.start,
 				float_time_vector(rcast->dist,
 						  rcast->ray.dir));
-  if (rcast->touch_circle == 1)
-    {
-      rcast->normale = rcast->cone->dir;
-      rcast->touch_circle = 0;
-    }
-  else
-   {
-      mag = sqrt(rcast->new_point.x * rcast->new_point.x + rcast->new_point.z *
-		 rcast->new_point.z);
-      costheta = rcast->new_point.x / mag;
-      rcast->normale.x = 1.0f / sqrt(2.0f) * costheta;
-      rcast->normale.y = 1.0f / sqrt(2.0f);
-      rcast->normale.z = 1.0f / sqrt(2.0f) * (1.0 - costheta);
-    }
+  mag = sqrt(rcast->new_point.x * rcast->new_point.x + rcast->new_point.z *
+	     rcast->new_point.z);
+  costheta = rcast->new_point.x / mag;
+  rcast->normale.x = 1.0f / sqrt(2.0f) * costheta;
+  rcast->normale.y = 1.0f / sqrt(2.0f);
+  rcast->normale.z = 1.0f / sqrt(2.0f) * (1.0 - costheta);
 }
 
 void			calc_cyl_normale(t_prog *prog, t_raycast *rcast)

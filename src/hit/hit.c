@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 23:01:14 2016 victor sousa
-** Last update Wed May  4 00:05:27 2016 Victor Sousa
+** Last update Wed May  4 01:33:49 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -14,8 +14,6 @@ t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist)
 {
   t_obj_list	*out;
   t_obj_list	*tmp;
-  t_circle	base;
-  t_cone	*cone;
 
   if ((out = malloc(sizeof(t_obj_list))) == NULL)
     return (NULL);
@@ -56,16 +54,7 @@ t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist)
       if (tmp->type == 'c' &&
 	  hit_cone(ray, (t_cone *)tmp->obj, dist))
   	{
-	  cone = (t_cone *)tmp->obj;
-	  base.plan.center.x = cone->center.x;
-	  base.plan.center.y = cone->center.y;
-	  base.plan.center.z = cone->center.z;
-	  base.plan.dir.x = cone->dir.x;
-	  base.plan.dir.y = cone->dir.y;
-	  base.plan.dir.z = cone->dir.z;
-	  base.radius = cone->radius;
-	  hit_circle(ray, &base, dist);
-  	  out->type = tmp->type;
+	  out->type = tmp->type;
   	  out->obj = tmp->obj;
   	}
       tmp = tmp->next;

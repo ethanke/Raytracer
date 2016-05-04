@@ -105,13 +105,19 @@
     </obj2>
 
     <obj3>
-      <type>sphere</type>
+      <type>cone</type>
       <center>
 	<x>0</x>
-	<y>100</y>
+	<y>50</y>
 	<z>0</z>
       </center>
+      <dir>
+	<x>0</x>
+	<y>1</y>
+	<z>0</z>
+      </dir>
       <radius>100</radius>
+      <height>200</height>
       <material_id>3</material_id>
     </obj3>
 
@@ -165,8 +171,8 @@
 	<y>1</y>
 	<z>0</z>
       </dir>
-      <radius>100</radius>
-      <height>250</height>
+      <radius>75</radius>
+      <height>200</height>
       <material_id>1</material_id>
     </obj7>
 
@@ -174,10 +180,10 @@
       <type>sphere</type>
       <center>
 	<x>300</x>
-	<y>125</y>
+	<y>100</y>
 	<z>-300</z>
       </center>
-      <radius>100</radius>
+      <radius>75</radius>
       <material_id>1</material_id>
     </obj8>
 
@@ -185,29 +191,12 @@
       <type>sphere</type>
       <center>
 	<x>300</x>
-	<y>-125</y>
+	<y>-100</y>
 	<z>-300</z>
       </center>
-      <radius>100</radius>
+      <radius>75</radius>
       <material_id>1</material_id>
     </obj9>
-
-    <obj11>
-      <type>cone</type>
-      <center>
-	<x>0</x>
-	<y>0</y>
-	<z>-75</z>
-      </center>
-      <dir>
-	<x>0</x>
-	<y>1</y>
-	<z>0</z>
-      </dir>
-      <radius>100</radius>
-      <height>100</height>
-      <material_id>4</material_id>
-    </obj11>
   </object_list>
 
   <light_list>
