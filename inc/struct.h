@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Wed May  4 18:16:36 2016 Victor Sousa
+** Last update Wed May  4 21:53:00 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -179,6 +179,7 @@ typedef struct          s_prog
   t_bunny_pixelarray    *pix;
   t_editor		*editor;
   t_texture		*background;
+  char			*background_path;
   int			anti_alias;
 }                       t_prog;
 

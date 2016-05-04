@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:05:12 2016 victor sousa
-** Last update Wed May  4 17:49:44 2016 Victor Sousa
+** Last update Wed May  4 20:05:28 2016 Victor Sousa
 */
 
 #ifndef			RAYTRACE_H_
@@ -14,7 +14,7 @@
 # include		"main.h"
 
 # define		MAX_DEPTH		10
-#define			SIZE_TILE		75
+#define			SIZE_TILE		101
 
 int                     raytrace(t_prog *prog);
 t_color			raytrace_loop(t_prog *prog,

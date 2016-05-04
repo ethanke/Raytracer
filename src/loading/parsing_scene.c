@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Tue May  3 23:43:18 2016 Victor Sousa
+** Last update Wed May  4 21:55:02 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -209,6 +209,10 @@ int			load_scene(t_prog *prog, char *scene_path)
       my_putstr("Could not find scene:view:background\n");
       return (-1);
     }
+  if ((prog->background_path = malloc(my_strlen(get) + 1)) == NULL)
+    return (-1);
+  prog->background_path[0] = '\0';
+  prog->background_path = my_strcat(prog->background_path, get);
   if (my_strcmp(get, "NULL") == 0)
     {
       if ((prog->background = create_text_uni(prog->win_size.x, prog->win_size.x, 0xff000000)) == NULL)

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 23:01:14 2016 victor sousa
-** Last update Wed May  4 19:26:49 2016 Victor Sousa
+** Last update Wed May  4 21:37:29 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -43,21 +43,21 @@ t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist)
       if (tmp->type == 'y')
       	{
 	  cylin = tmp->obj;
-	 /*if (hit_cylin(ray, cylin, dist))
+	 if (hit_cylin(ray, cylin, dist))
 	    {
 	      out->type = tmp->type;
       	      out->obj = tmp->obj;
-	    }*/
-	  if (hit_circle(ray, cylin->cap[0], dist))
+	    }
+	  /*if (hit_circle(ray, cylin->cap[0], dist))
 	    {
 	      out->type = 'i';
       	      out->obj = cylin->cap[0];
-	    }
-	 /*if (hit_circle(ray, cylin->cap[1], dist))
+	    }*/
+	 if (hit_circle(ray, cylin->cap[1], dist))
 	    {
 	      out->type = 'i';
 	      out->obj = cylin->cap[1];
-	    }*/
+	    }
 	}
       if (tmp->type == 'i' &&
 	  hit_circle(ray, (t_circle *)tmp->obj, dist))

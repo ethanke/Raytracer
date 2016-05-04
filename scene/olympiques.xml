@@ -163,7 +163,7 @@
       <type>cylinder</type>
       <center>
 	<x>300</x>
-	<y>400</y>
+	<y>-110</y>
 	<z>-300</z>
       </center>
       <dir>

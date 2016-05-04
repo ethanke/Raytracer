@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Wed May  4 00:29:24 2016 Victor Sousa
+** Last update Wed May  4 21:45:31 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -57,10 +57,10 @@ void			alias_loop(t_prog *prog,
 
   col.full = 0xFF000000;
   alias_pos.y = pos.y;
-  while (alias_pos.y < pos.y + 1)
+  while (alias_pos.y < pos.y + prog->anti_alias)
     {
       alias_pos.x = pos.x;
-      while (alias_pos.x < pos.x + 1)
+      while (alias_pos.x < pos.x + prog->anti_alias)
 	{
 	  init_ray(&prog->win_size, &raycast.ray, &alias_pos, prog);
 	  raytrace_loop(prog, &raycast, pos);
@@ -73,9 +73,9 @@ void			alias_loop(t_prog *prog,
 		col.argb[i_cmp] = col.argb[i_cmp] / 2 + raycast.out_col.argb[i_cmp] / 2;
 	    }
 	  tekpixel(prog->pix, &pos, &col);
-	  alias_pos.x += 1.0 / (float)prog->anti_alias;
+	  alias_pos.x += 1.0;
 	}
-      alias_pos.y += 1.0 / (float)prog->anti_alias;
+      alias_pos.y += 1.0;
     }
 }
 
