@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:54:30 2016 Victor Sousa
-** Last update Fri Apr 29 08:25:30 2016 Victor Sousa
+** Last update Wed May  4 23:27:44 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -144,6 +144,15 @@ t_obj_list              *add_cone(t_obj_list *prev, char **file, int id)
     return (NULL);
   if (get_cone_height(c, file, id) != 0)
     return (NULL);
+  if ((c->cap = malloc(sizeof(t_circle))) == NULL)
+    return (NULL);
+  c->center = minus_vector(c->center, float_time_vector((float)c->height / 2.0, c->dir));
+  c->cap->plan.center = c->center;
+  c->cap->plan.dir.x = c->dir.x;
+  c->cap->plan.dir.y = c->dir.y;
+  c->cap->plan.dir.z = c->dir.z;
+  c->cap->material = c->material;
+  c->cap->radius = c->radius;
   new->obj = c;
   new->type = 'c';
   new->next = prev;

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 23:01:14 2016 victor sousa
-** Last update Wed May  4 22:46:18 2016 Victor Sousa
+** Last update Wed May  4 23:23:21 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -15,6 +15,7 @@ t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist)
   t_obj_list	*out;
   t_obj_list	*tmp;
   t_cylin	*cy;
+  t_cone	*co;
 
   if ((out = malloc(sizeof(t_obj_list))) == NULL)
     return (NULL);
@@ -65,11 +66,19 @@ t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist)
 	      out->obj = cy->cap[0];
 	    }
 	}
-      if (tmp->type == 'c' &&
-	  hit_cone(ray, (t_cone *)tmp->obj, dist))
+      if (tmp->type == 'c')
   	{
-	  out->type = tmp->type;
-  	  out->obj = tmp->obj;
+	  co = tmp->obj;
+	  if (hit_cone(ray, co, dist))
+	    {
+	      out->type = tmp->type;
+	      out->obj = tmp->obj;
+	    }
+	  if (hit_circle(ray, co->cap, dist))
+	    {
+	      out->type = 'i';
+	      out->obj = cy->cap;
+	    }
   	}
       tmp = tmp->next;
     }

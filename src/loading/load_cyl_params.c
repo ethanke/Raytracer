@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:54:30 2016 Victor Sousa
-** Last update Wed May  4 22:51:20 2016 Victor Sousa
+** Last update Wed May  4 23:18:50 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -155,12 +155,12 @@ t_obj_list              *add_cyl(t_obj_list *prev, char **file, int id)
   if ((c->cap[1] = malloc(sizeof(t_circle))) == NULL)
     return (NULL);
   c->cap[1]->plan.center = add_vector(c->center, float_time_vector((float)c->height / 2.0, c->dir));
-  c->cap[1]->plan.dir.x = c->dir.x;
-  c->cap[1]->plan.dir.y = c->dir.y;
-  c->cap[1]->plan.dir.z = c->dir.z;
+  c->cap[1]->plan.dir.x = -c->dir.x;
+  c->cap[1]->plan.dir.y = -c->dir.y;
+  c->cap[1]->plan.dir.z = -c->dir.z;
   c->cap[1]->material = c->material;
   c->cap[1]->radius = c->radius;
-  c->center = minus_vector(c->center, float_time_vector(c->height / 2.0 , c->dir));
+  c->center = minus_vector(c->center, float_time_vector((float)c->height / 2.0 , c->dir));
   new->obj = c;
   new->type = 'y';
   new->next = prev;

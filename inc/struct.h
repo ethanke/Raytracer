@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Wed May  4 22:44:34 2016 Victor Sousa
+** Last update Wed May  4 23:21:30 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -51,17 +51,17 @@ typedef struct          s_sphere
 
 typedef struct		s_plan
 {
-        t_coord		center;
-        t_coord		dir;
-        char                  material;
-        char                  material2;
+  t_coord		center;
+  t_coord		dir;
+  char                  material;
+  char                  material2;
 }			t_plan;
 
 typedef struct		s_circle
 {
-        t_plan		plan;
-        float			radius;
-        char			material;
+  t_plan		plan;
+  float			radius;
+  char			material;
 }			t_circle;
 
 typedef struct          s_cylin
@@ -87,6 +87,7 @@ typedef struct		s_cone
   int			radius;
   int			height;
   char                  material;
+  t_circle		*cap;
 }			t_cone;
 
 typedef struct		s_triangle

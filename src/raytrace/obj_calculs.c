@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Wed May  4 22:41:25 2016 Victor Sousa
+** Last update Wed May  4 23:07:32 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -92,7 +92,9 @@ void			calc_plan_normale(t_prog *prog, t_raycast *rcast)
   rcast->new_point = add_vector(rcast->ray.start,
 				float_time_vector(rcast->dist,
 						  rcast->ray.dir));
-  rcast->normale = rcast->plan->dir;
+  rcast->normale.x = -rcast->plan->dir.x;
+  rcast->normale.y = -rcast->plan->dir.y;
+  rcast->normale.z = -rcast->plan->dir.z;
   dist_to_center = minus_vector(rcast->new_point, rcast->plan->center);
   if (damier(&dist_to_center) == 0)
     rcast->mat_touch = get_color(rcast->plan->material, prog->mat_list);
