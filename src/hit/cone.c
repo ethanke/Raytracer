@@ -5,32 +5,10 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:28:00 2016 Victor Sousa
-** Last update Wed May  4 21:50:39 2016 Victor Sousa
+** Last update Wed May  4 22:33:07 2016 Victor Sousa
 */
 
 #include		"main.h"
-
-int 			hit_circle(t_ray *r, t_circle *c, float *t)
-{
-  float			dist;
-
-  dist = *t;
-  if (hit_plan(r, &c->plan, &dist))
-    {
-      t_coord p = add_vector(r->start, float_time_vector(dist, r->dir));
-      t_coord v = minus_vector(p, c->plan.center);
-      float d2 = mult_vector(v, v);
-      if (d2 < c->radius * c->radius)
-	{
-	  if (dist < *t)
-	    {
-	      *t = dist;
-	      return (1);
-	    }
-	}
-    }
-  return (0);
-}
 
 int			hit_cone(t_ray *r, t_cone *c, float *t)
 {

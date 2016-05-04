@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:45:54 2016 victor sousa
-** Last update Wed May  4 03:59:03 2016 Gaëtan Léandre
+** Last update Wed May  4 22:10:24 2016 Victor Sousa
 */
 
 #ifndef			MAIN_H_
@@ -33,6 +33,7 @@
 
 # define		Deg_To_Rad(ang)	((ang) / 180.0 * M_PI)
 # define		ABS(x)		((x)<0 ? -(x) : (x))
+# define		NEG(x)		((x)<0 ? (x) : -(x))
 
 t_bunny_response	mainloop(void *p);
 void			free_stuff(t_prog *prog);

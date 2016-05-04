@@ -5,16 +5,16 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Wed Apr 27 16:59:30 2016 Victor Sousa
-** Last update Wed May  4 21:18:50 2016 Victor Sousa
+** Last update Wed May  4 22:30:39 2016 Victor Sousa
 */
 
 #include		"main.h"
 
 int			hit_plan(t_ray *r, t_plan *p, float *t)
 {
+  float			dist;
   float			a;
   float			b;
-  float			dist;
 
   a = p->dir.x * r->dir.x +
       p->dir.y * r->dir.y + p->dir.z * r->dir.z;

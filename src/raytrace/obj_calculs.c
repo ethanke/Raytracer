@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Wed May  4 18:35:24 2016 Victor Sousa
+** Last update Wed May  4 22:37:58 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -22,8 +22,6 @@ int			calc_normale(t_prog *prog, t_raycast *rcast)
     calc_cone_normale(prog, rcast);
   else if (rcast->obj_touch->type == 'y')
     calc_cyl_normale(prog, rcast);
-  else if (rcast->obj_touch->type == 'i')
-    calc_circle_normale(prog, rcast);
   else
     return (-1);
   return (0);
@@ -33,9 +31,9 @@ int			damier(t_coord *pos)
 {
   t_point		tmp;
 
-  tmp.x = (int)((pos->x + 13272) / SIZE_TILE);
+  tmp.x = (int)((pos->x + 13000) / SIZE_TILE);
   tmp.y = (int)(pos->y / SIZE_TILE);
-  tmp.z = (int)((pos->z + 13272) / SIZE_TILE);
+  tmp.z = (int)((pos->z + 13000) / SIZE_TILE);
   if (tmp.x % 2 == 0)
     {
       if (((tmp.y % 2 == 0) && (tmp.z % 2 == 0)) ||
@@ -131,14 +129,4 @@ void			calc_cyl_normale(t_prog *prog, t_raycast *rcast)
   rcast->normale = minus_vector(co, (float_time_vector((mult_vector(co, rcast->cyl->dir) /
 							mult_vector(rcast->cyl->dir, rcast->cyl->dir)),
 						       rcast->cyl->dir)));
-}
-
-void			calc_circle_normale(t_prog *prog, t_raycast *rcast)
-{
-  rcast->circle = rcast->obj_touch->obj;
-  rcast->mat_touch = get_color(rcast->circle->material, prog->mat_list);
-  rcast->new_point = add_vector(rcast->ray.start,
-				float_time_vector(rcast->dist,
-						  rcast->ray.dir));
-  rcast->normale = rcast->circle->plan.dir;
 }
