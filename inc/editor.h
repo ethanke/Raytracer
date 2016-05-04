@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 04:09:19 2016 Ethan Kerdelhue
-** Last update Wed May  4 19:37:35 2016 Ethan Kerdelhue
+** Last update Thu May  5 01:16:38 2016 Ethan Kerdelhue
 */
 
 #ifndef			EDITOR_H_
@@ -53,6 +53,7 @@ int			push_plan(t_prog *prog, t_plan pla);
 int			push_cylindre(t_prog *prog, t_cylin cyl);
 int			push_circle(t_prog *prog, t_circle cir);
 int			push_triangle(t_prog *prog, t_triangle tri);
+int			push_pillule(t_prog *prog, t_cylin cyl);
 
 int			check_material_id(t_prog *prog, char m_id);
 int			add_obj_sphere(t_prog *prog);

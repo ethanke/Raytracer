@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 09:58:54 2016 Ethan Kerdelhue
-** Last update Wed May  4 20:35:19 2016 Ethan Kerdelhue
+** Last update Thu May  5 01:20:15 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -111,6 +111,25 @@ int			aff_obj_cylindre(int fd, t_obj_list *obj)
   return (0);
 }
 
+int			aff_obj_pillule(int fd, t_obj_list *obj)
+{
+  t_cylin		*tmp;
+  t_pill		*pill;
+
+  pill = (t_pill *)obj->obj;
+  tmp = pill->cylin;
+  my_printf(fd, "\t\t<center>\n\t\t\t<x>%f<x>\n", tmp->center.x);
+  my_printf(fd, "\t\t\t<y>%f</y>\n\t\t\t<z>%f</z>\n\t\t</center>\n"
+	    ,tmp->center.y, tmp->center.z);
+  my_printf(fd, "\t\t<dir>\n\t\t\t<x>%f<x>\n", tmp->dir.x);
+  my_printf(fd, "\t\t\t<y>%f</y>\n\t\t\t<z>%f</z>\n\t\t</dir>\n"
+	    ,tmp->dir.y, tmp->dir.z);
+  my_printf(fd, "\t\t<radius>%d</radius>\n", tmp->radius);
+  my_printf(fd, "\t\t<height>%d</height>\n", tmp->height);
+  my_printf(fd, "\t\t<material_id>%c</matierial_id>\n", tmp->material + 48);
+  return (0);
+}
+
 int			aff_obj_circle(int fd, t_obj_list *obj)
 {
   t_circle		*tmp;
@@ -141,5 +160,7 @@ int			aff_obj(int fd, t_obj_list *obj)
     aff_obj_cylindre(fd, obj);
   if (obj->type == 'i')
     aff_obj_circle(fd, obj);
+  if (obj->type == 'l')
+    aff_obj_pillule(fd, obj);
   return (0);
 }

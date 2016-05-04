@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon May  2 17:19:25 2016 Ethan Kerdelhue
-** Last update Wed May  4 19:37:09 2016 Ethan Kerdelhue
+** Last update Thu May  5 01:34:01 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -124,10 +124,12 @@ int			add_obj_cone(t_prog *prog)
   get_coord(&cone.center);
   my_printf(1, "Entrez les coordonées de direction du cone :\n");
   get_coord(&cone.dir);
+  my_printf(1, "Entrez le rayon:\n");
   if ((str = get_next_line(0)) == NULL)
     return (-1);
   cone.radius = my_getnbr(str);
   free(str);
+  my_printf(1, "Entrez la hauteur:\n");
   if ((str = get_next_line(0)) == NULL)
     return (-1);
   cone.height = my_getnbr(str);
@@ -152,6 +154,7 @@ int			add_obj_cylindre(t_prog *prog)
     return (-1);
   cylindre.radius = my_getnbr(str);
   free(str);
+  my_printf(1, "Entrez la hauteur:\n");
   if ((str = get_next_line(0)) == NULL)
     return (-1);
   cylindre.height = my_getnbr(str);
@@ -159,6 +162,31 @@ int			add_obj_cylindre(t_prog *prog)
   if ((cylindre.material = get_material(prog)) == -1)
     return (-1);
   push_cylindre(prog, cylindre);
+  return (0);
+}
+
+int			add_obj_pillule(t_prog *prog)
+{
+  t_cylin		pill;
+  char			*str;
+
+  my_printf(1, "Entrez les coordonées centre du pillule :\n");
+  get_coord(&pill.center);
+  my_printf(1, "Entrez les coordonées de direction du pillule :\n");
+  get_coord(&pill.dir);
+  my_printf(1, "Entrez le rayon:\n");
+  if ((str = get_next_line(0)) == NULL)
+    return (-1);
+  pill.radius = my_getnbr(str);
+  free(str);
+  my_printf(1, "Entrez la hauteur:\n");
+  if ((str = get_next_line(0)) == NULL)
+    return (-1);
+  pill.height = my_getnbr(str);
+  free(str);
+  if ((pill.material = get_material(prog)) == -1)
+    return (-1);
+  push_pillule(prog, pill);
   return (0);
 }
 
@@ -190,7 +218,7 @@ int			add_obj(t_prog *prog)
   if (prog->editor->fd == -1)
     return (put_error(ERR_NOFD));
   my_printf(1, "Quelle objet voulez-vous rajoutez ?\n\n 1 - Sphere\n");
-  my_printf(1, " 2 - Triangle\n 3 - Plan\n 4 - Cone\n 5 - Cylindre\n 6 - Cercle\n");
+  my_printf(1, " 2 - Triangle\n 3 - Plan\n 4 - Cone\n 5 - Cylindre\n 6 - Cercle\n 7 - Pillule\n");
   str = get_next_line(0);
   if (my_strcmp(str, "1") == 0)
     add_obj_sphere(prog);
@@ -204,6 +232,8 @@ int			add_obj(t_prog *prog)
     add_obj_cylindre(prog);
   else if (my_strcmp(str, "6") == 0)
     add_obj_circle(prog);
+  else if (my_strcmp(str, "7") == 0)
+    add_obj_cylindre(prog);
   else
     my_printf(1, "Error : Your choice has no result\n");
   return (0);

@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed Apr 27 18:31:29 2016 Ethan Kerdelhue
-** Last update Wed May  4 18:53:57 2016 Ethan Kerdelhue
+** Last update Thu May  5 01:24:19 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -181,11 +181,11 @@ int			edit_cone(t_prog *prog, t_cone *con)
   edit_coord(&con->center);
   my_printf(1, "Coordonées de direction\n");
   edit_coord(&con->dir);
-  my_printf(1, "Entrez le rayon");
+  my_printf(1, "Entrez le rayon :\n");
   str = get_next_line(0);
   con->radius = ((str[0] != 0) ? (my_getnbr(str)) : (con->radius));
   free(str);
-  my_printf(1, "Entrez la hauteur");
+  my_printf(1, "Entrez la hauteur :\n");
   str = get_next_line(0);
   con->height = ((str[0] != 0) ? (my_getnbr(str)) : (con->height));
   free(str);
@@ -199,6 +199,7 @@ int			edit_obj(t_prog *prog)
   int			flag;
   char			*str;
   t_obj_list		*obj;
+  t_pill		*pill;
 
   flag = 0;
   if (prog->editor->fd == -1)
@@ -227,5 +228,10 @@ int			edit_obj(t_prog *prog)
     edit_cone(prog, (t_cone *)obj->obj);
   if (obj->type == 'y')
     edit_cylindre(prog, (t_cylin *)obj->obj);
+  if (obj->type == 'l')
+    {
+      pill = (t_pill *)obj->obj;
+      edit_cylindre(prog, pill->cylin);
+    }
   return (0);
 }

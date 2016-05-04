@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed May  4 19:28:40 2016 Ethan Kerdelhue
-** Last update Wed May  4 19:38:39 2016 Ethan Kerdelhue
+** Last update Thu May  5 01:25:13 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -52,6 +52,27 @@ int			push_circle(t_prog *prog, t_circle cir)
   while (tmp->next != NULL)
     tmp = tmp->next;
   new_obj->type = 'i';
+  new_obj->obj = (void *) new;
+  new_obj->next = NULL;
+  tmp->next = new_obj;
+  return (0);
+}
+
+int			push_pillule(t_prog *prog, t_cylin cyl)
+{
+  t_obj_list		*tmp;
+  t_obj_list		*new_obj;
+  t_pill		*new;
+
+  if ((new = malloc(sizeof(t_pill))) == NULL)
+    return (-1);
+  if ((new_obj = malloc(sizeof(t_obj_list))) == NULL)
+    return (-1);
+  new->cylin = &cyl;
+  tmp = prog->obj_list;
+  while (tmp->next != NULL)
+    tmp = tmp->next;
+  new_obj->type = 'l';
   new_obj->obj = (void *) new;
   new_obj->next = NULL;
   tmp->next = new_obj;
