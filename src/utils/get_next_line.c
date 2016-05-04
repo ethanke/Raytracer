@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Mon Jan  4 15:56:23 2016 Gaëtan Léandre
-** Last update Mon May  2 11:25:02 2016 Gaëtan Léandre
+** Last update Wed May  4 18:03:47 2016 Ethan Kerdelhue
 */
 
 #include 		"get_next_line.h"

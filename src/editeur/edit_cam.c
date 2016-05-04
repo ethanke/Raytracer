@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Fri Apr 29 22:08:18 2016 Ethan Kerdelhue
-** Last update Wed May  4 17:29:16 2016 Ethan Kerdelhue
+** Last update Wed May  4 18:10:02 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -114,6 +114,8 @@ int			edit_cam(t_prog *prog)
 {
   char			*str;
 
+  if (prog->editor->fd == -1)
+    return (put_error(ERR_NOFD));
   if (aff_win_prop(0, prog) == -1)
     return (-1);
   my_printf(1, "Laissez vide pour concerver la valeur\n");
