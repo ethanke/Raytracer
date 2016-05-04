@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 10:06:01 2016 Ethan Kerdelhue
-** Last update Wed May  4 17:22:41 2016 Ethan Kerdelhue
+** Last update Wed May  4 21:56:21 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -27,6 +27,7 @@ int			aff_win_prop(int fd, t_prog *prog)
 	    prog->look_at.y, prog->look_at.z);
   my_printf(fd, "\t\t<fov>%d</fov>\n", prog->cam_fov.x);
   my_printf(fd, "\t\t<alias>%d</alias>\n", prog->anti_alias);
+  my_printf(fd, "\t\t<background>%s</background>\n", prog->background_path);
   my_printf(fd, "\t</view>\n");
   return (0);
 }
