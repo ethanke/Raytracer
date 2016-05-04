@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:28:00 2016 Victor Sousa
-** Last update Wed May  4 02:37:51 2016 Victor Sousa
+** Last update Wed May  4 18:01:28 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -76,58 +76,4 @@ int			hit_cone(t_ray *r, t_cone *c, float *t)
 	}
     }
   return(0);
-  /* TEST 2 */
-  /*
-  t_coord rayOrigin = r->start;
-  t_coord rayDirection = r->dir;
-  t_coord pa = add_vector(co->center, float_time_vector(co->height, co->dir));
-  t_coord va = float_time_vector(-1, co->dir);
-  t_coord deltaP = minus_vector(rayOrigin, pa);
-  double c1 = mult_vector(rayDirection, va);
-  t_coord c2 = float_time_vector(c1, va);
-  double c3 = mult_vector(deltaP, va);
-  t_coord c4 = float_time_vector(c3, va);
-  double alpha = atan(co->radius / co->height);
-  double cos2a = cos(alpha) * cos(alpha);
-
-  double sin2a = 1 - cos2a;
-  double a = cos2a * mult_vector(minus_vector(rayDirection, c2), minus_vector(rayDirection, c2)) - sin2a * c1 * c1;
-  double b = 2 * cos2a * mult_vector(minus_vector(rayDirection, c2), minus_vector(deltaP, c4)) - 2 * sin2a * (c1 * c3);
-  double c = cos2a * mult_vector(minus_vector(deltaP, c4), minus_vector(deltaP, c4)) - sin2a * (c3 * c3);
-  double discriminant = b * b - 4 * a * c;
-  double t1, t2;
-  if (discriminant < 0)
-    return (0);
-  else
-    {
-      discriminant = sqrt(discriminant);
-      t1 = ((-1 * b) + discriminant) / (2 * a);
-      t2 = ((-1 * b) - discriminant) / (2 * a);
-      if (t1 < t2 && t1 >= 0.1)
-	{
-	  if (mult_vector(co->dir, add_vector(minus_vector(rayOrigin, co->center), float_time_vector(t1, rayDirection))) > 0 &&
-	      mult_vector(co->dir, add_vector(minus_vector(rayOrigin, pa), float_time_vector(t1, rayDirection))) > 0)
-	    {
-	      if (t1 < *t)
-		{
-		  *t = t1;
-		  return (1);
-		}
-	    }
-	}
-      else if (t2 >= 0.1)
-	{
-	  if (mult_vector(co->dir, add_vector(minus_vector(rayOrigin, co->center), float_time_vector(t2, rayDirection))) > 0 &&
-	      mult_vector(co->dir, add_vector(minus_vector(rayOrigin, pa), float_time_vector(t2, rayDirection))) > 0)
-	    {
-	      if (t2 < *t)
-		{
-		  *t = t2;
-		  return (1);
-		}
-	    }
-	}
-    }
-  return (0);
-  */
 }

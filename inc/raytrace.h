@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:05:12 2016 victor sousa
-** Last update Wed May  4 00:29:40 2016 Victor Sousa
+** Last update Wed May  4 17:49:44 2016 Victor Sousa
 */
 
 #ifndef			RAYTRACE_H_
