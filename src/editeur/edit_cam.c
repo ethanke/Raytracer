@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Fri Apr 29 22:08:18 2016 Ethan Kerdelhue
-** Last update Wed May  4 18:10:02 2016 Ethan Kerdelhue
+** Last update Wed May  4 21:58:04 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -137,5 +137,9 @@ int			edit_cam(t_prog *prog)
   if ((str = get_next_line(0)) == NULL)
     return (-1);
   prog->anti_alias = ((str[0] != 0) ? (my_getnbr(str)) : (prog->anti_alias));
+  my_printf(1, "Chemin du background :\n");
+  if ((str = get_next_line(0)) == NULL)
+    return (-1);
+  prog->background_path = ((str[0] != 0) ? (str) : (prog->background_path));
   return (0);
 }
