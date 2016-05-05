@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Wed May  4 23:21:30 2016 Victor Sousa
+** Last update Thu May  5 00:18:40 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -73,6 +73,12 @@ typedef struct          s_cylin
   char                  material;
   t_circle		*cap[2];
 }                       t_cylin;
+
+typedef struct          s_pill
+{
+  t_cylin		*cylin;
+  t_sphere		*cap[2];
+}                       t_pill;
 
 typedef struct		s_vtx_list
 {

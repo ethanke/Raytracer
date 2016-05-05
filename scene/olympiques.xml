@@ -10,7 +10,7 @@
       <z>-600</z>
     </cam_pos>
     <look_at>
-      <x>0</x>
+      <x>-100</x>
       <y>0</y>
       <z>0</z>
     </look_at>
@@ -80,7 +80,7 @@
   </material_list>
 
   <object_list>
-    <count>7</count>
+    <count>8</count>
 
     <obj1>
       <type>sphere</type>
@@ -147,7 +147,7 @@
       <type>plan</type>
       <center>
 	<x>0</x>
-	<y>-150</y>
+	<y>-200</y>
 	<z>0</z>
       </center>
       <dir>
@@ -162,9 +162,9 @@
     <obj7>
       <type>cylinder</type>
       <center>
-	<x>300</x>
+	<x>250</x>
 	<y>0</y>
-	<z>-300</z>
+	<z>-250</z>
       </center>
       <dir>
 	<x>0</x>
@@ -175,6 +175,23 @@
       <height>200</height>
       <material_id>1</material_id>
     </obj7>
+
+    <obj8>
+      <type>pill</type>
+      <center>
+	<x>-450</x>
+	<y>0</y>
+	<z>0</z>
+      </center>
+      <dir>
+	<x>0</x>
+	<y>1</y>
+	<z>0</z>
+      </dir>
+      <radius>60</radius>
+      <height>150</height>
+      <material_id>5</material_id>
+    </obj8>
   </object_list>
 
   <light_list>

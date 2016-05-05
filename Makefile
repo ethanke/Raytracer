@@ -59,6 +59,7 @@ SRC		+=	src/loading/parsing_scene.c		\
 			src/loading/load_triangle_param.c	\
 			src/loading/load_cone_params.c		\
 			src/loading/load_cyl_params.c		\
+			src/loading/load_pill_params.c		\
 			src/loading/load_plan_params.c		\
 			src/loading/load_obj_file.c		\
 			src/loading/load_vertex.c		\
@@ -133,7 +134,6 @@ SRC		+=	$(EDITDIR)/aff_light.c			\
 SRC		+=	src/image/load_image.c			\
 			src/image/disp_image.c			\
 			src/image/hitbox_creator.c
-
 
 ##  UTILS  ##
 SRC		+=	src/utils/my_tablen.c			\
