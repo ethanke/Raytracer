@@ -10,7 +10,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 int MainWindow::CloseWindow()
 {
-    printf("lourd bite");
     exit(1);
 }
 
