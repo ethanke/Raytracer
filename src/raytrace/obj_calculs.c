@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Thu May  5 07:46:17 2016 Victor Sousa
+** Last update Thu May  5 08:14:35 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -106,6 +106,7 @@ int			calc_normale(t_prog *prog, t_raycast *rcast)
   float temp = mult_vector(rcast->normale, rcast->normale);
   if (temp == 0.0)
     return (-1);
+  temp = invsqrtf(temp);
   rcast->normale = float_time_vector(temp, rcast->normale);
   return (0);
 }
