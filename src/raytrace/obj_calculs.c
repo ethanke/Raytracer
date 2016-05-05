@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Thu May  5 05:31:16 2016 Victor Sousa
+** Last update Thu May  5 05:52:50 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -88,7 +88,7 @@ void			calc_sphere_normale(t_prog *prog, t_raycast *rcast)
       phi = acos(-mult_vector(vn,vp));
       v = phi / M_PI;
       theta = (acos(mult_vector(vp, ve) / sin(phi))) / (2.0 * M_PI);
-      if (isnan(theta))
+      if (vp.z < 0.01 && vp.z > -0.01)
 	theta = 0;
       if (mult_vector(crossProduct(vn, ve), vp) > 0)
 	u = theta;
