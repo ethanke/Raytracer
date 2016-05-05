@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Thu May  5 07:40:27 2016 Victor Sousa
+** Last update Thu May  5 07:46:17 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -97,20 +97,16 @@ int			calc_normale(t_prog *prog, t_raycast *rcast)
   else
     return (-1);
 
- if (rcast->mat_touch->bump > 0.01)
-    {
-      float noiseCoefx = noise(0.1 * rcast->new_point.x, 0.1 * rcast->new_point.y, 0.1 * rcast->new_point.z);
-      float noiseCoefy = noise(0.1 * rcast->new_point.y, 0.1 * rcast->new_point.z, 0.1 * rcast->new_point.x);
-      float noiseCoefz = noise(0.1 * rcast->new_point.z, 0.1 * rcast->new_point.x, 0.1 * rcast->new_point.y);
-      rcast->normale.x = (1.0f - rcast->mat_touch->bump) * rcast->normale.x + rcast->mat_touch->bump * noiseCoefx;
-      rcast->normale.y = (1.0f - rcast->mat_touch->bump) * rcast->normale.y + rcast->mat_touch->bump * noiseCoefy;
-      rcast->normale.z = (1.0f - rcast->mat_touch->bump) * rcast->normale.z + rcast->mat_touch->bump * noiseCoefz;
-      float temp = mult_vector(rcast->normale, rcast->normale);
-      if (temp < 0.1)
-	return (-1);
-      temp = invsqrt(temp);
-      rcast->normale = float_time_vector(temp, rcast->normale);
-  }
+  float noiseCoefx = noise(0.1 * rcast->new_point.x, 0.1 * rcast->new_point.y, 0.1 * rcast->new_point.z);
+  float noiseCoefy = noise(0.1 * rcast->new_point.y, 0.1 * rcast->new_point.z, 0.1 * rcast->new_point.x);
+  float noiseCoefz = noise(0.1 * rcast->new_point.z, 0.1 * rcast->new_point.x, 0.1 * rcast->new_point.y);
+  rcast->normale.x = (1.0f - rcast->mat_touch->bump) * rcast->normale.x + rcast->mat_touch->bump * noiseCoefx;
+  rcast->normale.y = (1.0f - rcast->mat_touch->bump) * rcast->normale.y + rcast->mat_touch->bump * noiseCoefy;
+  rcast->normale.z = (1.0f - rcast->mat_touch->bump) * rcast->normale.z + rcast->mat_touch->bump * noiseCoefz;
+  float temp = mult_vector(rcast->normale, rcast->normale);
+  if (temp == 0.0)
+    return (-1);
+  rcast->normale = float_time_vector(temp, rcast->normale);
   return (0);
 }
 

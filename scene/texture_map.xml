@@ -20,15 +20,15 @@
     </view>
 
   <material_list>
-    <count>6</count>
+    <count>7</count>
 
     <mat1>
       <red>25</red>
       <green>25</green>
       <blue>255</blue>
-      <reflect>50</reflect>
-      <bump>0.8</bump>
-      <texture>NULL</texture>
+      <reflect>0</reflect>
+      <bump>0</bump>
+      <texture>sprites/image/street.jpg</texture>
     </mat1>
 
     <mat2>
@@ -75,10 +75,19 @@
       <bump>0</bump>
       <texture>NULL</texture>
     </mat6>
+
+    <mat7>
+      <red>25</red>
+      <green>220</green>
+      <blue>135</blue>
+      <reflect>30</reflect>
+      <bump>0.9</bump>
+      <texture>NULL</texture>
+    </mat7>
   </material_list>
 
   <object_list>
-    <count>6</count>
+    <count>7</count>
 
     <obj1>
       <type>sphere</type>
@@ -150,6 +159,17 @@
       <material_id1>6</material_id1>
       <material_id2>6</material_id2>
     </obj6>
+
+    <obj7>
+      <type>sphere</type>
+      <center>
+	<x>100</x>
+	<y>0</y>
+	<z>-300</z>
+      </center>
+      <radius>100</radius>
+      <material_id>7</material_id>
+    </obj7>
   </object_list>
 
   <light_list>
