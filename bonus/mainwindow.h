@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "addobjectpopup.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +18,7 @@ public:
 
 public slots:
     int CloseWindow();
+    void show_pop();
 
 private:
     Ui::MainWindow *ui;

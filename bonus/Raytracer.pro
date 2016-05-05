@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    addobjectpopup.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    addobjectpopup.h
 
 FORMS    += mainwindow.ui
