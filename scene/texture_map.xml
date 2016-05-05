@@ -28,6 +28,7 @@
       <blue>255</blue>
       <reflect>0</reflect>
       <bump>0</bump>
+      <sky>0</sky>
       <texture>sprites/image/street.jpg</texture>
     </mat1>
 
@@ -37,6 +38,7 @@
       <blue>25</blue>
       <reflect>25</reflect>
       <bump>0</bump>
+      <sky>0</sky>
       <texture>sprites/image/wood.jpg</texture>
     </mat2>
 
@@ -46,6 +48,7 @@
       <blue>50</blue>
       <reflect>20</reflect>
       <bump>0</bump>
+      <sky>0</sky>
       <texture>sprites/image/earth.jpg</texture>
     </mat3>
 
@@ -55,6 +58,7 @@
       <blue>25</blue>
       <reflect>0</reflect>
       <bump>0</bump>
+      <sky>0</sky>
       <texture>sprites/image/lava.png</texture>
     </mat4>
 
@@ -64,6 +68,7 @@
       <blue>25</blue>
       <reflect>10</reflect>
       <bump>0</bump>
+      <sky>0</sky>
       <texture>sprites/image/sky1.png</texture>
     </mat5>
 
@@ -73,6 +78,7 @@
       <blue>210</blue>
       <reflect>70</reflect>
       <bump>0.05</bump>
+      <sky>0</sky>
       <texture>NULL</texture>
     </mat6>
 
@@ -82,6 +88,7 @@
       <blue>135</blue>
       <reflect>30</reflect>
       <bump>0.9</bump>
+      <sky>0</sky>
       <texture>NULL</texture>
     </mat7>
   </material_list>
