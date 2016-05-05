@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:55:20 2016 victor sousa
-** Last update Thu May  5 01:47:26 2016 Victor Sousa
+** Last update Thu May  5 05:29:51 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -98,6 +98,39 @@ int			get_mat_reflect(t_mat_list *new, char **file, int id)
   return (0);
 }
 
+int			get_mat_texture(t_mat_list *new, char **file, int id)
+{
+  char			*lf;
+  char			*get;
+
+  if ((lf = malloc(sizeof(char) *
+		   my_strlen("scene:material_list:matX:texture") + 1)) == NULL)
+    return (1);
+  lf[0] = '\0';
+  lf = my_strcat(lf, "scene:material_list:matX:texture");
+  lf[23] = id + 49;
+  if ((get = get_field(file, lf)) == NULL)
+    {
+      my_putstr("Could not find scene:material_list:matX:texture\n");
+      return (-1);
+    }
+  if ((new->texture_path = malloc(my_strlen(get) + 1)) == NULL)
+    return (-1);
+  new->texture_path[0] = '\0';
+  new->texture_path = my_strcat(new->texture_path, get);
+  if (my_strcmp(get, "NULL") == 0)
+    {
+      if ((new->texture = create_text_uni(300, 100, 0xff000000)) == NULL)
+	return (-1);
+    }
+  else
+    {
+      if ((new->texture = load_image(get)) == NULL)
+	return (-1);
+    }
+  return (0);
+}
+
 t_mat_list              *add_mat(t_mat_list *prev, char **file, int id)
 {
   t_mat_list            *new;
@@ -111,6 +144,8 @@ t_mat_list              *add_mat(t_mat_list *prev, char **file, int id)
   if (get_mat_blue(new, file, id) != 0)
     return (NULL);
   if (get_mat_reflect(new, file, id) != 0)
+    return (NULL);
+  if (get_mat_texture(new, file, id) != 0)
     return (NULL);
   new->id = id + 1;
   new->next = prev;

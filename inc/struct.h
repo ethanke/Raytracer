@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Thu May  5 01:47:40 2016 Victor Sousa
+** Last update Thu May  5 05:29:29 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -113,6 +113,8 @@ typedef struct		s_mat_list
   int			id;
   t_color		color;
   int			reflect;
+  t_texture		*texture;
+  char			*texture_path;
   char			*mtl_name;
   struct s_mat_list	*next;
 }			t_mat_list;

@@ -27,6 +27,7 @@
       <green>25</green>
       <blue>255</blue>
       <reflect>50</reflect>
+      <texture>NULL</texture>
     </mat1>
 
     <mat2>
@@ -34,20 +35,23 @@
       <green>255</green>
       <blue>25</blue>
       <reflect>25</reflect>
+      <texture>NULL</texture>
     </mat2>
 
     <mat3>
       <red>50</red>
       <green>50</green>
       <blue>50</blue>
-      <reflect>30</reflect>
+      <reflect>40</reflect>
+      <texture>sprites/image/earth.jpg</texture>
     </mat3>
 
     <mat4>
       <red>25</red>
       <green>255</green>
       <blue>25</blue>
-      <reflect>50</reflect>
+      <reflect>75</reflect>
+      <texture>NULL</texture>
     </mat4>
 
     <mat5>
@@ -55,6 +59,7 @@
       <green>25</green>
       <blue>25</blue>
       <reflect>50</reflect>
+      <texture>NULL</texture>
     </mat5>
 
     <mat6>
@@ -62,6 +67,7 @@
       <green>210</green>
       <blue>210</blue>
       <reflect>10</reflect>
+      <texture>NULL</texture>
     </mat6>
 
     <mat7>
@@ -69,6 +75,7 @@
       <green>25</green>
       <blue>255</blue>
       <reflect>5</reflect>
+      <texture>NULL</texture>
     </mat7>
   </material_list>
 
@@ -98,19 +105,13 @@
     </obj2>
 
     <obj3>
-      <type>cone</type>
+      <type>sphere</type>
       <center>
-	<x>0</x>
-	<y>100</y>
-	<z>0</z>
+  <x></x>
+  <y>100</y>
+  <z>0</z>
       </center>
-      <dir>
-	<x>0</x>
-	<y>1</y>
-	<z>0</z>
-      </dir>
       <radius>100</radius>
-      <height>200</height>
       <material_id>3</material_id>
     </obj3>
 
@@ -185,6 +186,17 @@
       <height>150</height>
       <material_id>5</material_id>
     </obj8>
+
+    <obj9>
+      <type>sphere</type>
+      <center>
+	<x>0</x>
+	<y>0</y>
+	<z>0</z>
+      </center>
+      <radius>1000</radius>
+      <material_id>5</material_id>
+    </obj9>
   </object_list>
 
   <light_list>
@@ -225,7 +237,7 @@
       </center>
       <intensity>125</intensity>
     </light4>
-    
+
     <light5>
       <center>
 	<x>0</x>

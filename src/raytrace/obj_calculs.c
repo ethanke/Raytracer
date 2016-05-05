@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Wed May  4 23:07:32 2016 Victor Sousa
+** Last update Thu May  5 05:31:16 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -56,12 +56,52 @@ int			damier(t_coord *pos)
 
 void			calc_sphere_normale(t_prog *prog, t_raycast *rcast)
 {
+  t_coord		vn;
+  t_coord		ve;
+  t_coord		vp;
+  float 		u;
+  float 		v;
+  float			phi;
+  float			theta;
+
   rcast->sphere = rcast->obj_touch->obj;
   rcast->mat_touch = get_color(rcast->sphere->material, prog->mat_list);
   rcast->new_point = add_vector(rcast->ray.start,
 				float_time_vector(rcast->dist,
 						  rcast->ray.dir));
   rcast->normale = minus_vector(rcast->new_point, rcast->sphere->center);
+  vn.x = 0;
+  vn.y = - 1;
+  vn.z = 0;
+  vn = normalize(vn);
+
+  ve.x = 1;
+  ve.y = 0;
+  ve.z = 0;
+  ve = normalize(ve);
+
+  vp = minus_vector(rcast->new_point, rcast->sphere->center);
+  vp = normalize(vp);
+  if (!my_strstr(rcast->mat_touch->texture_path, "NULL"))
+    {
+
+      phi = acos(-mult_vector(vn,vp));
+      v = phi / M_PI;
+      theta = (acos(mult_vector(vp, ve) / sin(phi))) / (2.0 * M_PI);
+      if (isnan(theta))
+	theta = 0;
+      if (mult_vector(crossProduct(vn, ve), vp) > 0)
+	u = theta;
+      else
+	u = 1 - theta;
+      v = v * (float)rcast->mat_touch->texture->height;
+      u = u * (float)rcast->mat_touch->texture->width;
+      if (v >= rcast->mat_touch->texture->height)
+	v = 1;
+      if (u >= rcast->mat_touch->texture->width)
+        u = 1;
+      rcast->mat_touch->color = rcast->mat_touch->texture->color[(int)v][(int)u];
+    }
 }
 
 void			calc_triangle_normale(t_prog *prog, t_raycast *rcast)
