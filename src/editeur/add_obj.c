@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon May  2 17:19:25 2016 Ethan Kerdelhue
-** Last update Thu May  5 01:34:01 2016 Ethan Kerdelhue
+** Last update Thu May  5 02:16:21 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -80,6 +80,8 @@ int			add_obj_triangle(t_prog *prog)
   my_printf(1, "Coordonée du troisième point du triangle\n");
   if ((get_coord(&tmp.angle[2])) == NULL)
     return (-1);
+  if ((tmp.material = get_material(prog)) == -1)
+    return (-1);
   push_triangle(prog, tmp);
   return (0);
 }
@@ -109,7 +111,11 @@ int			add_obj_plan(t_prog *prog)
   get_coord(&plan.center);
   my_printf(1, "Entrez les coordonées de direction du plan :\n");
   get_coord(&plan.dir);
+  my_printf(1, "Material 1 :\n");
   if ((plan.material = get_material(prog)) == -1)
+    return (-1);
+  my_printf(1, "Material 2 :\n");
+  if ((plan.material2 = get_material(prog)) == -1)
     return (-1);
   push_plan(prog, plan);
   return (0);
@@ -196,10 +202,10 @@ int			add_obj_circle(t_prog *prog)
   char			*str;
 
 
-  my_printf(1, "Entrez les coordonées du centre du cylindre :\n");
-  edit_coord(&circle.plan.center);
-  my_printf(1, "Entrez les coordonées de direction du cylindre :\n");
-  edit_coord(&circle.plan.dir);
+  my_printf(1, "Entrez les coordonées du centre du cercle :\n");
+  get_coord(&circle.plan.center);
+  my_printf(1, "Entrez les coordonées de direction du cercle :\n");
+  get_coord(&circle.plan.dir);
   my_printf(1, "Entrez le rayon:\n");
   if ((str = get_next_line(0)) == NULL)
     return (-1);

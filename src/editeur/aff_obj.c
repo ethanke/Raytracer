@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 09:58:54 2016 Ethan Kerdelhue
-** Last update Thu May  5 01:20:15 2016 Ethan Kerdelhue
+** Last update Thu May  5 02:01:30 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -54,7 +54,7 @@ int			aff_obj_sphere(int fd, t_obj_list *obj)
   t_sphere 		*tmp;
 
   tmp = (t_sphere *) obj->obj;
-  my_printf(fd, "\t\t<center>\n\t\t\t<x>%f<x>\n", tmp->center.x);
+  my_printf(fd, "\t\t<center>\n\t\t\t<x>%f</x>\n", tmp->center.x);
   my_printf(fd, "\t\t\t<y>%f</y>\n\t\t\t<z>%f</z>\n", tmp->center.y,
 		  tmp->center.z);
   my_printf(fd, "\t\t</center>\n\t\t<radius>%d</radius>\n", tmp->radius);
@@ -67,13 +67,14 @@ int			aff_obj_plan(int fd, t_obj_list *obj)
   t_plan		*tmp;
 
   tmp = (t_plan *) obj->obj;
-  my_printf(fd, "\t\t<center>\n\t\t\t<x>%f<x>\n", tmp->center.x);
+  my_printf(fd, "\t\t<center>\n\t\t\t<x>%f</x>\n", tmp->center.x);
   my_printf(fd, "\t\t\t<y>%f</y>\n\t\t\t<z>%f</z>\n\t\t</center>\n"
 	    ,tmp->center.y, tmp->center.z);
   my_printf(fd, "\t\t<dir>\n\t\t\t<x>%f<x>\n", tmp->dir.x);
   my_printf(fd, "\t\t\t<y>%f</y>\n\t\t\t<z>%f</z>\n\t\t</dir>\n"
 	    ,tmp->dir.y, tmp->dir.z);
-  my_printf(fd, "\t\t<material_id>%c</matierial_id>\n", tmp->material + 48);
+  my_printf(fd, "\t\t<material_id1>%c</matierial_id1>\n", tmp->material + 48);
+my_printf(fd, "\t\t<material_id2>%c</matierial_id2>\n", tmp->material2 + 48);
   return (0);
 }
 
@@ -82,7 +83,7 @@ int			aff_obj_cone(int fd, t_obj_list *obj)
   t_cone		*tmp;
 
   tmp = (t_cone *) obj->obj;
-  my_printf(fd, "\t\t<center>\n\t\t\t<x>%f<x>\n", tmp->center.x);
+  my_printf(fd, "\t\t<center>\n\t\t\t<x>%f</x>\n", tmp->center.x);
   my_printf(fd, "\t\t\t<y>%f</y>\n\t\t\t<z>%f</z>\n\t\t</center>\n"
 	    ,tmp->center.y, tmp->center.z);
   my_printf(fd, "\t\t<dir>\n\t\t\t<x>%f<x>\n", tmp->dir.x);
@@ -99,7 +100,7 @@ int			aff_obj_cylindre(int fd, t_obj_list *obj)
   t_cylin		*tmp;
 
   tmp = (t_cylin *) obj->obj;
-  my_printf(fd, "\t\t<center>\n\t\t\t<x>%f<x>\n", tmp->center.x);
+  my_printf(fd, "\t\t<center>\n\t\t\t<x>%f</x>\n", tmp->center.x);
   my_printf(fd, "\t\t\t<y>%f</y>\n\t\t\t<z>%f</z>\n\t\t</center>\n"
 	    ,tmp->center.y, tmp->center.z);
   my_printf(fd, "\t\t<dir>\n\t\t\t<x>%f<x>\n", tmp->dir.x);
@@ -118,7 +119,7 @@ int			aff_obj_pillule(int fd, t_obj_list *obj)
 
   pill = (t_pill *)obj->obj;
   tmp = pill->cylin;
-  my_printf(fd, "\t\t<center>\n\t\t\t<x>%f<x>\n", tmp->center.x);
+  my_printf(fd, "\t\t<center>\n\t\t\t<x>%f</x>\n", tmp->center.x);
   my_printf(fd, "\t\t\t<y>%f</y>\n\t\t\t<z>%f</z>\n\t\t</center>\n"
 	    ,tmp->center.y, tmp->center.z);
   my_printf(fd, "\t\t<dir>\n\t\t\t<x>%f<x>\n", tmp->dir.x);
@@ -135,7 +136,7 @@ int			aff_obj_circle(int fd, t_obj_list *obj)
   t_circle		*tmp;
 
   tmp = (t_circle *) obj->obj;
-  my_printf(fd, "\t\t<center>\n\t\t\t<x>%f<x>\n", tmp->plan.center.x);
+  my_printf(fd, "\t\t<center>\n\t\t\t<x>%f</x>\n", tmp->plan.center.x);
   my_printf(fd, "\t\t\t<y>%f</y>\n\t\t\t<z>%f</z>\n\t\t</center>\n"
 	    ,tmp->plan.center.y, tmp->plan.center.z);
   my_printf(fd, "\t\t<dir>\n\t\t\t<x>%f<x>\n", tmp->plan.dir.x);

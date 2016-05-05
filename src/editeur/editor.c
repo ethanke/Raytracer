@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 03:54:51 2016 Ethan Kerdelhue
-** Last update Thu May  5 01:02:26 2016 Ethan Kerdelhue
+** Last update Thu May  5 02:04:03 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -58,11 +58,11 @@ char			*get_type(char c)
   if (c == 'c')
     return ("cone");
   if (c == 'y')
-    return ("cylindre");
+    return ("cylinder");
   if (c == 'i')
     return ("circle");
   if (c == 'l')
-    return ("pillule");
+    return ("pill");
   return (NULL);
 }
 

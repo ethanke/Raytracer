@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed Apr 27 18:31:29 2016 Ethan Kerdelhue
-** Last update Thu May  5 01:24:19 2016 Ethan Kerdelhue
+** Last update Thu May  5 01:59:12 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -134,7 +134,10 @@ int			edit_plan(t_prog *prog, t_plan *pla)
   edit_coord(&pla->center);
   my_printf(1, "Direction du plan :\n");
   edit_coord(&pla->dir);
+  my_printf(1, "Materiel 1 :\n");
   pla->material = edit_material_id(prog, pla->material);
+  my_printf(1, "Materiel 2 :\n");
+  pla->material2 = edit_material_id(prog, pla->material2);
   return (0);
 }
 
