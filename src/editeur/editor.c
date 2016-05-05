@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 03:54:51 2016 Ethan Kerdelhue
-** Last update Thu May  5 02:04:03 2016 Ethan Kerdelhue
+** Last update Thu May  5 08:14:12 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -28,7 +28,7 @@ int			aff_help(t_prog *prog)
 
 int			fill_struct(t_prog *prog)
 {
-  load_scene(prog, "scene/olympiques.xml");
+  load_scene(prog, "scene/texture_map.xml");
   prog->editor->fd = open("scene/olympiques.xml", O_RDONLY);
   my_putstr("scene loading success!\n");
    /* if (my_access(prog->editor->arg[1]) == 0)

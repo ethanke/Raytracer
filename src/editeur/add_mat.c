@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed Apr 27 16:18:56 2016 Ethan Kerdelhue
-** Last update Wed Apr 27 18:05:24 2016 Ethan Kerdelhue
+** Last update Thu May  5 08:07:01 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -24,6 +24,8 @@ int			push_mat(t_prog *prog, t_mat_list mat)
   tmp->next = new;
   new->color = mat.color;
   new->reflect = mat.reflect;
+  new->bump = mat.bump;
+  new->texture_path = mat.texture_path;
   new->next = NULL;
   return (0);
 }
@@ -66,9 +68,19 @@ int			add_mat_s(t_prog *prog)
   my_printf(0, "Entrez les couleurs RGB :\n");
   tmp.color = get_rgb(0);
   my_printf(0, "Reflection :\n");
-  str = get_next_line(0);
+  if ((str = get_next_line(0)) == NULL)
+    return (-1);
   tmp.reflect = my_getnbr(str);
   free(str);
+  my_printf(1, "Coefficient de bump mapping (conseil : > 0 && < 1) :\n");
+  if ((str = get_next_line(0)) == NULL)
+    return (-1);
+  tmp.bump = my_atof(str);
+  free(str);
+  my_printf(1, "Entrez le chemin de l'éventuel texture :\n");
+  if ((str = get_next_line(0)) == NULL)
+    return (-1);
+  tmp.texture_path = ((str[0] != 0) ? (str) : ("NULL"));
   push_mat(prog, tmp);
   return (0);
 }

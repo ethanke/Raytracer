@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Fri Apr 29 19:34:34 2016 Ethan Kerdelhue
-** Last update Mon May  2 22:48:41 2016 Ethan Kerdelhue
+** Last update Thu May  5 08:10:21 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -104,5 +104,14 @@ int			edit_mat(t_prog *prog)
   my_printf(1, "Reflection :\n");
   str = get_next_line(0);
   mat->reflect = ((str[0] != '\0') ? (my_getnbr(str)) : (mat->reflect));
+  my_printf(1, "Coefficient de bump mapping (conseil : > 0 && < 1) :\n");
+  if ((str = get_next_line(0)) == NULL)
+    return (-1);
+  mat->bump = ((str[0] != 0) ? (my_atof(str)) : (mat->bump));
+  free(str);
+  my_printf(1, "Chemin de texture :\n");
+  if ((str = get_next_line(0)) == NULL)
+    return (-1);
+  mat->texture_path = ((str[0] != 0) ? (str) : (mat->texture_path));
   return (0);
 }

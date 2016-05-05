@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 09:58:25 2016 Ethan Kerdelhue
-** Last update Tue Apr 26 09:58:36 2016 Ethan Kerdelhue
+** Last update Thu May  5 08:15:13 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -16,6 +16,8 @@ int			aff_mat(int fd, t_mat_list *mat)
   my_printf(fd, "\t\t<green>%d</green>\n", mat->color.argb[GREEN_CMP]);
   my_printf(fd, "\t\t<blue>%d</blue>\n", mat->color.argb[BLUE_CMP]);
   my_printf(fd, "\t\t<reflect>%d</reflect>\n", mat->reflect);
+  my_printf(fd, "\t\t<bump>%f</bump>\n", mat->bump);
+  my_printf(fd, "\t\t<texture>%s</texture>\n", mat->texture_path);
   return (0);
 }
 
