@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Thu May  5 06:17:18 2016 Victor Sousa
+** Last update Thu May  5 09:37:28 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -117,6 +117,7 @@ typedef struct		s_mat_list
   char			*texture_path;
   char			*mtl_name;
   float			bump;
+  char			sky;
   struct s_mat_list	*next;
 }			t_mat_list;
 

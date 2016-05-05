@@ -11,7 +11,7 @@
     </cam_pos>
     <look_at>
       <x>-100</x>
-      <y>0</y>
+      <y>-50</y>
       <z>0</z>
     </look_at>
     <fov>75</fov>
@@ -20,14 +20,15 @@
     </view>
 
   <material_list>
-    <count>7</count>
+    <count>8</count>
 
     <mat1>
       <red>25</red>
       <green>25</green>
       <blue>255</blue>
-      <reflect>50</reflect>
+      <reflect>25</reflect>
       <bump>0</bump>
+      <sky>0</sky>
       <texture>NULL</texture>
     </mat1>
 
@@ -35,8 +36,9 @@
       <red>255</red>
       <green>255</green>
       <blue>25</blue>
-      <reflect>25</reflect>
+      <reflect>20</reflect>
       <bump>0</bump>
+      <sky>0</sky>
       <texture>NULL</texture>
     </mat2>
 
@@ -44,17 +46,19 @@
       <red>50</red>
       <green>50</green>
       <blue>50</blue>
-      <reflect>20</reflect>
+      <reflect>5</reflect>
       <bump>0</bump>
+      <sky>0</sky>
       <texture>sprites/image/earth.jpg</texture>
     </mat3>
 
     <mat4>
-      <red>25</red>
+      <red>255</red>
       <green>255</green>
-      <blue>25</blue>
-      <reflect>75</reflect>
-      <bump>0</bump>
+      <blue>255</blue>
+      <reflect>100<reflect>
+      <bump>0.05</bump>
+      <sky>0</sky>
       <texture>NULL</texture>
     </mat4>
 
@@ -62,8 +66,9 @@
       <red>255</red>
       <green>25</green>
       <blue>25</blue>
-      <reflect>50</reflect>
+      <reflect>20</reflect>
       <bump>0.9</bump>
+      <sky>0</sky>
       <texture>NULL</texture>
     </mat5>
 
@@ -72,22 +77,34 @@
       <green>210</green>
       <blue>210</blue>
       <reflect>10</reflect>
-      <bump>0.1</bump>
+      <bump>0.05</bump>
+      <sky>0</sky>
       <texture>NULL</texture>
     </mat6>
 
     <mat7>
       <red>25</red>
-      <green>25</green>
-      <blue>255</blue>
-      <reflect>5</reflect>
-      <bump>0</bump>
+      <green>225</green>
+      <blue>135</blue>
+      <reflect>15</reflect>
+      <bump>0.95</bump>
+      <sky>0</sky>
       <texture>NULL</texture>
     </mat7>
+
+    <mat8>
+      <red>255</red>
+      <green>25</green>
+      <blue>25</blue>
+      <reflect>0</reflect>
+      <bump>0</bump>
+      <sky>1</sky>
+      <texture>sprites/image/swagbox.jpg</texture>
+    </mat8>
   </material_list>
 
   <object_list>
-    <count>8</count>
+    <count>9</count>
 
     <obj1>
       <type>sphere</type>
@@ -145,19 +162,14 @@
     </obj5>
 
     <obj6>
-      <type>plan</type>
+      <type>sphere</type>
       <center>
-	<x>0</x>
-	<y>-200</y>
-	<z>0</z>
+    <x>0</x>
+    <y>0</y>
+    <z>0</z>
       </center>
-      <dir>
-	<x>0</x>
-	<y>-1</y>
-	<z>0</z>
-      </dir>
-      <material_id1>6</material_id1>
-      <material_id2>4</material_id2>
+      <radius>1000</radius>
+      <material_id>8</material_id>
     </obj6>
 
     <obj7>
@@ -197,15 +209,13 @@
     <obj9>
       <type>sphere</type>
       <center>
-	<x>0</x>
-	<y>0</y>
-	<z>0</z>
+    <x>150</x>
+    <y>-225</y>
+    <z>-200</z>
       </center>
-      <radius>1000</radius>
-      <material_id>5</material_id>
+      <radius>100</radius>
+      <material_id>7</material_id>
     </obj9>
-  </object_list>
-
   <light_list>
     <count>5</count>
 
