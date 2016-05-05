@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Wed May  4 04:36:02 2016 Gaëtan Léandre
+** Last update Thu May  5 10:27:44 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -84,7 +84,7 @@ int			main(int ac, char *av[], char *env[])
 {
   t_prog		prog;
 
-  set_max_heap_size(256);
+  set_max_heap_size(521);
   if (verif_arg(ac, av, env) != 0 ||
       verif_load(&prog, av) != 0 ||
       create_pix(&prog) != 0 ||

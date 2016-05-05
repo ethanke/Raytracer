@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Thu May  5 08:18:29 2016 Victor Sousa
+** Last update Thu May  5 10:25:26 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -173,7 +173,7 @@ void			calc_sphere_normale(t_prog *prog, t_raycast *rcast)
   vn.z = 0;
   vn = normalize(vn);
 
-  ve.x = 1;
+  ve.x = -1;
   ve.y = 0;
   ve.z = 0;
   ve = normalize(ve);
