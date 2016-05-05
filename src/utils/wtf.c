@@ -1,9 +1,9 @@
 /*
 ** wtf.c for raytracer1 in /home/sousa_v/rendu/lapin/gfx_raytracer1
-** 
+**
 ** Made by victor sousa
 ** Login   <sousa_v@epitech.net>
-** 
+**
 ** Started on  Wed Mar  9 06:36:19 2016 victor sousa
 ** Last update Wed Mar  9 06:38:19 2016 victor sousa
 */

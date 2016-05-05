@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 04:04:48 2016 victor sousa
-** Last update Thu May  5 05:30:09 2016 Victor Sousa
+** Last update Thu May  5 06:34:47 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -35,7 +35,7 @@ int                     reflect_loop(t_prog *prog, t_raycast *rcast)
   if (calc_normale(prog, rcast) == -1)
     return (-1);
   tmp = mult_vector(rcast->normale, rcast->normale);
-  if (tmp == 0)
+  if (tmp == 0.0)
     return (-1);
   free(rcast->obj_touch);
   tmp = 1.0 / sqrt(tmp);

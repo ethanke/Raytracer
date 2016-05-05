@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:55:20 2016 victor sousa
-** Last update Thu May  5 05:29:51 2016 Victor Sousa
+** Last update Thu May  5 07:17:13 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -98,6 +98,28 @@ int			get_mat_reflect(t_mat_list *new, char **file, int id)
   return (0);
 }
 
+int			get_mat_bump(t_mat_list *new, char **file, int id)
+{
+  char			*lf;
+  char			*get;
+
+  if ((lf = malloc(sizeof(char) *
+		   my_strlen("scene:material_list:matX:bump") + 1)) == NULL)
+    return (1);
+  lf[0] = '\0';
+  lf = my_strcat(lf, "scene:material_list:matX:bump");
+  lf[23] = id + 49;
+  if ((get = get_field(file, lf)) == NULL)
+    {
+      my_printf(1, "Could not find scene:material_list:mat%d:bump\n", id + 1);
+      return (-1);
+    }
+  new->bump = atof(get);
+  free(get);
+  free(lf);
+  return (0);
+}
+
 int			get_mat_texture(t_mat_list *new, char **file, int id)
 {
   char			*lf;
@@ -144,6 +166,8 @@ t_mat_list              *add_mat(t_mat_list *prev, char **file, int id)
   if (get_mat_blue(new, file, id) != 0)
     return (NULL);
   if (get_mat_reflect(new, file, id) != 0)
+    return (NULL);
+  if (get_mat_bump(new, file, id) != 0)
     return (NULL);
   if (get_mat_texture(new, file, id) != 0)
     return (NULL);

@@ -27,6 +27,7 @@
       <green>25</green>
       <blue>255</blue>
       <reflect>50</reflect>
+      <bump>0</bump>
       <texture>NULL</texture>
     </mat1>
 
@@ -35,6 +36,7 @@
       <green>255</green>
       <blue>25</blue>
       <reflect>25</reflect>
+      <bump>0</bump>
       <texture>NULL</texture>
     </mat2>
 
@@ -43,6 +45,7 @@
       <green>50</green>
       <blue>50</blue>
       <reflect>40</reflect>
+      <bump>0</bump>
       <texture>sprites/image/earth.jpg</texture>
     </mat3>
 
@@ -51,6 +54,7 @@
       <green>255</green>
       <blue>25</blue>
       <reflect>75</reflect>
+      <bump>0</bump>
       <texture>NULL</texture>
     </mat4>
 
@@ -59,6 +63,7 @@
       <green>25</green>
       <blue>25</blue>
       <reflect>50</reflect>
+      <bump>0</bump>
       <texture>NULL</texture>
     </mat5>
 
@@ -67,6 +72,7 @@
       <green>210</green>
       <blue>210</blue>
       <reflect>10</reflect>
+      <bump>0</bump>
       <texture>NULL</texture>
     </mat6>
 
@@ -75,6 +81,7 @@
       <green>25</green>
       <blue>255</blue>
       <reflect>5</reflect>
+      <bump>0</bump>
       <texture>NULL</texture>
     </mat7>
   </material_list>
