@@ -44,7 +44,7 @@
       <red>50</red>
       <green>50</green>
       <blue>50</blue>
-      <reflect>40</reflect>
+      <reflect>20</reflect>
       <bump>0</bump>
       <texture>sprites/image/earth.jpg</texture>
     </mat3>
@@ -72,7 +72,7 @@
       <green>210</green>
       <blue>210</blue>
       <reflect>70</reflect>
-      <bump>0</bump>
+      <bump>0.05</bump>
       <texture>NULL</texture>
     </mat6>
 
