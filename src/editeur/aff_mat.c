@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 09:58:25 2016 Ethan Kerdelhue
-** Last update Thu May  5 08:58:46 2016 Ethan Kerdelhue
+** Last update Thu May  5 10:09:20 2016 Ethan Kerdelhue
 */
 
 #include		"main.h"
@@ -20,8 +20,6 @@ int			aff_mat(int fd, t_mat_list *mat)
   my_printf(fd, "\t\t<texture>%s</texture>\n", mat->texture_path);
   return (0);
 }
-
-x^2 * y + y * z^2 + y^3 - y - 2 * x * z - 2 * x^2 * z - 2 * y^2 * z = 0
 
 int			aff_mat_list(int fd, t_prog *prog)
 {
