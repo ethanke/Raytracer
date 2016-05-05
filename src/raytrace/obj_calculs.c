@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Thu May  5 08:14:35 2016 Victor Sousa
+** Last update Thu May  5 08:18:29 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -26,8 +26,21 @@ double			grad(int hash, double x, double y, double z)
   return (((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v));
 }
 
-double noise(double x, double y, double z)
+double			noise(double x, double y, double z)
 {
+  int			X;
+  int			Y;
+  int			Z;
+  double		u;
+  double		v;
+  double		w;
+  int			A;
+  int			AA;
+  int			AB;
+  int			B;
+  int			BA;
+  int			BB;
+
   int p[512] = {151,160,137,91,90,15,
       131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,
       190, 6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,35,11,32,57,177,33,
@@ -55,21 +68,21 @@ double noise(double x, double y, double z)
       84,204,176,115,121,50,45,127, 4,150,254,138,236,205,93,222,114,67,29,24,72,
       243,141,128,195,78,66,215,61,156,180};
 
-  int X = (int)floor(x) & 255;
-  int Y = (int)floor(y) & 255;
-  int Z = (int)floor(z) & 255;
+  X = (int)floor(x) & 255;
+  Y = (int)floor(y) & 255;
+  Z = (int)floor(z) & 255;
   x -= floor(x);
   y -= floor(y);
   z -= floor(z);
-  double u = fade(x);
-  double v = fade(y);
-  double w = fade(z);
-  int A = p[X] + Y;
-  int AA = p[A] + Z;
-  int AB = p[A + 1] + Z;
-  int B = p[X + 1] + Y;
-  int BA = p[B] + Z;
-  int BB = p[B + 1] + Z;
+  u = fade(x);
+  v = fade(y);
+  w = fade(z);
+  A = p[X] + Y;
+  AA = p[A] + Z;
+  AB = p[A + 1] + Z;
+  B = p[X + 1] + Y;
+  BA = p[B] + Z;
+  BB = p[B + 1] + Z;
   return (lerp(w, lerp(v, lerp(u, grad(p[AA], x  , y  , z   ),
 			       grad(p[BA], x-1, y  , z   )),
 		       lerp(u, grad(p[AB], x  , y-1, z   ),
@@ -82,6 +95,9 @@ double noise(double x, double y, double z)
 
 int			calc_normale(t_prog *prog, t_raycast *rcast)
 {
+  t_coord		noiseCoef;
+  float			temp;
+
   if (rcast->obj_touch->type == 's')
     calc_sphere_normale(prog, rcast);
   else if (rcast->obj_touch->type == 't')
@@ -97,13 +113,13 @@ int			calc_normale(t_prog *prog, t_raycast *rcast)
   else
     return (-1);
 
-  float noiseCoefx = noise(0.1 * rcast->new_point.x, 0.1 * rcast->new_point.y, 0.1 * rcast->new_point.z);
-  float noiseCoefy = noise(0.1 * rcast->new_point.y, 0.1 * rcast->new_point.z, 0.1 * rcast->new_point.x);
-  float noiseCoefz = noise(0.1 * rcast->new_point.z, 0.1 * rcast->new_point.x, 0.1 * rcast->new_point.y);
-  rcast->normale.x = (1.0f - rcast->mat_touch->bump) * rcast->normale.x + rcast->mat_touch->bump * noiseCoefx;
-  rcast->normale.y = (1.0f - rcast->mat_touch->bump) * rcast->normale.y + rcast->mat_touch->bump * noiseCoefy;
-  rcast->normale.z = (1.0f - rcast->mat_touch->bump) * rcast->normale.z + rcast->mat_touch->bump * noiseCoefz;
-  float temp = mult_vector(rcast->normale, rcast->normale);
+  noiseCoef.x = noise(0.1 * rcast->new_point.x, 0.1 * rcast->new_point.y, 0.1 * rcast->new_point.z);
+  noiseCoef.y = noise(0.1 * rcast->new_point.y, 0.1 * rcast->new_point.z, 0.1 * rcast->new_point.x);
+  noiseCoef.z = noise(0.1 * rcast->new_point.z, 0.1 * rcast->new_point.x, 0.1 * rcast->new_point.y);
+  rcast->normale.x = (1.0f - rcast->mat_touch->bump) * rcast->normale.x + rcast->mat_touch->bump * noiseCoef.x;
+  rcast->normale.y = (1.0f - rcast->mat_touch->bump) * rcast->normale.y + rcast->mat_touch->bump * noiseCoef.y;
+  rcast->normale.z = (1.0f - rcast->mat_touch->bump) * rcast->normale.z + rcast->mat_touch->bump * noiseCoef.z;
+  temp = mult_vector(rcast->normale, rcast->normale);
   if (temp == 0.0)
     return (-1);
   temp = invsqrtf(temp);
