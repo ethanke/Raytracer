@@ -21,7 +21,11 @@ SOURCES += main.cpp\
     glwindow.cpp \
     vector2.cpp \
     vector3.cpp \
-    myxml.cpp
+    myxml.cpp \
+    object.cpp \
+    camera.cpp \
+    vector3f.cpp \
+    vector2f.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -29,6 +33,10 @@ HEADERS  += mainwindow.h \
     glwindow.h \
     vector2.h \
     vector3.h \
-    myxml.h
+    myxml.h \
+    object.h \
+    camera.h \
+    vector3f.h \
+    vector2f.h
 
 FORMS    += mainwindow.ui
