@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QKeyEvent>
-#include "addobjectpopup.h"
 #include "scene.h"
 
 namespace Ui {
@@ -24,7 +23,6 @@ protected:
 
 public slots:
     int CloseWindow();
-    void show_pop();
 
 private slots:
     void on_loadButton_clicked();

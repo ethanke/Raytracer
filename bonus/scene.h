@@ -2,7 +2,7 @@
 #define SCENE_H
 
 #include <string>
-#include <Qstring>
+#include <QString>
 #include <QFile>
 class Scene
 {

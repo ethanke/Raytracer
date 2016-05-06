@@ -1,8 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "scene.h"
-#include "addobjectpopup.h"
-#include "QFileDialog.h"
+#include <QFileDialog>
 #include <QTextStream>
 #include <QMessageBox>
 #include <string.h>
@@ -19,12 +18,6 @@ MainWindow::MainWindow(QWidget *parent) :
 int MainWindow::CloseWindow()
 {
     exit(1);
-}
-
-void MainWindow::show_pop()
-{
-    addObjectPopup *pop = new addObjectPopup;
-    pop->show_it();
 }
 
 MainWindow::~MainWindow()
