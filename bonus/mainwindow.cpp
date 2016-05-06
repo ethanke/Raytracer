@@ -29,4 +29,9 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 void MainWindow::on_loadButton_clicked()
 {
     this->scene = new Scene(this);
+    if (this->scene->stringlist.length() != 0)
+    {
+        this->xml_file = new MyXML(this->scene->stringlist);
+        qDebug() << this->xml_file->get_field("scene:view:x_size");
+    }
 }

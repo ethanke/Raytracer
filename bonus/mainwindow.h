@@ -4,6 +4,7 @@
 #include <QApplication>
 #include <QMainWindow>
 #include <QKeyEvent>
+#include "myxml.h"
 #include "scene.h"
 
 namespace Ui {
@@ -19,6 +20,7 @@ public:
     ~MainWindow();
 
     Scene *scene;
+    MyXML *xml_file;
 
 protected:
     void keyPressEvent(QKeyEvent *event);

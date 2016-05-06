@@ -20,13 +20,15 @@ SOURCES += main.cpp\
     color.cpp \
     glwindow.cpp \
     vector2.cpp \
-    vector3.cpp
+    vector3.cpp \
+    myxml.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
     color.h \
     glwindow.h \
     vector2.h \
-    vector3.h
+    vector3.h \
+    myxml.h
 
 FORMS    += mainwindow.ui

@@ -1,5 +1,4 @@
 #include "scene.h"
-#include "mainwindow.h"
 
 Scene::Scene(QWidget *parent)
 {
