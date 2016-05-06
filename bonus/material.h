@@ -7,10 +7,11 @@
 class Material
 {
     public:
-        Material(const int id, const Color color, const float reflect, const float bump, Image texture);
+        Material();
+        Material(const int id, const Color color, const float reflect, const float bump, const Image &texture);
 
         int		id;
-        Color	color;
+        Color	*color;
         float	reflect;
         float	bump;
         Image	*texture;
