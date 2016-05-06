@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Thu May  5 09:37:28 2016 Victor Sousa
+** Last update Thu May  5 11:50:24 2016 Victor Sousa
 */
 
 #ifndef			STRUCT_H_
@@ -63,6 +63,13 @@ typedef struct		s_circle
   float			radius;
   char			material;
 }			t_circle;
+
+typedef struct		s_cube
+{
+  t_coord               center;
+  t_coord               size;
+  char			material;
+}			t_cube;
 
 typedef struct          s_cylin
 {
