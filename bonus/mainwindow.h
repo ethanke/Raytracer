@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QApplication>
 #include <QMainWindow>
 #include <QKeyEvent>
 #include "scene.h"
@@ -17,12 +18,14 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    Scene *scene;
+
 protected:
     void keyPressEvent(QKeyEvent *event);
 
 
 public slots:
-    int CloseWindow();
+    void CloseWindow();
 
 private slots:
     void on_loadButton_clicked();
