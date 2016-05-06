@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 23:01:14 2016 victor sousa
-** Last update Thu May  5 00:57:18 2016 Victor Sousa
+** Last update Thu May  5 11:56:33 2016 Victor Sousa
 */
 
 #include	"main.h"
@@ -44,6 +44,12 @@ t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist)
     	}
       if (tmp->type == 'p' &&
 	  hit_circle(ray, (t_circle *)tmp->obj, dist))
+	{
+	  out->type = tmp->type;
+	  out->obj = tmp->obj;
+	}
+      if (tmp->type == 'u' &&
+	  hit_cube(ray, (t_cube *)tmp->obj, dist))
 	{
 	  out->type = tmp->type;
 	  out->obj = tmp->obj;

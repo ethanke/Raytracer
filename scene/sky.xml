@@ -44,8 +44,7 @@
   </material_list>
 
   <object_list>
-    <count>2</count>
-
+    <count>3</count>
 
     <obj1>
       <type>sphere</type>
@@ -61,13 +60,28 @@
   <obj2>
     <type>sphere</type>
     <center>
-<x>0</x>
+<x>-100</x>
 <y>0</y>
 <z>0</z>
     </center>
-    <radius>100</radius>
+    <radius>50</radius>
     <material_id>2</material_id>
   </obj2>
+
+  <obj3>
+    <type>cube</type>
+    <center>
+      <x>100</x>
+      <y>0</y>
+      <z>0</z>
+    </center>
+    <size>
+      <x>100</x>
+      <y>50</y>
+      <z>75</z>
+    </size>
+    <material_id>2</material_id>
+  </obj3>
 </object_list>
 
   <light_list>

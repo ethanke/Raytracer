@@ -74,7 +74,7 @@
 
     <mat6>
       <red>25</red>
-      <green>210</green>
+      <green>50</green>
       <blue>210</blue>
       <reflect>70</reflect>
       <bump>0.05</bump>

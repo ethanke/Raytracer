@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:26:06 2016 victor sousa
-** Last update Thu May  5 00:57:05 2016 Victor Sousa
+** Last update Thu May  5 11:55:35 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -58,8 +58,14 @@ int			while_load_obj(char **file, char *get,
 	    return (-1);
 	}
       else if (my_strstr(get, "cylinder"))
+  	{
+  	  if ((prog->obj_list = add_cyl(prog->obj_list, file, i))
+  	      == NULL)
+  	    return (-1);
+  	}
+      else if (my_strstr(get, "cube"))
 	{
-	  if ((prog->obj_list = add_cyl(prog->obj_list, file, i))
+	  if ((prog->obj_list = add_cube(prog->obj_list, file, i))
 	      == NULL)
 	    return (-1);
 	}
