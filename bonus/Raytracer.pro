@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    addobjectpopup.cpp
+    addobjectpopup.cpp \
+    scene.cpp
 
 HEADERS  += mainwindow.h \
-    addobjectpopup.h
+    addobjectpopup.h \
+    scene.h
 
 FORMS    += mainwindow.ui
