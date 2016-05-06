@@ -9,6 +9,7 @@ void RaytraceThread::run()
         for (pos.x = 0; pos.x < 700; pos.x++)
         {
             /* set global color */
+            printf("ahah\n");
         }
     }
 }

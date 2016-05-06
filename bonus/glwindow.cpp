@@ -1,5 +1,4 @@
 #include "glwindow.h"
-#include "global.h"
 
 GlWindow::GlWindow(QWidget *parent)
     : QGLWidget(QGLFormat(QGL::SampleBuffers), parent)
@@ -23,6 +22,7 @@ void GlWindow::initializeGL()
     {
         this->pixel[i] = Color();
     }
+    this->thread = new RaytraceThread;
 }
 
 void GlWindow::resizeGL(int width, int height)
@@ -51,9 +51,7 @@ void GlWindow::paintGL()
 
 void GlWindow::raytrace_button()
 {
-    RaytraceThread thread;
-    thread.start();
-    while (thread.isRunning());
+    this->thread->start();
 }
 
 void GlWindow::setPixel(const Vector2 pixel_pos, Color color)

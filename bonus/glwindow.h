@@ -37,6 +37,7 @@ class GlWindow : public QGLWidget
 
     private:
         Color *pixel;
+        RaytraceThread *thread;
         void setPixel(const Vector2 pixel_pos, const Color color);
 };
 
