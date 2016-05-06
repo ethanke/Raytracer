@@ -25,7 +25,10 @@ SOURCES += main.cpp\
     object.cpp \
     camera.cpp \
     vector3f.cpp \
-    vector2f.cpp
+    vector2f.cpp \
+    sphere.cpp \
+    material.cpp \
+    image.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -37,6 +40,9 @@ HEADERS  += mainwindow.h \
     object.h \
     camera.h \
     vector3f.h \
-    vector2f.h
+    vector2f.h \
+    sphere.h \
+    material.h \
+    image.h
 
 FORMS    += mainwindow.ui
