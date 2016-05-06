@@ -14,10 +14,10 @@ Scene::Scene(QWidget *parent)
     else
     {
         while(!this->file->atEnd())
-        {
-            myStringList.append(this->file->readLine());
-        }
-
+             myStringList.append(this->file->readLine());
         this->file->close();
     }
+    this->stringlist = myStringList;
 }
+
+

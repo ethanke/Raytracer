@@ -13,6 +13,7 @@ public:
     Scene(QWidget *parent);
     QString path_file;
     QFile *file;
+    QStringList stringlist;
 };
 
 #endif // SCENE_H
