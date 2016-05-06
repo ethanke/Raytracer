@@ -3,7 +3,15 @@
 
 #include <QGLWidget>
 #include <QtOpenGL>
-#include <GL/glu.h>
+#ifdef __APPLE__
+    #include "TargetConditionals.h"
+    #ifdef TARGET_OS_MAC
+        #include <GLUT/glut.h>
+        #include <OpenGL/OpenGL.h>
+    #endif
+#elif defined _WIN32 || defined _WIN64
+    #include <GL/glut.h>
+#endif
 
 #include "color.h"
 #include "vector2.h"
