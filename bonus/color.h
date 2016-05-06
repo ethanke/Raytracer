@@ -11,6 +11,11 @@ class Color
         float r;
         float g;
         float b;
+
+        void clamp_color();
+
+    private:
+
 };
 
 #endif // COLOR_H

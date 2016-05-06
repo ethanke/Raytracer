@@ -6,10 +6,13 @@
 #include <QKeyEvent>
 #include "myxml.h"
 #include "scene.h"
+#include "color.h"
 
 namespace Ui {
 class MainWindow;
 }
+
+extern Color *pixel_buff;
 
 class MainWindow : public QMainWindow
 {

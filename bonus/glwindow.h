@@ -1,6 +1,7 @@
 #ifndef GLWINDOW_H
 #define GLWINDOW_H
 
+#include <QObject>
 #include <QGLWidget>
 #include <QtOpenGL>
 #ifdef __APPLE__
@@ -16,6 +17,7 @@
 #include "color.h"
 #include "vector2.h"
 #include "vector3.h"
+#include "raytracethread.h"
 
 class GlWindow : public QGLWidget
 {
@@ -30,7 +32,11 @@ class GlWindow : public QGLWidget
         void paintGL();
         void resizeGL(int width, int height);
 
+    private slots:
+        void raytrace_button();
+
     private:
+        Color *pixel;
         void setPixel(const Vector2 pixel_pos, const Color color);
 };
 

@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     vector2f.cpp \
     sphere.cpp \
     material.cpp \
-    image.cpp
+    image.cpp \
+    raytracethread.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -43,6 +44,7 @@ HEADERS  += mainwindow.h \
     vector2f.h \
     sphere.h \
     material.h \
-    image.h
+    image.h \
+    raytracethread.h
 
 FORMS    += mainwindow.ui
