@@ -1,5 +1,8 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include <QtGui>
+#include <QtXml>
+#include "xmlDom.h"
 
 int main(int argc, char *argv[])
 {

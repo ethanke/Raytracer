@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,10 +16,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     addobjectpopup.cpp \
-    scene.cpp
+    scene.cpp \
+    xmldom.cpp
 
 HEADERS  += mainwindow.h \
     addobjectpopup.h \
-    scene.h
+    scene.h \
+    xmldom.h
 
 FORMS    += mainwindow.ui

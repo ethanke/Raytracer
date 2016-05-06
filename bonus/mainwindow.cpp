@@ -3,7 +3,10 @@
 #include "scene.h"
 #include "addobjectpopup.h"
 #include "QFileDialog.h"
+#include <QTextStream>
+#include <QMessageBox>
 #include <string.h>
+#include <qdom.h>
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -42,4 +45,19 @@ void MainWindow::on_loadButton_clicked()
     Scene *scene = new Scene();
     scene->path_file = QFileDialog::getOpenFileName(this, tr("Open File"),"/path/to/file/",tr("Files Xml's only (*.xml)"));
     scene->file = new QFile(scene->path_file);
+    QStringList myStringList;
+
+    if (!scene->file->open(QIODevice::ReadOnly))
+    {
+        QMessageBox::information(0, "Error opening file", scene->file->errorString());
+    }
+    else
+    {
+        while(!scene->file->atEnd())
+        {
+            myStringList.append(scene->file->readLine());
+        }
+
+        scene->file->close();
+    }
 }
