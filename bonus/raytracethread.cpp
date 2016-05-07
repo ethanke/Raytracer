@@ -1,15 +1,26 @@
 #include "raytracethread.h"
+
 #include <QDebug>
+
+RaytraceThread::RaytraceThread(QMutex* mu, GlWindow *glWin)
+{
+    this->mutex= mu;
+    this->glWin = glWin;
+}
 
 void RaytraceThread::run()
 {
     Vector2 pos;
-    for (pos.y = 0; pos.y < 1000; pos.y++)
+    qDebug() << global_scene->camera->start.x;
+    for (pos.y = 0; pos.y < 720; pos.y++)
     {
-        for (pos.x = 0; pos.x < 700; pos.x++)
+        mutex->lock();
+        for (pos.x = 0; pos.x < 1080; pos.x++)
         {
-            /* set global color */
-            printf("ahah\n");
+
+            this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = 1;
         }
+        mutex->unlock();
+        this->glWin->update();
     }
 }

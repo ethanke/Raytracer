@@ -17,7 +17,7 @@ Color::Color(const float r, const float g, const float b)
 
 void Color::clamp_color()
 {
-    float   max = -1.0;
+    float   max = 1.0;
 
     if (this->r > max)
         max = this->r;

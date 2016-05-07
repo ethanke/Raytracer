@@ -8,6 +8,7 @@
 #include "myxml.h"
 #include "scene.h"
 #include "color.h"
+#include "global.h"
 
 namespace Ui {
 class MainWindow;

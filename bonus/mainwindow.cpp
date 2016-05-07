@@ -40,7 +40,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 
 void MainWindow::on_loadButton_clicked()
 {
-    this->scene = new Scene(this);
+    global_scene = new Scene(this);
     ui->lineEdit_wx->setReadOnly(false);
     ui->lineEdit_wy->setReadOnly(false);
     ui->lineEdit_cpx->setReadOnly(false);
@@ -61,16 +61,16 @@ void MainWindow::on_loadButton_clicked()
     ui->lineEdit_laz->setValidator( new QIntValidator(-99999999, 99999999, this));
     ui->lineEdit_fov->setValidator( new QIntValidator(0, 99999999, this));
     ui->lineEdit_aa->setValidator( new QIntValidator(1, 32, this));
-    ui->lineEdit_wx->setText(QString::number(scene->camera->win_size.x));
-    ui->lineEdit_wy->setText(QString::number(scene->camera->win_size.y));
-    ui->lineEdit_cpx->setText(QString::number(scene->camera->start.x));
-    ui->lineEdit_cpy->setText(QString::number(scene->camera->start.y));
-    ui->lineEdit_cpz->setText(QString::number(scene->camera->start.z));
-    ui->lineEdit_lax->setText(QString::number(scene->camera->look_at.x));
-    ui->lineEdit_lay->setText(QString::number(scene->camera->look_at.y));
-    ui->lineEdit_laz->setText(QString::number(scene->camera->look_at.z));
+    ui->lineEdit_wx->setText(QString::number(global_scene->camera->win_size.x));
+    ui->lineEdit_wy->setText(QString::number(global_scene->camera->win_size.y));
+    ui->lineEdit_cpx->setText(QString::number(global_scene->camera->start.x));
+    ui->lineEdit_cpy->setText(QString::number(global_scene->camera->start.y));
+    ui->lineEdit_cpz->setText(QString::number(global_scene->camera->start.z));
+    ui->lineEdit_lax->setText(QString::number(global_scene->camera->look_at.x));
+    ui->lineEdit_lay->setText(QString::number(global_scene->camera->look_at.y));
+    ui->lineEdit_laz->setText(QString::number(global_scene->camera->look_at.z));
 
-    ui->lineEdit_fov->setText(QString::number(scene->camera->fov.x));
-    ui->lineEdit_aa->setText(QString::number(scene->camera->alliasing));
+    ui->lineEdit_fov->setText(QString::number(global_scene->camera->fov.x));
+    ui->lineEdit_aa->setText(QString::number(global_scene->camera->alliasing));
 }
 

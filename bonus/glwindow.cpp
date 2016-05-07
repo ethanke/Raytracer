@@ -3,7 +3,7 @@
 GlWindow::GlWindow(QWidget *parent)
     : QGLWidget(QGLFormat(QGL::SampleBuffers), parent)
 {
-
+    this->scene = NULL;
 }
 
 GlWindow::~GlWindow()
@@ -22,7 +22,7 @@ void GlWindow::initializeGL()
     {
         this->pixel[i] = Color();
     }
-    this->thread = new RaytraceThread;
+    this->thread = new RaytraceThread(&this->mutex, this);
 }
 
 void GlWindow::resizeGL(int width, int height)
@@ -35,15 +35,14 @@ void GlWindow::resizeGL(int width, int height)
 
 void GlWindow::paintGL()
 {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
-    glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
-
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
     Vector2 pos;
     for (pos.y = 0; pos.y < this->size().height(); pos.y++)
     {
         for (pos.x = 0; pos.x < this->size().width(); pos.x++)
         {
-            setPixel(pos, this->pixel[pos.x + pos.y * this->size().width()]);
+            setPixelOnScreen(pos, this->pixel[pos.x + pos.y * this->size().width()]);
         }
     }
     glFlush();
@@ -54,7 +53,14 @@ void GlWindow::raytrace_button()
     this->thread->start();
 }
 
-void GlWindow::setPixel(const Vector2 pixel_pos, Color color)
+void GlWindow::setPixel(const Vector2 pixel_pos, const Color color)
+{
+    this->pixel[pixel_pos.x + pixel_pos.y * this->size().width()].r = color.r;
+    this->pixel[pixel_pos.x + pixel_pos.y * this->size().width()].g = color.g;
+    this->pixel[pixel_pos.x + pixel_pos.y * this->size().width()].b = color.b;
+}
+
+void GlWindow::setPixelOnScreen(const Vector2 pixel_pos, Color color)
 {
     // Draw a Red 1x1 Square
     color.clamp_color();

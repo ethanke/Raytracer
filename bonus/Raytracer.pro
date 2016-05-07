@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     sphere.cpp \
     material.cpp \
     image.cpp \
-    raytracethread.cpp
+    raytracethread.cpp \
+    global.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -45,6 +46,7 @@ HEADERS  += mainwindow.h \
     sphere.h \
     material.h \
     image.h \
-    raytracethread.h
+    raytracethread.h \
+    global.h
 
 FORMS    += mainwindow.ui

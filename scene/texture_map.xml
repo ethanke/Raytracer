@@ -14,7 +14,7 @@
       <y>0</y>
       <z>0</z>
     </look_at>
-    <fov>75</fov>
+    <fov>180</fov>
     <alias>1</alias>
     <background>NULL</background>
     </view>
