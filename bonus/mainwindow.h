@@ -25,7 +25,6 @@ public:
 
     Scene *scene;
     MyXML *xml_file;
-    QLineEdit *lineEdit;
 
 protected:
     void keyPressEvent(QKeyEvent *event);
@@ -36,6 +35,7 @@ public slots:
 
 private slots:
     void on_loadButton_clicked();
+
 
 private:
     Ui::MainWindow *ui;
