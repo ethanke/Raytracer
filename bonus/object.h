@@ -3,6 +3,7 @@
 
 #include "vector3f.h"
 #include "material.h"
+#include "camera.h"
 
 class Object
 {
@@ -11,6 +12,8 @@ class Object
 
         Vector3f    center;
         Material    *material;
+
+        bool hit(const Camera ray, float &old_dist);
 };
 
 #endif // OBJECT_H

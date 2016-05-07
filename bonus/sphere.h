@@ -9,10 +9,10 @@
 class Sphere : public Object
 {
     public:
-        Sphere(const Vector3f center, const float radius, const Material mat);
-        bool hit(const Camera ray, float &old_dist);
-
+        Sphere();
+        Sphere(const Vector3f center, const float radius, Material *mat);
         float       radius;
+        bool hit(const Camera ray, float &old_dist);
 };
 
 #endif // SPHERE_H

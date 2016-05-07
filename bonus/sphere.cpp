@@ -1,12 +1,20 @@
 #include "sphere.h"
 
-Sphere::Sphere(const Vector3f center, const float radius, const Material mat)
+Sphere::Sphere()
+{
+    this->center = Vector3f();
+    this->radius = 100;
+    this->material = new Material();
+
+}
+
+Sphere::Sphere(const Vector3f center, const float radius, Material *mat)
 {
     this->center.x = center.x;
     this->center.y = center.y;
     this->center.z = center.z;
     this->radius = radius;
-    this->material = new Material();
+    this->material = mat;
 }
 
 bool Sphere::hit(const Camera ray, float &old_dist)
@@ -16,7 +24,6 @@ bool Sphere::hit(const Camera ray, float &old_dist)
     float		delta = B * B - dist * dist + this->radius * this->radius;
     if (delta < 0)
         return (0);
-    return (1);
     float       t0 = B - sqrt(delta);
     float       t1 = B + sqrt(delta);
     if (t0 < t1 && (t0 > 0.0) && (t0 < old_dist))
