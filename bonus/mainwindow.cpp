@@ -114,3 +114,13 @@ void MainWindow::on_lineEdit_laz_editingFinished()
 {
     global_scene->camera->look_at.z = ui->lineEdit_laz->text().toFloat();
 }
+
+void MainWindow::on_lineEdit_aa_editingFinished()
+{
+    global_scene->camera->alliasing = ui->lineEdit_aa->text().toFloat();
+}
+
+void MainWindow::on_lineEdit_fov_editingFinished()
+{
+    global_scene->camera->fov.x = ui->lineEdit_fov->text().toFloat();
+}

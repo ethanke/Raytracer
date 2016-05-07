@@ -22,7 +22,4 @@ Scene::Scene(QWidget *parent)
     Vector3f look_at = Vector3f(this->myxml->get_field("scene:view:look_at:x").toFloat(), this->myxml->get_field("scene:view:look_at:y").toFloat(), this->myxml->get_field("scene:view:look_at:z").toFloat());
     Vector2 size = Vector2(this->myxml->get_field("scene:view:x_size").toInt(), this->myxml->get_field("scene:view:y_size").toInt());
     this->camera = new Camera(size, cam_pos, look_at, this->myxml->get_field("scene:view:fov").toFloat(), this->myxml->get_field("scene:view:alias").toFloat());
-    qDebug() << this->camera->start.x;
-    qDebug() << this->camera->start.y;
-    qDebug() << this->camera->start.z;
 }

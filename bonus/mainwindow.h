@@ -48,13 +48,15 @@ private slots:
 
     void on_lineEdit_cpz_editingFinished();
 
-    void on_lineEdit_lax_cursorPositionChanged(int arg1, int arg2);
-
     void on_lineEdit_lax_editingFinished();
 
     void on_lineEdit_lay_editingFinished();
 
     void on_lineEdit_laz_editingFinished();
+
+    void on_lineEdit_aa_editingFinished();
+
+    void on_lineEdit_fov_editingFinished();
 
 private:
     Ui::MainWindow *ui;
