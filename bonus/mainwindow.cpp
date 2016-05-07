@@ -69,8 +69,48 @@ void MainWindow::on_loadButton_clicked()
     ui->lineEdit_lax->setText(QString::number(global_scene->camera->look_at.x));
     ui->lineEdit_lay->setText(QString::number(global_scene->camera->look_at.y));
     ui->lineEdit_laz->setText(QString::number(global_scene->camera->look_at.z));
-
     ui->lineEdit_fov->setText(QString::number(global_scene->camera->fov.x));
     ui->lineEdit_aa->setText(QString::number(global_scene->camera->alliasing));
+
 }
 
+
+void MainWindow::on_lineEdit_wx_editingFinished()
+{
+    global_scene->camera->win_size.x = ui->lineEdit_wx->text().toFloat();
+}
+
+void MainWindow::on_lineEdit_wy_editingFinished()
+{
+    global_scene->camera->win_size.y = ui->lineEdit_wy->text().toFloat();
+}
+
+void MainWindow::on_lineEdit_cpx_editingFinished()
+{
+    global_scene->camera->start.x = ui->lineEdit_cpx->text().toFloat();
+}
+
+void MainWindow::on_lineEdit_cpy_editingFinished()
+{
+    global_scene->camera->start.y = ui->lineEdit_cpy->text().toFloat();
+}
+
+void MainWindow::on_lineEdit_cpz_editingFinished()
+{
+    global_scene->camera->start.z = ui->lineEdit_cpz->text().toFloat();
+}
+
+void MainWindow::on_lineEdit_lax_editingFinished()
+{
+    global_scene->camera->look_at.x = ui->lineEdit_lax->text().toFloat();
+}
+
+void MainWindow::on_lineEdit_lay_editingFinished()
+{
+    global_scene->camera->look_at.y = ui->lineEdit_lay->text().toFloat();
+}
+
+void MainWindow::on_lineEdit_laz_editingFinished()
+{
+    global_scene->camera->look_at.z = ui->lineEdit_laz->text().toFloat();
+}

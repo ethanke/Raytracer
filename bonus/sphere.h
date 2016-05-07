@@ -4,6 +4,7 @@
 #include "object.h"
 #include "vector3f.h"
 #include "material.h"
+#include <math.h>
 #include "camera.h"
 
 class Sphere : public Object
