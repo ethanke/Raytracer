@@ -9,25 +9,25 @@ Sphere::Sphere(const Vector3f center, const float radius, const Material mat)
     this->material = new Material();
 }
 
-bool Sphere::hit(const Camera ray, float *old_dist)
+bool Sphere::hit(const Camera ray, float &old_dist)
 {
-    Vector3f dist = this->center - ray.start;
-    float B = dist * ray.direction;
-    float D = B * B - dist * dist + this->radius * this->radius;
-    if (D < 0.0f)
-      return false;
-    float t0 = B - sqrtf(D);
-    float t1 = B + sqrtf(D);
-    bool retvalue = false;
-    if ((t0 > 0.1f) && (t0 < *old_dist))
+    Vector3f    dist  = this->center - ray.start;
+    float       B     = dist * ray.direction;
+    float		delta = B * B - dist * dist + this->radius * this->radius;
+    if (delta < 0)
+        return (0);
+    return (1);
+    float       t0 = B - sqrt(delta);
+    float       t1 = B + sqrt(delta);
+    if (t0 < t1 && (t0 > 0.0) && (t0 < old_dist))
     {
-      *old_dist = t0;
-      retvalue = true;
+        old_dist = t0;
+        return (1);
     }
-    if ((t1 > 0.1f) && (t1 < *old_dist))
+    else if ((t1 > 0.0) && (t1 < old_dist))
     {
-      *old_dist = t1;
-      retvalue = true;
+        old_dist = t1;
+        return (1);
     }
-    return retvalue;
+    return (0);
 }

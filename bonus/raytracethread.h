@@ -8,6 +8,7 @@
 #include "glwindow.h"
 #include "scene.h"
 #include "global.h"
+#include "sphere.h"
 
 class RaytraceThread : public QThread
 {

@@ -11,14 +11,16 @@
 
 class Scene
 {
-
-public:
-    Scene(QWidget *parent);
-    QString path_file;
-    QFile *file;
-    QStringList stringlist;
-    Camera *camera;
-    MyXML *myxml;
+    public:
+        Scene(QWidget *parent);
+        QString path_file;
+        QFile *file;
+        QStringList stringlist;
+        Camera *camera;
+        MyXML *myxml;
 };
+
+#else
+    class Scene;
 
 #endif // SCENE_H

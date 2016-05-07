@@ -66,10 +66,10 @@ void GlWindow::setPixelOnScreen(const Vector2 pixel_pos, Color color)
     color.clamp_color();
     glBegin(GL_QUADS);
         glColor3f(color.r, color.g, color.b);
-        glVertex2f(pixel_pos.x + 0, pixel_pos.y + 0);
-        glVertex2f(pixel_pos.x + 0, pixel_pos.y + 1);
-        glVertex2f(pixel_pos.x + 1, pixel_pos.y + 0);
-        glVertex2f(pixel_pos.x + 1, pixel_pos.y + 1);
+        glVertex2f(pixel_pos.x - 0.5, pixel_pos.y - 0.5);
+        glVertex2f(pixel_pos.x - 0.5, pixel_pos.y + 0.5);
+        glVertex2f(pixel_pos.x + 0.5, pixel_pos.y - 0.5);
+        glVertex2f(pixel_pos.x + 0.5, pixel_pos.y + 0.5);
     glEnd();
 }
 
