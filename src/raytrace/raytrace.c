@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Wed May  4 21:45:31 2016 Victor Sousa
+** Last update Sat May  7 23:18:13 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -47,9 +47,9 @@ t_color			raytrace_loop(t_prog *prog,
   return (rcast->out_col);
 }
 
-void			alias_loop(t_prog *prog,
-				   t_raycast raycast,
-				   t_bunny_position pos)
+unsigned int		calcul_pixel(t_prog *prog,
+				     t_raycast raycast,
+				     t_bunny_position pos)
 {
   t_color		col;
   t_coord		alias_pos;
@@ -72,17 +72,18 @@ void			alias_loop(t_prog *prog,
 	      while (++i_cmp < 3)
 		col.argb[i_cmp] = col.argb[i_cmp] / 2 + raycast.out_col.argb[i_cmp] / 2;
 	    }
-	  tekpixel(prog->pix, &pos, &col);
 	  alias_pos.x += 1.0;
 	}
       alias_pos.y += 1.0;
     }
+  return (col.full);
 }
 
 int			raytrace(t_prog *prog)
 {
   t_bunny_position      pos;
   t_raycast		raycast;
+  t_color		pixel_color;
 
   my_putstr("\nRaytracing started\n");
   raycast.touch_circle = 0;
@@ -91,7 +92,10 @@ int			raytrace(t_prog *prog)
     {
       pos.x = -1;
       while (++pos.x < prog->win_size.x)
-	alias_loop(prog, raycast, pos);
+	{
+	  pixel_color.full = calcul_pixel(prog, raycast, pos);
+	  tekpixel(prog->pix, &pos, &pixel_color);
+	}
     }
   bunny_blit(&prog->win->buffer, &prog->pix->clipable, &pos);
   bunny_display(prog->win);

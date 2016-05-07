@@ -16,9 +16,10 @@
     </look_at>
     <fov>75</fov>
     <alias>1</alias>
-    <background>sprites/image/sky1.png<background>
-    </view>
+    <background>sprites/image/sky1.png</background>
+  </view>
 
+  <material_list>
     <count>8</count>
 
     <mat1>

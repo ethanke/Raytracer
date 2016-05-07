@@ -12,6 +12,8 @@ class Sphere : public Object
         Sphere();
         Sphere(const Vector3f center, const float radius, Material *mat);
         float       radius;
+
+
         bool hit(const Camera ray, float &old_dist);
 };
 
