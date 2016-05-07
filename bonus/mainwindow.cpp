@@ -77,50 +77,60 @@ void MainWindow::on_loadButton_clicked()
 
 void MainWindow::on_lineEdit_wx_editingFinished()
 {
+    if (ui->lineEdit_wx->text() != NULL)
     global_scene->camera->win_size.x = ui->lineEdit_wx->text().toFloat();
 }
 
 void MainWindow::on_lineEdit_wy_editingFinished()
 {
+    if (ui->lineEdit_wy->text() != NULL)
     global_scene->camera->win_size.y = ui->lineEdit_wy->text().toFloat();
 }
 
 void MainWindow::on_lineEdit_cpx_editingFinished()
 {
+    if (ui->lineEdit_cpx->text() != NULL)
     global_scene->camera->start.x = ui->lineEdit_cpx->text().toFloat();
 }
 
 void MainWindow::on_lineEdit_cpy_editingFinished()
 {
+    if (ui->lineEdit_cpy->text() != NULL)
     global_scene->camera->start.y = ui->lineEdit_cpy->text().toFloat();
 }
 
 void MainWindow::on_lineEdit_cpz_editingFinished()
 {
+    if (ui->lineEdit_cpz->text() != NULL)
     global_scene->camera->start.z = ui->lineEdit_cpz->text().toFloat();
 }
 
 void MainWindow::on_lineEdit_lax_editingFinished()
 {
+    if (ui->lineEdit_lax->text() != NULL)
     global_scene->camera->look_at.x = ui->lineEdit_lax->text().toFloat();
 }
 
 void MainWindow::on_lineEdit_lay_editingFinished()
 {
+    if (ui->lineEdit_lay->text() != NULL)
     global_scene->camera->look_at.y = ui->lineEdit_lay->text().toFloat();
 }
 
 void MainWindow::on_lineEdit_laz_editingFinished()
 {
+    if (ui->lineEdit_laz->text() != NULL)
     global_scene->camera->look_at.z = ui->lineEdit_laz->text().toFloat();
 }
 
 void MainWindow::on_lineEdit_aa_editingFinished()
 {
+    if (ui->lineEdit_aa->text() != NULL)
     global_scene->camera->alliasing = ui->lineEdit_aa->text().toFloat();
 }
 
 void MainWindow::on_lineEdit_fov_editingFinished()
 {
+    if (ui->lineEdit_fov->text() != NULL)
     global_scene->camera->fov.x = ui->lineEdit_fov->text().toFloat();
 }
