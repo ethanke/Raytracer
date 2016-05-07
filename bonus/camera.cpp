@@ -1,7 +1,10 @@
 #include "camera.h"
 
-Camera::Camera(const Vector3f start, const Vector3f look_at, const Vector2f fov, const int alliasing)
+Camera::Camera(const Vector2 size, const Vector3f start, const Vector3f look_at, const float fov, const int alliasing)
 {
+    this->win_size.x = size.x;
+    this->win_size.y = size.y;
+
     this->start.x = start.x;
     this->start.y = start.y;
     this->start.z = start.z;
@@ -11,7 +14,8 @@ Camera::Camera(const Vector3f start, const Vector3f look_at, const Vector2f fov,
     this->look_at.z = look_at.z;
 
     /* configure fov */
-
+    this->fov.x = fov;
+    this->fov.y = this->fov.x * ((this->win_size.x / this->win_size.y) / 1.5);
     /* configure dir */
 
     this->alliasing = alliasing;

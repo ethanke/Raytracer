@@ -17,6 +17,12 @@ Scene::Scene(QWidget *parent)
         this->file->close();
     }
     this->stringlist = myStringList;
+    this->myxml = new MyXML(this->stringlist);
+    Vector3f cam_pos = Vector3f(this->myxml->get_field("scene:view:cam_pos:x").toFloat(), this->myxml->get_field("scene:view:cam_pos:y").toFloat(), this->myxml->get_field("scene:view:cam_pos:z").toFloat());
+    Vector3f look_at = Vector3f(this->myxml->get_field("scene:view:look_at:x").toFloat(), this->myxml->get_field("scene:view:look_at:y").toFloat(), this->myxml->get_field("scene:view:look_at:z").toFloat());
+    Vector2 size = Vector2(this->myxml->get_field("scene:view:x_size").toInt(), this->myxml->get_field("scene:view:y_size").toInt());
+    this->camera = new Camera(size, cam_pos, look_at, this->myxml->get_field("scene:view:fov").toFloat(), this->myxml->get_field("scene:view:alias").toFloat());
+    qDebug() << this->camera->start.x;
+    qDebug() << this->camera->start.y;
+    qDebug() << this->camera->start.z;
 }
-
-

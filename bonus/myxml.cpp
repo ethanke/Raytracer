@@ -23,8 +23,12 @@ QString MyXML::get_field(const char *_field)
             parent_i++;
             if (parent_i >= parent.length())
             {
-                out = this->file.at(field_i).mid(this->file.at(field_i).indexOf(">") + 1,
-                                                 this->file.at(field_i).indexOf("<", 2));
+                out = this->file.at(field_i);
+                int beg = 0;
+                while (out.at(beg++) != '>');
+                int end = 0;
+                while (out.at(beg + end++) != '<');
+                out = out.mid(beg, --end);
                 return (out);
             }
         }

@@ -6,6 +6,9 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
+#include "camera.h"
+#include "myxml.h"
+
 class Scene
 {
 
@@ -14,6 +17,8 @@ public:
     QString path_file;
     QFile *file;
     QStringList stringlist;
+    Camera *camera;
+    MyXML *myxml;
 };
 
 #endif // SCENE_H

@@ -4,6 +4,7 @@
 #include <QApplication>
 #include <QMainWindow>
 #include <QKeyEvent>
+#include <QLineEdit>
 #include "myxml.h"
 #include "scene.h"
 #include "color.h"
@@ -24,6 +25,7 @@ public:
 
     Scene *scene;
     MyXML *xml_file;
+    QLineEdit *lineEdit;
 
 protected:
     void keyPressEvent(QKeyEvent *event);
