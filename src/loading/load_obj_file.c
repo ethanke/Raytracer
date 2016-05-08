@@ -19,7 +19,7 @@ static t_light_list	*add_empty_light(t_light_list *prev)
   new->center.x = 0;
   new->center.y = 500;
   new->center.z = 0;
-  new->intensity = 100;
+  new->intensity = 200;
   new->next = prev;
   return (new);
 }
@@ -32,7 +32,7 @@ static t_light_list	*add_empty_light2(t_light_list *prev)
   new->center.x = 0;
   new->center.y = -500;
   new->center.z = 0;
-  new->intensity = 100;
+  new->intensity = 200;
   new->next = prev;
   return (new);
 }
@@ -45,7 +45,7 @@ static t_light_list	*add_empty_light3(t_light_list *prev)
   new->center.x = 500;
   new->center.y = 0;
   new->center.z = 0;
-  new->intensity = 100;
+  new->intensity = 200;
   new->next = prev;
   return (new);
 }
@@ -58,7 +58,7 @@ static t_light_list	*add_empty_light4(t_light_list *prev)
   new->center.x = -500;
   new->center.y = 0;
   new->center.z = 0;
-  new->intensity = 100;
+  new->intensity = 200;
   new->next = prev;
   return (new);
 }
@@ -101,10 +101,10 @@ int			load_obj_file(t_prog *prog, char *path)
   t_vtx_list		*vtx_list;
   t_coord		dir;
 
-  prog->win_size.x = 1080;
-  prog->win_size.y = 720;
+  prog->win_size.x = 200;
+  prog->win_size.y = 100;
   prog->cam_pos.x = -500;
-  prog->cam_pos.y = 0;
+  prog->cam_pos.y = 125;
   prog->cam_pos.z = -500;
   prog->cam_fov.x = 75;
   prog->cam_fov.y = prog->cam_fov.x * ((prog->win_size.x / prog->win_size.y) / 1.5);

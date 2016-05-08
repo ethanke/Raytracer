@@ -44,6 +44,7 @@ void RaytraceThread::run()
             this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = objectList[objTouched]->material->color->r;
             this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = objectList[objTouched]->material->color->g;
             this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = objectList[objTouched]->material->color->b;
+
              //Vector3f hitPoint = camera.start + camera.direction * hitDist;
              //
              //*normale on hit_pont, a faire avec des methodes pour chaque object*/
