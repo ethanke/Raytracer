@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Sun May  8 04:32:20 2016 Philippe Lefevre
+## Last update Sun May  8 05:35:04 2016 Philippe Lefevre
 ##
 
 NAME		=	raytracer2
@@ -29,7 +29,6 @@ RM		=	rm -f
 
 CC		=	gcc
 CFLAGS		=	-W -Wall -Wextra -DMACRO -g3 -ggdb \
-			-ansi -pedantic				\
 			-I/home/${USER}/.froot/include		\
 			-I$(INCDIR)
 

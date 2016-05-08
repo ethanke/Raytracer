@@ -5,7 +5,7 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Sun May  8 02:20:22 2016 Philippe Lefevre
-** Last update Sun May  8 05:27:50 2016 Philippe Lefevre
+** Last update Sun May  8 05:33:34 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -37,10 +37,10 @@ void			*raytrace_zone(void *p)
 
 int			raytrace_threading(t_prog *prog)
 {
-  t_bunny_position      pos;
   pthread_t		thread_id[prog->thread_nb];
-  int			i;
   time_t		mytime;
+  t_bunny_position      pos;
+  int			i;
 
   pos.x = 0;
   pos.y = 0;
