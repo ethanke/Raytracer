@@ -15,11 +15,11 @@ Vector3f::Vector3f(const float x, const float y, const float z)
     this->z = z;
 }
 
-Vector3f::Vector3f(const char *beg_string, MyXML *file)
+Vector3f::Vector3f(const QString beg_string, MyXML *file)
 {
-    this->x = file->get_field((QString(beg_string) + QString("x")).toLatin1().data()).toFloat();
-    this->y = file->get_field((QString(beg_string) + QString("y")).toLatin1().data()).toFloat();
-    this->z = file->get_field((QString(beg_string) + QString("z")).toLatin1().data()).toFloat();
+    this->x = file->get_field(((QString(beg_string) + QString("x")).toLatin1().data())).toFloat();
+    this->y = file->get_field(((QString(beg_string) + QString("y")).toLatin1().data())).toFloat();
+    this->z = file->get_field(((QString(beg_string) + QString("z")).toLatin1().data())).toFloat();
 }
 
 Vector3f Vector3f::operator * (float c)

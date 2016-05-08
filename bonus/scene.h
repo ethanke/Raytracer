@@ -6,12 +6,15 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
+#include "object.h"
 #include "camera.h"
 #include "myxml.h"
 
 class Scene
 {
     public:
+        Object *objectList;
+        int objectCount;
         Scene(QWidget *parent);
         QString path_file;
         QFile *file;

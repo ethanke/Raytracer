@@ -533,20 +533,47 @@
      <attribute name="title">
       <string>Objets</string>
      </attribute>
-     <widget class="QListWidget" name="listWidget">
+     <widget class="QTableWidget" name="listObject">
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>20</y>
+        <y>10</y>
         <width>256</width>
         <height>192</height>
        </rect>
       </property>
-      <item>
+      <property name="styleSheet">
+       <string notr="true">QTableView {
+   	text-align: center;
+
+}</string>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <column>
        <property name="text">
-        <string>Sphère</string>
+        <string>type</string>
        </property>
-      </item>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+       <property name="foreground">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>0</red>
+          <green>0</green>
+          <blue>0</blue>
+         </color>
+        </brush>
+       </property>
+      </column>
      </widget>
     </widget>
    </widget>

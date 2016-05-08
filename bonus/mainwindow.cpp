@@ -18,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEdit_laz->setReadOnly(true);
     ui->lineEdit_fov->setReadOnly(true);
     ui->lineEdit_aa->setReadOnly(true);
+    ui->listObject->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->listObject->setColumnWidth(0, ui->listObject->size().width());
+    ui->listObject->setSelectionMode(QAbstractItemView::SingleSelection);
 }
 
 void MainWindow::CloseWindow()
@@ -71,9 +74,15 @@ void MainWindow::on_loadButton_clicked()
     ui->lineEdit_laz->setText(QString::number(global_scene->camera->look_at.z));
     ui->lineEdit_fov->setText(QString::number(global_scene->camera->fov.x));
     ui->lineEdit_aa->setText(QString::number(global_scene->camera->alliasing));
+    int i = 0;
+    while (i < global_scene->objectCount)
+    {
+        ui->listObject->insertRow(i);
+        ui->listObject->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->objectList[i].center.x), 1));
+        i++;
+    }
 
 }
-
 
 void MainWindow::on_lineEdit_wx_editingFinished()
 {

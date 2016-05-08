@@ -16,4 +16,6 @@ class Object
         bool hit(const Camera ray, float &old_dist);
 };
 
+#else
+    class Object;
 #endif // OBJECT_H

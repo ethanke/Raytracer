@@ -10,7 +10,7 @@ class Vector3f
     public:
         Vector3f();
         Vector3f(const float x, const float y, const float z);
-        Vector3f(const char *beg_string, MyXML *file);
+        Vector3f(const QString beg_string, MyXML *file);
 
         float x;
         float y;
