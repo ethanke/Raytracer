@@ -21,6 +21,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->listObject->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->listObject->setColumnWidth(0, ui->listObject->size().width());
     ui->listObject->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->listLight->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->listLight->setColumnWidth(0, ui->listObject->size().width());
+    ui->listLight->setSelectionMode(QAbstractItemView::SingleSelection);
 }
 
 void MainWindow::CloseWindow()
@@ -75,13 +78,21 @@ void MainWindow::on_loadButton_clicked()
     ui->lineEdit_fov->setText(QString::number(global_scene->camera->fov.x));
     ui->lineEdit_aa->setText(QString::number(global_scene->camera->alliasing));
     int i = 0;
-    while (i < global_scene->objectCount)
+    while (i < global_scene->objectList.size())
     {
         ui->listObject->insertRow(i);
-        ui->listObject->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->objectList[i].center.x), 1));
+        ui->listObject->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->objectList[i]->center.x), 1));
         i++;
     }
-
+    i = 0;
+    qDebug(" ---- ");
+    while (i < global_scene->lightCount)
+    {
+        qDebug() << QString::number(global_scene->lightList[i]->intensity);
+        ui->listLight->insertRow(i);
+        ui->listLight->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->lightList[i]->intensity), 1));
+        i++;
+    }
 }
 
 void MainWindow::on_lineEdit_wx_editingFinished()

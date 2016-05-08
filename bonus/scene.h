@@ -5,16 +5,20 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <vector>
 
 #include "object.h"
 #include "camera.h"
+#include "light.h"
 #include "myxml.h"
 
 class Scene
 {
     public:
-        Object *objectList;
+        std::vector<Object *> objectList;
+        std::vector<Light  *> lightList;
         int objectCount;
+        int lightCount;
         Scene(QWidget *parent);
         QString path_file;
         QFile *file;

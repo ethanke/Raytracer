@@ -17,15 +17,6 @@ void RaytraceThread::run()
                             global_scene->camera->look_at,
                             global_scene->camera->fov.x,
                             global_scene->camera->alliasing);
-
-    std::vector<Object *> objectList;
-    objectList.push_back(new Sphere(Vector3f(-225, 100.0, 0.0), 100, new Material(1, Color(0.0, 0.0, 1.0), 50, 0, Image("bite"))));
-    objectList.push_back(new Sphere(Vector3f(-112.0, -100.0, 0.0), 100, new Material(1, Color(1.0, 1.0, 0.0), 50, 0, Image("bite"))));
-    objectList.push_back(new Sphere(Vector3f(0.0, 100.0, 0.0), 100, new Material(1, Color(0.25, 0.25, 0.25), 50, 0, Image("bite"))));
-    objectList.push_back(new Sphere(Vector3f(112, -100.0, 0.0), 100, new Material(1, Color(0.0, 1.0, 0.0), 50, 0, Image("bite"))));
-    objectList.push_back(new Sphere(Vector3f(225.0, 100.0, 0.0), 100, new Material(1, Color(1.0, 0.0, 0.0), 50, 0, Image("bite"))));
-    objectList.push_back(new Plan(Vector3f(0.0, -200.0, 0.0), Vector3f(0.0, -1.0, 0.0), new Material(1, Color(0.5, 0.5, 0.5), 50, 0, Image("bite"))));
-
     for (pos.y = 0; pos.y < this->glWin->size().height(); pos.y++)
     {
         mutex->lock();
@@ -38,21 +29,21 @@ void RaytraceThread::run()
             {
                 int   objTouched = -1;
                 float hitDist = 20000.0;
-                for (int obj_i = 0; obj_i < objectList.size(); obj_i++)
+                for (int obj_i = 0; obj_i < global_scene->objectList.size(); obj_i++)
                 {
-                    if (objectList.at(obj_i)->hit(camera, hitDist))
+                    if (global_scene->objectList.at(obj_i)->hit(camera, hitDist))
                         objTouched = obj_i;
                 }
                 if (objTouched != -1)
                 {
-                    this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = objectList.at(objTouched)->material->color->r;
-                    this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = objectList.at(objTouched)->material->color->g;
-                    this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = objectList.at(objTouched)->material->color->b;
+                    this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = global_scene->objectList.at(objTouched)->material->color->r;
+                    this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = global_scene->objectList.at(objTouched)->material->color->g;
+                    this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = global_scene->objectList.at(objTouched)->material->color->b;
 
                     Vector3f hitPoint = camera.start + camera.direction * hitDist;
 
                     /*normale on hit_pont, a faire avec des methodes pour chaque object, ini fait pour une sphere*/
-                    Vector3f normale = hitPoint - objectList[objTouched]->center;
+                    Vector3f normale = hitPoint - global_scene->objectList[objTouched]->center;
                     float tmp = normale * normale;
                     if (tmp == 0.0f)
                        break;

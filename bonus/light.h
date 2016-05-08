@@ -10,10 +10,13 @@ class Light
 
 public:
         Light(Vector3f center, float inten);
+        Light();
 
         Vector3f		center;
         float		intensity;
-
 };
+
+#else
+    class Light;
 
 #endif // LIGHT_H
