@@ -34,3 +34,8 @@ bool Plan::hit(const Camera ray, float &old_dist)
     }
     return (0);
 }
+
+QString Plan::getObjectType()
+{
+    return (QString("plan"));
+}

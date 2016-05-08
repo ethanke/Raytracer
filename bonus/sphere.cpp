@@ -38,3 +38,8 @@ bool Sphere::hit(const Camera ray, float &old_dist)
     }
     return (0);
 }
+
+QString Sphere::getObjectType()
+{
+    return (QString("sphere"));
+}

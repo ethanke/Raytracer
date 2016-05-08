@@ -23,6 +23,7 @@ class RaytraceThread : public QThread
 
     protected:
         void run();
+
 };
 
 #else

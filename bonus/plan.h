@@ -13,7 +13,8 @@ class Plan : public Object
         Vector3f    center;
         Vector3f    direction;
 
-        bool hit(const Camera ray, float &old_dist);
+        virtual bool hit(const Camera ray, float &old_dist);
+        virtual QString getObjectType();
 };
 
 #endif // PLAN_H

@@ -13,9 +13,12 @@ class Object
         Vector3f    center;
         Material    *material;
 
-        bool hit(const Camera ray, float &old_dist);
+        virtual bool hit(const Camera ray, float &old_dist);
+        virtual QString getObjectType();
+
 };
 
 #else
     class Object;
+
 #endif // OBJECT_H

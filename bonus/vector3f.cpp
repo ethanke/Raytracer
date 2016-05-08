@@ -28,6 +28,12 @@ Vector3f Vector3f::operator * (float c)
    return (out);
 }
 
+Vector3f Vector3f::operator + (const Vector3f v1)
+{
+    Vector3f out = {this->x + v1.x, this->y + v1.y, this->z + v1.z};
+    return (out);
+}
+
 Vector3f Vector3f::operator - (const Vector3f v1)
 {
     Vector3f out = {this->x - v1.x, this->y - v1.y, this->z - v1.z};

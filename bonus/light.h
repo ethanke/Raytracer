@@ -5,11 +5,11 @@
 #include "material.h"
 #include "object.h"
 
-class Light : public Object
+class Light
 {
 
 public:
-        Light(Vector3f center, float inten, Material *mat);
+        Light(Vector3f center, float inten);
 
         Vector3f		center;
         float		intensity;
