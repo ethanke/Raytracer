@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:45:54 2016 victor sousa
-** Last update Wed May  4 22:10:24 2016 Victor Sousa
+** Last update Sun May  8 04:02:50 2016 Philippe Lefevre
 */
 
 #ifndef			MAIN_H_
@@ -16,6 +16,7 @@
 # include               <sys/types.h>
 # include               <sys/stat.h>
 # include               <fcntl.h>
+# include		<pthread.h>
 
 # include		"lapin.h"
 # include		"image.h"
@@ -34,6 +35,7 @@
 # define		Deg_To_Rad(ang)	((ang) / 180.0 * M_PI)
 # define		ABS(x)		((x)<0 ? -(x) : (x))
 # define		NEG(x)		((x)<0 ? (x) : -(x))
+# define		NTHREADS	4
 
 t_bunny_response	mainloop(void *p);
 void			free_stuff(t_prog *prog);

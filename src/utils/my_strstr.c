@@ -1,11 +1,11 @@
 /*
 ** my_strstr.c for raytracer in /home/sousa_v/rendu/lapin/gfx_raytracer1
-** 
+**
 ** Made by victor sousa
 ** Login   <sousa_v@epitech.net>
-** 
+**
 ** Started on  Tue Feb  9 07:36:05 2016 victor sousa
-** Last update Fri Mar 11 00:09:48 2016 victor sousa
+** Last update Sun May  8 04:24:09 2016 Philippe Lefevre
 */
 
 #include	"main.h"

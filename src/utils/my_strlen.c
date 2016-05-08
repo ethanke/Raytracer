@@ -5,10 +5,10 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 05:30:17 2016 victor sousa
-** Last update Mon Apr 25 05:29:56 2016 Ethan Kerdelhue
+** Last update Sun May  8 04:32:00 2016 Philippe Lefevre
 */
 
-#include	"main.h"
+#include		"main.h"
 
 int			my_strcmp(char *s1, char *s2)
 {

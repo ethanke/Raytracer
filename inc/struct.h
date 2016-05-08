@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Thu May  5 11:50:24 2016 Victor Sousa
+** Last update Sun May  8 04:15:29 2016 Philippe Lefevre
 */
 
 #ifndef			STRUCT_H_
@@ -198,6 +198,8 @@ typedef struct          s_prog
   t_texture		*background;
   char			*background_path;
   int			anti_alias;
+  int			thread_nb;
+  int			thread_id;
 }                       t_prog;
 
 typedef struct s_cmd

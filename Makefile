@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Wed May  4 13:31:58 2016 Kerdelhue Ethan
+## Last update Sun May  8 04:32:20 2016 Philippe Lefevre
 ##
 
 NAME		=	raytracer2
@@ -41,7 +41,7 @@ LDFLAGS		=	-L/home/${USER}/.froot/lib		\
 			-lsfml-window				\
 			-lsfml-system				\
 			-lstdc++ -ldl				\
-			-lm
+			-lm -lpthread
 
 ##  MAIN  ##
 SRC		=	src/main.c				\
@@ -77,6 +77,7 @@ SRC		+=	src/hit/hit.c				\
 
 ##  RAYTRACE  ##
 SRC		+=	src/raytrace/raytrace.c			\
+			src/raytrace/raytrace_threading.c	\
 			src/raytrace/shad_n_light.c		\
 			src/raytrace/reflect.c			\
 			src/raytrace/obj_calculs.c

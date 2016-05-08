@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Sat May  7 23:18:13 2016 Victor Sousa
+** Last update Sun May  8 05:24:36 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -57,6 +57,7 @@ unsigned int		calcul_pixel(t_prog *prog,
 
   col.full = 0xFF000000;
   alias_pos.y = pos.y;
+
   while (alias_pos.y < pos.y + prog->anti_alias)
     {
       alias_pos.x = pos.x;
@@ -76,6 +77,7 @@ unsigned int		calcul_pixel(t_prog *prog,
 	}
       alias_pos.y += 1.0;
     }
+
   return (col.full);
 }
 

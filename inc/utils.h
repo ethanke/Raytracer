@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 05:29:22 2016 victor sousa
-** Last update Thu May  5 08:14:41 2016 Victor Sousa
+** Last update Sun May  8 04:29:41 2016 Philippe Lefevre
 */
 
 #ifndef			UTILS_H_
