@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Sun May  8 05:35:04 2016 Philippe Lefevre
+## Last update Sun May  8 05:43:16 2016 Philippe Lefevre
 ##
 
 NAME		=	raytracer2
@@ -138,7 +138,8 @@ SRC		+=	src/image/load_image.c			\
 			src/image/hitbox_creator.c
 
 ##  UTILS  ##
-SRC		+=	src/utils/my_tablen.c			\
+SRC		+=	src/utils/tekpixel.c			\
+			src/utils/my_tablen.c			\
 			src/utils/my_str_to_wordtab.c		\
 			src/utils/str_to_wordtab.c		\
 			src/utils/my_strstr.c			\
@@ -162,7 +163,6 @@ SRC		+=	src/output/my_putchar.c			\
 			src/output/my_strlen.c
 
 ##  TCORE  ##
-SRC		+=	tcore/tekpixel.c
 
 
 OBJ		=	$(SRC:.c=.o)
