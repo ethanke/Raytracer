@@ -9,7 +9,7 @@
 */
 
 #include		"main.h"
-
+ 
 static t_light_list	*add_empty_light(t_light_list *prev)
 {
   t_light_list          *new;
