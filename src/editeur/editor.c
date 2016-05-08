@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 03:54:51 2016 Ethan Kerdelhue
-** Last update Thu May  5 08:14:12 2016 Ethan Kerdelhue
+** Last update Sun May  8 05:52:43 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -82,7 +82,7 @@ int			aff_xml(t_prog *prog)
   return (0);
 }
 
-void			editor(void)
+int			editor(void)
 {
   t_prog		*prog;
   t_cmd			cmd;
@@ -100,4 +100,5 @@ void			editor(void)
       free(str);
       disp_info();
     }
+  return (0);
 }

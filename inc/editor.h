@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 04:09:19 2016 Ethan Kerdelhue
-** Last update Thu May  5 01:16:38 2016 Ethan Kerdelhue
+** Last update Sun May  8 05:53:05 2016 Philippe Lefevre
 */
 
 #ifndef			EDITOR_H_
@@ -18,7 +18,7 @@
 # define		ERR_NOSTR		-3
 # define		ERR_NOFD		-4
 
-void			editor(void);
+int			editor(void);
 int			aff_light(int fd, t_light_list *light);
 int			aff_light_list(int fd, t_prog *prog);
 int			aff_mat(int fd, t_mat_list *mat);

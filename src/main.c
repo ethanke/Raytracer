@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Sun May  8 05:33:43 2016 Philippe Lefevre
+** Last update Sun May  8 06:04:08 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -27,7 +27,7 @@ int			verif_load(t_prog *prog, char *args)
     ret = load_obj_file(prog, args);
   else
     return (0);
- if (ret == -1)
+  if (ret == -1)
     {
       my_putstr("scene   loading  failed... leaving\n");
       return (-1);
@@ -39,11 +39,11 @@ int			verif_load(t_prog *prog, char *args)
 
 int			disp_help(char *bin)
 {
-my_printf(1, "Usage: %s [path/to/scene.xml] [--thread={nb thread}]\n", bin);
-my_printf(1, "  OR   %s [path/to/scene.obj] [--thread={nb thread}]\n", bin);
+  my_printf(1, "Usage: %s [path/to/scene.xml] [--thread={nb thread}]\n", bin);
+  my_printf(1, "  OR   %s [path/to/scene.obj] [--thread={nb thread}]\n", bin);
   my_printf(1, "  OR   %s --edit\n", bin);
   return (-1);
- }
+}
 
 int			verif_arg(int ac, char **av, char **env, t_prog *prog)
 {
@@ -53,30 +53,29 @@ int			verif_arg(int ac, char **av, char **env, t_prog *prog)
   i = 0;
   if (env == NULL)
     return (-1);
-  if (ac < 2 || ac > 4)
+  if (ac < 2 || ac > 3)
     return (disp_help(av[0]));
   prog->thread_nb = 0;
   while (av[++i])
-    {
-      if ((ret = verif_load(prog, av[i])))
-	{
-	  if (ret == -1)
-	    return (ret);
-	}
-      else if (!(my_strncmp("--thread=", av[i], 9)))
-	{
-	  prog->thread_nb = my_getnbr(av[i] + 9);
-	  if (prog->thread_nb < 1)
-	    return (my_printf(2, "Error: number of thread must be positive\n") - 1);
-	}
-      else if (!(my_strcmp("--edit", av[i])))
-	{
-	  editor();
-	  return (-1);
-	}
-      else
-	return (disp_help(av[0]));
-    }
+    if ((ret = verif_load(prog, av[i])))
+      {
+	if (ret == -1)
+	  return (ret);
+      }
+    else if (!(my_strncmp("--thread=", av[i], 9)))
+      {
+	prog->thread_nb = my_getnbr(av[i] + 9);
+	if (prog->thread_nb < 1)
+	  return (my_printf(2, "Error: number of thread must be positive\n") - 1);
+      }
+    else if (!(my_strcmp("--edit", av[i])))
+      {
+	if (prog->thread_nb)
+	  return (disp_help(av[0]));
+	return (editor() - 1);
+      }
+    else
+      return (disp_help(av[0]));
   return (0);
 }
 
@@ -96,7 +95,7 @@ int			create_pix(t_prog *prog)
 int			create_win(t_prog *prog)
 {
   if ((prog->win = bunny_start(prog->win_size.x, prog->win_size.y,
-			      false, "Raytracer 2")) == NULL)
+			       false, "Raytracer 2")) == NULL)
     {
       my_putstr("windows creation failed... leaving\n");
       return (-1);
