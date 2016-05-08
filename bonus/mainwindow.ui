@@ -627,7 +627,7 @@
      <attribute name="title">
       <string>Matériaux</string>
      </attribute>
-     <widget class="QTableWidget" name="listLight_2">
+     <widget class="QTableWidget" name="listMat">
       <property name="geometry">
        <rect>
         <x>30</x>

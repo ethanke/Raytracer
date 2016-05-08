@@ -9,6 +9,7 @@
 
 #include "object.h"
 #include "camera.h"
+#include "material.h"
 #include "light.h"
 #include "myxml.h"
 
@@ -17,8 +18,10 @@ class Scene
     public:
         std::vector<Object *> objectList;
         std::vector<Light  *> lightList;
+        std::vector<Material  *> matList;
         int objectCount;
         int lightCount;
+        int matCount;
         Scene(QWidget *parent);
         QString path_file;
         QFile *file;

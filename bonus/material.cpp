@@ -9,11 +9,11 @@ Material::Material()
     this->texture = new Image("NULL");
 }
 
-Material::Material(const int id, const Color color, const float reflect, const float bump, const Image &texture)
+Material::Material(const int id, const Color color, const float reflect, const float bump, Image *texture)
 {
     this->id = id;
     this->color = new Color(color.r, color.g, color.b);
     this->reflect = reflect;
     this->bump = bump;
-    this->texture = new Image(texture.file_path, texture.size, texture.pixel);
+    this->texture = texture;
 }

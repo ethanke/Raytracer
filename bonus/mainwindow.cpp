@@ -22,8 +22,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->listObject->setColumnWidth(0, ui->listObject->size().width());
     ui->listObject->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->listLight->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->listLight->setColumnWidth(0, ui->listObject->size().width());
+    ui->listLight->setColumnWidth(0, ui->listLight->size().width());
     ui->listLight->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->listMat->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->listMat->setColumnWidth(0, ui->listMat->size().width());
+    ui->listMat->setSelectionMode(QAbstractItemView::SingleSelection);
 }
 
 void MainWindow::CloseWindow()
@@ -78,6 +81,13 @@ void MainWindow::on_loadButton_clicked()
     ui->lineEdit_fov->setText(QString::number(global_scene->camera->fov.x));
     ui->lineEdit_aa->setText(QString::number(global_scene->camera->alliasing));
     int i = 0;
+    while (i < global_scene->matList.size())
+    {
+        ui->listMat->insertRow(i);
+        ui->listMat->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->matList[i]->color->r * 255), 1));
+        i++;
+    }
+    i = 0;
     while (i < global_scene->objectList.size())
     {
         ui->listObject->insertRow(i);
@@ -85,10 +95,8 @@ void MainWindow::on_loadButton_clicked()
         i++;
     }
     i = 0;
-    qDebug(" ---- ");
     while (i < global_scene->lightCount)
     {
-        qDebug() << QString::number(global_scene->lightList[i]->intensity);
         ui->listLight->insertRow(i);
         ui->listLight->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->lightList[i]->intensity), 1));
         i++;
