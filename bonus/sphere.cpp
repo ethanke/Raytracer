@@ -21,7 +21,7 @@ bool Sphere::hit(const Camera ray, float &old_dist)
 {
     Vector3f    dist  = this->center - ray.start;
     float       B     = dist * ray.direction;
-    float		delta = B * B - dist * dist + this->radius * this->radius;
+    float		delta = B * B - (dist * dist) + (this->radius * this->radius);
     if (delta < 0)
         return (0);
     float       t0 = B - sqrt(delta);

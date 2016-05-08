@@ -23,7 +23,7 @@ void RaytraceThread::run()
     objectList[2] = new Sphere(Vector3f(0.0, 100.0, 0.0), 100, new Material(1, Color(0.25, 0.25, 0.25), 50, 0, Image("bite")));
     objectList[3] = new Sphere(Vector3f(112, -100.0, 0.0), 100, new Material(1, Color(0.0, 1.0, 0.0), 50, 0, Image("bite")));
     objectList[4] = new Sphere(Vector3f(225.0, 100.0, 0.0), 100, new Material(1, Color(1.0, 0.0, 0.0), 50, 0, Image("bite")));
-    objectList[5] = new Plan(Vector3f(0.0, -.0, 0.0), Vector3f(0.0, -1.0, 0.0), new Material(1, Color(1.0, 0.0, 0.0), 50, 0, Image("bite")));
+    objectList[5] = new Plan(Vector3f(0.0, -1.0, 0.0), Vector3f(0.0, -1.0, 0.0), new Material(1, Color(1.0, 0.0, 0.0), 50, 0, Image("bite")));
 
     for (pos.y = 0; pos.y < this->glWin->size().height(); pos.y++)
     {
@@ -38,7 +38,7 @@ void RaytraceThread::run()
                 if (objectList[obj_i]->hit(camera, hitDist))
                     objTouched = obj_i;
             }
-            if (objTouched != -1)
+            if (objTouched == -1)
                 break;
 
             this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = objectList[objTouched]->material->color->r;
@@ -46,7 +46,7 @@ void RaytraceThread::run()
             this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = objectList[objTouched]->material->color->b;
              //Vector3f hitPoint = camera.start + camera.direction * hitDist;
              //
-             ////normale on hit_pont, a faire avec des methodes pour chaque object
+             //*normale on hit_pont, a faire avec des methodes pour chaque object*/
              //Vector3f normale = hitPoint - objectList[objTouched]->center;
              //float tmp = normale * normale;
              //if (tmp == 0.0f)

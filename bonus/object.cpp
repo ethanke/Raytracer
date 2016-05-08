@@ -9,7 +9,7 @@ Object::Object()
 
 bool Object::hit(const Camera ray, float &old_dist)
 {
-    qDebug("unknown object\n");
+    qDebug("unknown object");
     return (0);
 }
 
