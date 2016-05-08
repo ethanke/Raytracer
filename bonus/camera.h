@@ -11,6 +11,7 @@ class Camera
 {   
     public:
         Camera(const Vector2 size, const Vector3f start, const Vector3f look_at, const float fov, const int alliasing);
+        void update_fov(float change);
 
         Vector2     win_size;
         Vector3f    start;

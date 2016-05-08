@@ -36,3 +36,9 @@ void Camera::processDir(Vector2 pos)
     point.z = this->start.z + sin(DTR(ang.x));
     this->direction = (point - this->start).normalize();
 }
+
+void Camera::update_fov(float change)
+{
+    this->fov.x = change;
+    this->fov.y = this->fov.x * ((this->win_size.x / this->win_size.y) / 1.5);
+}
