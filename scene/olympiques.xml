@@ -6,12 +6,12 @@
     <y_size>720</y_size>
     <cam_pos>
       <x>-600</x>
-      <y>0</y>
-      <z>-600</z>
+      <y>200</y>
+      <z>600</z>
     </cam_pos>
     <look_at>
-      <x>-100</x>
-      <y>-50</y>
+      <x>0</x>
+      <y>0</y>
       <z>0</z>
     </look_at>
     <fov>90</fov>

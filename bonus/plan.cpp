@@ -25,7 +25,7 @@ bool Plan::hit(const Camera ray, float &old_dist)
     if (denom > 0)
     {
         Vector3f p0l0 = this->center - ray.start;
-        float dist = (this->direction * p0l0) / denom;
+        float dist = (p0l0 * this->direction) / denom;
         if (dist > 0.1 && old_dist > dist)
         {
             old_dist = dist;

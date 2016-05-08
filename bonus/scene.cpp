@@ -25,15 +25,15 @@ Scene::Scene(QWidget *parent)
     Vector2 size = Vector2(this->myxml->get_field("scene:view:x_size").toInt(), this->myxml->get_field("scene:view:y_size").toInt());
     this->camera = new Camera(size, cam_pos, look_at, this->myxml->get_field("scene:view:fov").toFloat(), this->myxml->get_field("scene:view:alias").toFloat());
     this->objectCount = this->myxml->get_field("scene:object_list:count").toInt();
-    this->objectList = new Object[this->objectCount];
-    int i = 1;
-    while (i < this->objectCount)
-    {
-        QString s = QString("scene:object_list:obj") + QString(QString::number(i) + QString(":type"));
-        if (this->myxml->get_field(s.toLatin1().data()) == "sphere")
-            this->objectList[i] = Sphere(Vector3f(QString("scene:object_list:obj") + QString::number(i) + QString(":center:"), this->myxml),  this->myxml->get_field("scene:object_list:radius").toFloat(), new Material(1, Color(0.0, 0.0, 1.0), 50, 0, Image("bite")));
-        this->myxml->get_field(s.toLatin1().data());
-        i++;
-    }
+    //this->objectList = new Object[this->objectCount];
+    //int i = 1;
+    //while (i < this->objectCount)
+    //{
+    //    QString s = QString("scene:object_list:obj") + QString(QString::number(i) + QString(":type"));
+    //    if (this->myxml->get_field(s.toLatin1().data()) == "sphere")
+    //        this->objectList[i] = Sphere(Vector3f(QString("scene:object_list:obj") + QString::number(i) + QString(":center:"), this->myxml),  this->myxml->get_field("scene:object_list:radius").toFloat(), new Material(1, Color(0.0, 0.0, 1.0), 50, 0, Image("bite")));
+    //    this->myxml->get_field(s.toLatin1().data());
+    //    i++;
+    //}
 
 }
