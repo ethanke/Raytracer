@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 05:29:22 2016 victor sousa
-** Last update Sun May  8 04:29:41 2016 Philippe Lefevre
+** Last update Sun May  8 09:53:54 2016 Gaëtan Léandre
 */
 
 #ifndef			UTILS_H_
@@ -18,6 +18,7 @@
 # define		invsqrtf(x)	(1.0f / sqrt(x))
 
 int			my_strlen(char *str);
+char			*read_opti(char *file);
 int			my_tablen(char **str);
 char			*my_strstr(char *str, char *to_find);
 char			*my_strcat(char *dest, char *src);
