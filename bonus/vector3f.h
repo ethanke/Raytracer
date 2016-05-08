@@ -1,13 +1,16 @@
 #ifndef VECTOR3F_H
 #define VECTOR3F_H
 
+#include <QString>
 #include <math.h>
+#include "myxml.h"
 
 class Vector3f
 {
     public:
         Vector3f();
         Vector3f(const float x, const float y, const float z);
+        Vector3f(const char *beg_string, MyXML *file);
 
         float x;
         float y;

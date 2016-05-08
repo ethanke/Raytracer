@@ -16,4 +16,7 @@ class MyXML
         QStringList file;
 };
 
+#else
+    class MyXML;
+
 #endif // MYXML_H

@@ -14,7 +14,7 @@
       <y>-50</y>
       <z>0</z>
     </look_at>
-    <fov>75</fov>
+    <fov>90</fov>
     <alias>1</alias>
     <background>sprites/image/sky1.png</background>
   </view>

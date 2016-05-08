@@ -17,12 +17,13 @@ void RaytraceThread::run()
                             global_scene->camera->fov.x,
                             global_scene->camera->alliasing);
 
-    Sphere *objectList = new Sphere[5];
+    Object *objectList = new Object[6];
     objectList[0] = Sphere(Vector3f(-225, 100.0, 0.0), 100, new Material(1, Color(0.0, 0.0, 1.0), 50, 0, Image("bite")));
-    objectList[1] = Sphere(Vector3f(-112.0, -100.0, 0.0), 100, new Material(1, Color(0.0, 1.0, 1.0), 50, 0, Image("bite")));
+    objectList[1] = Sphere(Vector3f(-112.0, -100.0, 0.0), 100, new Material(1, Color(1.0, 1.0, 0.0), 50, 0, Image("bite")));
     objectList[2] = Sphere(Vector3f(0.0, 100.0, 0.0), 100, new Material(1, Color(0.25, 0.25, 0.25), 50, 0, Image("bite")));
     objectList[3] = Sphere(Vector3f(112, -100.0, 0.0), 100, new Material(1, Color(0.0, 1.0, 0.0), 50, 0, Image("bite")));
     objectList[4] = Sphere(Vector3f(225.0, 100.0, 0.0), 100, new Material(1, Color(1.0, 0.0, 0.0), 50, 0, Image("bite")));
+    objectList[5] = Plan(Vector3f(0.0, 0.0, 0.0), Vector3f(0.0, 1.0, 0.0), new Material(1, Color(1.0, 0.0, 0.0), 50, 0, Image("bite")));
 
     for (pos.y = 0; pos.y < this->glWin->size().height(); pos.y++)
     {
@@ -32,7 +33,7 @@ void RaytraceThread::run()
             camera.processDir(pos);
             int   objTouched = -1;
             float max_dist = 20000.0;
-            for (int obj_i = 0; obj_i < 5; obj_i++)
+            for (int obj_i = 0; obj_i < 6; obj_i++)
             {
                 if (objectList[obj_i].hit(camera, max_dist))
                     objTouched = obj_i;

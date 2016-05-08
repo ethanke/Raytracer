@@ -50,6 +50,9 @@ void GlWindow::paintGL()
 
 void GlWindow::raytrace_button()
 {
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0.0, global_scene->camera->win_size.x, global_scene->camera->win_size.y, 0.0, -1, 1);
     this->thread->start();
 }
 
@@ -63,13 +66,17 @@ void GlWindow::setPixel(const Vector2 pixel_pos, const Color color)
 void GlWindow::setPixelOnScreen(const Vector2 pixel_pos, Color color)
 {
     // Draw a Red 1x1 Square
+    float   ratio_x = (float)this->size().width()  / (global_scene == NULL ? (float)this->size().width()  : (float)global_scene->camera->win_size.x) + 0.35;
+    float   ratio_y = (float)this->size().height() / (global_scene == NULL ? (float)this->size().height() : (float)global_scene->camera->win_size.y) + 0.35;
+    float   size_x  = 0.5 * ratio_x;
+    float   size_y  = 0.5 * ratio_y;
     color.clamp_color();
     glBegin(GL_QUADS);
         glColor3f(color.r, color.g, color.b);
-        glVertex2f(pixel_pos.x - 0.5, pixel_pos.y - 0.5);
-        glVertex2f(pixel_pos.x - 0.5, pixel_pos.y + 0.5);
-        glVertex2f(pixel_pos.x + 0.5, pixel_pos.y - 0.5);
-        glVertex2f(pixel_pos.x + 0.5, pixel_pos.y + 0.5);
+        glVertex2f(pixel_pos.x - size_x, pixel_pos.y - size_y);
+        glVertex2f(pixel_pos.x - size_x, pixel_pos.y + size_y);
+        glVertex2f(pixel_pos.x + size_x, pixel_pos.y - size_y);
+        glVertex2f(pixel_pos.x + size_x, pixel_pos.y + size_y);
     glEnd();
 }
 

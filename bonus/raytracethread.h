@@ -9,6 +9,7 @@
 #include "scene.h"
 #include "global.h"
 #include "sphere.h"
+#include "plan.h"
 
 class RaytraceThread : public QThread
 {

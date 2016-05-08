@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     material.cpp \
     image.cpp \
     raytracethread.cpp \
-    global.cpp
+    global.cpp \
+    plan.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -47,6 +48,7 @@ HEADERS  += mainwindow.h \
     material.h \
     image.h \
     raytracethread.h \
-    global.h
+    global.h \
+    plan.h
 
 FORMS    += mainwindow.ui
