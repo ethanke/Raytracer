@@ -11,88 +11,113 @@ RaytraceThread::RaytraceThread(QMutex* mu, GlWindow *glWin)
 
 void RaytraceThread::run()
 {
-    Vector2 pos;
+    Vector2 pos = Vector2(-1, -1);
     Camera  camera = Camera(global_scene->camera->win_size,
                             global_scene->camera->start,
                             global_scene->camera->look_at,
                             global_scene->camera->fov.x,
                             global_scene->camera->alliasing);
-    for (pos.y = 0; pos.y < this->glWin->size().height(); pos.y++)
+    while (++pos.y < this->glWin->size().height())
     {
+        pos.x = -1;
         mutex->lock();
-        for (pos.x = 0; pos.x < this->glWin->size().width(); pos.x++)
+        while (++pos.x < this->glWin->size().width())
         {
-            float coef = 1.0f;
-            int   depth = 0;
             camera.processDir(pos);
-            while ((coef > 0.0f) && (depth < 10))
-            {
-                int   objTouched = -1;
-                float hitDist = 20000.0;
-                for (int obj_i = 0; obj_i < global_scene->objectList.size(); obj_i++)
-                {
-                    if (global_scene->objectList.at(obj_i)->hit(camera, hitDist))
-                        objTouched = obj_i;
-                }
-                if (objTouched != -1)
-                {
-                    this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = global_scene->objectList.at(objTouched)->material->color->r;
-                    this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = global_scene->objectList.at(objTouched)->material->color->g;
-                    this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = global_scene->objectList.at(objTouched)->material->color->b;
-
-                    Vector3f hitPoint = camera.start + camera.direction * hitDist;
-
-                    /*normale on hit_pont, a faire avec des methodes pour chaque object, ini fait pour une sphere*/
-                    Vector3f normale = hitPoint - global_scene->objectList[objTouched]->center;
-                    float tmp = normale * normale;
-                    if (tmp == 0.0f)
-                       break;
-                    tmp = 1.0f / sqrtf(tmp);
-                    normale = normale * tmp;
-
-                    //// calcul de la valeur d'éclairement
-                    //for (unsigned int j = 0; j < myScene.lgtTab.size(); ++j)
-                    //{
-                    //    light current = myScene.lgtTab[j];imageFile.put
-                    //    vecteur dist = current.pos - newStart;
-                    //    if (n * dist <= 0.0f)
-                    //        continue;
-                    //    float t = sqrtf(dist * dist);
-                    //    if ( t <= 0.0f )
-                    //        continue;
-                    //    ray lightRay;
-                    //    lightRay.start = newStart;
-                    //    lightRay.dir = (1/t) * dist;
-                    //    // calcul des ombres
-                    //    bool inShadow = false;
-                    //    for (unsigned int i = 0; i < myScene.sphTab.size(); ++i)
-                    //    {
-                    //        if (hitSphere(lightRay, myScene.sphTab[i], t))
-                    //        {
-                    //            inShadow = true;
-                    //            break;
-                    //        }
-                    //    }
-                    //    if (!inShadow)
-                    //    {
-                    //      // lambert
-                    //      float lambert = (lightRay.dir * n) * coef;
-                    //      red += lambert * current.red * currentMat.red;
-                    //      green += lambert * current.green * currentMat.green;
-                    //      blue += lambert * current.blue * currentMat.blue;
-                    //    }
-                    //}
-
-                    // on itére sur la prochaine reflexion
-                    //coef *= currentMat.reflection;
-                    //float reflet = 2.0f * (viewRay.dir * n);
-                    //viewRay.start = newStart;
-                    //viewRay.dir = viewRay.dir - reflet * n;
-                }
-                depth++;
-            }
+            Color outColor = raytrace(camera.start, camera.direction, 0);
+            this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = outColor.r;
+            this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = outColor.g;
+            this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = outColor.b;
         }
         mutex->unlock();
         this->glWin->update();
     }
+}
+
+Color RaytraceThread::raytrace(const Vector3f<float> &camStart, const Vector3f<float> &camDir, int depth)
+{
+    Camera camera;
+    camera.start = camStart;
+    camera.direction = camDir;
+    Color outColor = Color();
+    float tnear = INFINITY;
+    int   objTouchedID = -1;
+    for (int obj_i = 0; obj_i < global_scene->objectList.size(); obj_i++)
+    {
+        if (global_scene->objectList.at(obj_i)->hit(camera, tnear))
+            objTouchedID = obj_i;
+    }
+    if (objTouchedID == -1)
+        return (outColor);
+    Object   *objTouched = global_scene->objectList.at(objTouchedID);
+    Material *matTouched = objTouched->material;
+
+    Vector3f<float> hitPoint = camera.start + camera.direction * tnear;
+    Vector3f<float> hitNormale = objTouched->getNormale(camera, hitPoint);
+    hitNormale.normalize();
+
+    // If the normal and the view direction are not opposite to each other
+    // reverse the normal direction. That also means we are inside the sphere so set
+    // the inside bool to true. Finally reverse the sign of IdotN which we want
+    // positive.
+
+    float bias = 1e-4;
+    bool  inside = false;
+    if (camera.direction.dot(hitNormale) > 0)
+    {
+        hitNormale = -hitNormale;
+        inside = true;
+    }
+
+    if ((matTouched->transparency > 0 || matTouched->reflect > 0) && depth < MAX_DEPTH)
+    {
+        float facingRate = -camera.direction.dot(hitNormale);
+
+        // change the mix value to tweak the effect
+        float fresnelEffect = mix(pow(1 - facingRate, 3), 1, 0.1);
+
+        Vector3f<float> reflectDir = camera.direction - hitNormale * 2 * camera.direction.dot(hitNormale);
+        reflectDir.normalize();
+        Color reflectionColor = raytrace(hitPoint + hitNormale * bias, reflectDir, depth + 1);
+        Color refractionColor;
+        if (matTouched->transparency)
+        {
+            float ior = 1.1;
+            float eta = (inside) ? ior : 1 / ior;
+            float cosi = -hitNormale.dot(camera.direction);
+            float k = 1 - eta * eta * (1 - cosi * cosi);
+            Vector3f<float> refractDir = camera.direction * eta + hitNormale * (eta *  cosi - sqrt(k));
+            refractDir.normalize();
+            refractionColor = raytrace(hitPoint - hitNormale * bias, refractDir, depth + 1);
+        }
+        surfaceColor = (reflectionColor * fresneleffect + refractionColor * (1 - fresneleffect) * sphere->transparency) * sphere->surfaceColor;
+    }
+    //else {
+    //    // it's a diffuse object, no need to raytrace any further
+    //    for (unsigned i = 0; i < spheres.size(); ++i) {
+    //        if (spheres[i].emissionColor.x > 0) {
+    //            // this is a light
+    //            Vec3f transmission = 1;
+    //            Vec3f lightDirection = spheres[i].center - hitPoint;
+    //            lightDirection.normalize();
+    //            for (unsigned j = 0; j < spheres.size(); ++j) {
+    //                if (i != j) {
+    //                    float t0, t1;
+    //                    if (spheres[j].intersect(hitPoint + hitNormale * bias, lightDirection, t0, t1)) {
+    //                        transmission = 0;
+    //                        break;
+    //                    }
+    //                }
+    //            }
+    //            surfaceColor += sphere->surfaceColor * transmission *
+    //            std::max(float(0), hitNormale.dot(lightDirection)) * spheres[i].emissionColor;
+    //        }
+    //    }
+    //}
+    //return surfaceColor + sphere->emissionColor;
+}
+
+float RaytraceThread::mix(const float &a, const float &b, const float &mix)
+{
+    return b * mix + a * (1 - mix);
 }

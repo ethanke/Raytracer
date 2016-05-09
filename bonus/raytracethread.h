@@ -11,12 +11,16 @@
 #include "sphere.h"
 #include "plan.h"
 
+#define     MAX_DEPTH       10
+
 class RaytraceThread : public QThread
 {
     private:
         QMutex      *mutex;
         GlWindow    *glWin;
         Scene       *scene;
+        Color       raytrace(const Vector3f<float> &camStart, const Vector3f<float> &camDir, int depth);
+        float       mix(const float &a, const float &b, const float &mix);
 
     public:
         RaytraceThread(QMutex* mu, GlWindow *glWin);

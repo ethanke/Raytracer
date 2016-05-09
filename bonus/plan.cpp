@@ -2,13 +2,13 @@
 
 Plan::Plan()
 {
-    this->center = Vector3f();
-    this->direction = Vector3f(0.0, 1.0, 0.0);
+    this->center = Vector3f<float>();
+    this->direction = Vector3f<float>(0.0, 1.0, 0.0);
     this->material = new Material();
 
 }
 
-Plan::Plan(const Vector3f center, const Vector3f dir , Material *mat)
+Plan::Plan(const Vector3f<float> center, const Vector3f<float> dir , Material *mat)
 {
     this->center.x = center.x;
     this->center.y = center.y;
@@ -21,11 +21,11 @@ Plan::Plan(const Vector3f center, const Vector3f dir , Material *mat)
 
 bool Plan::hit(const Camera ray, float &old_dist)
 {
-    float denom = this->direction * ray.direction;
+    float denom = this->direction.dot(ray.direction);
     if (denom > 0)
     {
-        Vector3f p0l0 = this->center - ray.start;
-        float dist = (p0l0 * this->direction) / denom;
+        Vector3f<float> p0l0 = this->center - ray.start;
+        float dist = (p0l0.dot(this->direction)) / denom;
         if (dist > 0.1 && old_dist > dist)
         {
             old_dist = dist;
@@ -33,6 +33,11 @@ bool Plan::hit(const Camera ray, float &old_dist)
         }
     }
     return (0);
+}
+
+Vector3f<float> Plan::getNormale(const Camera ray, const Vector3f<float> hitPoint)
+{
+  return (this->direction);
 }
 
 QString Plan::getObjectType()

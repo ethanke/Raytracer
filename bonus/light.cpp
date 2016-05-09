@@ -8,7 +8,7 @@ Light::Light()
     this->intensity = 0.0;
 }
 
-Light::Light(const Vector3f center, const float inten)
+Light::Light(const Vector3f<float> center, const float inten)
 {
     this->center.x = center.x;
     this->center.y = center.y;

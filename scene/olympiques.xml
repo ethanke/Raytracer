@@ -7,14 +7,14 @@
     <cam_pos>
       <x>-600</x>
       <y>200</y>
-      <z>600</z>
+      <z>-600</z>
     </cam_pos>
     <look_at>
       <x>0</x>
       <y>0</y>
       <z>0</z>
     </look_at>
-    <fov>90</fov>
+    <fov>75</fov>
     <alias>1</alias>
     <background>sprites/image/sky1.png</background>
   </view>
