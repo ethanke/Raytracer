@@ -3,6 +3,8 @@
 #include <qwidget.h>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QLabel>
+#include <QOpenGLWidget>
 
 Popup::Popup(QWidget *parent) : QWidget(parent)
 {
@@ -19,22 +21,32 @@ void Popup::show_it()
     this->show();
 }
 
-void Popup::set_ui_obj()
+void Popup::set_ui_obj(Object *object)
 {
-    qDebug("lourde queu");
-    QWidget *window = this->window();
-      QOpenGLWindow *QtWPreview = new QOpenGLWindow();
-      QPushButton *button2 = new QPushButton("Two");
-      QPushButton *button3 = new QPushButton("Three");
-      QPushButton *button4 = new QPushButton("Four");
-      QPushButton *button5 = new QPushButton("Five");
+    QWidget *mainwindow = this;
+    QWidget *window = new QWidget();
+    if (object->getObjectType() == QString("sphere"))
+    {
+        QLabel *CenterX = new QLabel("Center x :\n", window);
+        QLabel *CenterY = new QLabel("Center y :\n", window);
+        QLabel *CenterZ = new QLabel("Center z :\n", window);
+        QLineEdit *EditX = new QLineEdit();
+        QLineEdit *EditY = new QLineEdit();
+        QLineEdit *EditZ = new QLineEdit();
+        QGridLayout *layout = new QGridLayout;
+        QGridLayout *mainLayout = new QGridLayout;
+        layout->addWidget(CenterX, 0, 0);
+        layout->addWidget(CenterY, 1, 0);
+        layout->addWidget(CenterZ, 2, 0);
+        layout->addWidget(EditX, 0, 1);
+        layout->addWidget(EditY, 1, 1);
+        layout->addWidget(EditZ, 2, 1);
+        window->setLayout(layout);
+        window->setFixedSize(165, 150);
+        mainLayout->addWidget(window);
+        mainwindow->setLayout(mainLayout);
+        mainwindow->setFixedWidth(600);
+        mainwindow->show();
+    }
 
-      QHBoxLayout *layout = new QHBoxLayout;
-      layout->addWidget(button2);
-      layout->addWidget(button3);
-      layout->addWidget(button4);
-      layout->addWidget(button5);
-
-      window->setLayout(layout);
-      window->show();
 }

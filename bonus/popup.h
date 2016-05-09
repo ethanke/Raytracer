@@ -13,7 +13,7 @@ class Popup: public QWidget
     Popup(QWidget *parent = NULL);
     ~Popup();
     void show_it();
-    void set_ui_obj();
+    void set_ui_obj(Object *object);
 };
 
 #endif // POPUP_H
