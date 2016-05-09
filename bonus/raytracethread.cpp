@@ -32,6 +32,7 @@ void RaytraceThread::run()
         mutex->unlock();
         this->glWin->update();
     }
+    qDebug("Raytracing finished");
 }
 
 Color RaytraceThread::raytrace(const Vector3f<float> &camStart, const Vector3f<float> &camDir, int depth)
@@ -79,7 +80,7 @@ Color RaytraceThread::raytrace(const Vector3f<float> &camStart, const Vector3f<f
         Vector3f<float> reflectDir = camera.direction - hitNormale * 2 * camera.direction.dot(hitNormale);
         reflectDir.normalize();
         Color reflectionColor = raytrace(hitPoint + hitNormale * bias, reflectDir, depth + 1);
-        Color refractionColor;
+        Color refractionColor = Color();
         if (matTouched->transparency)
         {
             float ior = 1.1;
@@ -90,31 +91,39 @@ Color RaytraceThread::raytrace(const Vector3f<float> &camStart, const Vector3f<f
             refractDir.normalize();
             refractionColor = raytrace(hitPoint - hitNormale * bias, refractDir, depth + 1);
         }
-        surfaceColor = (reflectionColor * fresneleffect + refractionColor * (1 - fresneleffect) * sphere->transparency) * sphere->surfaceColor;
+        outColor.r += (reflectionColor.r * fresnelEffect + refractionColor.r * (1 - fresnelEffect) * matTouched->transparency) * (matTouched->color->r / 255);
+        outColor.g += (reflectionColor.g * fresnelEffect + refractionColor.g * (1 - fresnelEffect) * matTouched->transparency) * (matTouched->color->g / 255);
+        outColor.b += (reflectionColor.b * fresnelEffect + refractionColor.b * (1 - fresnelEffect) * matTouched->transparency) * (matTouched->color->b / 255);
     }
-    //else {
-    //    // it's a diffuse object, no need to raytrace any further
-    //    for (unsigned i = 0; i < spheres.size(); ++i) {
-    //        if (spheres[i].emissionColor.x > 0) {
-    //            // this is a light
-    //            Vec3f transmission = 1;
-    //            Vec3f lightDirection = spheres[i].center - hitPoint;
-    //            lightDirection.normalize();
-    //            for (unsigned j = 0; j < spheres.size(); ++j) {
-    //                if (i != j) {
-    //                    float t0, t1;
-    //                    if (spheres[j].intersect(hitPoint + hitNormale * bias, lightDirection, t0, t1)) {
-    //                        transmission = 0;
-    //                        break;
-    //                    }
-    //                }
-    //            }
-    //            surfaceColor += sphere->surfaceColor * transmission *
-    //            std::max(float(0), hitNormale.dot(lightDirection)) * spheres[i].emissionColor;
-    //        }
-    //    }
-    //}
-    //return surfaceColor + sphere->emissionColor;
+    else
+    {
+        //it's a diffuse object, no need to raytrace any further
+        for (unsigned i = 0; i < global_scene->lightList.size(); ++i)
+        {
+            Vector3f<float> transmission = 1;
+            Vector3f<float> lightDirection = global_scene->lightList[i]->center - hitPoint;
+            lightDirection.normalize();
+            for (int j = 0; j < global_scene->objectList.size(); j++)
+            {
+                float t0 = INFINITY;
+                Camera lightRay;
+                lightRay.start = hitPoint + hitNormale * bias;
+                lightRay.direction = lightDirection;
+                if (global_scene->objectList[j]->hit(lightRay, t0))
+                {
+                    transmission = 0;
+                    break;
+                }
+            }
+
+            //qDebug() << (matTouched->color->r / 255) * transmission.x * std::max(float(0), hitNormale.dot(lightDirection)) * global_scene->lightList[i]->intensity;
+
+            outColor.r += (matTouched->color->r / 255) * transmission.x * std::max(float(0), hitNormale.dot(lightDirection)) * global_scene->lightList[i]->intensity;
+            outColor.g += (matTouched->color->g / 255) * transmission.y * std::max(float(0), hitNormale.dot(lightDirection)) * global_scene->lightList[i]->intensity;
+            outColor.b += (matTouched->color->b / 255) * transmission.z * std::max(float(0), hitNormale.dot(lightDirection)) * global_scene->lightList[i]->intensity;
+        }
+    }
+    return outColor;
 }
 
 float RaytraceThread::mix(const float &a, const float &b, const float &mix)

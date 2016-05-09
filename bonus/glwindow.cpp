@@ -71,7 +71,7 @@ void GlWindow::setPixelOnScreen(const Vector2 pixel_pos, Color color)
     float   size_x  = 0.5 * ratio_x;
     float   size_y  = 0.5 * ratio_y;
     glBegin(GL_QUADS);
-        glColor3f(std::min(color.r * 255.0, 255.0), std::min(color.g * 255.0, 255.0), std::min(color.b * 255.0, 255.0));
+        glColor3f(color.r * 255, color.g * 255, color.b * 255);
         glVertex2f(pixel_pos.x - size_x, pixel_pos.y - size_y);
         glVertex2f(pixel_pos.x - size_x, pixel_pos.y + size_y);
         glVertex2f(pixel_pos.x + size_x, pixel_pos.y - size_y);
