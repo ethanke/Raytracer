@@ -1,7 +1,7 @@
 #ifndef SPHERE_H
 #define SPHERE_H
 
-#include "vector3f.h"
+#include "vector3f.hpp"
 #include "material.h"
 #include "camera.h"
 
@@ -9,11 +9,12 @@ class Sphere : public Object
 {
     public:
         Sphere();
-        Sphere(const Vector3f center, const float radius, Material *mat);
+        Sphere(const Vector3f<float> center, const float radius, Material *mat);
         float       radius;
 
-        virtual bool hit(const Camera ray, float &old_dist);
-        virtual QString getObjectType();
+        virtual bool            hit(const Camera ray, float &old_dist);
+        virtual Vector3f<float> getNormale(const Camera ray, const Vector3f<float> hitPoint);
+        virtual QString         getObjectType();
 };
 
 #endif // SPHERE_H

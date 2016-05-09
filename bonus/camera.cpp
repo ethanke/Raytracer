@@ -1,6 +1,30 @@
 #include "camera.h"
 
-Camera::Camera(const Vector2 size, const Vector3f start, const Vector3f look_at, const float fov, const int alliasing)
+Camera::Camera()
+{
+    this->win_size.x = 0;
+    this->win_size.y = 0;
+
+    this->start.x = 0;
+    this->start.y = 0;
+    this->start.z = 0;
+
+    this->look_at.x = 0;
+    this->look_at.y = 0;
+    this->look_at.z = 0;
+
+    this->fov.x = 0;
+    this->fov.y = 0;
+
+    this->direction = Vector3f<float>();
+
+    this->cam_rot.x = 0;
+    this->cam_rot.y = 0;
+
+    this->alliasing = 0;
+}
+
+Camera::Camera(const Vector2 size, const Vector3f<float> start, const Vector3f<float> look_at, const float fov, const int alliasing)
 {
     this->win_size.x = size.x;
     this->win_size.y = size.y;
@@ -26,8 +50,8 @@ Camera::Camera(const Vector2 size, const Vector3f start, const Vector3f look_at,
 
 void Camera::processDir(Vector2 pos)
 {
-    Vector3f    point;
-    Vector2f    ang;
+    Vector3f<float> point;
+    Vector2f        ang;
 
     ang.x = this->cam_rot.x - (this->fov.x / this->win_size.x) * (pos.x - this->win_size.x / 2.0);
     ang.y = this->cam_rot.y - (this->fov.y / this->win_size.y) * (pos.y - this->win_size.y / 2.0);

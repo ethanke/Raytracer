@@ -20,12 +20,12 @@ Scene::Scene(QWidget *parent)
     }
     this->stringlist = myStringList;
     this->myxml = new MyXML(this->stringlist);
-    Vector3f cam_pos = Vector3f(this->myxml->get_field("scene:view:cam_pos:x").toFloat(),
-                                this->myxml->get_field("scene:view:cam_pos:y").toFloat(),
-                                this->myxml->get_field("scene:view:cam_pos:z").toFloat());
-    Vector3f look_at = Vector3f(this->myxml->get_field("scene:view:look_at:x").toFloat(),
-                                this->myxml->get_field("scene:view:look_at:y").toFloat(),
-                                this->myxml->get_field("scene:view:look_at:z").toFloat());
+    Vector3f<float> cam_pos = Vector3f<float>(this->myxml->get_field("scene:view:cam_pos:x").toFloat(),
+                                        this->myxml->get_field("scene:view:cam_pos:y").toFloat(),
+                                        this->myxml->get_field("scene:view:cam_pos:z").toFloat());
+    Vector3f<float> look_at = Vector3f<float>(this->myxml->get_field("scene:view:look_at:x").toFloat(),
+                                        this->myxml->get_field("scene:view:look_at:y").toFloat(),
+                                        this->myxml->get_field("scene:view:look_at:z").toFloat());
     Vector2 size = Vector2(this->myxml->get_field("scene:view:x_size").toInt(), this->myxml->get_field("scene:view:y_size").toInt());
     this->camera = new Camera(size, cam_pos, look_at, this->myxml->get_field("scene:view:fov").toFloat(), this->myxml->get_field("scene:view:alias").toFloat());
     int i = 1;
@@ -35,9 +35,9 @@ Scene::Scene(QWidget *parent)
         this->matList.push_back(new Material(i, Color(this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":red")).toLatin1().data()).toFloat() / 255.0,
                                                       this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":green")).toLatin1().data()).toFloat() / 255.0,
                                                       this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":blue")).toLatin1().data()).toFloat() / 255.0),
-                                             this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":reflect")).toLatin1().data()).toFloat(),
-                                             this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":bump")).toLatin1().data()).toFloat(),
-                                             new Image(this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":texture")).toLatin1().data()))));
+                                                      this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":reflect")).toLatin1().data()).toFloat(),
+                                                      this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":bump")).toLatin1().data()).toFloat(),
+                                                      new Image(this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":texture")).toLatin1().data()))));
         i++;
     }
     qDebug() << "materiaux loaded\n";
@@ -48,9 +48,9 @@ Scene::Scene(QWidget *parent)
     {
         if (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":type")).toLatin1().data()) == QString("sphere"))
         {
-            Vector3f sphere_center = Vector3f(QString("scene:object_list:obj") + QString::number(i) + QString(":center:"), this->myxml);
-            float    sphere_radius = this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":radius")).toLatin1().data()).toFloat();
-            int      sphere_mat_id = (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id")).toLatin1().data())).toInt() - 1;
+            Vector3f<float> sphere_center = Vector3f<float>(QString("scene:object_list:obj") + QString::number(i) + QString(":center:"), this->myxml);
+            float           sphere_radius = this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":radius")).toLatin1().data()).toFloat();
+            int             sphere_mat_id = (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id")).toLatin1().data())).toInt() - 1;
             Sphere *sphere_tmp = new Sphere(sphere_center, sphere_radius, this->matList[sphere_mat_id]);
             this->objectList.push_back(sphere_tmp);
         }
@@ -67,7 +67,7 @@ Scene::Scene(QWidget *parent)
     this->lightCount = this->myxml->get_field("scene:light_list:count").toInt();
     while (i <= this->lightCount)
     {
-        this->lightList.push_back(new Light(Vector3f(QString("scene:light_list:light") + QString::number(i) + QString(":center:"), this->myxml),
+        this->lightList.push_back(new Light(Vector3f<float>(QString("scene:light_list:light") + QString::number(i) + QString(":center:"), this->myxml),
                                             this->myxml->get_field((QString("scene:light_list:light") + QString::number(i) + ":intensity").toLatin1().data()).toFloat()));
         i++;
     }

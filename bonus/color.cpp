@@ -15,7 +15,7 @@ Color::Color(const float r, const float g, const float b)
     this->b = b;
 }
 
-void Color::clamp_color()
+Color Color::clamp_color()
 {
     float   max = 1.0;
 
@@ -25,7 +25,9 @@ void Color::clamp_color()
         max = this->g;
     if (this->b > max)
         max = this->b;
-    this->r /= max;
-    this->g /= max;
-    this->b /= max;
+    Color out;
+    out.r = this->r;
+    out.g = this->g;
+    out.b = this->b;
+    return (out);
 }

@@ -2,13 +2,13 @@
 
 Sphere::Sphere()
 {
-    this->center = Vector3f();
+    this->center = Vector3f<float>();
     this->radius = 100;
     this->material = new Material();
 
 }
 
-Sphere::Sphere(const Vector3f center, const float radius, Material *mat)
+Sphere::Sphere(const Vector3f<float> center, const float radius, Material *mat)
 {
     this->center.x = center.x;
     this->center.y = center.y;
@@ -19,9 +19,9 @@ Sphere::Sphere(const Vector3f center, const float radius, Material *mat)
 
 bool Sphere::hit(const Camera ray, float &old_dist)
 {
-    Vector3f    dist  = this->center - ray.start;
-    float       B     = dist * ray.direction;
-    float		delta = B * B - dist * dist + this->radius * this->radius;
+    Vector3f<float> dist  = this->center - ray.start;
+    float           B     = dist.dot(ray.direction);
+    float           delta = B * B - dist.length2() + this->radius * this->radius;
     if (delta < 0)
         return (0);
     float       t0 = B - sqrt(delta);
@@ -37,6 +37,11 @@ bool Sphere::hit(const Camera ray, float &old_dist)
         return (1);
     }
     return (0);
+}
+
+Vector3f<float> Sphere::getNormale(const Camera ray, const Vector3f<float> hitPoint)
+{
+  return (hitPoint - this->center);
 }
 
 QString Sphere::getObjectType()

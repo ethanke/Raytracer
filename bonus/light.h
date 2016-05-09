@@ -1,7 +1,7 @@
 #ifndef LIGHT_H
 #define LIGHT_H
 
-#include "vector3f.h"
+#include "vector3f.hpp"
 #include "material.h"
 #include "object.h"
 
@@ -9,11 +9,11 @@ class Light
 {
 
 public:
-        Light(Vector3f center, float inten);
+        Light(Vector3f<float> center, float inten);
         Light();
 
-        Vector3f		center;
-        float		intensity;
+        Vector3f<float> center;
+        float           intensity;
 };
 
 #else

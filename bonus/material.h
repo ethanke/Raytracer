@@ -12,6 +12,7 @@ class Material
 
         int		id;
         Color	*color;
+        float   transparency;
         float	reflect;
         float	bump;
         Image	*texture;

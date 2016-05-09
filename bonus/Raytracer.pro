@@ -24,7 +24,6 @@ SOURCES += main.cpp\
     myxml.cpp \
     object.cpp \
     camera.cpp \
-    vector3f.cpp \
     vector2f.cpp \
     sphere.cpp \
     material.cpp \
@@ -43,7 +42,7 @@ HEADERS  += mainwindow.h \
     myxml.h \
     object.h \
     camera.h \
-    vector3f.h \
+    vector3f.hpp \
     vector2f.h \
     sphere.h \
     material.h \

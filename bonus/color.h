@@ -12,7 +12,7 @@ class Color
         float g;
         float b;
 
-        void clamp_color();
+        Color clamp_color();
 
     private:
 
