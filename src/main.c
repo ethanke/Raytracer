@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Sun May  8 06:04:08 2016 Philippe Lefevre
+** Last update Tue May 10 22:54:17 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -13,17 +13,19 @@
 int			verif_load(t_prog *prog, char *args)
 {
   int			ret;
+  int			size;
 
+  size = my_strlen(args);
   ret = -1;
-  if (args[my_strlen(args) - 1] == 'l' &&
-      args[my_strlen(args) - 2] == 'm' &&
-      args[my_strlen(args) - 3] == 'x' &&
-      args[my_strlen(args) - 4] == '.')
+  if (args[size - 1] == 'l' &&
+      args[size - 2] == 'm' &&
+      args[size - 3] == 'x' &&
+      args[size - 4] == '.')
     ret = load_scene(prog, args);
-  else if (args[my_strlen(args) - 1] == 'j' &&
-	   args[my_strlen(args) - 2] == 'b' &&
-	   args[my_strlen(args) - 3] == 'o' &&
-	   args[my_strlen(args) - 4] == '.')
+  else if (args[size - 1] == 'j' &&
+	   args[size - 2] == 'b' &&
+	   args[size - 3] == 'o' &&
+	   args[size - 4] == '.')
     ret = load_obj_file(prog, args);
   else
     return (0);
@@ -56,26 +58,36 @@ int			verif_arg(int ac, char **av, char **env, t_prog *prog)
   if (ac < 2 || ac > 3)
     return (disp_help(av[0]));
   prog->thread_nb = 0;
+  prog->cluster = 0;
   while (av[++i])
-    if ((ret = verif_load(prog, av[i])))
-      {
-	if (ret == -1)
-	  return (ret);
-      }
-    else if (!(my_strncmp("--thread=", av[i], 9)))
-      {
-	prog->thread_nb = my_getnbr(av[i] + 9);
-	if (prog->thread_nb < 1)
-	  return (my_printf(2, "Error: number of thread must be positive\n") - 1);
-      }
-    else if (!(my_strcmp("--edit", av[i])))
-      {
-	if (prog->thread_nb)
-	  return (disp_help(av[0]));
-	return (editor() - 1);
-      }
-    else
-      return (disp_help(av[0]));
+    {
+      if ((ret = verif_load(prog, av[i])))
+	{
+	  if (ret == -1)
+	    return (ret);
+	}
+      else if (!(my_strcmp("--cluster", av[i])))
+	{
+	  if (prog->thread_nb)
+	    return (disp_help(av[0]));
+	  prog->cluster = 1;
+      	  return (0);
+	}
+      else if (!(my_strncmp("--thread=", av[i], 9)))
+	{
+	  prog->thread_nb = my_getnbr(av[i] + 9);
+	  if (prog->thread_nb < 1)
+	    return (my_printf(2, "Error: number of thread must be positive\n") - 1);
+	}
+      else if (!(my_strcmp("--edit", av[i])))
+	{
+	  if (prog->thread_nb)
+	    return (disp_help(av[0]));
+	  return (editor() - 1);
+	}
+      else
+	return (disp_help(av[0]));
+    }
   return (0);
 }
 
@@ -115,7 +127,9 @@ int			main(int ac, char *av[], char *env[])
       || create_win(&prog) != 0)
     return (-1);
   bunny_set_key_response(key);
-  if (!prog.thread_nb)
+  if (prog.cluster)
+    client(&prog);
+  else if (!prog.thread_nb)
     raytrace(&prog);
   else
     raytrace_threading(&prog);
