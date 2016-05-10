@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Tue May 10 14:36:25 2016 Gaëtan Léandre
+## Last update Tue May 10 15:01:32 2016 Gaëtan Léandre
 ##
 
 NAME		=	raytracer2
