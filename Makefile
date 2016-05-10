@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Sun May  8 09:54:29 2016 Gaëtan Léandre
+## Last update Tue May 10 14:36:25 2016 Gaëtan Léandre
 ##
 
 NAME		=	raytracer2
@@ -154,9 +154,8 @@ SRC		+=	src/utils/tekpixel.c			\
 			src/utils/vect_operator.c		\
 			src/utils/vect_operator2.c		\
 			src/utils/wtf.c				\
-			src/utils/epur_str.c			\
-			src/utils/read_opti.c
-
+			src/utils/epur_str.c
+			
 ##  OUTPUT  ##
 SRC		+=	src/output/my_putchar.c			\
 			src/output/my_putstr.c			\
@@ -174,7 +173,7 @@ title		:
 			@$(ECHO) $(GREEN)Raytracer$(TEAL)2$(DEFAULT)
 
 $(NAME)		:	$(OBJ)
-			@$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS) &&	\
+			@$(CC) -o $(NAME) $(OBJ) $(LDFLAGS) &&	\
 			$(ECHO) $(GREEN) "[OK]" $(TEAL) $(NAME) $(DEFAULT) ||	\
 			$(ECHO) $(RED) "[XX]" $(TEAL) $(NAME) $(DEFAULT)
 
