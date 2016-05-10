@@ -5,10 +5,11 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Mon Jan  4 15:56:23 2016 Gaëtan Léandre
-** Last update Tue May 10 15:17:02 2016 Philippe Lefevre
+** Last update Wed May 11 00:00:25 2016 Philippe Lefevre
 */
 
 #include 		"get_next_line.h"
+#include		"main.h"
 
 int			my_strlen_back(char *str)
 {
@@ -103,30 +104,32 @@ char			*get_next_line(const int fd)
   return (text.result);
 }
 
-char			*get_next_line_size(const int fd, int size, char *iread)
+char			*get_next_line_size(const int fd)
 {
-  static char		*stock = NULL;
-  t_text		text;
-  int			beread;
+  static char		*buf = NULL;
+  struct stat		file_s;
+  char			*line;
+  static int		curs = 0;
+  int			i;
 
-  text.i = 0;
-  beread = 1;
-  if (fd < 0 || (text.result = malloc(sizeof(char))) == NULL)
-    return (NULL);
-  text.result[0] = '\0';
-  if (stock != NULL)
+  if (buf == NULL)
     {
-      add_end(&text, stock);
-      stock = text.stock;
+      fstat(fd, &file_s);
+      if ((buf = malloc(file_s.st_size + 1)) == NULL)
+	return (NULL);
+      buf[file_s.st_size] = '\0';
+      read(fd, buf, file_s.st_size);
     }
-  while (text.i == 0 && (beread = read(fd, iread, size)) > 0)
-    {
-      printf("je suis la et je read\n");
-      iread[beread] = '\0';
-      add_end(&text, iread);
-      stock = text.stock;
-    }
-  if ((text.result[0] == '\0' && beread == 0) || beread < 0)
+  else if (buf[curs] == '\0')
     return (NULL);
-  return (text.result);
+  i = curs;
+  while (buf[i] && buf[i] != '\n')
+    i++;
+  line = malloc(i - curs + 2);
+  i = 0;
+  while (buf[curs] && buf[curs] != '\n')
+    line[i++] = buf[curs++];
+  curs++;
+  line[i] = '\0';
+  return (line);
 }

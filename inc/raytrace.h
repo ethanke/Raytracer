@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:05:12 2016 victor sousa
-** Last update Sun May  8 05:34:02 2016 Philippe Lefevre
+** Last update Wed May 11 00:01:19 2016 Philippe Lefevre
 */
 
 #ifndef			RAYTRACE_H_
@@ -21,6 +21,10 @@ int                     raytrace_threading(t_prog *prog);
 t_color			raytrace_loop(t_prog *prog,
 				      t_raycast *rcast,
 				      t_bunny_position pos);
+
+unsigned int		calcul_pixel(t_prog *prog,
+				     t_raycast raycast,
+				     t_bunny_position pos);
 void                    process_shadow(t_prog *prog, t_raycast *rcast);
 int                     process_light(t_prog *prog, t_raycast *rcast);
 void                    process_reflect(t_raycast *rcast);

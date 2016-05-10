@@ -5,7 +5,7 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Sun May  8 02:20:22 2016 Philippe Lefevre
-** Last update Tue May 10 14:12:52 2016 Philippe Lefevre
+** Last update Wed May 11 00:03:55 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -23,6 +23,7 @@ void			*raytrace_zone(void *p)
   pos.x = ((prog->win_size.x / prog->thread_nb) * prog->thread_id) - 1;
   end = ((prog->win_size.x / prog->thread_nb) * (prog->thread_id + 1));
   my_printf(1, "Thread number %d : %d to %d\n", prog->thread_id, pos.x, end);
+
   while (++pos.x < end)
     {
       pos.y = -1;
@@ -38,6 +39,7 @@ void			*raytrace_zone(void *p)
 int			raytrace_threading(t_prog *prog)
 {
   pthread_t		thread_id[prog->thread_nb];
+  t_texture		*loading;
   time_t		time_thread;
   time_t		time_beg;
   time_t		time_end;
@@ -46,6 +48,11 @@ int			raytrace_threading(t_prog *prog)
 
   pos.x = 0;
   pos.y = 0;
+  if ((loading = load_image("sprites/image/loading.jpg")) == NULL)
+    return (-1);
+  put_image(loading, prog->pix, &pos);
+  bunny_blit(&prog->win->buffer, &prog->pix->clipable, &pos);
+  bunny_display(prog->win);
   my_putstr("\nRaytracing multi-threading started\n");
   i = -1;
   time_beg = time(NULL);
