@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Sun May  8 04:15:29 2016 Philippe Lefevre
+** Last update Tue May 10 14:03:41 2016 Philippe Lefevre
 */
 
 #ifndef			STRUCT_H_
@@ -200,6 +200,7 @@ typedef struct          s_prog
   int			anti_alias;
   int			thread_nb;
   int			thread_id;
+  int			rendu_success;
 }                       t_prog;
 
 typedef struct s_cmd

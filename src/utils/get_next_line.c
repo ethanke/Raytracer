@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Mon Jan  4 15:56:23 2016 Gaëtan Léandre
-** Last update Wed May  4 18:03:47 2016 Ethan Kerdelhue
+** Last update Tue May 10 14:26:01 2016 Philippe Lefevre
 */
 
 #include 		"get_next_line.h"
@@ -93,6 +93,34 @@ char			*get_next_line(const int fd)
       stock = text.stock;
     }
   while (text.i == 0 && (beread = read(fd, iread, READ_SIZE)) > 0)
+    {
+      iread[beread] = '\0';
+      add_end(&text, iread);
+      stock = text.stock;
+    }
+  if ((text.result[0] == '\0' && beread == 0) || beread < 0)
+    return (NULL);
+  return (text.result);
+}
+
+char			*get_next_line_size(const int fd, int size)
+{
+  char			iread[size + 1];
+  static char		*stock = NULL;
+  t_text		text;
+  int			beread;
+
+  text.i = 0;
+  beread = 1;
+  if (fd < 0 || (text.result = malloc(sizeof(char))) == NULL)
+    return (NULL);
+  text.result[0] = '\0';
+  if (stock != NULL)
+    {
+      add_end(&text, stock);
+      stock = text.stock;
+    }
+  while (text.i == 0 && (beread = read(fd, iread, size)) > 0)
     {
       iread[beread] = '\0';
       add_end(&text, iread);
