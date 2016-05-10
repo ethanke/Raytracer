@@ -5,7 +5,7 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Sun May  8 02:20:22 2016 Philippe Lefevre
-** Last update Sun May  8 05:33:34 2016 Philippe Lefevre
+** Last update Tue May 10 13:46:11 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -38,7 +38,9 @@ void			*raytrace_zone(void *p)
 int			raytrace_threading(t_prog *prog)
 {
   pthread_t		thread_id[prog->thread_nb];
-  time_t		mytime;
+  time_t		time_thread;
+  time_t		time_beg;
+  time_t		time_end;
   t_bunny_position      pos;
   int			i;
 
@@ -46,16 +48,20 @@ int			raytrace_threading(t_prog *prog)
   pos.y = 0;
   my_putstr("\nRaytracing multi-threading started\n");
   i = -1;
+  time_beg = time(NULL);
   while (++i < prog->thread_nb)
     {
       prog->thread_id = i;
       pthread_create(&thread_id[i], NULL, raytrace_zone, (void *)prog);
-      mytime = time(NULL);
-      while (mytime == time(NULL));
+      time_thread = time(NULL);
+      while (time_thread == time(NULL));
     }
   i = -1;
   while (++i < prog->thread_nb)
     pthread_join(thread_id[i], NULL);
+  time_end = time(NULL);
+  my_printf(1, "Rendu en %d heures %d minutes %d secondes\n", (time_end - time_beg) / 3600,
+	    ((time_end - time_beg) % 3600) / 60, ((time_end - time_beg) % 3600) % 60);
   bunny_blit(&prog->win->buffer, &prog->pix->clipable, &pos);
   bunny_display(prog->win);
   my_putstr("Raytracing multi-threading successfull\n");
