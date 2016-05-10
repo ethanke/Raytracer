@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 05:55:56 2016 Gaëtan Léandre
-** Last update Sun May  8 01:41:19 2016 Gaëtan Léandre
+** Last update Tue May 10 18:03:46 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -16,7 +16,7 @@ void			add_client(SOCKET sock, t_connected *co, fd_set fdset)
   t_client		*client;
   t_client		*tmp;
   SOCKET		csock;
-  int			size;
+  socklen_t		size;
 
   size = sizeof(csock_addr);
   if ((csock = accept(sock, (SOCKADDR *)&csock_addr, &size)) == -1)
@@ -49,7 +49,7 @@ void			deco_client(t_connected *co, t_client *client)
   if (client->next != NULL)
     client->next->prev = client->prev;
   if (client->prev != NULL)
-    client->prev->next;
+    client->prev->next = client->next;
   if (co->max == client->sock)
     {
       tmp = co->clients;
@@ -58,7 +58,7 @@ void			deco_client(t_connected *co, t_client *client)
 	{
 	  if (tmp->sock > co->max)
 	    co->max = tmp->sock;
-	  tmp->next;
+	  tmp = tmp->next;
 	}
       co->max = (co->master && co->master->sock > co->max) ? co->master->sock
 	  : co->max;
@@ -80,7 +80,7 @@ void			deco_master(t_connected *co)
 	{
 	  if (tmp->sock > co->max)
 	    co->max = tmp->sock;
-	  tmp->next;
+	  tmp = tmp->next;
 	}
     }
   printf("Déconnection du chef de serveur : %s\n",

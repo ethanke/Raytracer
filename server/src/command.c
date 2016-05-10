@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 05:54:51 2016 Gaëtan Léandre
-** Last update Tue May 10 14:30:08 2016 Gaëtan Léandre
+** Last update Tue May 10 15:12:36 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -110,7 +110,7 @@ void			launch_command_client(SOCKET sock, char **tab,
   free_tab(tab);
 }
 
-void			exec_command(SOCKET sock, t_connected *co)
+void			exec_command(t_connected *co)
 {
   char			*str;
   char			**tab;

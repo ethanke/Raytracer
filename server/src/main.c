@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Thu May  5 00:03:54 2016 Gaëtan Léandre
-** Last update Tue May 10 14:27:56 2016 Gaëtan Léandre
+** Last update Tue May 10 18:12:05 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -77,7 +77,7 @@ void			get_connections(SOCKET sock, t_connected *co)
       if (select(co->max + 1, &fdset, NULL, NULL, NULL) == -1)
 	return;
       if (FD_ISSET(STDIN_FILENO, &fdset))
-	exec_command(sock, co);
+	exec_command(co);
       else if (FD_ISSET(sock, &fdset))
 	add_client(sock, co, fdset);
       else
@@ -149,7 +149,7 @@ int			main()
   get_connections(sock, &connected);
   if (connected.status == 1)
     {
-      charge_server(sock, &connected);
+      charge_server(&connected);
     }
   end_co(&connected);
   close(sock);

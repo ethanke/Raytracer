@@ -12,28 +12,42 @@ NAME		=	server
 
 CFLAGS		=	-I./include -W -Wall -Werror
 
-SRC		=	server_src/main.c			\
-			server_src/comunicate.c			\
-			server_src/command.c			\
-			server_src/connection.c			\
-			server_src/reciv_img.c
+SPRTFDIR	=	src/my_sprintf
 
-SRC_A		=	commun/get_next_line.c			\
-			commun/utils.c				\
-			commun/str_to_wordtab.c			\
-			commun/send_file.c
+SRC		=	src/main.c				\
+			src/comunicate.c			\
+			src/command.c				\
+			src/connection.c			\
+			src/reciv_img.c
+
+			## SPRINTF ##
+SRC             +=      $(SPRTFDIR)/my_disp_unprintable.c    	\
+	                $(SPRTFDIR)/my_sprintf.c               	\
+                        $(SPRTFDIR)/my_sprintf2.c              	\
+		        $(SPRTFDIR)/my_sprintf3.c              	\
+		        $(SPRTFDIR)/my_put_nbr.c              	\
+		        $(SPRTFDIR)/my_put_u_nbr_base.c        	\
+		        $(SPRTFDIR)/my_put_unbr.c               \
+		        $(SPRTFDIR)/my_putnbr_base.c            \
+		        $(SPRTFDIR)/my_putnbr_base_add.c        \
+			$(SPRTFDIR)/my_put_fnbr.c		\
+			$(SPRTFDIR)/my_strcat.c
+
+SRC		+=	src/get_next_line.c			\
+			src/utils.c				\
+			src/str_to_wordtab.c			\
+			src/send_file.c
 
 OBJ		=	$(SRC:.c=.o)
 
-OBJ_A		=	$(SRC_A:.c=.o)
 
 all		:	$(NAME)
 
-$(NAME)		:	$(OBJ) $(OBJ_A)
-			gcc -o $(NAME) $(OBJ) $(OBJ_A)
+$(NAME)		:	$(OBJ)
+			gcc -o $(NAME) $(OBJ)
 
 clean		:
-			rm -rf $(OBJ) $(OBJ_A)
+			rm -rf $(OBJ)
 
 fclean		:	clean
 			rm -rf $(NAME)

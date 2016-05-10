@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May  6 22:41:13 2016 Gaëtan Léandre
-** Last update Tue May 10 14:28:38 2016 Gaëtan Léandre
+** Last update Tue May 10 18:10:44 2016 Gaëtan Léandre
 */
 
 #ifndef			_SERVER_H_
@@ -26,6 +26,7 @@
 # include		<stdlib.h>
 # include		"get_next_line.h"
 # include 		"utils.h"
+# include		"my_sprintf.h"
 
 typedef 		int SOCKET;
 typedef struct 		sockaddr_in SOCKADDR_IN;
@@ -58,7 +59,7 @@ int			read_client(SOCKET sock, char *buffer);
 void			launch_command_server(char **tab, t_connected *co);
 void			launch_command_client(SOCKET sock, char **tab,
 					      t_connected *co);
-void			exec_command(SOCKET sock, t_connected *co);
+void			exec_command(t_connected *co);
 void			add_client(SOCKET sock, t_connected *co, fd_set fdset);
 void			deco_client(t_connected *co, t_client *client);
 void			deco_master(t_connected *co);
@@ -66,6 +67,6 @@ int			read_client(SOCKET sock, char *buffer);
 void			write_client(SOCKET sock, char *buffer);
 void			write_all_client(t_connected *co, char *buffer,
 		 			 int exept);
-int			charge_server(SOCKET sock, t_connected *co);
+int			charge_server(t_connected *co);
 
 #endif			/* _SERVER_H_ */

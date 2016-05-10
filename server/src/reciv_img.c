@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun May  8 02:00:53 2016 Gaëtan Léandre
-** Last update Sun May  8 06:16:40 2016 Gaëtan Léandre
+** Last update Tue May 10 18:13:39 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -64,7 +64,7 @@ unsigned int		*fill_end(t_client *client, unsigned int *tmp, unsigned int *end, 
   return (end);
 }
 
-unsigned int		*reciv_img(SOCKET sock, t_connected *co)
+unsigned int		*reciv_img(t_connected *co)
 {
   unsigned int		*end;
   fd_set		fdset;
@@ -82,9 +82,10 @@ unsigned int		*reciv_img(SOCKET sock, t_connected *co)
 	  tmp = tmp->next;
 	}
     }
+  return (end);
 }
 
-int			charge_server(SOCKET sock, t_connected *co)
+int			charge_server(t_connected *co)
 {
   t_client		*tmp;
   char			*file;
@@ -115,10 +116,11 @@ int			charge_server(SOCKET sock, t_connected *co)
       tmp->start_x = actu_x;
       tmp->end_x = (actu_x + size_x >= co->width) ? co->width : actu_x + size_x;
       actu_x = tmp->end_x;
-      file = sprintf("/run %d %d", tmp->start_x, tmp->end_x);
+      file = my_sprintf("/run %d %d", tmp->start_x, tmp->end_x);
       tmp->done = 0;
       write_client(tmp->sock, file);
       free(file);
       tmp = tmp->next;
     }
+  return (1);
 }
