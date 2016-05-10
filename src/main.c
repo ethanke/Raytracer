@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Tue May 10 22:54:17 2016 Gaëtan Léandre
+** Last update Tue May 10 23:21:24 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -128,7 +128,8 @@ int			main(int ac, char *av[], char *env[])
     return (-1);
   bunny_set_key_response(key);
   if (prog.cluster)
-    client(&prog);
+    if (client(&prog) == -1)
+	return (-1);
   else if (!prog.thread_nb)
     raytrace(&prog);
   else
