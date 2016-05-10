@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Mon Jan  4 15:56:23 2016 Gaëtan Léandre
-** Last update Tue May 10 14:26:01 2016 Philippe Lefevre
+** Last update Tue May 10 15:17:02 2016 Philippe Lefevre
 */
 
 #include 		"get_next_line.h"
@@ -103,9 +103,8 @@ char			*get_next_line(const int fd)
   return (text.result);
 }
 
-char			*get_next_line_size(const int fd, int size)
+char			*get_next_line_size(const int fd, int size, char *iread)
 {
-  char			iread[size + 1];
   static char		*stock = NULL;
   t_text		text;
   int			beread;
@@ -122,6 +121,7 @@ char			*get_next_line_size(const int fd, int size)
     }
   while (text.i == 0 && (beread = read(fd, iread, size)) > 0)
     {
+      printf("je suis la et je read\n");
       iread[beread] = '\0';
       add_end(&text, iread);
       stock = text.stock;
