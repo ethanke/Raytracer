@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May  6 22:41:13 2016 Gaëtan Léandre
-** Last update Tue May 10 18:10:44 2016 Gaëtan Léandre
+** Last update Tue May 10 23:35:14 2016 Gaëtan Léandre
 */
 
 #ifndef			_SERVER_H_
@@ -27,6 +27,7 @@
 # include		"get_next_line.h"
 # include 		"utils.h"
 # include		"my_sprintf.h"
+# include		"my_printf.h"
 
 typedef 		int SOCKET;
 typedef struct 		sockaddr_in SOCKADDR_IN;

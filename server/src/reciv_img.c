@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun May  8 02:00:53 2016 Gaëtan Léandre
-** Last update Tue May 10 18:13:39 2016 Gaëtan Léandre
+** Last update Tue May 10 23:40:56 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -92,14 +92,14 @@ int			charge_server(t_connected *co)
   int			size_x;
   int			actu_x;
 
-  printf("Téléchargement du fichier sur le serveur\n");
+  my_printf(1, "Téléchargement du fichier sur le serveur\n");
   file = reciv_file(co->master->sock);
   if (file == NULL)
     return (-1);
   //RECUPERATION DES TAILLES DE FICHIER
   co->width = 10;
   co->height = 10;
-  printf("Envois du fichier aux clients\n");
+  my_printf(1, "Envois du fichier aux clients\n");
   tmp = co->clients;
   while (tmp)
     {
@@ -107,7 +107,7 @@ int			charge_server(t_connected *co)
       tmp = tmp->next;
     }
   free(file);
-  printf("Envois des consignes aux clients\n");
+  my_printf(1, "Envois des consignes aux clients\n");
   size_x = co->width / co->size + 1;
   actu_x = 0;
   tmp = co->clients;

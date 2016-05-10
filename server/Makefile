@@ -13,6 +13,7 @@ NAME		=	server
 CFLAGS		=	-I./include -W -Wall -Werror
 
 SPRTFDIR	=	src/my_sprintf
+PRTFDIR		=	src/my_printf
 
 SRC		=	src/main.c				\
 			src/comunicate.c			\
@@ -32,6 +33,20 @@ SRC             +=      $(SPRTFDIR)/my_disp_unprintable.c    	\
 		        $(SPRTFDIR)/my_putnbr_base_add.c        \
 			$(SPRTFDIR)/my_put_fnbr.c		\
 			$(SPRTFDIR)/my_strcat.c
+
+SRC             +=      $(PRTFDIR)/my_disp_unprintable.c        \
+			$(PRTFDIR)/my_printf.c                  \
+			$(PRTFDIR)/my_printf2.c                 \
+			$(PRTFDIR)/my_printf3.c                 \
+			$(PRTFDIR)/my_put_nbr.c                 \
+			$(PRTFDIR)/my_put_u_nbr_base.c          \
+			$(PRTFDIR)/my_put_unbr.c                \
+			$(PRTFDIR)/my_putchar.c                 \
+			$(PRTFDIR)/my_putnbr_base.c             \
+			$(PRTFDIR)/my_putnbr_base_add.c         \
+			$(PRTFDIR)/my_putstr.c			\
+			$(PRTFDIR)/my_put_fnbr.c
+
 
 SRC		+=	src/get_next_line.c			\
 			src/utils.c				\

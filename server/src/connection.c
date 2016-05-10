@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 05:55:56 2016 Gaëtan Léandre
-** Last update Tue May 10 18:03:46 2016 Gaëtan Léandre
+** Last update Tue May 10 23:38:31 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -36,7 +36,7 @@ void			add_client(SOCKET sock, t_connected *co, fd_set fdset)
   client->sock_addr = csock_addr;
   FD_SET(csock, &fdset);
   co->max = csock > co->max ? csock : co->max;
-  printf("Nouveau client : %s\n", inet_ntoa(csock_addr.sin_addr));
+  my_printf(1, "Nouveau client : %s\n", inet_ntoa(csock_addr.sin_addr));
 }
 
 void			deco_client(t_connected *co, t_client *client)
@@ -63,7 +63,7 @@ void			deco_client(t_connected *co, t_client *client)
       co->max = (co->master && co->master->sock > co->max) ? co->master->sock
 	  : co->max;
     }
-  printf("Déconnection de %s\n", inet_ntoa(client->sock_addr.sin_addr));
+  my_printf(1, "Déconnection de %s\n", inet_ntoa(client->sock_addr.sin_addr));
   close(client->sock);
   free(client);
 }
@@ -83,7 +83,7 @@ void			deco_master(t_connected *co)
 	  tmp = tmp->next;
 	}
     }
-  printf("Déconnection du chef de serveur : %s\n",
+  my_printf(1, "Déconnection du chef de serveur : %s\n",
 	 inet_ntoa(co->master->sock_addr.sin_addr));
   close(co->master->sock);
   free(co->master);
