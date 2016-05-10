@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 03:36:00 2016 Gaëtan Léandre
-** Last update Sun May  8 01:00:26 2016 Gaëtan Léandre
+** Last update Tue May 10 23:37:57 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -16,7 +16,7 @@ int			read_client(SOCKET sock, char *buffer)
 
    if ((verif = recv(sock, buffer, BUF_SIZE, 0)) < 0)
    {
-      printf("Erreur de réception\n");
+      my_printf(2, "Erreur de réception\n");
       verif = 0;
    }
    buffer[verif] = '\0';
@@ -26,7 +26,7 @@ int			read_client(SOCKET sock, char *buffer)
 void			write_client(SOCKET sock, char *buffer)
 {
    if(send(sock, buffer, my_strlen(buffer), 0) < 0)
-    printf("Erreur de transfers\n");
+    my_printf(2, "Erreur de transfers\n");
 }
 
 void			write_all_client(t_connected *co, char *buffer,

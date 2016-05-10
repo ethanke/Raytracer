@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Thu May  5 00:03:54 2016 Gaëtan Léandre
-** Last update Tue May 10 18:12:05 2016 Gaëtan Léandre
+** Last update Tue May 10 23:44:34 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -23,7 +23,7 @@ int			action_master(t_connected *co, fd_set fdset)
       else if ((tab = is_command(buffer)))
 	launch_command_client(co->master->sock, tab, co);
       else
-	printf("%s\n", buffer);
+	my_printf(1, "%s\n", buffer);
     }
   else
     return (0);
@@ -49,7 +49,7 @@ void			action_client(t_connected *co, fd_set fdset)
 	  else if ((tab = is_command(buffer)))
 	    launch_command_client(tmp->sock, tab, co);
 	  else
-	    printf("%s\n", buffer);
+	    my_printf(1, "%s\n", buffer);
 	  return;
 	}
       tmp = tmp->next;
@@ -101,7 +101,7 @@ SOCKET			init_connection()
 
   if ((sock = socket(AF_INET, SOCK_STREAM, 0)) == -1)
     {
-      printf("Erreur de socket\n");
+      my_printf(2, "Erreur de socket\n");
       return (-1);
     }
   sock_addr.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -109,12 +109,12 @@ SOCKET			init_connection()
   sock_addr.sin_family = AF_INET;
   if (bind(sock, (SOCKADDR*)&sock_addr, sizeof(sock_addr)) == -1)
     {
-      printf("Erreur dans le linkage de la socket\n");
+      my_printf(2, "Erreur dans le linkage de la socket\n");
       return (-1);
     }
   else if (listen(sock, MAX_CLIENTS) == -1)
     {
-      printf("Erreur dans l'attente\n");
+      my_printf(2, "Erreur dans l'attente\n");
       return (-1);
     }
   return (sock);
