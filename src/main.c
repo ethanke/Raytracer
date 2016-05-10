@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Tue May 10 23:21:24 2016 Gaëtan Léandre
+** Last update Wed May 11 00:01:21 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -41,8 +41,9 @@ int			verif_load(t_prog *prog, char *args)
 
 int			disp_help(char *bin)
 {
-  my_printf(1, "Usage: %s [path/to/scene.xml] [--thread={nb thread}]\n", bin);
-  my_printf(1, "  OR   %s [path/to/scene.obj] [--thread={nb thread}]\n", bin);
+my_printf(1, "Usage: %s [path/to/scene.xml] [--thread={nb thread}]\n", bin);
+my_printf(1, "  OR   %s [path/to/scene.obj] [--thread={nb thread}]\n", bin);
+my_printf(1, "  OR   %s --cluster\n", bin);
   my_printf(1, "  OR   %s --edit\n", bin);
   return (-1);
 }
@@ -128,8 +129,10 @@ int			main(int ac, char *av[], char *env[])
     return (-1);
   bunny_set_key_response(key);
   if (prog.cluster)
-    if (client(&prog) == -1)
+    {
+      if (client(&prog) == -1)
 	return (-1);
+    }
   else if (!prog.thread_nb)
     raytrace(&prog);
   else
