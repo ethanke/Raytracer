@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Wed May 11 00:05:53 2016 Philippe Lefevre
+** Last update Wed May 11 11:07:53 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -58,7 +58,7 @@ int			verif_arg(int ac, char **av, char **env, t_prog *prog)
     return (-1);
   if (ac < 2 || ac > 3)
     return (disp_help(av[0]));
-  prog->thread_nb = 0;
+  prog->thread_nb = 1;
   prog->cluster = 0;
   while (av[++i])
     {

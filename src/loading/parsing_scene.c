@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Tue May 10 23:15:42 2016 Philippe Lefevre
+** Last update Wed May 11 03:14:12 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -75,19 +75,13 @@ char			**load_scene_file(char *path)
   t_line_list		*file_list;
   time_t		time_beg;
   time_t		time_end;
-  int			perc;
 
   time_beg = time(NULL);
   if ((fd = open(path, O_RDONLY)) == -1)
     return (NULL);
   file_list = NULL;
-  perc = 0;
   while ((str = get_next_line_size(fd)) != NULL)
-    {
-      perc++;
-      my_printf(1, "%d\n", perc);
-      file_list = add_line_list(file_list, str);
-    }
+    file_list = add_line_list(file_list, str);
   time_end = time(NULL);
   my_printf(1, "Open/Read en %d heures %d minutes %d secondes\n", (time_end - time_beg) / 3600,
 	    ((time_end - time_beg) % 3600) / 60, ((time_end - time_beg) % 3600) % 60);
