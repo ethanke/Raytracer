@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun May  8 02:00:53 2016 Gaëtan Léandre
-** Last update Tue May 10 23:40:56 2016 Gaëtan Léandre
+** Last update Wed May 11 10:20:38 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -88,38 +88,30 @@ unsigned int		*reciv_img(t_connected *co)
 int			charge_server(t_connected *co)
 {
   t_client		*tmp;
-  char			*file;
+  char			*str;
   int			size_x;
   int			actu_x;
 
-  my_printf(1, "Téléchargement du fichier sur le serveur\n");
-  file = reciv_file(co->master->sock);
-  if (file == NULL)
-    return (-1);
-  //RECUPERATION DES TAILLES DE FICHIER
-  co->width = 10;
-  co->height = 10;
-  my_printf(1, "Envois du fichier aux clients\n");
-  tmp = co->clients;
-  while (tmp)
-    {
-      send_file(tmp->sock, file);
-      tmp = tmp->next;
-    }
-  free(file);
   my_printf(1, "Envois des consignes aux clients\n");
-  size_x = co->width / co->size + 1;
+  size_x = co->width / (co->size + 1) + 1;
   actu_x = 0;
+  co->master->start_x = actu_x;
+  co->master->end_x = (actu_x + size_x >= co->width) ? co->width : actu_x + size_x;
+  actu_x = co->master->end_x;
+  str = my_sprintf("/run %d %d %c", co->master->start_x, co->master->end_x, (co->form == 1 ? 'x' : 'o'));
+  co->master->done = 0;
+  write_client(co->master->sock, str);
+  free(str);
   tmp = co->clients;
   while (tmp)
     {
       tmp->start_x = actu_x;
       tmp->end_x = (actu_x + size_x >= co->width) ? co->width : actu_x + size_x;
       actu_x = tmp->end_x;
-      file = my_sprintf("/run %d %d", tmp->start_x, tmp->end_x);
+      str = my_sprintf("/run %d %d %c", tmp->start_x, tmp->end_x, (co->form == 1 ? 'x' : 'o'));
       tmp->done = 0;
-      write_client(tmp->sock, file);
-      free(file);
+      write_client(tmp->sock, str);
+      free(str);
       tmp = tmp->next;
     }
   return (1);

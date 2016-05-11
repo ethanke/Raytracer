@@ -5,15 +5,37 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 05:54:51 2016 Gaëtan Léandre
-** Last update Tue May 10 23:37:25 2016 Gaëtan Léandre
+** Last update Wed May 11 09:53:05 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
 
+int			is_valid_file(char *args, t_connected *co)
+{
+  int			size;
+
+  size = my_strlen(args);
+  if (args[size - 1] == 'l' &&
+      args[size - 2] == 'm' &&
+      args[size - 3] == 'x' &&
+      args[size - 4] == '.')
+    co->form = 1;
+  else if (args[size - 1] == 'j' &&
+	   args[size - 2] == 'b' &&
+	   args[size - 3] == 'o' &&
+      	   args[size - 4] == '.')
+    co->form = 2;
+  else
+    {
+      co->form = 0;
+      return (0);
+    }
+  return (1);
+}
+
 int			cmd_launch(SOCKET sock, char **tab, t_connected *co)
 {
   char			*str;
-  t_client		*tmp;
 
   (void)str;
   if (tab == NULL)
@@ -26,15 +48,11 @@ int			cmd_launch(SOCKET sock, char **tab, t_connected *co)
 	  write_client(sock, "Pas de clients connectés pour effectuer launch");
 	  return (1);
 	}
-      tmp = co->clients;
-/*      str = sprintf("/launch s %s", tab[1]);*/
-      write_client(sock, "test");
-/*      free(str);*/
-      while (tmp)
-	{
-	  write_client(tmp->sock, "/launch r");
-	  tmp = tmp->next;
-	}
+      else if (is_valid_file(tab[1], co) == 0)
+	return (0);
+      str = my_sprintf("/launch s %s", tab[1]);
+      write_client(sock, str);
+      free(str);
       co->status = 1;
       return (1);
     }
@@ -87,6 +105,7 @@ int			cmd_exit(char **tab, t_connected *co)
     return (0);
   if (my_strcmp(tab[0], "exit") && tab[1] == NULL)
     {
+      write_all_client(co, "/halt", -1);
       co->status = -1;
       return (1);
     }

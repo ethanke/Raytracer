@@ -19,7 +19,8 @@ SRC		=	src/main.c				\
 			src/comunicate.c			\
 			src/command.c				\
 			src/connection.c			\
-			src/reciv_img.c
+			src/reciv_img.c				\
+			src/recive_and_launch.c
 
 			## SPRINTF ##
 SRC             +=      $(SPRTFDIR)/my_disp_unprintable.c    	\
@@ -51,7 +52,9 @@ SRC             +=      $(PRTFDIR)/my_disp_unprintable.c        \
 SRC		+=	src/get_next_line.c			\
 			src/utils.c				\
 			src/str_to_wordtab.c			\
-			src/send_file.c
+			src/send_file.c				\
+			src/xml/get_field.c			\
+			src/my_getnbr.c
 
 OBJ		=	$(SRC:.c=.o)
 

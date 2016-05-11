@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Wed May 11 00:05:53 2016 Philippe Lefevre
+** Last update Wed May 11 00:31:53 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -72,7 +72,7 @@ int			verif_arg(int ac, char **av, char **env, t_prog *prog)
 	  if (prog->thread_nb)
 	    return (disp_help(av[0]));
 	  prog->cluster = 1;
-      	  return (0);
+      	  return (client(prog));
 	}
       else if (!(my_strncmp("--thread=", av[i], 9)))
 	{
