@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue May 10 22:56:16 2016 Gaëtan Léandre
-** Last update Tue May 10 23:14:02 2016 Gaëtan Léandre
+** Last update Wed May 11 06:11:03 2016 Gaëtan Léandre
 */
 
 #ifndef			_CLIENT_H_
@@ -34,8 +34,18 @@ typedef struct		s_connected
   int			status;
 }			t_connected;
 
+typedef union		s_size
+{
+  int			i;
+  unsigned char		csize[4];
+}			t_size;
+
 void			write_server(SOCKET sock, char *buffer);
 int			read_server(SOCKET sock, char *buffer);
 int			client(t_prog *prog);
+int			send_file(SOCKET sock, char *file, int siz);
+char			*reciv_file(SOCKET sock);
+char			**is_command(char *str);
+char			*exec_command(SOCKET sock, char **tab, int *status);
 
 #endif			/* _CLIENT_H_ */

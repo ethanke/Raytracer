@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue May 10 22:52:42 2016 Gaëtan Léandre
-** Last update Tue May 10 23:24:52 2016 Gaëtan Léandre
+** Last update Wed May 11 09:50:49 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -23,25 +23,35 @@ void			push_command(SOCKET sock)
     my_printf(2, "Erreur de commande\n");
 }
 
-int			recive_command(SOCKET sock)
+char			*recive_command(SOCKET sock, int *status)
 {
   int			recive;
   char			buffer[BUF_SIZE + 1];
+  char			**tab;
+  char			*str;
 
+  str = NULL;
   recive = read_server(sock, buffer);
   if (recive == 0)
     {
       my_printf(2, "La connection avec le serveur a ete perdue\n");
-      return (-1);
+      return (str);
     }
-  my_printf(1, "%s\n", buffer);
-  return (0);
+  if ((tab = is_command(buffer)) == NULL)
+    my_printf(1, "%s\n", buffer);
+  else
+    {
+      str = exec_command(sock, tab, status);
+      free_tab(tab);
+    }
+  return (str);
 }
 
 void			set_connections(SOCKET sock)
 {
   fd_set		fdset;
   int			status;
+  char			*str;
 
   status = 0;
   while (status == 0)
@@ -54,8 +64,10 @@ void			set_connections(SOCKET sock)
       if (FD_ISSET(STDIN_FILENO, &fdset))
 	push_command(sock);
       else if (FD_ISSET(sock, &fdset))
-	status = recive_command(sock);
+	str = recive_command(sock, &status);
     }
+  /*ENVOYER LES INSTRUCTIONS + OBJ OU XML*/
+  (void)str;
 }
 
 SOCKET			init_connection()

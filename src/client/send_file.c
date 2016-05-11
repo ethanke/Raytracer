@@ -5,10 +5,10 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun May  8 03:45:09 2016 Gaëtan Léandre
-** Last update Wed May 11 05:28:09 2016 Gaëtan Léandre
+** Last update Wed May 11 06:02:43 2016 Gaëtan Léandre
 */
 
-#include		"server.h"
+#include		"client.h"
 
 char			*reciv_file(SOCKET sock)
 {

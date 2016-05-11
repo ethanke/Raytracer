@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May  6 22:41:13 2016 Gaëtan Léandre
-** Last update Tue May 10 23:35:14 2016 Gaëtan Léandre
+** Last update Wed May 11 10:09:47 2016 Gaëtan Léandre
 */
 
 #ifndef			_SERVER_H_
@@ -28,6 +28,7 @@
 # include 		"utils.h"
 # include		"my_sprintf.h"
 # include		"my_printf.h"
+# include		"xml.h"
 
 typedef 		int SOCKET;
 typedef struct 		sockaddr_in SOCKADDR_IN;
@@ -49,6 +50,7 @@ typedef struct		s_connected
 {
   int			size;
   int			max;
+  char			form;
   char			status;
   int			width;
   int			height;
@@ -69,5 +71,7 @@ void			write_client(SOCKET sock, char *buffer);
 void			write_all_client(t_connected *co, char *buffer,
 		 			 int exept);
 int			charge_server(t_connected *co);
+int			my_getnbr(char *str);
+char			*my_strstr(char *str, char *to_find);
 
 #endif			/* _SERVER_H_ */
