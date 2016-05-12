@@ -5,10 +5,11 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Thu May 12 12:42:13 2016 Philippe Lefevre
+** Last update Thu May 12 16:41:02 2016 Philippe Lefevre
 */
 
 #include		"main.h"
+pthread_mutex_t		mutex = PTHREAD_MUTEX_INITIALIZER;
 
 double			fade(double t)
 {
@@ -98,6 +99,7 @@ int			calc_normale(t_prog *prog, t_raycast *rcast)
   t_coord		noiseCoef;
   float			temp;
 
+  pthread_mutex_lock(&mutex);
   if (rcast->obj_touch->type == 's')
     calc_sphere_normale(prog, rcast);
   else if (rcast->obj_touch->type == 't')
@@ -119,6 +121,7 @@ int			calc_normale(t_prog *prog, t_raycast *rcast)
   rcast->normale.x = (1.0f - rcast->mat_touch->bump) * rcast->normale.x + rcast->mat_touch->bump * noiseCoef.x;
   rcast->normale.y = (1.0f - rcast->mat_touch->bump) * rcast->normale.y + rcast->mat_touch->bump * noiseCoef.y;
   rcast->normale.z = (1.0f - rcast->mat_touch->bump) * rcast->normale.z + rcast->mat_touch->bump * noiseCoef.z;
+  pthread_mutex_unlock(&mutex);
   temp = mult_vector(rcast->normale, rcast->normale);
   if (temp == 0.0)
     return (-1);

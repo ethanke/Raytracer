@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Thu May 12 12:34:35 2016 Philippe Lefevre
+** Last update Thu May 12 16:43:17 2016 Philippe Lefevre
 */
 
 #ifndef			STRUCT_H_
@@ -200,9 +200,9 @@ typedef struct          s_prog
   char			cluster;
   int			anti_alias;
   int			thread_nb;
-  int			thread_id;
   int			rendu_success;
   int			display_rendu;
+  int			rendu_verticale;
   int			verbose;
 }                       t_prog;
 

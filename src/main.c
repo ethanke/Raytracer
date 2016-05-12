@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Thu May 12 12:22:23 2016 Philippe Lefevre
+** Last update Thu May 12 13:30:35 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -42,12 +42,13 @@ int			verif_load(t_prog *prog, char *args)
 int			disp_help(char *bin)
 {
   my_printf(1, "Usage: %s scene[.xml|.obj]\n", bin);
-  my_printf(1, "	--thread=nb_thread\n", bin);
+  my_printf(1, "	--thread=nb_thread	Number of thread using. Default=1\n", bin);
   my_printf(1, "	--cluster\n", bin);
-  my_printf(1, "	--display_rendu\n", bin);
+  my_printf(1, "	--display_rendu		Rendering in real time\n", bin);
+  my_printf(1, "	--rendu_verticale	Split rendering zone in verticale mode for the thread. Default is horizontale\n", bin);
   my_printf(1, "	--edit\n", bin);
-  my_printf(1, "	--verbose\n", bin);
-  my_printf(1, "	--credit\n", bin);
+  my_printf(1, "	--verbose		Display all details message [time|status]\n", bin);
+  my_printf(1, "	--credit		Display credit for author\n", bin);
   return (-1);
 }
 
@@ -71,6 +72,7 @@ int			verif_arg(int ac, char **av, char **env, t_prog *prog)
   prog->thread_nb = 1;
   prog->cluster = 0;
   prog->display_rendu = 0;
+  prog->rendu_verticale = 0;
   prog->verbose = 0;
   i = 0;
   while (av[++i])
@@ -89,6 +91,8 @@ int			verif_arg(int ac, char **av, char **env, t_prog *prog)
 	}
       else if (!(my_strcmp("--display_rendu", av[i])))
 	prog->display_rendu = 1;
+      else if (!(my_strcmp("--rendu_verticale", av[i])))
+	prog->rendu_verticale = 1;
       else if (!(my_strcmp("--verbose", av[i])))
 	prog->verbose = 1;
       else if (!(my_strncmp("--thread=", av[i], 9)))
