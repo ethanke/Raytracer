@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Mon Jan  4 15:51:07 2016 Gaëtan Léandre
-** Last update Wed Apr 27 20:14:10 2016 Victor Sousa
+** Last update Wed May 11 00:01:58 2016 Philippe Lefevre
 */
 
 #ifndef			GET_NEXT_LINE_H_
@@ -32,5 +32,6 @@ typedef struct		s_line_list
 }			t_line_list;
 
 char			*get_next_line(const int fd);
+char			*get_next_line_size(const int fd);
 
 #endif			/* !GET_NEXT_LINE_H_*/

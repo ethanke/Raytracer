@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Mon Oct  5 13:31:52 2015 Gaëtan Léandre
-** Last update Wed May  4 04:22:04 2016 Gaëtan Léandre
+** Last update Tue May 10 18:17:28 2016 Gaëtan Léandre
 */
 
 #include 		"main.h"
@@ -52,9 +52,9 @@ char			*my_putnbr_base_add_s(size_t nbr, char *base,
   i = taille >= 0 ? taille : big_pow_add_s(nbr, base_size);
   while (i >= 0)
     {
-      puissance = nbr / power_add(base_size, i);
+      puissance = nbr / power_add_s(base_size, i);
       str = my_strcatchar(str, base[puissance]);
-      nbr = nbr - puissance * power_add(base_size, i);
+      nbr = nbr - puissance * power_add_s(base_size, i);
       i--;
     }
   return (str);

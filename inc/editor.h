@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 04:09:19 2016 Ethan Kerdelhue
-** Last update Sun May  8 05:53:05 2016 Philippe Lefevre
+** Last update Thu May 12 10:56:46 2016 Philippe Lefevre
 */
 
 #ifndef			EDITOR_H_
@@ -28,7 +28,7 @@ int			aff_obj_triangle(int fd, t_obj_list *obj, int i);
 int			aff_obj_sphere(int fd, t_obj_list *obj);
 int			aff_obj(int fd, t_obj_list *obj);
 int			aff_win_prop(int fd, t_prog *prog);
-t_cmd			*init_cmd();
+t_cmd			*init_cmd(t_cmd *cmd);
 int			count_material(t_prog *prog);
 int			count_light(t_prog *prog);
 int			count_object(t_prog *prog);
@@ -44,6 +44,11 @@ int			fill_struct(t_prog *prog);
 int			aff_help(t_prog *prog);
 int			aff_xml(t_prog *prog);
 int			add_obj(t_prog *prog);
+int			edit_win_size_x(t_prog *prog);
+int			edit_win_size_y(t_prog *prog);
+int			edit_win(t_prog *prog);
+int			edit_point(t_point *tmp);
+int			edit_cam_pos(t_prog *prog);
 
 			/* PUSH FUNC */
 int			push_sphere(t_prog *prog, t_sphere sph);

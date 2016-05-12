@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Sun May  8 09:54:29 2016 Gaëtan Léandre
+## Last update Thu May 12 12:16:38 2016 Philippe Lefevre
 ##
 
 NAME		=	raytracer2
@@ -21,6 +21,8 @@ SRCDIR		=	src
 PRTFDIR		=	src/editeur/my_printf
 SPRTFDIR	=	src/editeur/my_sprintf
 EDITDIR		=	src/editeur
+LOADIR		=	src/loading
+HITDIR		=	src/hit
 
 INCDIR		=	inc
 LIBDIR		=	lib
@@ -48,31 +50,32 @@ SRC		=	src/main.c				\
 			src/end.c
 
 ## LOADING ##
-SRC		+=	src/loading/parsing_scene.c		\
-			src/loading/load_mat.c			\
-			src/loading/load_mtl.c			\
-			src/loading/load_mat_param.c		\
-			src/loading/load_light.c		\
-			src/loading/load_obj.c			\
-			src/loading/load_sphere_param.c		\
-			src/loading/load_triangle_param.c	\
-			src/loading/load_cone_params.c		\
-			src/loading/load_cyl_params.c		\
-			src/loading/load_cube_param.c		\
-			src/loading/load_pill_params.c		\
-			src/loading/load_plan_params.c		\
-			src/loading/load_obj_file.c		\
-			src/loading/load_vertex.c		\
-			src/loading/load_forme.c
+SRC		+=	$(LOADIR)/parsing_scene.c		\
+			$(LOADIR)/load_mat.c			\
+			$(LOADIR)/load_mtl.c			\
+			$(LOADIR)/load_mat_param.c		\
+			$(LOADIR)/load_light.c			\
+			$(LOADIR)/load_obj.c			\
+			$(LOADIR)/load_sphere_param.c		\
+			$(LOADIR)/load_triangle_param.c		\
+			$(LOADIR)/load_cone_params.c		\
+			$(LOADIR)/load_cyl_params.c		\
+			$(LOADIR)/load_cube_param.c		\
+			$(LOADIR)/load_pill_params.c		\
+			$(LOADIR)/load_plan_params.c		\
+			$(LOADIR)/load_obj_file.c		\
+			$(LOADIR)/load_vertex.c			\
+			$(LOADIR)/load_forme.c			\
+			$(LOADIR)/load_screen.c
 
 ##  HIT  ##
-SRC		+=	src/hit/hit.c				\
-			src/hit/sphere.c			\
-			src/hit/triangle.c			\
-			src/hit/cone.c				\
-			src/hit/cube.c				\
-			src/hit/cylinder.c			\
-			src/hit/plan.c
+SRC		+=	$(HITDIR)/hit.c				\
+			$(HITDIR)/sphere.c			\
+			$(HITDIR)/triangle.c			\
+			$(HITDIR)/cone.c				\
+			$(HITDIR)/cube.c				\
+			$(HITDIR)/cylinder.c			\
+			$(HITDIR)/plan.c
 
 ##  RAYTRACE  ##
 SRC		+=	src/raytrace/raytrace.c			\
@@ -82,7 +85,8 @@ SRC		+=	src/raytrace/raytrace.c			\
 			src/raytrace/obj_calculs.c
 
 ##  XML  ##
-SRC		+=	src/xml/get_field.c
+SRC		+=	src/xml/get_field.c			\
+			src/xml/get_field_bis.c
 
 ##  EDITEUR  ##
 SRC		+=	src/editeur/editor.c
@@ -123,6 +127,7 @@ SRC		+=	$(EDITDIR)/aff_light.c			\
 			$(EDITDIR)/edit_light.c			\
 			$(EDITDIR)/push_func.c			\
 			$(EDITDIR)/edit_cam.c			\
+			$(EDITDIR)/edit_cam_bis.c		\
 			$(EDITDIR)/aff_obj.c			\
 			$(EDITDIR)/aff_win.c			\
 			$(EDITDIR)/add_light.c			\
@@ -154,8 +159,13 @@ SRC		+=	src/utils/tekpixel.c			\
 			src/utils/vect_operator.c		\
 			src/utils/vect_operator2.c		\
 			src/utils/wtf.c				\
-			src/utils/epur_str.c			\
-			src/utils/read_opti.c
+			src/utils/epur_str.c
+
+##  CLIENT  ##
+SRC		+=	src/client/client.c			\
+			src/client/communicate.c		\
+			src/client/command.c			\
+			src/client/send_file.c
 
 ##  OUTPUT  ##
 SRC		+=	src/output/my_putchar.c			\
@@ -174,7 +184,7 @@ title		:
 			@$(ECHO) $(GREEN)Raytracer$(TEAL)2$(DEFAULT)
 
 $(NAME)		:	$(OBJ)
-			@$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS) &&	\
+			@$(CC) -o $(NAME) $(OBJ) $(LDFLAGS) &&	\
 			$(ECHO) $(GREEN) "[OK]" $(TEAL) $(NAME) $(DEFAULT) ||	\
 			$(ECHO) $(RED) "[XX]" $(TEAL) $(NAME) $(DEFAULT)
 

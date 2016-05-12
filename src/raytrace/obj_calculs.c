@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Sun May  8 04:10:33 2016 Philippe Lefevre
+** Last update Thu May 12 16:41:02 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -114,7 +114,6 @@ int			calc_normale(t_prog *prog, t_raycast *rcast)
     calc_circle_normale(prog, rcast);
   else
     return (-1);
-  pthread_mutex_unlock(&mutex);
 
   noiseCoef.x = noise(0.1 * rcast->new_point.x, 0.1 * rcast->new_point.y, 0.1 * rcast->new_point.z);
   noiseCoef.y = noise(0.1 * rcast->new_point.y, 0.1 * rcast->new_point.z, 0.1 * rcast->new_point.x);
@@ -122,6 +121,7 @@ int			calc_normale(t_prog *prog, t_raycast *rcast)
   rcast->normale.x = (1.0f - rcast->mat_touch->bump) * rcast->normale.x + rcast->mat_touch->bump * noiseCoef.x;
   rcast->normale.y = (1.0f - rcast->mat_touch->bump) * rcast->normale.y + rcast->mat_touch->bump * noiseCoef.y;
   rcast->normale.z = (1.0f - rcast->mat_touch->bump) * rcast->normale.z + rcast->mat_touch->bump * noiseCoef.z;
+  pthread_mutex_unlock(&mutex);
   temp = mult_vector(rcast->normale, rcast->normale);
   if (temp == 0.0)
     return (-1);
@@ -271,9 +271,11 @@ void			calc_cyl_normale(t_prog *prog, t_raycast *rcast)
 				float_time_vector(rcast->dist,
 						  rcast->ray.dir));
   co = minus_vector(rcast->new_point, rcast->cyl->center);
-  rcast->normale = minus_vector(co, (float_time_vector((mult_vector(co, rcast->cyl->dir) /
-							mult_vector(rcast->cyl->dir, rcast->cyl->dir)),
-						       rcast->cyl->dir)));
+  rcast->normale =
+  minus_vector(co, (float_time_vector((mult_vector(co, rcast->cyl->dir) /
+				       mult_vector(rcast->cyl->dir,
+						   rcast->cyl->dir)),
+				      rcast->cyl->dir)));
 }
 
 void			calc_circle_normale(t_prog *prog, t_raycast *rcast)

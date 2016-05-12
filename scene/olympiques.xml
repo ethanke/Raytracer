@@ -57,7 +57,7 @@
       <green>255</green>
       <blue>255</blue>
       <reflect>100</reflect>
-      <bump>0.05</bump>
+      <bump>0.9</bump>
       <sky>0</sky>
       <texture>NULL</texture>
     </mat4>

@@ -70,8 +70,9 @@ void GlWindow::setPixelOnScreen(const Vector2 pixel_pos, Color color)
     float   ratio_y = (float)this->size().height() / (global_scene == NULL ? (float)this->size().height() : (float)global_scene->camera->win_size.y) + 0.35;
     float   size_x  = 0.5 * ratio_x;
     float   size_y  = 0.5 * ratio_y;
+    Color   _color = color.clamp_color();
     glBegin(GL_QUADS);
-        glColor3f(std::min(color.r * 255.0, 255.0), std::min(color.g * 255.0, 255.0), std::min(color.b * 255.0, 255.0));
+        glColor3f(_color.r, _color.g, _color.b);
         glVertex2f(pixel_pos.x - size_x, pixel_pos.y - size_y);
         glVertex2f(pixel_pos.x - size_x, pixel_pos.y + size_y);
         glVertex2f(pixel_pos.x + size_x, pixel_pos.y - size_y);

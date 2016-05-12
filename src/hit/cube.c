@@ -5,13 +5,16 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:28:00 2016 Victor Sousa
-** Last update Thu May  5 13:34:16 2016 Victor Sousa
+** Last update Thu May 12 11:03:44 2016 Philippe Lefevre
 */
 
 #include		"main.h"
 
 int			hit_cube(t_ray *r, t_cube *c, float *t)
 {
+  (void)r;
+  (void)c;
+  (void)t;
   /*
   float tmin = (min.x - r.orig.x) / r.dir.x;
   float tmax = (max.x - r.orig.x) / r.dir.x;

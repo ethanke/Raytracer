@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 10:07:00 2016 Ethan Kerdelhue
-** Last update Tue Apr 26 10:07:07 2016 Ethan Kerdelhue
+** Last update Wed May 11 14:36:31 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -13,7 +13,8 @@
 int			put_error(int error)
 {
   if (error == ERR_NOCMD)
-    my_putstr("Error : No entry for this command use \"help\" for more details\n");
+    my_putstr("Error : No entry for this command \
+	      use \"help\" for more details\n");
   if (error == ERR_NOACC)
     my_putstr("Error : No access to this file\n");
   if (error == ERR_NOSTR)

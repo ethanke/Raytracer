@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Sun May  8 05:24:36 2016 Philippe Lefevre
+** Last update Thu May 12 13:48:56 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -40,10 +40,10 @@ t_color			raytrace_loop(t_prog *prog,
   rcast->out_col = prog->background->color[pos.y][pos.x];
   rcast->mat_touch = NULL;
   while ((rcast->coef > 0.0f) && (rcast->depth < MAX_DEPTH))
-    {
       if (reflect_loop(prog, rcast) == -1)
-	rcast->depth = MAX_DEPTH;
-    }
+	{
+	  rcast->depth = MAX_DEPTH;
+	}
   return (rcast->out_col);
 }
 
@@ -77,7 +77,6 @@ unsigned int		calcul_pixel(t_prog *prog,
 	}
       alias_pos.y += 1.0;
     }
-
   return (col.full);
 }
 

@@ -5,10 +5,11 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Mon Jan  4 15:56:23 2016 Gaëtan Léandre
-** Last update Wed May  4 18:03:47 2016 Ethan Kerdelhue
+** Last update Wed May 11 00:00:25 2016 Philippe Lefevre
 */
 
 #include 		"get_next_line.h"
+#include		"main.h"
 
 int			my_strlen_back(char *str)
 {
@@ -101,4 +102,34 @@ char			*get_next_line(const int fd)
   if ((text.result[0] == '\0' && beread == 0) || beread < 0)
     return (NULL);
   return (text.result);
+}
+
+char			*get_next_line_size(const int fd)
+{
+  static char		*buf = NULL;
+  struct stat		file_s;
+  char			*line;
+  static int		curs = 0;
+  int			i;
+
+  if (buf == NULL)
+    {
+      fstat(fd, &file_s);
+      if ((buf = malloc(file_s.st_size + 1)) == NULL)
+	return (NULL);
+      buf[file_s.st_size] = '\0';
+      read(fd, buf, file_s.st_size);
+    }
+  else if (buf[curs] == '\0')
+    return (NULL);
+  i = curs;
+  while (buf[i] && buf[i] != '\n')
+    i++;
+  line = malloc(i - curs + 2);
+  i = 0;
+  while (buf[curs] && buf[curs] != '\n')
+    line[i++] = buf[curs++];
+  curs++;
+  line[i] = '\0';
+  return (line);
 }

@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Thu Nov 12 14:36:04 2015 Gaëtan Léandre
-** Last update Wed May  4 04:15:28 2016 Gaëtan Léandre
+** Last update Wed May 11 14:05:34 2016 Philippe Lefevre
 */
 
 #ifndef			MY_SPRINTF_H_
@@ -47,6 +47,5 @@ char			*my_put_unbr_s(unsigned int nbr);
 char			*my_putnbr_base_add_s(size_t nbr, char *base,
 					      int taille);
 char			*my_putnbr_base_s(int nbr, char *base, int taille);
-
 
 #endif	      /*MY_SPRINTF_H_*/

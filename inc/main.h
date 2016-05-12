@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:45:54 2016 victor sousa
-** Last update Sun May  8 04:02:50 2016 Philippe Lefevre
+** Last update Thu May 12 12:22:45 2016 Philippe Lefevre
 */
 
 #ifndef			MAIN_H_
@@ -31,7 +31,9 @@
 # include		"my_printf.h"
 # include		"my_sprintf.h"
 # include		"xml.h"
+# include		"client.h"
 
+# define		RT_MAX_RAM	(512)
 # define		Deg_To_Rad(ang)	((ang) / 180.0 * M_PI)
 # define		ABS(x)		((x)<0 ? -(x) : (x))
 # define		NEG(x)		((x)<0 ? (x) : -(x))
