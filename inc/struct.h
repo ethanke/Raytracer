@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Wed May 11 02:35:53 2016 Philippe Lefevre
+** Last update Thu May 12 11:23:57 2016 Philippe Lefevre
 */
 
 #ifndef			STRUCT_H_
@@ -203,6 +203,7 @@ typedef struct          s_prog
   int			thread_id;
   int			rendu_success;
   int			thread_success;
+  int			display_rendu;
 }                       t_prog;
 
 typedef struct s_cmd

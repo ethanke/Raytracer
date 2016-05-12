@@ -5,34 +5,10 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 05:02:48 2016 victor sousa
-** Last update Sun May  1 15:23:37 2016 Victor Sousa
+** Last update Wed May 11 14:32:22 2016 Philippe Lefevre
 */
 
-# include	"main.h"
-
-int		contains_char(char *str, char to_find)
-{
-  int		i;
-
-  i = 0;
-  while (str[i])
-    if (str[i++] == to_find)
-      return (i);
-  return (-1);
-}
-
-int		how_much_char(char *str, char to_find)
-{
-  int		i;
-  int		count;
-
-  count = 1;
-  i = 0;
-  while (str[i])
-    if (str[i++] == to_find)
-      count++;
-  return (count);
-}
+#include	"main.h"
 
 char		*get_next_occurence(char *str, char separator)
 {
@@ -72,8 +48,7 @@ char		*parse_value(char *str)
       return (NULL);
     }
   j = 0;
-  i++;
-  while (str[i] && str[i] != '<')
+  while (str[++i] && str[i] != '<')
     {
       out[j] = str[i];
       out[j++ + 1] = 0;
@@ -82,9 +57,19 @@ char		*parse_value(char *str)
 	  my_printf(1, "Malloc failed..\n");
 	  return (NULL);
 	}
-      i++;
     }
   return (out);
+}
+
+char		*get_field_end(char **scene, char **parent,
+			       int i, int current)
+{
+  while (parent[i + ++current * 0])
+    if (my_strstr(scene[current], parent[i]) != 0)
+      i++;
+    else if (my_strstr(scene[current], parent[(i > 0 ? i - 1 : 0)]) != 0)
+      return (NULL);
+  return (parse_value(scene[current - 1]));
 }
 
 char		*get_field(char **scene, char *field)
@@ -108,13 +93,7 @@ char		*get_field(char **scene, char *field)
     }
   parent[i++] = get_next_occurence(field + field_decal, ':');
   parent[i] = 0;
-  field_decal = 0;
   current = -1;
   i = 0;
-  while (parent[i + ++current * 0])
-    if (my_strstr(scene[current], parent[i]) != 0)
-      i++;
-    else if (my_strstr(scene[current], parent[(i > 0 ? i - 1 : 0)]) != 0)
-      return (NULL);
-  return (parse_value(scene[current - 1]));
+  return (get_field_end(scene, parent, i, current));
 }

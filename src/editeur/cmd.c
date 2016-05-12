@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 10:04:58 2016 Ethan Kerdelhue
-** Last update Mon May  2 22:48:32 2016 Ethan Kerdelhue
+** Last update Thu May 12 10:56:28 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -17,10 +17,8 @@ int			close_xml(t_prog *prog)
   return (0);
 }
 
-t_cmd			*init_cmd()
+t_cmd			*init_cmd(t_cmd *cmd)
 {
-  t_cmd			*cmd;
-
   cmd = malloc(sizeof(t_cmd) * 20);
   cmd[0].index = "help";
   cmd[0].ptr = &aff_help;

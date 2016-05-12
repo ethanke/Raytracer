@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Wed May 11 05:53:56 2016 Gaëtan Léandre
+## Last update Wed May 11 14:40:12 2016 Philippe Lefevre
 ##
 
 NAME		=	raytracer2
@@ -82,7 +82,8 @@ SRC		+=	src/raytrace/raytrace.c			\
 			src/raytrace/obj_calculs.c
 
 ##  XML  ##
-SRC		+=	src/xml/get_field.c
+SRC		+=	src/xml/get_field.c			\
+			src/xml/get_field_bis.c
 
 ##  EDITEUR  ##
 SRC		+=	src/editeur/editor.c
@@ -123,6 +124,7 @@ SRC		+=	$(EDITDIR)/aff_light.c			\
 			$(EDITDIR)/edit_light.c			\
 			$(EDITDIR)/push_func.c			\
 			$(EDITDIR)/edit_cam.c			\
+			$(EDITDIR)/edit_cam_bis.c		\
 			$(EDITDIR)/aff_obj.c			\
 			$(EDITDIR)/aff_win.c			\
 			$(EDITDIR)/add_light.c			\

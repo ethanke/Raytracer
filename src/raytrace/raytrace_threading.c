@@ -5,7 +5,7 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Sun May  8 02:20:22 2016 Philippe Lefevre
-** Last update Wed May 11 02:44:36 2016 Philippe Lefevre
+** Last update Thu May 12 11:26:50 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -74,7 +74,7 @@ int			raytrace_threading(t_prog *prog)
     }
   my_putstr("Thread create successfull\n");
   i = -1;
-  while (prog->rendu_success > 0)
+  while (prog->display_rendu && (prog->rendu_success > 0))
     {
       bunny_blit(&prog->win->buffer, &prog->pix->clipable, &pos);
       bunny_display(prog->win);

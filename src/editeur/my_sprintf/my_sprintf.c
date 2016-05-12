@@ -5,38 +5,31 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Thu Nov 12 12:27:44 2015 Gaëtan Léandre
-** Last update Wed May  4 04:34:04 2016 Gaëtan Léandre
+** Last update Thu May 12 10:50:32 2016 Philippe Lefevre
 */
 
 #include 		"main.h"
 
-static t_sfonct		*init_sstruct(t_sfonct *tab)
+static t_sfonct		*init_sstruct(t_sfonct *tab, char *flag, int nb_flag)
 {
+  int			i;
+
+  i = -1;
   if ((tab = malloc(12 * sizeof(t_sfonct))) == NULL)
     return (NULL);
-  tab[0].flag = 'c';
+  while (++i < nb_flag)
+    tab[i].flag = flag[i];
   (tab[0].f) = va_my_putchar_s;
-  tab[1].flag = 's';
   (tab[1].f) = va_my_putstr_s;
-  tab[2].flag = 'i';
   (tab[2].f) = va_my_putnbr_s;
-  tab[3].flag = 'd';
   (tab[3].f) = va_my_putnbr_s;
-  tab[4].flag = 'u';
   (tab[4].f) = va_my_putunbr_s;
-  tab[5].flag = 'o';
   (tab[5].f) = va_my_octal_s;
-  tab[6].flag = 'x';
   (tab[6].f) = va_my_examin_s;
-  tab[7].flag = 'X';
   (tab[7].f) = va_my_examaj_s;
-  tab[8].flag = 'b';
   (tab[8].f) = va_my_bin_s;
-  tab[9].flag = 'S';
   (tab[9].f) = va_my_disp_unp_s;
-  tab[10].flag = 'p';
   (tab[10].f) = va_my_adress_s;
-  tab[11].flag = 'f';
   (tab[11].f) = va_my_putfnbr_s;
   return (tab);
 }
@@ -75,18 +68,12 @@ static char			*print_ffct(va_list ap, t_sfonct *tab,
     {
       result = my_strcatchar(result, '%');
       if (str[*i] != '%')
-	{
-	  if (wait == 1)
-	    result = my_strcatchar(result, ' ');
-	  result = my_strcatchar(result, str[*i]);
-	}
+	result = ((wait == 1) ? (my_strcatchar(result, ' '))
+		  : (my_strcatchar(result, str[*i])));
     }
   else if (fct > -1)
-    {
-      if (wait == 1)
-	result = my_strcatchar(result, ' ');
-      result = my_strcatprint(result, tab[fct].f(ap));
-    }
+    result = ((wait == 1) ? (my_strcatchar(result, ' '))
+	      : (my_strcatprint(result, tab[fct].f(ap))));
   return (result);
 }
 
@@ -98,7 +85,7 @@ char			*my_sprintf(char *str, ...)
   char			*result;
 
   tab = NULL;
-  tab = init_sstruct(tab);
+  tab = init_sstruct(tab, "csiduoxXbspf", 12);
   if ((result = malloc_and_init()) == NULL)
     return (NULL);
   i = 0;
