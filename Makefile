@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Wed May 11 14:40:12 2016 Philippe Lefevre
+## Last update Thu May 12 12:16:38 2016 Philippe Lefevre
 ##
 
 NAME		=	raytracer2
@@ -21,6 +21,8 @@ SRCDIR		=	src
 PRTFDIR		=	src/editeur/my_printf
 SPRTFDIR	=	src/editeur/my_sprintf
 EDITDIR		=	src/editeur
+LOADIR		=	src/loading
+HITDIR		=	src/hit
 
 INCDIR		=	inc
 LIBDIR		=	lib
@@ -48,31 +50,32 @@ SRC		=	src/main.c				\
 			src/end.c
 
 ## LOADING ##
-SRC		+=	src/loading/parsing_scene.c		\
-			src/loading/load_mat.c			\
-			src/loading/load_mtl.c			\
-			src/loading/load_mat_param.c		\
-			src/loading/load_light.c		\
-			src/loading/load_obj.c			\
-			src/loading/load_sphere_param.c		\
-			src/loading/load_triangle_param.c	\
-			src/loading/load_cone_params.c		\
-			src/loading/load_cyl_params.c		\
-			src/loading/load_cube_param.c		\
-			src/loading/load_pill_params.c		\
-			src/loading/load_plan_params.c		\
-			src/loading/load_obj_file.c		\
-			src/loading/load_vertex.c		\
-			src/loading/load_forme.c
+SRC		+=	$(LOADIR)/parsing_scene.c		\
+			$(LOADIR)/load_mat.c			\
+			$(LOADIR)/load_mtl.c			\
+			$(LOADIR)/load_mat_param.c		\
+			$(LOADIR)/load_light.c			\
+			$(LOADIR)/load_obj.c			\
+			$(LOADIR)/load_sphere_param.c		\
+			$(LOADIR)/load_triangle_param.c		\
+			$(LOADIR)/load_cone_params.c		\
+			$(LOADIR)/load_cyl_params.c		\
+			$(LOADIR)/load_cube_param.c		\
+			$(LOADIR)/load_pill_params.c		\
+			$(LOADIR)/load_plan_params.c		\
+			$(LOADIR)/load_obj_file.c		\
+			$(LOADIR)/load_vertex.c			\
+			$(LOADIR)/load_forme.c			\
+			$(LOADIR)/load_screen.c
 
 ##  HIT  ##
-SRC		+=	src/hit/hit.c				\
-			src/hit/sphere.c			\
-			src/hit/triangle.c			\
-			src/hit/cone.c				\
-			src/hit/cube.c				\
-			src/hit/cylinder.c			\
-			src/hit/plan.c
+SRC		+=	$(HITDIR)/hit.c				\
+			$(HITDIR)/sphere.c			\
+			$(HITDIR)/triangle.c			\
+			$(HITDIR)/cone.c				\
+			$(HITDIR)/cube.c				\
+			$(HITDIR)/cylinder.c			\
+			$(HITDIR)/plan.c
 
 ##  RAYTRACE  ##
 SRC		+=	src/raytrace/raytrace.c			\

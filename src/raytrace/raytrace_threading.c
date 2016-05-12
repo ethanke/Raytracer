@@ -5,10 +5,11 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Sun May  8 02:20:22 2016 Philippe Lefevre
-** Last update Thu May 12 11:26:50 2016 Philippe Lefevre
+** Last update Thu May 12 12:44:11 2016 Philippe Lefevre
 */
 
 #include		"main.h"
+pthread_mutex_t		mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void			*raytrace_zone(void *p)
 {
@@ -22,27 +23,38 @@ void			*raytrace_zone(void *p)
   raycast.touch_circle = 0;
   pos.x = ((prog->win_size.x / prog->thread_nb) * prog->thread_id) - 1;
   end = ((prog->win_size.x / prog->thread_nb) * (prog->thread_id + 1));
-  my_printf(1, "Thread number %d : %d to %d\n", prog->thread_id, pos.x, end);
-  prog->thread_success -= (prog->thread_id + 1);
-  while (prog->thread_success > 0);
+  if (prog->verbose)
+    my_printf(1, "Thread number %d : %d to %d\n", prog->thread_id, pos.x, end);
   while (++pos.x < end)
     {
       pos.y = -1;
       while (++pos.y < prog->win_size.y)
 	{
+	  pthread_mutex_lock(&mutex);
 	  pixel_color.full = calcul_pixel(prog, raycast, pos);
+	  pthread_mutex_unlock(&mutex);
 	  tekpixel(prog->pix, &pos, &pixel_color);
 	}
     }
-    prog->rendu_success -= (prog->thread_id + 1);
+  prog->rendu_success -= (prog->thread_id + 1);
   pthread_exit(NULL);
+}
+int			raytrace_thread_create(t_prog *prog, int i,
+					       pthread_t thread_id[])
+{
+  time_t		time_thread;
+
+  prog->thread_id = i;
+  if (pthread_create(&thread_id[i], NULL, raytrace_zone, (void *)prog))
+    return (my_printf(2, "Error: can not create thread\n") - 1);
+  time_thread = time(NULL);
+  while (time_thread == time(NULL));
+  return (0);
 }
 
 int			raytrace_threading(t_prog *prog)
 {
   pthread_t		thread_id[prog->thread_nb];
-  t_texture		*loading;
-  time_t		time_thread;
   time_t		time_beg;
   time_t		time_end;
   t_bunny_position      pos;
@@ -50,28 +62,16 @@ int			raytrace_threading(t_prog *prog)
 
   pos.x = 0;
   pos.y = 0;
-  if ((loading = load_image("sprites/image/loading.jpg")) == NULL)
-    return (-1);
-  put_image(loading, prog->pix, &pos);
-  bunny_blit(&prog->win->buffer, &prog->pix->clipable, &pos);
-  bunny_display(prog->win);
-  prog->thread_success = 0;
   i = -1;
-  while (++i < prog->thread_nb)
-    prog->thread_success += i +1;
-  my_putstr("\nRaytracing multi-threading started\n");
+  if (prog->verbose)
+    my_putstr("\nRaytracing multi-threading started\n");
   i = -1;
   time_beg = time(NULL);
   my_putstr("\nStarting create thread\n");
   prog->rendu_success = 0;
   while (++i < prog->thread_nb)
-    {
-      prog->thread_id = i;
-      prog->rendu_success += i + 1;
-      pthread_create(&thread_id[i], NULL, raytrace_zone, (void *)prog);
-      time_thread = time(NULL);
-      while (time_thread == time(NULL));
-    }
+    if (raytrace_thread_create(prog, i, thread_id))
+	return (-1);
   my_putstr("Thread create successfull\n");
   i = -1;
   while (prog->display_rendu && (prog->rendu_success > 0))

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Thu May 12 12:06:42 2016 Philippe Lefevre
+** Last update Thu May 12 12:22:23 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -46,6 +46,7 @@ int			disp_help(char *bin)
   my_printf(1, "	--cluster\n", bin);
   my_printf(1, "	--display_rendu\n", bin);
   my_printf(1, "	--edit\n", bin);
+  my_printf(1, "	--verbose\n", bin);
   my_printf(1, "	--credit\n", bin);
   return (-1);
 }
@@ -70,6 +71,7 @@ int			verif_arg(int ac, char **av, char **env, t_prog *prog)
   prog->thread_nb = 1;
   prog->cluster = 0;
   prog->display_rendu = 0;
+  prog->verbose = 0;
   i = 0;
   while (av[++i])
     {
@@ -87,6 +89,8 @@ int			verif_arg(int ac, char **av, char **env, t_prog *prog)
 	}
       else if (!(my_strcmp("--display_rendu", av[i])))
 	prog->display_rendu = 1;
+      else if (!(my_strcmp("--verbose", av[i])))
+	prog->verbose = 1;
       else if (!(my_strncmp("--thread=", av[i], 9)))
 	{
 	  prog->thread_nb = my_getnbr(av[i] + 9);
@@ -135,10 +139,9 @@ int			main(int ac, char **av, char **env)
 {
   t_prog		prog;
 
-  set_max_heap_size(512);
-  if (verif_arg(ac, av, env, &prog) != 0
-      || create_pix(&prog) != 0
-      || create_win(&prog) != 0)
+  set_max_heap_size(RT_MAX_RAM);
+  if (verif_arg(ac, av, env, &prog) || create_pix(&prog)
+      || create_win(&prog) || waiting_screen(&prog))
     return (-1);
   bunny_set_key_response(key);
   if (prog.cluster)

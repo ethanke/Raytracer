@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:38 2016 victor sousa
-** Last update Thu May  5 11:55:51 2016 Victor Sousa
+** Last update Thu May 12 12:18:51 2016 Philippe Lefevre
 */
 
 #ifndef			LOADING_H_
@@ -31,5 +31,6 @@ t_obj_list              *add_cone(t_obj_list *prev, char **file, int id);
 t_obj_list              *add_cyl(t_obj_list *prev, char **file, int id);
 t_obj_list              *add_pill(t_obj_list *prev, char **file, int id);
 t_obj_list              *add_cube(t_obj_list *prev, char **file, int id);
+int			waiting_screen(t_prog *prog);
 
 #endif		      /*LOADING_H*/

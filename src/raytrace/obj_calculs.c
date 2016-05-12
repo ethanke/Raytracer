@@ -5,11 +5,10 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Sun May  8 04:10:33 2016 Philippe Lefevre
+** Last update Thu May 12 12:42:13 2016 Philippe Lefevre
 */
 
 #include		"main.h"
-pthread_mutex_t		mutex = PTHREAD_MUTEX_INITIALIZER;
 
 double			fade(double t)
 {
@@ -99,7 +98,6 @@ int			calc_normale(t_prog *prog, t_raycast *rcast)
   t_coord		noiseCoef;
   float			temp;
 
-  pthread_mutex_lock(&mutex);
   if (rcast->obj_touch->type == 's')
     calc_sphere_normale(prog, rcast);
   else if (rcast->obj_touch->type == 't')
@@ -114,7 +112,6 @@ int			calc_normale(t_prog *prog, t_raycast *rcast)
     calc_circle_normale(prog, rcast);
   else
     return (-1);
-  pthread_mutex_unlock(&mutex);
 
   noiseCoef.x = noise(0.1 * rcast->new_point.x, 0.1 * rcast->new_point.y, 0.1 * rcast->new_point.z);
   noiseCoef.y = noise(0.1 * rcast->new_point.y, 0.1 * rcast->new_point.z, 0.1 * rcast->new_point.x);
@@ -271,9 +268,11 @@ void			calc_cyl_normale(t_prog *prog, t_raycast *rcast)
 				float_time_vector(rcast->dist,
 						  rcast->ray.dir));
   co = minus_vector(rcast->new_point, rcast->cyl->center);
-  rcast->normale = minus_vector(co, (float_time_vector((mult_vector(co, rcast->cyl->dir) /
-							mult_vector(rcast->cyl->dir, rcast->cyl->dir)),
-						       rcast->cyl->dir)));
+  rcast->normale =
+  minus_vector(co, (float_time_vector((mult_vector(co, rcast->cyl->dir) /
+				       mult_vector(rcast->cyl->dir,
+						   rcast->cyl->dir)),
+				      rcast->cyl->dir)));
 }
 
 void			calc_circle_normale(t_prog *prog, t_raycast *rcast)
