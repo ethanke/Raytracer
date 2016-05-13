@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<scene>
+
+  <view>
+    <x_size>1080</x_size>
+    <y_size>720</y_size>
+    <cam_pos>
+      <x>0</x>
+      <y>200</y>
+      <z>-500</z>
+    </cam_pos>
+    <look_at>
+      <x>0</x>
+      <y>0</y>
+      <z>-150</z>
+    </look_at>
+    <fov>90</fov>
+    <alias>1</alias>
+    <background>sprites/image/sky1.png</background>
+  </view>
+
+  <material_list>
+    <count>3</count>
+
+    <mat1>
+      <red>200</red>
+      <green>100</green>
+      <blue>25</blue>
+      <reflect>0</reflect>
+      <transparency>0</transparency>
+      <ior>0</ior>
+      <bump>0</bump>
+      <sky>0</sky>
+      <texture>NULL</texture>
+    </mat1>
+
+    <mat2>
+      <red>255</red>
+      <green>255</green>
+      <blue>255</blue>
+      <reflect>10</reflect>
+      <transparency>0</transparency>
+      <ior>0</ior>
+      <bump>0</bump>
+      <sky>0</sky>
+      <texture>NULL</texture>
+    </mat2>
+
+    <mat3>
+      <red>25</red>
+      <green>25</green>
+      <blue>25</blue>
+      <reflect>10</reflect>
+      <transparency>0</transparency>
+      <ior>0</ior>
+      <bump>0</bump>
+      <sky>0</sky>
+      <texture>NULL</texture>
+    </mat3>
+  </material_list>
+
+  <object_list>
+    <count>2</count>
+
+    <obj1>
+      <type>sphere</type>
+      <center>
+	      <x>0</x>
+	      <y>0</y>
+	      <z>0</z>
+      </center>
+      <radius>100</radius>
+      <material_id>1</material_id>
+    </obj1>
+
+    <obj2>
+      <type>plan</type>
+      <center>
+        <x>0</x>
+        <y>-101</y>
+        <z>0</z>
+      </center>
+      <dir>
+        <x>0</x>
+        <y>-1</y>
+        <z>0</z>
+      </dir>
+      <material_id1>2</material_id1>
+      <material_id2>3</material_id2>
+    </obj2>
+  </object_list>
+  <light_list>
+    <count>1</count>
+
+    <light1>
+      <center>
+        <x>300</x>
+	      <y>300</y>
+        <z>0</z>
+      </center>
+      <intensity>100</intensity>
+    </light1>
+
+    <light2>
+      <center>
+        <x>-350</x>
+	      <y>350</y>
+	      <z>0</z>
+      </center>
+      <intensity>100</intensity>
+    </light2>
+  </light_list>
+
+</scene>

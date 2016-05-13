@@ -19,14 +19,12 @@ class RaytraceThread : public QThread
         QMutex      *mutex;
         GlWindow    *glWin;
         Scene       *scene;
-        Vector3f<float> raytrace(const Vector3f<float> &camStart, const Vector3f<float> &camDir, int depth);
-        void  IlluminatePoint(Object *Object, Vector3f<float> &Point, Vector3f<float> &Normal, Vector3f<float> &Color, Camera &camera);
-        float AmbientOcclusionFactor(Object *object, Vector3f<float> &Point, Vector3f<float> &Normal);
-        Vector3f<float> LightIntensity(Object *Object, Vector3f<float> &Point, Vector3f<float> &Normal, Vector3f<float> &LightPosition, Light *light, float AO);
-        bool Shadow(Vector3f<float> &Point, Vector3f<float> &LightDirection, float LightDistance);
+        Vector3f<float> raytrace(const Vector3f<float> &camStart, const Vector3f<float> &camDir, int depth, float coef);
+        bool            Shadow(Vector3f<float> &Point, Vector3f<float> &LightDirection, float LightDistance);
         Vector3f<float> reflect(const Vector3f<float> &i, const Vector3f<float> &n);
         Vector3f<float> refract(const Vector3f<float> &i, const Vector3f<float> &n, float eta);
         Vector3f<float> mix(const Vector3f<float> &u, const Vector3f<float> &v, float a);
+        float           clamp(const float &lo, const float &hi, const float &v);
 
     public:
         RaytraceThread(QMutex* mu, GlWindow *glWin);

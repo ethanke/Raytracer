@@ -1,8 +1,5 @@
 #include "raytracethread.h"
 
-#include <QDebug>
-#include <vector>
-
 RaytraceThread::RaytraceThread(QMutex* mu, GlWindow *glWin)
 {
     this->mutex= mu;
@@ -24,7 +21,7 @@ void RaytraceThread::run()
         while (++pos.x < this->glWin->size().width())
         {
             camera.processDir(pos);
-            Vector3f<float> outColor = raytrace(camera.start, camera.direction, 0) * 255.0;
+            Vector3f<float> outColor = raytrace(camera.start, camera.direction, 0, 1.0) * 255.0;
             this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = outColor.x;
             this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = outColor.y;
             this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = outColor.z;
@@ -35,12 +32,7 @@ void RaytraceThread::run()
     qDebug("Raytracing finished");
 }
 
-#define IOR         1.5
-#define EIOR        (1.0 / IOR)
-
-#define M_1_PI_2    ((float)M_1_PI * 0.5)
-
-Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const Vector3f<float> &camDir, int depth)
+Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const Vector3f<float> &camDir, int depth, float coef)
 {
     Camera          camera;
     camera.start =  camStart;
@@ -56,50 +48,21 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
     if (obj_touched_id == -1)
         return (outColor);
     Object *obj_touched = global_scene->objectList.at(obj_touched_id);
-    outColor = Vector3f<float>(obj_touched->material->color->r, obj_touched->material->color->g, obj_touched->material->color->b) / 255.0;
     Vector3f<float> hitPoint = camera.start + camera.direction * Distance;
     Vector3f<float> Normal = obj_touched->getNormale(camera, hitPoint);
-
-    if(obj_touched->material->texture.width() > 0 && obj_touched->getObjectType() == QString("sphere"))
-    {
-        Vector3f<float> vn = Vector3f<float>(0, -1, 0);
-        vn = vn.normalize();
-
-        Vector3f<float> ve = Vector3f<float>(-1, 0, 0);
-        ve = ve.normalize();
-
-        Vector3f<float>vp = hitPoint - obj_touched->center;
-        vp = vp.normalize();
-        float phi = acos(-vn.dot(vp));
-        float v = phi / M_PI;
-        float u;
-        float theta = (acos(vp.dot(ve) / sin(phi))) / (2.0 * M_PI);
-        if (vp.z < 0.01 && vp.z > -0.01)
-            theta = 0;
-        if (vp.cross(vn, ve).dot(vp) > 0)
-            u = theta;
-        else
-            u = 1 - theta;
-        v = v * (float)obj_touched->material->texture.height();
-        u = u * (float)obj_touched->material->texture.width();
-        if (v >= obj_touched->material->texture.height())
-            v = 0;
-        if (u >= obj_touched->material->texture.width())
-            u = 0;
-        QColor clrCurrent(obj_touched->material->texture.pixel(u, v));
-        outColor.x = (float)clrCurrent.red();
-        outColor.y = (float)clrCurrent.green();
-        outColor.z = (float)clrCurrent.blue();
-
-        outColor = outColor / 255.0;
-    }
+    outColor = obj_touched->getObjectColor(hitPoint);
 
     if (obj_touched->material->sky > 0)
         return (outColor);
 
-    IlluminatePoint(obj_touched, hitPoint, Normal, outColor, camera);
+    if(obj_touched->material->reflect > 0.0f && depth < MAX_DEPTH && coef > 0.0)
+    {
+        Vector3f<float> ReflectedRay = reflect(camera.direction, Normal);
+        outColor = mix(outColor, raytrace(hitPoint - camera.direction, ReflectedRay, depth + 1, coef * obj_touched->material->reflect), obj_touched->material->reflect * coef);
+    }
 
-    if (obj_touched->material->transparency > 0.0f && obj_touched->getObjectType() == QString("sphere"))
+    if (obj_touched->material->transparency > 0.0f && depth < MAX_DEPTH && coef > 0 &&
+        obj_touched->getObjectType() == QString("sphere"))
     {
         Sphere *sphere = static_cast<Sphere *>(obj_touched);
         Vector3f<float> RefractedRay = refract(camera.direction, Normal, obj_touched->material->eior);
@@ -110,68 +73,33 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
         Vector3f<float> NewPoint = RefractedRay * dist_to_refract + hitPoint;
         Vector3f<float> NewNormal = (sphere->center - NewPoint) * sphere->radius;
         RefractedRay = refract(RefractedRay, NewNormal, obj_touched->material->ior);
-        Camera refractCam;
-        refractCam.start = NewPoint;
-        refractCam.direction = RefractedRay;
-        outColor = mix(outColor, raytrace(NewPoint, RefractedRay, depth + 1), obj_touched->material->transparency);
+        outColor = mix(outColor, raytrace(NewPoint, RefractedRay, depth + 1, coef), obj_touched->material->transparency);
     }
 
-    //if(obj_touched->material->reflect > 0.0f)
-    //{
-    //    Vector3f<float> ReflectedRay = reflect(camera.direction, Normal);
-    //    outColor = mix(outColor, raytrace(hitPoint, ReflectedRay, depth + 1), (float)obj_touched->material->reflect);
-    //}
+
+    for (unsigned int j = 0; j < global_scene->lightList.size(); ++j)
+    {
+        Light *current = global_scene->lightList.at(j);
+        Vector3f<float> dist = current->center - hitPoint;
+        if (Normal.dot(dist) <= 0.0)
+            continue;
+        float t = sqrtf(dist.length2());
+        if (t <= 0.0)
+            continue;
+        Vector3f<float> lightDir = dist * (1 / t);
+        bool inShadow = Shadow(hitPoint, lightDir, t);
+        if (!inShadow)
+        {
+            // lambert
+            float lambert = lightDir.dot(Normal) * coef;
+            outColor.x = (outColor.x + std::min(outColor.x + lambert * (current->intensity / 255.0) * obj_touched->material->color->r, 1.0)) / 2;
+            outColor.y = (outColor.y + std::min(outColor.y + lambert * (current->intensity / 255.0) * obj_touched->material->color->g, 1.0)) / 2;
+            outColor.z = (outColor.z + std::min(outColor.z + lambert * (current->intensity / 255.0) * obj_touched->material->color->b, 1.0)) / 2;
+        }
+    }
+
 
     return (outColor);
-}
-
-#define AmbientOcclusion                        1
-#define SoftShadows                             true
-#define GISamples                               16
-#define TDRM                                    (2.0 / (float)RAND_MAX)
-#define ODGISamples                             (1.0f / (float)GISamples)
-#define AmbientOcclusionIntensity               1
-#define ODGISamplesMAmbientOcclusionIntensity   (ODGISamples * AmbientOcclusionIntensity)
-
-void RaytraceThread::IlluminatePoint(Object *Object, Vector3f<float> &Point, Vector3f<float> &Normal, Vector3f<float> &Color, Camera &camera)
-{
-    float AO = 1.0f;
-
-   if(AmbientOcclusion)
-     AO = AmbientOcclusionFactor(Object, Point, Normal);
-
-    if(global_scene->lightList.size() == 0)
-    {
-        float NdotCD = Normal.dot((camera.start - Point).normalize());
-        if(NdotCD > 0.0f)
-            Color *= (0.5 * (AO + NdotCD)) / 50;
-        else
-            Color *= (0.5 * AO) / 50;
-    }
-    if(SoftShadows == false)
-    {
-        Vector3f<float> LightsIntensitiesSum;
-
-        for(unsigned int light_i = 0; light_i < global_scene->lightList.size(); light_i++)
-            LightsIntensitiesSum += LightIntensity(Object, Point, Normal, global_scene->lightList.at(light_i)->center, global_scene->lightList.at(light_i), AO);
-
-        Color *= LightsIntensitiesSum;
-    }
-    else
-    {
-        Vector3f<float> LightsIntensitiesSum;
-
-        for(unsigned int light_i = 0; light_i < global_scene->lightList.size(); light_i++)
-        {
-            for(int i = 0; i < GISamples; i++)
-            {
-                Vector3f<float> RandomRay = Vector3f<float>(TDRM * (float)rand() - 1.0, TDRM * (float)rand() - 1.0, TDRM * (float)rand() - 1.0);
-                Vector3f<float> RandomLightPosition = RandomRay * 50.0 + global_scene->lightList.at(light_i)->center;
-                LightsIntensitiesSum += LightIntensity(Object, Point, Normal, RandomLightPosition, global_scene->lightList.at(light_i), AO);
-            }
-        }
-        Color *= LightsIntensitiesSum * ODGISamples;
-    }
 }
 
 bool RaytraceThread::Shadow(Vector3f<float> &Point, Vector3f<float> &LightDirection, float LightDistance)
@@ -186,50 +114,6 @@ bool RaytraceThread::Shadow(Vector3f<float> &Point, Vector3f<float> &LightDirect
             return true;
     }
     return false;
-}
-
-
-Vector3f<float> RaytraceThread::LightIntensity(Object *Object, Vector3f<float> &Point, Vector3f<float> &Normal, Vector3f<float> &LightPosition, Light *light, float AO)
-{
-    Vector3f<float> LightDirection = LightPosition - Point;
-
-    float LightDistance2 = LightDirection.length2();
-    float LightDistance = sqrt(LightDistance2);
-    LightDirection *= 1.0f / LightDistance;
-    float Attenuation = 0.125 * LightDistance2 + 0.100 * LightDistance + 1.0;
-    float NdotLD = Normal.dot(LightDirection);
-    if(NdotLD > 0.0f)
-    {
-        if(Shadow(Point, LightDirection, LightDistance) == false)
-            return (Vector3f<float>(175.0) * ((1.0 * AO + 1.0 * NdotLD) / Attenuation));
-    }
-
-  return Vector3f<float>(175.0) * (1 * AO / Attenuation);
-}
-
-float RaytraceThread::AmbientOcclusionFactor(Object *object, Vector3f<float> &Point, Vector3f<float> &Normal)
-{
-  float AO = 0.0f;
-
-  for (int i = 0; i < GISamples; i++)
-  {
-      Vector3f<float> RandomRay = (Vector3f<float>(TDRM * (float)rand() - 1.0f, TDRM * (float)rand() - 1.0f, TDRM * (float)rand() - 1.0f)).normalize();
-      float NdotRR = Normal.dot(RandomRay);
-      if (NdotRR < 0.0f)
-        {
-          RandomRay = -RandomRay;
-          NdotRR = -NdotRR;
-        }
-      Camera camera;
-      camera.start = Point;
-      camera.direction = RandomRay;
-      float Distance = INFINITY;
-      for (unsigned int obj_i = 0; obj_i < global_scene->objectList.size(); obj_i++)
-          global_scene->objectList.at(obj_i)->hit(camera, Distance);
-      AO += NdotRR / (1.0f + Distance * Distance);
-  }
-
-  return 1.0f - AO * ODGISamplesMAmbientOcclusionIntensity;
 }
 
 Vector3f<float> RaytraceThread::reflect(const Vector3f<float> &i, const Vector3f<float> &n)
@@ -248,6 +132,10 @@ Vector3f<float> RaytraceThread::refract(const Vector3f<float> &i, const Vector3f
     return r;
 }
 
+float RaytraceThread::clamp(const float &lo, const float &hi, const float &v)
+{
+    return std::max(lo, std::min(hi, v));
+}
 
 Vector3f<float> RaytraceThread::mix(const Vector3f<float> &u, const Vector3f<float> &v, float a)
 {

@@ -65,10 +65,11 @@ Scene::Scene(QWidget *parent, int y)
 
         if (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":type")).toLatin1().data()) == QString("plan"))
         {
-            Vector3f<float> plan_center = Vector3f<float>(QString("scene:object_list:obj") + QString::number(i) + QString(":center:"), this->myxml);
-            Vector3f<float> plan_dir    = Vector3f<float>(QString("scene:object_list:obj") + QString::number(i) + QString(":dir:"), this->myxml);
-            int             plan_mat_id = (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id")).toLatin1().data())).toInt() - 1;
-            Plan *plan_tmp = new Plan(plan_center, plan_dir, this->matList[plan_mat_id]);
+            Vector3f<float> plan_center  = Vector3f<float>(QString("scene:object_list:obj") + QString::number(i) + QString(":center:"), this->myxml);
+            Vector3f<float> plan_dir     = Vector3f<float>(QString("scene:object_list:obj") + QString::number(i) + QString(":dir:"), this->myxml);
+            int             plan_mat_id  = (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id1")).toLatin1().data())).toInt() - 1;
+            int             plan_mat_id2 = (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id2")).toLatin1().data())).toInt() - 1;
+            Plan *plan_tmp = new Plan(plan_center, plan_dir, this->matList[plan_mat_id], this->matList[plan_mat_id2]);
             this->objectList.push_back(plan_tmp);
         }
 
