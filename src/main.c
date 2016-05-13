@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Sat May 14 00:51:43 2016 Philippe Lefevre
+** Last update Sat May 14 00:54:13 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -152,7 +152,8 @@ int			main(int ac, char **av, char **env)
 	return (-1);
     }
   else
-    raytrace_threading(&prog, 0, prog.win_size.x);
+    raytrace_threading(&prog, 0, ((prog.rendu_verticale) ?
+				  (prog.win_size.y) : (prog.win_size.x)));
   bunny_set_loop_main_function(mainloop);
   bunny_loop(prog.win, 30, &prog);
   free_stuff(&prog);
