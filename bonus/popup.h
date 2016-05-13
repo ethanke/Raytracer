@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QComboBox>
 #include <object.h>
 #include <qwidget.h>
 #include "sphere.h"
@@ -32,9 +33,13 @@ private:
     QLabel *CenterX;
     QLabel *CenterY;
     QLabel *CenterZ;
+    QLabel *matLab;
+    QLabel *radLab;
+    QLineEdit *EditRad;
     QLineEdit *EditX;
     QLineEdit *EditY;
     QLineEdit *EditZ;
+    QComboBox *matList;
     Object *object;
     MainWindow *mw;
 private slots:
