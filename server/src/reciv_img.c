@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun May  8 02:00:53 2016 Gaëtan Léandre
-** Last update Wed May 11 10:20:38 2016 Gaëtan Léandre
+** Last update Fri May 13 04:14:38 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -91,7 +91,10 @@ int			charge_server(t_connected *co)
   char			*str;
   int			size_x;
   int			actu_x;
+  int			i;
 
+  i = 0;
+  while (i++ < 2000000000);
   my_printf(1, "Envois des consignes aux clients\n");
   size_x = co->width / (co->size + 1) + 1;
   actu_x = 0;

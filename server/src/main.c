@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Thu May  5 00:03:54 2016 Gaëtan Léandre
-** Last update Tue May 10 23:44:34 2016 Gaëtan Léandre
+** Last update Fri May 13 04:08:44 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -146,10 +146,16 @@ int			main()
   if ((sock = init_connection()) == -1)
     return (-1);
   init_connected(&connected, sock);
-  get_connections(sock, &connected);
-  if (connected.status == 1)
+  while (connected.status != -1)
     {
-      charge_server(&connected);
+      get_connections(sock, &connected);
+      if (connected.status == 1)
+	{
+	  recive_and_launch(&connected);
+	  if (connected.status != 0)
+	    charge_server(&connected);
+	  connected.status = 0;
+	}
     }
   end_co(&connected);
   close(sock);

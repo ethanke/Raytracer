@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 10:07:00 2016 Ethan Kerdelhue
-** Last update Wed May 11 14:36:31 2016 Philippe Lefevre
+** Last update Fri May 13 01:15:39 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -31,9 +31,10 @@ void			free_tab(char **tab)
   i = 0;
   while (tab[i])
     {
-      free(tab);
+      free(tab[i]);
       i++;
     }
+      free(tab);
 }
 
 int			my_access(char *file)
