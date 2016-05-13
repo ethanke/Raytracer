@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue May 10 22:52:42 2016 Gaëtan Léandre
-** Last update Fri May 13 04:10:35 2016 Gaëtan Léandre
+** Last update Fri May 13 05:09:58 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -83,8 +83,8 @@ void			set_connections(SOCKET sock)
 	}
       if (status == 2)
 	{
+	  client_raytrace(str, &status, sock);
 	  exit(0);
-	  //lancement
 	}
     }
   (void)str;

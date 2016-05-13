@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Thu May 12 12:16:38 2016 Philippe Lefevre
+## Last update Fri May 13 05:13:11 2016 Gaëtan Léandre
 ##
 
 NAME		=	raytracer2
@@ -165,7 +165,8 @@ SRC		+=	src/utils/tekpixel.c			\
 SRC		+=	src/client/client.c			\
 			src/client/communicate.c		\
 			src/client/command.c			\
-			src/client/send_file.c
+			src/client/send_file.c			\
+			src/client/client_raytrace.c
 
 ##  OUTPUT  ##
 SRC		+=	src/output/my_putchar.c			\

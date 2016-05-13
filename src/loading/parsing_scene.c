@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Wed May 11 03:14:12 2016 Philippe Lefevre
+** Last update Fri May 13 05:50:39 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -98,7 +98,7 @@ char			**load_scene_file(char *path)
   return (file);
 }
 
-static int		get_cam_pos(char **file, t_prog *prog)
+int			get_cam_pos(char **file, t_prog *prog)
 {
   char			*lf;
   char			*get;
@@ -136,7 +136,7 @@ static int		get_cam_pos(char **file, t_prog *prog)
   return (0);
 }
 
-static int		get_cam_look_at(char **file, t_prog *prog)
+int			get_cam_look_at(char **file, t_prog *prog)
 {
   char			*lf;
   char			*get;

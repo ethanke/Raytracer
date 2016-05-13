@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Wed May 11 00:37:45 2016 Gaëtan Léandre
-** Last update Fri May 13 04:29:29 2016 Gaëtan Léandre
+** Last update Fri May 13 06:01:01 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -69,6 +69,7 @@ char			*launch_cmd(SOCKET sock, char **tab, int *status)
 	}
       else if (!my_strcmp(tab[1], "r") && !tab[2])
 	{
+	  my_printf(1, "Reception d'un fichier depuis le serveur\n");
 	  if ((str = reciv_file(sock)) == NULL)
 	    *status = -1;
 	  else

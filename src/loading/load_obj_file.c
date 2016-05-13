@@ -5,12 +5,12 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 08:37:20 2016 Victor Sousa
-** Last update Mon May  2 23:32:48 2016 Victor Sousa
+** Last update Fri May 13 05:54:17 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
- 
-static t_light_list	*add_empty_light(t_light_list *prev)
+
+t_light_list		*add_empty_light(t_light_list *prev)
 {
   t_light_list          *new;
 
@@ -23,7 +23,7 @@ static t_light_list	*add_empty_light(t_light_list *prev)
   new->next = prev;
   return (new);
 }
-static t_light_list	*add_empty_light2(t_light_list *prev)
+t_light_list		*add_empty_light2(t_light_list *prev)
 {
   t_light_list          *new;
 
@@ -36,7 +36,7 @@ static t_light_list	*add_empty_light2(t_light_list *prev)
   new->next = prev;
   return (new);
 }
-static t_light_list	*add_empty_light3(t_light_list *prev)
+t_light_list		*add_empty_light3(t_light_list *prev)
 {
   t_light_list          *new;
 
@@ -49,7 +49,7 @@ static t_light_list	*add_empty_light3(t_light_list *prev)
   new->next = prev;
   return (new);
 }
-static t_light_list	*add_empty_light4(t_light_list *prev)
+t_light_list		*add_empty_light4(t_light_list *prev)
 {
   t_light_list          *new;
 
