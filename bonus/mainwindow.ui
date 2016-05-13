@@ -738,6 +738,25 @@
      </widget>
     </widget>
    </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>90</y>
+      <width>211</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1080</width>
+      <height>720</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Loaod xml magique</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

@@ -15,10 +15,9 @@ class MyPopup: public QWidget
 public:
     MyPopup();
     ~MyPopup();
-
-private:
     void show_it();
     void set_ui_obj(Object *object);
+    void keyPressEvent(QKeyEvent *e);
 
 };
 

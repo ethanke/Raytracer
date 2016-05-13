@@ -3,12 +3,16 @@
 #include "plan.h"
 #include <qdebug.h>
 
-Scene::Scene(QWidget *parent)
+Scene::Scene(QWidget *parent, int y)
 {
+    if (y == 0)
+    {
     this->path_file = QFileDialog::getOpenFileName(parent, QObject::tr("Open File"),"/path/to/file/", QObject::tr("Files Xml's only (*.xml)"));
     this->file = new QFile(this->path_file);
+    }
+    else
+        this->file = new QFile("/Users/ethankerdelhue/Documents/Shared/Raytracer/scene/olympiques_transpa.xml");
     QStringList myStringList;
-
     if (!this->file->open(QIODevice::ReadOnly))
     {
         QMessageBox::information(0, "Error opening file", this->file->errorString());

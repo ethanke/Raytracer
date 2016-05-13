@@ -9,7 +9,7 @@
 
 MyPopup::MyPopup() : QWidget()
 {
-    this->set_ui_obj(new Sphere());
+
 }
 
 MyPopup::~MyPopup()
@@ -47,6 +47,18 @@ void MyPopup::set_ui_obj(Object *object)
         mainLayout->addWidget(window);
         mainwindow->setLayout(mainLayout);
         mainwindow->setFixedWidth(600);
+
+        EditX->setText(QString::number(object->center.x));
+        EditY->setText(QString::number(object->center.y));
+        EditZ->setText(QString::number(object->center.z));
         mainwindow->show();
     }
+}
+
+void MyPopup::keyPressEvent(QKeyEvent *e)
+{
+    if (e->key() == Qt::Key_Escape)
+        close();
+    else
+        QWidget::keyPressEvent(e);
 }

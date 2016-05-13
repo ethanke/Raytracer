@@ -34,7 +34,6 @@ MainWindow::MainWindow(QWidget *parent) :
       ui->comboBox_wx->addItem(tab_x[i]);
     for(int i = 0; i < 8; i++)
       ui->comboBox_wy->addItem(tab_y[i]);
-    this->popup = new MyPopup();
 }
 
 void MainWindow::CloseWindow()
@@ -57,7 +56,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 
 void MainWindow::on_loadButton_clicked()
 {
-    global_scene = new Scene(this);
+    global_scene = new Scene(this, 0);
     ui->lineEdit_cpx->setReadOnly(false);
     ui->lineEdit_cpy->setReadOnly(false);
     ui->lineEdit_cpz->setReadOnly(false);
@@ -173,5 +172,55 @@ void MainWindow::on_editButtonObj_clicked()
 {
     if (this->objSelect != 0)
     {
+        this->popup = new MyPopup();
+        popup->set_ui_obj(global_scene->objectList.at(this->objSelect));
+    }
+}
+
+void MainWindow::on_pushButton_3_pressed()
+{
+    global_scene = new Scene(this, 1);
+    ui->lineEdit_cpx->setReadOnly(false);
+    ui->lineEdit_cpy->setReadOnly(false);
+    ui->lineEdit_cpz->setReadOnly(false);
+    ui->lineEdit_lax->setReadOnly(false);
+    ui->lineEdit_lay->setReadOnly(false);
+    ui->lineEdit_laz->setReadOnly(false);
+    ui->comboBox_wx->setDisabled(false);
+    ui->comboBox_wy->setDisabled(false);
+    ui->horizontalSlider_aa->setDisabled(false);
+    ui->horizontalSlider_fov->setDisabled(false);
+    ui->lineEdit_cpx->setValidator(new QIntValidator(-99999999, 99999999, this));
+    ui->lineEdit_cpy->setValidator(new QIntValidator(-99999999, 99999999, this));
+    ui->lineEdit_cpz->setValidator(new QIntValidator(-99999999, 99999999, this));
+    ui->lineEdit_lax->setValidator(new QIntValidator(-99999999, 99999999, this));
+    ui->lineEdit_lay->setValidator(new QIntValidator(-99999999, 99999999, this));
+    ui->lineEdit_laz->setValidator(new QIntValidator(-99999999, 99999999, this));
+    ui->lineEdit_cpx->setText(QString::number(global_scene->camera->start.x));
+    ui->lineEdit_cpy->setText(QString::number(global_scene->camera->start.y));
+    ui->lineEdit_cpz->setText(QString::number(global_scene->camera->start.z));
+    ui->lineEdit_lax->setText(QString::number(global_scene->camera->look_at.x));
+    ui->lineEdit_lay->setText(QString::number(global_scene->camera->look_at.y));
+    ui->lineEdit_laz->setText(QString::number(global_scene->camera->look_at.z));
+    int i = 0;
+    while (i < int(global_scene->matList.size()))
+    {
+        ui->listMat->insertRow(i);
+        ui->listMat->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->matList[i]->color->r * 255), 1));
+        i++;
+    }
+    i = 0;
+    while (i < int(global_scene->objectList.size()))
+    {
+        ui->listObject->insertRow(i);
+        ui->listObject->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->objectList[i]->center.x), 1));
+        i++;
+    }
+    i = 0;
+    while (i < global_scene->lightCount)
+    {
+        ui->listLight->insertRow(i);
+        ui->listLight->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->lightList[i]->intensity), 1));
+        i++;
     }
 }
