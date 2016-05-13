@@ -91,7 +91,7 @@
       <ior>0</ior>
       <bump>0</bump>
       <sky>1</sky>
-      <texture>../sprites/image/swagbox.jpg</texture>
+      <texture>NULL</texture>
     </mat6>
   </material_list>
 

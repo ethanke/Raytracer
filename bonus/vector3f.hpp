@@ -28,6 +28,11 @@ class Vector3f
             }
             return *this;
         }
+        Vector3f<T> cross(const Vector3f<T> &u, const Vector3f<T> &v)
+        {
+            return Vector3f<T>(u.y * v.z - u.z * v.y, u.z * v.x - u.x * v.z, u.x * v.y - u.y * v.x);
+        }
+
         Vector3f<T> operator * (const T &f) const {
             return Vector3f<T>(x * f, y * f, z * f);
         }

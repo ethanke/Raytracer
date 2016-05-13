@@ -35,8 +35,10 @@ void RaytraceThread::run()
     qDebug("Raytracing finished");
 }
 
-#define IOR     1.5
-#define EIOR    (1.0 / IOR)
+#define IOR         1.5
+#define EIOR        (1.0 / IOR)
+
+#define M_1_PI_2    ((float)M_1_PI * 0.5)
 
 Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const Vector3f<float> &camDir, int depth)
 {
@@ -58,16 +60,43 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
     Vector3f<float> hitPoint = camera.start + camera.direction * Distance;
     Vector3f<float> Normal = obj_touched->getNormale(camera, hitPoint);
 
-    //if(Textures && Data.Sphere->Texture)
-    //{
-    //    float s = atan2(Normal.x, Normal.z) * M_1_PI_2 + 0.5f;
-    //    float t = asin(Normal.y < -1.0f ? -1.0f : Normal.y > 1.0f ? 1.0f : Normal.y) * (float)M_1_PI + 0.5f;
-    //
-    //    outColor *= Data.Sphere->Texture->GetColorBilinear(s, t);
-    //}
+    if(obj_touched->material->texture.width() > 0 && obj_touched->getObjectType() == QString("sphere"))
+    {
+        Vector3f<float> vn = Vector3f<float>(0, -1, 0);
+        vn = vn.normalize();
 
-    if (obj_touched->material->sky != 0)
+        Vector3f<float> ve = Vector3f<float>(-1, 0, 0);
+        ve = ve.normalize();
+
+        Vector3f<float>vp = hitPoint - obj_touched->center;
+        vp = vp.normalize();
+        float phi = acos(-vn.dot(vp));
+        float v = phi / M_PI;
+        float u;
+        float theta = (acos(vp.dot(ve) / sin(phi))) / (2.0 * M_PI);
+        if (vp.z < 0.01 && vp.z > -0.01)
+            theta = 0;
+        if (vp.cross(vn, ve).dot(vp) > 0)
+            u = theta;
+        else
+            u = 1 - theta;
+        v = v * (float)obj_touched->material->texture.height();
+        u = u * (float)obj_touched->material->texture.width();
+        if (v >= obj_touched->material->texture.height())
+            v = 0;
+        if (u >= obj_touched->material->texture.width())
+            u = 0;
+        QColor clrCurrent(obj_touched->material->texture.pixel(u, v));
+        outColor.x = (float)clrCurrent.red();
+        outColor.y = (float)clrCurrent.green();
+        outColor.z = (float)clrCurrent.blue();
+
+        outColor = outColor / 255.0;
+    }
+
+    if (obj_touched->material->sky > 0)
         return (outColor);
+
     IlluminatePoint(obj_touched, hitPoint, Normal, outColor, camera);
 
     if (obj_touched->material->transparency > 0.0f && obj_touched->getObjectType() == QString("sphere"))
@@ -98,7 +127,7 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
 
 #define AmbientOcclusion                        1
 #define SoftShadows                             true
-#define GISamples                               256
+#define GISamples                               16
 #define TDRM                                    (2.0 / (float)RAND_MAX)
 #define ODGISamples                             (1.0f / (float)GISamples)
 #define AmbientOcclusionIntensity               1
