@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May  6 22:41:13 2016 Gaëtan Léandre
-** Last update Wed May 11 10:09:47 2016 Gaëtan Léandre
+** Last update Fri May 13 01:42:52 2016 Gaëtan Léandre
 */
 
 #ifndef			_SERVER_H_
@@ -73,5 +73,7 @@ void			write_all_client(t_connected *co, char *buffer,
 int			charge_server(t_connected *co);
 int			my_getnbr(char *str);
 char			*my_strstr(char *str, char *to_find);
+void			recive_and_launch(t_connected *co);
+
 
 #endif			/* _SERVER_H_ */

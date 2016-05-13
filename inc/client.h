@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue May 10 22:56:16 2016 Gaëtan Léandre
-** Last update Wed May 11 06:11:03 2016 Gaëtan Léandre
+** Last update Fri May 13 05:56:27 2016 Gaëtan Léandre
 */
 
 #ifndef			_CLIENT_H_
@@ -47,5 +47,6 @@ int			send_file(SOCKET sock, char *file, int siz);
 char			*reciv_file(SOCKET sock);
 char			**is_command(char *str);
 char			*exec_command(SOCKET sock, char **tab, int *status);
+void			client_raytrace(char *str, int *status, SOCKET sock);
 
 #endif			/* _CLIENT_H_ */

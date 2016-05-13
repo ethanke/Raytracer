@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue May 10 22:52:42 2016 Gaëtan Léandre
-** Last update Wed May 11 09:50:49 2016 Gaëtan Léandre
+** Last update Fri May 13 05:09:58 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -34,6 +34,7 @@ char			*recive_command(SOCKET sock, int *status)
   recive = read_server(sock, buffer);
   if (recive == 0)
     {
+      *status = -1;
       my_printf(2, "La connection avec le serveur a ete perdue\n");
       return (str);
     }
@@ -47,6 +48,17 @@ char			*recive_command(SOCKET sock, int *status)
   return (str);
 }
 
+void			recive_launch(SOCKET sock)
+{
+  int			recive;
+  char			buffer[BUF_SIZE + 1];
+
+  recive = read_server(sock, buffer);
+  if (recive == 0)
+    my_printf(2, "La connection avec le serveur a ete perdue\n");
+  my_printf(1, "%s\n", buffer);
+}
+
 void			set_connections(SOCKET sock)
 {
   fd_set		fdset;
@@ -54,19 +66,27 @@ void			set_connections(SOCKET sock)
   char			*str;
 
   status = 0;
-  while (status == 0)
+  while (status != -1)
     {
-      FD_ZERO(&fdset);
-      FD_SET(STDIN_FILENO, &fdset);
-      FD_SET(sock, &fdset);
-      if (select(sock + 1, &fdset, NULL, NULL, NULL) == -1)
-	return;
-      if (FD_ISSET(STDIN_FILENO, &fdset))
-	push_command(sock);
-      else if (FD_ISSET(sock, &fdset))
-	str = recive_command(sock, &status);
+      status = 0;
+      while (status == 0)
+	{
+	  FD_ZERO(&fdset);
+	  FD_SET(STDIN_FILENO, &fdset);
+	  FD_SET(sock, &fdset);
+	  if (select(sock + 1, &fdset, NULL, NULL, NULL) == -1)
+	    return;
+	  if (FD_ISSET(STDIN_FILENO, &fdset))
+	    push_command(sock);
+	  else if (FD_ISSET(sock, &fdset))
+	    str = recive_command(sock, &status);
+	}
+      if (status == 2)
+	{
+	  client_raytrace(str, &status, sock);
+	  exit(0);
+	}
     }
-  /*ENVOYER LES INSTRUCTIONS + OBJ OU XML*/
   (void)str;
 }
 

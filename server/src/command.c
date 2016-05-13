@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 05:54:51 2016 Gaëtan Léandre
-** Last update Wed May 11 09:53:05 2016 Gaëtan Léandre
+** Last update Fri May 13 01:59:43 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -37,7 +37,6 @@ int			cmd_launch(SOCKET sock, char **tab, t_connected *co)
 {
   char			*str;
 
-  (void)str;
   if (tab == NULL)
     return (0);
   if (co->master && sock == co->master->sock && my_strcmp(tab[0], "launch")

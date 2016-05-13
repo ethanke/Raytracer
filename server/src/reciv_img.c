@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun May  8 02:00:53 2016 Gaëtan Léandre
-** Last update Wed May 11 10:20:38 2016 Gaëtan Léandre
+** Last update Fri May 13 05:20:55 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -91,14 +91,17 @@ int			charge_server(t_connected *co)
   char			*str;
   int			size_x;
   int			actu_x;
+  int			i;
 
+  i = 0;
+  while (i++ < 2000000000);
   my_printf(1, "Envois des consignes aux clients\n");
   size_x = co->width / (co->size + 1) + 1;
   actu_x = 0;
   co->master->start_x = actu_x;
   co->master->end_x = (actu_x + size_x >= co->width) ? co->width : actu_x + size_x;
   actu_x = co->master->end_x;
-  str = my_sprintf("/run %d %d %c", co->master->start_x, co->master->end_x, (co->form == 1 ? 'x' : 'o'));
+  str = my_sprintf("%d %d %c", co->master->start_x, co->master->end_x, (co->form == 1 ? 'x' : 'o'));
   co->master->done = 0;
   write_client(co->master->sock, str);
   free(str);
@@ -108,7 +111,7 @@ int			charge_server(t_connected *co)
       tmp->start_x = actu_x;
       tmp->end_x = (actu_x + size_x >= co->width) ? co->width : actu_x + size_x;
       actu_x = tmp->end_x;
-      str = my_sprintf("/run %d %d %c", tmp->start_x, tmp->end_x, (co->form == 1 ? 'x' : 'o'));
+      str = my_sprintf("%d %d %c", tmp->start_x, tmp->end_x, (co->form == 1 ? 'x' : 'o'));
       tmp->done = 0;
       write_client(tmp->sock, str);
       free(str);

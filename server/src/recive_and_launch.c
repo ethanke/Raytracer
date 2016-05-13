@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Wed May 11 01:31:59 2016 Gaëtan Léandre
-** Last update Wed May 11 10:13:16 2016 Gaëtan Léandre
+** Last update Fri May 13 04:04:47 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -18,11 +18,13 @@ void			recive_and_launch(t_connected *co)
   t_client		*tmp;
   char			*get;
   char			**tab;
+  int			i;
 
   my_printf(1, "Téléchargement du fichier sur le serveur\n");
   if ((size = read_client(co->master->sock, buffer)) == 0
       || my_strcmp(buffer, "error"))
     {
+      my_printf(1, "Ouverture du fichier impossible\n");
       co->status = 0;
       return;
     }
@@ -59,6 +61,8 @@ void			recive_and_launch(t_connected *co)
     }
   my_printf(1, "Envois du fichier aux clients\n");
   write_all_client(co, "/launch r", -1);
+  i = 0;
+  while (i++ < 2000000000);
   send_file(co->master->sock, str, size);
   tmp = co->clients;
   while (tmp)

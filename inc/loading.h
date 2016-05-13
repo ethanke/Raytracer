@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:38 2016 victor sousa
-** Last update Thu May 12 12:18:51 2016 Philippe Lefevre
+** Last update Fri May 13 05:54:15 2016 Gaëtan Léandre
 */
 
 #ifndef			LOADING_H_
@@ -32,5 +32,12 @@ t_obj_list              *add_cyl(t_obj_list *prev, char **file, int id);
 t_obj_list              *add_pill(t_obj_list *prev, char **file, int id);
 t_obj_list              *add_cube(t_obj_list *prev, char **file, int id);
 int			waiting_screen(t_prog *prog);
+int			get_cam_pos(char **file, t_prog *prog);
+int			get_cam_look_at(char **file, t_prog *prog);
+t_light_list		*add_empty_light(t_light_list *prev);
+t_light_list		*add_empty_light2(t_light_list *prev);
+t_light_list		*add_empty_light3(t_light_list *prev);
+t_light_list		*add_empty_light4(t_light_list *prev);
+t_mat_list              *add_empty_mat(t_mat_list *prev);
 
 #endif		      /*LOADING_H*/

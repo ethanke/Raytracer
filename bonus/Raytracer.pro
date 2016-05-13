@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     raytracethread.cpp \
     global.cpp \
     plan.cpp \
-    light.cpp
+    light.cpp \
+    popup.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -50,6 +51,7 @@ HEADERS  += mainwindow.h \
     raytracethread.h \
     global.h \
     plan.h \
-    light.h
+    light.h \
+    popup.h
 
 FORMS    += mainwindow.ui

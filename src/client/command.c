@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Wed May 11 00:37:45 2016 Gaëtan Léandre
-** Last update Wed May 11 06:10:56 2016 Gaëtan Léandre
+** Last update Fri May 13 06:01:01 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -47,36 +47,46 @@ char			*launch_cmd(SOCKET sock, char **tab, int *status)
 {
   char			*str;
 
-  if (my_strcmp(tab[0], "launch") && tab[1])
+  if (!my_strcmp(tab[0], "launch") && tab[1])
     {
-      if (my_strcmp(tab[1], "s") && tab[2] && !tab[3])
+      if (!my_strcmp(tab[1], "s") && tab[2] && !tab[3])
 	{
+	  my_printf(1, "Ouverture du fichier\n");
 	  if ((str = read_file_to_char(tab[2])) == NULL)
-	    write_server(sock, "error");
+	    {
+	      my_printf(1, "%s\n", tab[2]);
+	      my_printf(1, "Path fichier invalide\n");
+	      write_server(sock, "error");
+	    }
 	  else
 	    {
 	      write_server(sock, "ok");
+              my_printf(1, "Envois du fichier au serveur\n");
 	      if (send_file(sock, str, my_strlen(str)) == 0)
 		*status = -1;
-	      else
-		*status = 2;
 	    }
 	  return ("k");
 	}
-      else if (my_strcmp(tab[1], "r") && !tab[2])
+      else if (!my_strcmp(tab[1], "r") && !tab[2])
 	{
+	  my_printf(1, "Reception d'un fichier depuis le serveur\n");
 	  if ((str = reciv_file(sock)) == NULL)
 	    *status = -1;
+	  else
+	    *status = 2;
 	  return (str);
 	}
+      else
+	my_printf(1, "%s %d\n", tab[1], tab[1][1]);
     }
   return (NULL);
 }
 
 int			exit_cmd(int *status, char **tab)
 {
-  if (tab[0] && my_strcmp(tab[0], "halt"))
+  if (tab[0] && !my_strcmp(tab[0], "halt"))
     {
+      my_printf(1, "Arret du serveur\n");
       *status = -1;
       return (1);
     }
@@ -88,6 +98,6 @@ char			*exec_command(SOCKET sock, char **tab, int *status)
   char			*str;
 
   if ((str = launch_cmd(sock, tab, status)) == NULL && exit_cmd(status, tab) == 0)
-    my_printf(2, "Commande recue erronée");
+    my_printf(2, "Commande recue erronée\n");
   return (str);
 }

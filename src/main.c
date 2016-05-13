@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Fri May 13 23:21:41 2016 Philippe Lefevre
+** Last update Fri May 13 23:23:46 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -84,8 +84,6 @@ int			verif_arg(int ac, char **av, char **env, t_prog *prog)
 	}
       else if (!(my_strcmp("--cluster", av[i])))
 	{
-	  if (prog->thread_nb)
-	    return (disp_help(av[0]));
 	  prog->cluster = 1;
       	  return (client(prog));
 	}
