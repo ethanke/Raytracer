@@ -66,6 +66,7 @@ class Vector3f
         T length() const {
             return sqrt(length2());
         }
+
 };
 
 

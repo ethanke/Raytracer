@@ -20,13 +20,13 @@
   </view>
 
   <material_list>
-    <count>6</count>
+    <count>8</count>
 
     <mat1>
       <red>25</red>
       <green>25</green>
       <blue>255</blue>
-      <reflect>25</reflect>
+      <reflect>10</reflect>
       <transparency>0</transparency>
       <ior>0</ior>
       <bump>0</bump>
@@ -38,8 +38,8 @@
       <red>255</red>
       <green>255</green>
       <blue>25</blue>
-      <reflect>20</reflect>
-      <transparency>50</transparency>
+      <reflect>10</reflect>
+      <transparency>35</transparency>
       <ior>1</ior>
       <bump>0</bump>
       <sky>0</sky>
@@ -50,8 +50,8 @@
       <red>50</red>
       <green>50</green>
       <blue>50</blue>
-      <reflect>5</reflect>
-      <transparency>75</transparency>
+      <reflect>75</reflect>
+      <transparency>50</transparency>
       <ior>1</ior>
       <bump>0</bump>
       <sky>0</sky>
@@ -62,7 +62,7 @@
       <red>25</red>
       <green>255</green>
       <blue>25</blue>
-      <reflect>50</reflect>
+      <reflect>15</reflect>
       <transparency>0</transparency>
       <ior>0</ior>
       <bump>0.05</bump>
@@ -74,7 +74,7 @@
       <red>255</red>
       <green>25</green>
       <blue>25</blue>
-      <reflect>20</reflect>
+      <reflect>10</reflect>
       <transparency>0</transparency>
       <ior>0</ior>
       <bump>0.9</bump>
@@ -86,17 +86,41 @@
       <red>175</red>
       <green>50</green>
       <blue>175</blue>
-      <reflect>10</reflect>
+      <reflect>20</reflect>
       <transparency>0</transparency>
       <ior>0</ior>
       <bump>0</bump>
       <sky>1</sky>
       <texture>NULL</texture>
     </mat6>
+
+    <mat7>
+      <red>255</red>
+      <green>255</green>
+      <blue>255</blue>
+      <reflect>10</reflect>
+      <transparency>0</transparency>
+      <ior>0</ior>
+      <bump>0</bump>
+      <sky>0</sky>
+      <texture>NULL</texture>
+    </mat7>
+
+    <mat8>
+      <red>25</red>
+      <green>25</green>
+      <blue>25</blue>
+      <reflect>10</reflect>
+      <transparency>0</transparency>
+      <ior>0</ior>
+      <bump>0</bump>
+      <sky>0</sky>
+      <texture>NULL</texture>
+    </mat8>
   </material_list>
 
   <object_list>
-    <count>6</count>
+    <count>7</count>
 
     <obj1>
       <type>sphere</type>
@@ -160,11 +184,27 @@
     <y>0</y>
     <z>0</z>
       </center>
-      <radius>1000</radius>
+      <radius>10000</radius>
       <material_id>6</material_id>
     </obj6>
+
+    <obj7>
+      <type>plan</type>
+      <center>
+  <x>0</x>
+  <y>-201</y>
+  <z>0</z>
+      </center>
+      <dir>
+  <x>0</x>
+  <y>-1</y>
+  <z>0</z>
+      </dir>
+      <material_id1>7</material_id1>
+      <material_id2>8</material_id2>
+    </obj7>
   <light_list>
-    <count>2</count>
+    <count>1</count>
 
     <light1>
       <center>
@@ -174,15 +214,6 @@
       </center>
       <intensity>100</intensity>
     </light1>
-
-    <light2>
-      <center>
-        <x>-400</x>
-	      <y>200</y>
-	      <z>-150</z>
-      </center>
-      <intensity>100</intensity>
-    </light2>
   </light_list>
 
 </scene>

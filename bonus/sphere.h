@@ -14,6 +14,7 @@ class Sphere : public Object
 
         virtual bool            hit(const Camera ray, float &old_dist);
         virtual Vector3f<float> getNormale(const Camera ray, const Vector3f<float> hitPoint);
+        virtual Vector3f<float> getObjectColor(const Vector3f<float> hitPoint);
         virtual QString         getObjectType();
 };
 

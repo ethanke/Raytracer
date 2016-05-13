@@ -5,10 +5,10 @@ Plan::Plan()
     this->center = Vector3f<float>();
     this->direction = Vector3f<float>(0.0, 1.0, 0.0);
     this->material = new Material();
-
+    this->material2 = new Material();
 }
 
-Plan::Plan(const Vector3f<float> center, const Vector3f<float> dir , Material *mat)
+Plan::Plan(const Vector3f<float> center, const Vector3f<float> dir , Material *mat, Material *mat2)
 {
     this->center.x = center.x;
     this->center.y = center.y;
@@ -17,6 +17,7 @@ Plan::Plan(const Vector3f<float> center, const Vector3f<float> dir , Material *m
     this->direction.y = dir.y;
     this->direction.z = dir.z;
     this->material = mat;
+    this->material2 = mat2;
 }
 
 bool Plan::hit(const Camera ray, float &old_dist)
@@ -38,6 +39,42 @@ bool Plan::hit(const Camera ray, float &old_dist)
 Vector3f<float> Plan::getNormale(const Camera ray, const Vector3f<float> hitPoint)
 {
   return (-this->direction);
+}
+
+
+Vector3f<float> Plan::getObjectColor(const Vector3f<float> hitPoint)
+{
+    Vector3f<float>dist_to_center = hitPoint - this->center;
+    if (damier(dist_to_center) == 0)
+        return Vector3f<float>(this->material->color->r,  this->material->color->g,  this->material->color->b) / 255.0;
+    else
+        return Vector3f<float>(this->material2->color->r, this->material2->color->g, this->material2->color->b) / 255.0;
+}
+
+#define     SIZE_TILE   150
+bool	Plan::damier(const Vector3f<float> &pos)
+{
+  Vector3f<int>tmp;
+
+  tmp.x = (int)((pos.x + 13000) / SIZE_TILE);
+  tmp.y = (int)(pos.y / SIZE_TILE);
+  tmp.z = (int)((pos.z + 13000) / SIZE_TILE);
+  if (tmp.x % 2 == 0)
+    {
+      if (((tmp.y % 2 == 0) && (tmp.z % 2 == 0)) ||
+      (((tmp.y % 2 != 0) && (tmp.z % 2 != 0))))
+    return (0);
+      else
+    return (1);
+    }
+  else
+    {
+      if ((((tmp.y % 2 == 0) && (tmp.z % 2 == 0))) ||
+      (((tmp.y % 2 != 0) && (tmp.z % 2 != 0))))
+    return (1);
+      else
+    return (0);
+  }
 }
 
 QString Plan::getObjectType()
