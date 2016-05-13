@@ -3,9 +3,11 @@
 
 #include <QApplication>
 #include <QMainWindow>
+#include <qtablewidget.h>
 #include <QKeyEvent>
 #include <QLineEdit>
 #include "myxml.h"
+#include "popup.h"
 #include "scene.h"
 #include "color.h"
 #include "global.h"
@@ -23,6 +25,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    int objSelect;
+    MyPopup *popup;
 
     MyXML *xml_file;
 
@@ -37,10 +41,6 @@ private slots:
     void on_loadButton_clicked();
 
 
-    void on_lineEdit_wx_editingFinished();
-
-    void on_lineEdit_wy_editingFinished();
-
     void on_lineEdit_cpx_editingFinished();
 
     void on_lineEdit_cpy_editingFinished();
@@ -53,9 +53,18 @@ private slots:
 
     void on_lineEdit_laz_editingFinished();
 
-    void on_lineEdit_aa_editingFinished();
+    void on_comboBox_wx_currentIndexChanged(const QString &arg1);
 
-    void on_lineEdit_fov_editingFinished();
+    void on_comboBox_wy_currentIndexChanged(const QString &arg1);
+
+    void on_horizontalSlider_aa_valueChanged(int value);
+
+    void on_horizontalSlider_fov_valueChanged(int value);
+
+    void on_listObject_itemClicked(QTableWidgetItem *item);
+
+    void on_editButtonObj_clicked();
+
 
 private:
     Ui::MainWindow *ui;
