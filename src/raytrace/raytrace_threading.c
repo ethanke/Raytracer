@@ -5,7 +5,7 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Sun May  8 02:20:22 2016 Philippe Lefevre
-** Last update Sat May 14 00:46:05 2016 Philippe Lefevre
+** Last update Sat May 14 00:47:33 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -98,8 +98,8 @@ static int		raytrace_end(t_prog *prog, pthread_t thread_id[],
   return (0);
 }
 
-int			raytrace_threading(t_prog *prog, int nb_client,
-					  int all_client)
+int			raytrace_threading(t_prog *prog, int start,
+					  int stop)
 {
   pthread_t		thread_id[prog->thread_nb];
   time_t		time_beg;
@@ -108,8 +108,8 @@ int			raytrace_threading(t_prog *prog, int nb_client,
 
   pos.x = 0;
   pos.y = 0;
-  prog->start = nb_client;
-  prog->stop = all_client;
+  prog->start = start;
+  prog->stop = stop;
   if (prog->verbose)
     my_putstr("\nRaytracing multi-threading started\n");
   i = -1;
