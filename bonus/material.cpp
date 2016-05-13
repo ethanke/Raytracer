@@ -1,24 +1,30 @@
 #include "material.h"
 
+#include <QDebug>
+
 Material::Material()
 {
     this->id = -1;
     this->color = new Color();
     this->reflect = 0.0;
-    this->transparency = 0.0;
+    this->transparency = 0.5;
     this->bump = 0.0;
-    this->texture = new Image("NULL");
+    this->texture.fill(QColor(0, 0, 0));
 }
 
-Material::Material(const int id, const Color color, const float reflect, const float bump, Image *texture)
+Material::Material(const int id, const Color color, const float reflect, const float transparency, const float ior, const float bump, const int sky, QString path)
 {
     this->id = id;
     this->color = new Color(color.r, color.g, color.b);
-    this->reflect = reflect;
+    this->reflect = reflect / 100.0;
 
-    // A CHANGER
-    this->transparency = 0.0;
+
+    this->transparency = transparency / 100.0;
+    this->ior = ior;
+    this->eior = 1.0 / this->ior;
 
     this->bump = bump;
-    this->texture = texture;
+
+    this->sky = sky;
+    this->texture.load(path);
 }

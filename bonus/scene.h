@@ -22,7 +22,7 @@ class Scene
         int objectCount;
         int lightCount;
         int matCount;
-        Scene(QWidget *parent);
+        Scene(QWidget *parent, int i);
         QString path_file;
         QFile *file;
         QStringList stringlist;
