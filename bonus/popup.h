@@ -1,6 +1,7 @@
 #ifndef POPUP_H
 #define POPUP_H
 
+#include <QMainWindow>
 #include <QObject>
 #include <QWidget>
 #include <QtGui>

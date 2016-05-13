@@ -173,6 +173,5 @@ void MainWindow::on_editButtonObj_clicked()
 {
     if (this->objSelect != 0)
     {
-        this->popup->show();
     }
 }
