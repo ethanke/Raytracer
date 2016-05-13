@@ -1,5 +1,6 @@
 #include "scene.h"
 #include "sphere.h"
+#include "plan.h"
 #include <qdebug.h>
 
 Scene::Scene(QWidget *parent)
@@ -36,7 +37,10 @@ Scene::Scene(QWidget *parent)
                                                       this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":green")).toLatin1().data()).toFloat() / 255.0,
                                                       this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":blue")).toLatin1().data()).toFloat() / 255.0),
                                                       this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":reflect")).toLatin1().data()).toFloat(),
+                                                      this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":transparency")).toLatin1().data()).toFloat(),
+                                                      this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":ior")).toLatin1().data()).toFloat(),
                                                       this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":bump")).toLatin1().data()).toFloat(),
+                                                      this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":sky")).toLatin1().data()).toInt(),
                                                       new Image(this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":texture")).toLatin1().data()))));
         i++;
     }
@@ -54,11 +58,16 @@ Scene::Scene(QWidget *parent)
             Sphere *sphere_tmp = new Sphere(sphere_center, sphere_radius, this->matList[sphere_mat_id]);
             this->objectList.push_back(sphere_tmp);
         }
-        /*QString s = QString("scene:object_list:obj") + QString::number(i) + QString(":type");
-        if (this->myxml->get_field(s.toLatin1().data()) == "sphere")
-            this->objectList.push_back(new Sphere(Vector3f(QString("scene:object_list:obj") + QString::number(i) + QString(":center:"), this->myxml),
-                                                  this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":radius")).toLatin1().data()).toFloat(),
-                                                  global_scene->matList[((this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id")).toLatin1().data())).toInt() - 1)]));*/
+
+        if (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":type")).toLatin1().data()) == QString("plan"))
+        {
+            Vector3f<float> plan_center = Vector3f<float>(QString("scene:object_list:obj") + QString::number(i) + QString(":center:"), this->myxml);
+            Vector3f<float> plan_dir    = Vector3f<float>(QString("scene:object_list:obj") + QString::number(i) + QString(":dir:"), this->myxml);
+            int             plan_mat_id = (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id")).toLatin1().data())).toInt() - 1;
+            Plan *plan_tmp = new Plan(plan_center, plan_dir, this->matList[plan_mat_id]);
+            this->objectList.push_back(plan_tmp);
+        }
+
         i++;
     }
     qDebug() << "object loaded\n";

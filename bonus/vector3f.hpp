@@ -31,6 +31,9 @@ class Vector3f
         Vector3f<T> operator * (const T &f) const {
             return Vector3f<T>(x * f, y * f, z * f);
         }
+        Vector3f<T> operator / (const T &f) const {
+            return Vector3f<T>(x / f, y / f, z / f);
+        }
         Vector3f<T> operator * (const Vector3f<T> &v) const {
             return Vector3f<T>(x * v.x, y * v.y, z * v.z);
         }
