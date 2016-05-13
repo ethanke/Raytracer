@@ -41,7 +41,7 @@ Scene::Scene(QWidget *parent)
                                                       this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":ior")).toLatin1().data()).toFloat(),
                                                       this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":bump")).toLatin1().data()).toFloat(),
                                                       this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":sky")).toLatin1().data()).toInt(),
-                                                      new Image(this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":texture")).toLatin1().data()))));
+                                                      this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":texture")).toLatin1().data())));
         i++;
     }
     qDebug() << "materiaux loaded\n";

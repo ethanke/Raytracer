@@ -55,7 +55,7 @@
       <ior>1</ior>
       <bump>0</bump>
       <sky>0</sky>
-      <texture>sprites/image/earth.jpg</texture>
+      <texture>NULL</texture>
     </mat3>
 
     <mat4>
@@ -91,7 +91,7 @@
       <ior>0</ior>
       <bump>0</bump>
       <sky>1</sky>
-      <texture>NULL</texture>
+      <texture>../sprites/image/swagbox.jpg</texture>
     </mat6>
   </material_list>
 
