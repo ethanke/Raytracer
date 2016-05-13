@@ -170,9 +170,9 @@ void MainWindow::on_listObject_itemClicked(QTableWidgetItem *item)
 
 void MainWindow::on_editButtonObj_clicked()
 {
-    if (this->objSelect != 0)
+    if (this->objSelect != -1)
     {
-        this->popup = new MyPopup();
+        this->popup = new MyPopup(this);
         popup->set_ui_obj(global_scene->objectList.at(this->objSelect));
     }
 }
@@ -202,21 +202,39 @@ void MainWindow::on_pushButton_3_pressed()
     ui->lineEdit_lax->setText(QString::number(global_scene->camera->look_at.x));
     ui->lineEdit_lay->setText(QString::number(global_scene->camera->look_at.y));
     ui->lineEdit_laz->setText(QString::number(global_scene->camera->look_at.z));
+    this->affLightTab();
+    this->affObjTab();
+    this->affMatTab();
+}
+
+void MainWindow::affObjTab()
+{
+   int i = 0;
+
+   while (i < int(global_scene->objectList.size()))
+    {
+       ui->listObject->insertRow(i);
+       ui->listObject->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->objectList[i]->center.x), 1));
+       i++;
+   }
+}
+
+void MainWindow::affLightTab()
+{
     int i = 0;
+
     while (i < int(global_scene->matList.size()))
     {
         ui->listMat->insertRow(i);
         ui->listMat->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->matList[i]->color->r * 255), 1));
         i++;
     }
-    i = 0;
-    while (i < int(global_scene->objectList.size()))
-    {
-        ui->listObject->insertRow(i);
-        ui->listObject->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->objectList[i]->center.x), 1));
-        i++;
-    }
-    i = 0;
+}
+
+void MainWindow::affMatTab()
+{
+    int i = 0;
+
     while (i < global_scene->lightCount)
     {
         ui->listLight->insertRow(i);

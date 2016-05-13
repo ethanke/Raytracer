@@ -6,6 +6,7 @@
 #include <qtablewidget.h>
 #include <QKeyEvent>
 #include <QLineEdit>
+#include "popup.h"
 #include "myxml.h"
 #include "popup.h"
 #include "scene.h"
@@ -25,8 +26,11 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    int objSelect;
+    int objSelect = -1;
     MyPopup *popup;
+    void affObjTab();
+    void affMatTab();
+    void affLightTab();
 
     MyXML *xml_file;
 
@@ -38,6 +42,7 @@ public slots:
     void CloseWindow();
 
 private slots:
+
     void on_loadButton_clicked();
 
 
@@ -71,5 +76,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
 };
+
+#else
+    class MainWindow;
 
 #endif // MAINWINDOW_H
