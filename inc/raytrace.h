@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:05:12 2016 victor sousa
-** Last update Wed May 11 00:01:19 2016 Philippe Lefevre
+** Last update Fri May 13 22:56:40 2016 Philippe Lefevre
 */
 
 #ifndef			RAYTRACE_H_
@@ -17,7 +17,8 @@
 # define		SIZE_TILE		101
 
 int                     raytrace(t_prog *prog);
-int                     raytrace_threading(t_prog *prog);
+int                     raytrace_threading(t_prog *prog, int nb_client,
+					   int all_client);
 t_color			raytrace_loop(t_prog *prog,
 				      t_raycast *rcast,
 				      t_bunny_position pos);

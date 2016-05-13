@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Thu May 12 16:43:17 2016 Philippe Lefevre
+** Last update Fri May 13 22:56:22 2016 Philippe Lefevre
 */
 
 #ifndef			STRUCT_H_
@@ -199,11 +199,14 @@ typedef struct          s_prog
   char			*background_path;
   char			cluster;
   int			anti_alias;
+
   int			thread_nb;
   int			rendu_success;
   int			display_rendu;
   int			rendu_verticale;
   int			verbose;
+  int			nb_client;
+  int			all_client;
 }                       t_prog;
 
 typedef struct s_cmd
