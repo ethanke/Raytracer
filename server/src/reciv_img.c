@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun May  8 02:00:53 2016 Gaëtan Léandre
-** Last update Fri May 13 05:20:55 2016 Gaëtan Léandre
+** Last update Sat May 14 08:24:47 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -64,25 +64,86 @@ unsigned int		*fill_end(t_client *client, unsigned int *tmp, unsigned int *end, 
   return (end);
 }
 
-unsigned int		*reciv_img(t_connected *co)
+void			recive_img_sock(t_connected *co, t_client *client,
+					fd_set *fdset, unsigned int *end)
+{
+  unsigned int		*grille;
+  int			size;
+  int			wait;
+  int			tmp;
+
+  if (FD_ISSET(client->sock, fdset))
+    {
+      wait = (client->end_x - client->start_x) * co->height;
+      wait *= sizeof(unsigned int);
+      grille = malloc(wait);
+      if (grille != NULL)
+	{
+	  size = 0;
+	  while (size < wait && tmp > 0)
+	    {
+	      tmp = recv(client->sock, &grille[size], wait , 0);
+	      size += tmp;
+	    }
+	}
+      if (size <= 0 && client->done < 1)
+	fill_end(client, NULL, end, co);
+      else if (client->done < 1)
+	fill_end(client, grille, end, co);
+      client->done = 1;
+    }
+}
+
+int			test_done(t_connected *co)
+{
+  t_client		*tmp;
+  if (co->master->done == 0)
+    return (0);
+  tmp = co->clients;
+  while (tmp)
+    {
+      if (tmp->done == 0)
+	return (0);
+      tmp = tmp->next;
+    }
+  return (1);
+}
+
+void			reciv_img(t_connected *co)
 {
   unsigned int		*end;
   fd_set		fdset;
   t_client		*tmp;
 
   if ((end = malloc(sizeof(unsigned int) * co->width * co->height)) == NULL)
-    return (NULL);
+    co->status = -1;
   while (co->status == 1)
     {
       FD_ZERO(&fdset);
+      FD_SET(co->master->sock, &fdset);
       tmp = co->clients;
       while (tmp != NULL)
 	{
 	  FD_SET(tmp->sock, &fdset);
 	  tmp = tmp->next;
 	}
+      if (select(co->max + 1, &fdset, NULL, NULL, NULL) == -1)
+	co->status = -1;
+      recive_img_sock(co, co->master, &fdset, end);
+      tmp = co->clients;
+      while (tmp != NULL)
+	{
+	  recive_img_sock(co, tmp, &fdset, end);
+	  tmp = tmp->next;
+	}
+      if (test_done(co) == 1)
+	{
+	  my_printf(1, "L'obj a bien été reçu. /download avec l'acces root pour le récuperer\n");
+	  write_all_client(co, "L'obj a bien été reçu. /download avec l'acces root pour le recuperer", -1);
+	  co->status = 0;
+	}
     }
-  return (end);
+  while(1);
 }
 
 int			charge_server(t_connected *co)

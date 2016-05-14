@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue May 10 22:56:16 2016 Gaëtan Léandre
-** Last update Fri May 13 05:56:27 2016 Gaëtan Léandre
+** Last update Sat May 14 06:09:32 2016 Gaëtan Léandre
 */
 
 #ifndef			_CLIENT_H_
@@ -40,6 +40,12 @@ typedef union		s_size
   unsigned char		csize[4];
 }			t_size;
 
+typedef struct		s_pass
+{
+  t_prog 		*prog;
+  unsigned int		*grille;
+}			t_pass;
+
 void			write_server(SOCKET sock, char *buffer);
 int			read_server(SOCKET sock, char *buffer);
 int			client(t_prog *prog);
@@ -48,5 +54,7 @@ char			*reciv_file(SOCKET sock);
 char			**is_command(char *str);
 char			*exec_command(SOCKET sock, char **tab, int *status);
 void			client_raytrace(char *str, int *status, SOCKET sock);
+unsigned int		*raytrace_threading_client(t_prog *prog, int start,
+						   int stop);
 
 #endif			/* _CLIENT_H_ */

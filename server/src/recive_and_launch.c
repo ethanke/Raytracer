@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Wed May 11 01:31:59 2016 Gaëtan Léandre
-** Last update Fri May 13 04:04:47 2016 Gaëtan Léandre
+** Last update Sat May 14 07:39:21 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -43,7 +43,7 @@ void			recive_and_launch(t_connected *co)
 	  return;
 	}
       free(get);
-      if ((get = get_field(tab, "scene:view:x_size")) == NULL || (co->width = my_getnbr(get)) <= 0)
+      if ((get = get_field(tab, "scene:view:y_size")) == NULL || (co->height = my_getnbr(get)) <= 0)
 	{
 	  free_tab(tab);
 	  if (get != NULL)

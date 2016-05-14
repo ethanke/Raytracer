@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May 13 04:44:05 2016 Gaëtan Léandre
-** Last update Fri May 13 06:05:53 2016 Gaëtan Léandre
+** Last update Sat May 14 08:19:56 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -138,6 +138,7 @@ int			load_obj_file_open(t_prog *prog, char *str)
 void			client_raytrace(char *str, int *status, SOCKET sock)
 {
   char			buffer[BUF_SIZE];
+  unsigned int		*grille;
   char			**tab;
   t_prog		prog;
 
@@ -153,10 +154,19 @@ void			client_raytrace(char *str, int *status, SOCKET sock)
     *status = -1;
     return;
   }
-  //raytracing dans la zone
-  //envoie
+  prog.thread_nb = 4;
+  grille = raytrace_threading_client(&prog, my_getnbr(tab[0]), my_getnbr(tab[1]));
+  my_printf(1, "Envois des calculs\n");
+  if (grille == NULL || send(sock, grille, sizeof(unsigned int) * (my_getnbr(tab[1]) - my_getnbr(tab[0])) * prog.win_size.y, 0) < 0)
+    *status = -1;
+  else
+    {
+      my_printf(1, "Caluls envoyés, en attente d'une autre information du serveur\n");
+      *status = 0;
+      free(grille);
+    }
   free(str);
   free_tab(tab);
-  exit(0);
+  while (1);
   *status = 0;
 }

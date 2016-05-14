@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Thu May  5 00:03:54 2016 Gaëtan Léandre
-** Last update Fri May 13 04:08:44 2016 Gaëtan Léandre
+** Last update Sat May 14 07:17:10 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -153,7 +153,10 @@ int			main()
 	{
 	  recive_and_launch(&connected);
 	  if (connected.status != 0)
-	    charge_server(&connected);
+	    {
+	      charge_server(&connected);
+	      reciv_img(&connected);
+	    }
 	  connected.status = 0;
 	}
     }

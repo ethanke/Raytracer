@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun May  8 03:45:09 2016 Gaëtan Léandre
-** Last update Wed May 11 06:02:43 2016 Gaëtan Léandre
+** Last update Sat May 14 08:28:54 2016 Gaëtan Léandre
 */
 
 #include		"client.h"
@@ -14,21 +14,28 @@ char			*reciv_file(SOCKET sock)
 {
   char			*file;
   t_size		size;
-  int			verif;
+  int			tmp;
+  int			pos;
 
-  if ((verif = recv(sock, size.csize, 4, 0)) < 0)
+  if ((pos = recv(sock, size.csize, 4, 0)) < 0)
   {
      my_printf(2, "Erreur de réception\n");
      size.i = 0;
   }
   if (size.i == 0 || (file = malloc(size.i + 1)) == NULL)
     return (NULL);
-  else if ((verif = recv(sock, file, size.i, 0)) < 0)
+  pos = 0;
+  while (pos < size.i && tmp > 0)
+    {
+      tmp = recv(sock, &file[pos], size.i, 0);
+      pos += tmp;
+    }
+  if (tmp <= 0)
     {
        my_printf(2, "Erreur de réception\n");
       return (NULL);
     }
-  file[verif] = '\0';
+  file[size.i] = '\0';
   return (file);
 }
 

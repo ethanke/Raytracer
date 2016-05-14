@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Wed May 11 00:37:45 2016 Gaëtan Léandre
-** Last update Fri May 13 06:01:01 2016 Gaëtan Léandre
+** Last update Sat May 14 06:32:53 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -54,7 +54,6 @@ char			*launch_cmd(SOCKET sock, char **tab, int *status)
 	  my_printf(1, "Ouverture du fichier\n");
 	  if ((str = read_file_to_char(tab[2])) == NULL)
 	    {
-	      my_printf(1, "%s\n", tab[2]);
 	      my_printf(1, "Path fichier invalide\n");
 	      write_server(sock, "error");
 	    }
