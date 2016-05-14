@@ -5,7 +5,7 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Sun May  8 02:20:22 2016 Philippe Lefevre
-** Last update Fri May 13 23:20:39 2016 Philippe Lefevre
+** Last update Sat May 14 00:47:33 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -27,8 +27,8 @@ void			*raytrace_verticale(void *p)
     my_printf(1, "Thread number %d : %d to %d\n", thread_id, pos.x, end);
   while (++pos.x < end)
     {
-      pos.y = (prog->win_size.y / prog->all_client * (prog->nb_client - 1)) - 1;
-      while (++pos.y < (prog->win_size.y / prog->all_client * prog->nb_client))
+      pos.y = prog->start - 1;
+      while (++pos.y < prog->stop)
 	{
 	  pixel_color.full = calcul_pixel(prog, raycast, pos);
 	  tekpixel(prog->pix, &pos, &pixel_color);
@@ -55,8 +55,8 @@ void			*raytrace_horizontale(void *p)
     my_printf(1, "Thread number %d : %d to %d\n", thread_id, pos.y, end);
   while (++pos.y < end)
     {
-      pos.x = (prog->win_size.x / prog->all_client * (prog->nb_client - 1)) - 1;
-      while (++pos.x < (prog->win_size.x / prog->all_client * prog->nb_client))
+      pos.x = prog->start - 1;
+      while (++pos.x < prog->stop)
 	{
 	  pixel_color.full = calcul_pixel(prog, raycast, pos);
 	  tekpixel(prog->pix, &pos, &pixel_color);
@@ -98,8 +98,8 @@ static int		raytrace_end(t_prog *prog, pthread_t thread_id[],
   return (0);
 }
 
-int			raytrace_threading(t_prog *prog, int nb_client,
-					  int all_client)
+int			raytrace_threading(t_prog *prog, int start,
+					  int stop)
 {
   pthread_t		thread_id[prog->thread_nb];
   time_t		time_beg;
@@ -108,8 +108,8 @@ int			raytrace_threading(t_prog *prog, int nb_client,
 
   pos.x = 0;
   pos.y = 0;
-  prog->nb_client = nb_client;
-  prog->all_client = all_client;
+  prog->start = start;
+  prog->stop = stop;
   if (prog->verbose)
     my_putstr("\nRaytracing multi-threading started\n");
   i = -1;

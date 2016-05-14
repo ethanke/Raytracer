@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Fri May 13 22:56:22 2016 Philippe Lefevre
+** Last update Sat May 14 00:44:56 2016 Philippe Lefevre
 */
 
 #ifndef			STRUCT_H_
@@ -205,6 +205,8 @@ typedef struct          s_prog
   int			display_rendu;
   int			rendu_verticale;
   int			verbose;
+  int			start;
+  int			stop;
   int			nb_client;
   int			all_client;
 }                       t_prog;
