@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon May  2 17:19:25 2016 Ethan Kerdelhue
-** Last update Thu May  5 02:16:21 2016 Ethan Kerdelhue
+** Last update Sat May 14 01:01:00 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -224,7 +224,8 @@ int			add_obj(t_prog *prog)
   if (prog->editor->fd == -1)
     return (put_error(ERR_NOFD));
   my_printf(1, "Quelle objet voulez-vous rajoutez ?\n\n 1 - Sphere\n");
-  my_printf(1, " 2 - Triangle\n 3 - Plan\n 4 - Cone\n 5 - Cylindre\n 6 - Cercle\n 7 - Pillule\n");
+  my_printf(1, " 2 - Triangle\n 3 - Plan\n 4 - Cone\n 5 - Cylindre\n 6 \
+	    - Cercle\n 7 - Pillule\n");
   str = get_next_line(0);
   if (my_strcmp(str, "1") == 0)
     add_obj_sphere(prog);

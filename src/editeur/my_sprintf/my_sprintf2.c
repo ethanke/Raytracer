@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Fri Nov 13 10:51:48 2015 Gaëtan Léandre
-** Last update Wed May  4 04:16:19 2016 Gaëtan Léandre
+** Last update Sat May 14 00:59:07 2016 Philippe Lefevre
 */
 
 #include 		"main.h"
@@ -43,9 +43,4 @@ char			*va_my_putunbr_s(va_list ap)
 char			*va_my_disp_unp_s(va_list ap)
 {
   return (disp_unprintable_s(va_arg(ap, char*)));
-}
-
-char			*va_my_putfnbr_s(va_list ap)
-{
-  return (my_put_fnbr_s(va_arg(ap, double)));
 }

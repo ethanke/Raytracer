@@ -5,10 +5,15 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Thu Nov 12 12:27:44 2015 Gaëtan Léandre
-** Last update Thu May 12 10:50:32 2016 Philippe Lefevre
+** Last update Sat May 14 00:59:16 2016 Philippe Lefevre
 */
 
 #include 		"main.h"
+
+char			*va_my_putfnbr_s(va_list ap)
+{
+  return (my_put_fnbr_s(va_arg(ap, double)));
+}
 
 static t_sfonct		*init_sstruct(t_sfonct *tab, char *flag, int nb_flag)
 {
