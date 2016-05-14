@@ -28,13 +28,16 @@ public:
     void set_ui_obj(Object *object);
     void keyPressEvent(QKeyEvent *e);
     QWidget *parent;
+    void set_ui_selectobj();
+    void set_ui_addobj();
+    void set_ui_addmat();
+    void set_layout_sphere(QGridLayout *mainLayout);
+    void set_layout_mat(QGridLayout *mainLayout);
     int typeSelected = 0;
     /*
      * 0 : sphere
      */
-    void set_ui_selectobj();
-    void set_ui_addobj();
-    void set_layout_sphere(QGridLayout *mainLayout);
+
 private:
     QPushButton *Apply;
     QLabel *CenterX;
@@ -57,6 +60,7 @@ private slots:
      void createButtonPressed();
      void editTypeSelect(int nb);
      void createSphere();
+     void createMaterial();
 
 };
 

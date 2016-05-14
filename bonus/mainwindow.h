@@ -79,6 +79,8 @@ private slots:
 
     void on_editButtonObj_4_clicked();
 
+    void on_renderButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

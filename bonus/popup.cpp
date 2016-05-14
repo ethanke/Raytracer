@@ -15,20 +15,73 @@ void MyPopup::show_it()
     this->show();
 }
 
-void MyPopup::set_ui_addobj()
+void MyPopup::createMaterial()
+{
+    Material *material = new Material();
+}
+
+void MyPopup::set_ui_addmat()
 {
     QWidget *mainwindow = this;
-    QGridLayout *layout = new QGridLayout;
     QGridLayout *mainLayout = new QGridLayout;
     if (this->typeSelected == 0)
         set_layout_sphere(mainLayout);
-    this->set_layout_sphere(mainLayout);
+    this->set_layout_mat(mainLayout);
     mainwindow->setLayout(mainLayout);
     mainwindow->setFixedWidth(600);
     mainwindow->setFixedHeight(400);
     if (this->typeSelected == 0)
      QObject::connect(this->createSph, SIGNAL(clicked(bool)), this, SLOT(createSphere()));
     mainwindow->show();
+}
+
+void MyPopup::set_ui_addobj()
+{
+    QWidget *mainwindow = this;
+    QGridLayout *mainLayout = new QGridLayout;
+    if (this->typeSelected == 0)
+    this->set_layout_sphere(mainLayout);
+    mainwindow->setLayout(mainLayout);
+    mainwindow->setFixedWidth(600);
+    mainwindow->setFixedHeight(400);
+    if (this->typeSelected == 0)
+     QObject::connect(this->createSph, SIGNAL(clicked(bool)), this, SLOT(createMaterial()));
+    mainwindow->show();
+}
+
+void MyPopup::set_layout_mat(QGridLayout *mainLayout)
+{
+    QLabel *LabelX = new QLabel("Center X :");
+    QLabel *LabelY = new QLabel("Center Y :");
+    QLabel *LabelZ = new QLabel("Center Z :");
+    QLabel *LabelRad = new QLabel("Radius :");
+    QLabel *LabelMat = new QLabel("Material :");
+    this->EditX = new QLineEdit();
+    this->EditY = new QLineEdit();
+    this->EditZ = new QLineEdit();
+    this->EditRad = new QLineEdit();
+    this->EditX->setValidator(new QIntValidator(-99999999, 99999999, this));
+    this->EditY->setValidator(new QIntValidator(-99999999, 99999999, this));
+    this->EditZ->setValidator(new QIntValidator(-99999999, 99999999, this));
+    this->EditRad->setValidator(new QIntValidator(-99999999, 99999999, this));
+    this->SelectMat = new QComboBox();
+    this->createSph = new QPushButton("Create");
+    if (!global_scene->matCount)
+        this->SelectMat->addItem(QString("No material found"));
+    else
+        for (int i = 0; i != global_scene->matCount; i++)
+            this->SelectMat->addItem(QString("Matériaux n°" + QString::number(i)));
+    mainLayout->addWidget(LabelX, 0, 0);
+    mainLayout->addWidget(this->EditX, 0, 1);
+    mainLayout->addWidget(LabelY, 1, 0);
+    mainLayout->addWidget(this->EditY, 1, 1);
+    mainLayout->addWidget(LabelZ, 2, 0);
+    mainLayout->addWidget(this->EditZ, 2, 1);
+    mainLayout->addWidget(LabelRad, 3, 0);
+    mainLayout->addWidget(this->EditRad, 3, 1);
+    mainLayout->addWidget(LabelMat, 4, 0);
+    mainLayout->addWidget(this->SelectMat, 4, 1);
+    mainLayout->addWidget(this->createSph, 5, 1);
 }
 
 void MyPopup::set_layout_sphere(QGridLayout *mainLayout)
@@ -42,6 +95,10 @@ void MyPopup::set_layout_sphere(QGridLayout *mainLayout)
     this->EditY = new QLineEdit();
     this->EditZ = new QLineEdit();
     this->EditRad = new QLineEdit();
+    this->EditX->setValidator(new QIntValidator(-99999999, 99999999, this));
+    this->EditY->setValidator(new QIntValidator(-99999999, 99999999, this));
+    this->EditZ->setValidator(new QIntValidator(-99999999, 99999999, this));
+    this->EditRad->setValidator(new QIntValidator(-99999999, 99999999, this));
     this->SelectMat = new QComboBox();
     this->createSph = new QPushButton("Create");
     if (!global_scene->matCount)
@@ -72,7 +129,7 @@ void MyPopup::createSphere()
     global_scene->objectList.push_back(sphere);
     global_scene->objectCount += 1;
     this->mw->refObjTab();
-     this->destroy();
+    this->destroy();
 }
 
 void MyPopup::set_ui_selectobj()
@@ -135,6 +192,10 @@ void MyPopup::set_ui_obj(Object *object)
         this->Apply = new QPushButton();
         this->matList = new QComboBox();
         this->EditRad = new QLineEdit();
+        this->EditX->setValidator(new QIntValidator(-99999999, 99999999, this));
+        this->EditY->setValidator(new QIntValidator(-99999999, 99999999, this));
+        this->EditZ->setValidator(new QIntValidator(-99999999, 99999999, this));
+        this->EditRad->setValidator(new QIntValidator(-99999999, 99999999, this));
         QGridLayout *layout = new QGridLayout;
         QGridLayout *mainLayout = new QGridLayout;
         layout->addWidget(CenterX, 0, 0);
@@ -148,7 +209,6 @@ void MyPopup::set_ui_obj(Object *object)
         layout->addWidget(radLab, 4, 0);
         layout->addWidget(EditRad, 4, 1);
         layout->addWidget(Apply, 5, 1);
-        QString *tab = new QString();
         int i = 0;
         while (i != global_scene->matCount)
         {

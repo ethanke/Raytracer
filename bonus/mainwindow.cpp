@@ -191,6 +191,9 @@ void MainWindow::on_pushButton_3_pressed()
     ui->editButtonObj->setEnabled(true);
     ui->editButtonObj_2->setEnabled(true);
     ui->editButtonObj_4->setEnabled(true);
+    ui->editButtonObj_3->setEnabled(true);
+    ui->editButtonObj_5->setEnabled(true);
+    ui->editButtonObj_6->setEnabled(true);
     ui->horizontalSlider_aa->setDisabled(false);
     ui->horizontalSlider_fov->setDisabled(false);
     ui->lineEdit_cpx->setValidator(new QIntValidator(-99999999, 99999999, this));
@@ -266,4 +269,10 @@ void MainWindow::on_editButtonObj_4_clicked()
     this->popup = new MyPopup(this);
     popup->set_ui_selectobj();
     this->refObjTab();
+}
+
+void MainWindow::on_renderButton_2_clicked()
+{
+    QColorDialog *cp = new QColorDialog();
+    cp->show();
 }
