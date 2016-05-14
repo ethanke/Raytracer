@@ -76,29 +76,6 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
         outColor = mix(outColor, raytrace(NewPoint, RefractedRay, depth + 1, coef), obj_touched->material->transparency);
     }
 
-
-    for (unsigned int j = 0; j < global_scene->lightList.size(); ++j)
-    {
-        Light *current = global_scene->lightList.at(j);
-        Vector3f<float> dist = current->center - hitPoint;
-        if (Normal.dot(dist) <= 0.0)
-            continue;
-        float t = sqrtf(dist.length2());
-        if (t <= 0.0)
-            continue;
-        Vector3f<float> lightDir = dist * (1 / t);
-        bool inShadow = Shadow(hitPoint, lightDir, t);
-        if (!inShadow)
-        {
-            // lambert
-            float lambert = lightDir.dot(Normal) * coef;
-            outColor.x = (outColor.x + std::min(outColor.x + lambert * (current->intensity / 255.0) * obj_touched->material->color->r, 1.0)) / 2;
-            outColor.y = (outColor.y + std::min(outColor.y + lambert * (current->intensity / 255.0) * obj_touched->material->color->g, 1.0)) / 2;
-            outColor.z = (outColor.z + std::min(outColor.z + lambert * (current->intensity / 255.0) * obj_touched->material->color->b, 1.0)) / 2;
-        }
-    }
-
-
     return (outColor);
 }
 

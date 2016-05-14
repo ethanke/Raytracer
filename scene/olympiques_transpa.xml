@@ -52,7 +52,7 @@
       <blue>50</blue>
       <reflect>75</reflect>
       <transparency>50</transparency>
-      <ior>1</ior>
+      <ior>1.25</ior>
       <bump>0</bump>
       <sky>0</sky>
       <texture>NULL</texture>
