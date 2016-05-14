@@ -5,41 +5,13 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun May  8 02:00:53 2016 Gaëtan Léandre
-** Last update Sat May 14 08:24:47 2016 Gaëtan Léandre
+** Last update Sat May 14 09:41:14 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
 
-/*void			get_connections(SOCKET sock, t_connected *co)
-{
-  t_client		*tmp;
-  fd_set		fdset;
-
-  while (co->status == 0)
-    {
-      FD_ZERO(&fdset);
-      FD_SET(STDIN_FILENO, &fdset);
-      FD_SET(sock, &fdset);
-      tmp = co->clients;
-      while (tmp != NULL)
-	{
-	  FD_SET(tmp->sock, &fdset);
-	  tmp = tmp->next;
-	}
-      if (co->master != NULL)
-	FD_SET(co->master->sock, &fdset);
-      if (select(co->max + 1, &fdset, NULL, NULL, NULL) == -1)
-	return;
-      if (FD_ISSET(STDIN_FILENO, &fdset))
-	exec_command(sock, co);
-      else if (FD_ISSET(sock, &fdset))
-	add_client(sock, co, fdset);
-      else
-	action_client(sock, co, fdset);
-    }
-}*/
-
-unsigned int		*fill_end(t_client *client, unsigned int *tmp, unsigned int *end, t_connected *co)
+void			fill_end(t_client *client, unsigned int *tmp,
+				 t_connected *co)
 {
   int			x;
   int			y;
@@ -53,19 +25,20 @@ unsigned int		*fill_end(t_client *client, unsigned int *tmp, unsigned int *end, 
       while (pos < client->end_x)
 	{
 	  if (tmp == NULL)
-	    end[pos + co->width * y] = COLOR_DEF;
+	    co->end[pos + co->width * y] = COLOR_DEF;
 	  else
-	    end[pos + co->width * y] = tmp[x + y * (client->end_x - client->start_x)];
+	    co->end[pos + co->width * y] = tmp[x + y * (client->end_x - client->start_x)];
 	  pos++;
 	  x++;
 	}
       y++;
     }
-  return (end);
+  if (tmp != NULL)
+    free(tmp);
 }
 
 void			recive_img_sock(t_connected *co, t_client *client,
-					fd_set *fdset, unsigned int *end)
+					fd_set *fdset)
 {
   unsigned int		*grille;
   int			size;
@@ -87,9 +60,9 @@ void			recive_img_sock(t_connected *co, t_client *client,
 	    }
 	}
       if (size <= 0 && client->done < 1)
-	fill_end(client, NULL, end, co);
+	fill_end(client, NULL, co);
       else if (client->done < 1)
-	fill_end(client, grille, end, co);
+	fill_end(client, grille, co);
       client->done = 1;
     }
 }
@@ -111,11 +84,10 @@ int			test_done(t_connected *co)
 
 void			reciv_img(t_connected *co)
 {
-  unsigned int		*end;
   fd_set		fdset;
   t_client		*tmp;
 
-  if ((end = malloc(sizeof(unsigned int) * co->width * co->height)) == NULL)
+  if ((co->end = malloc(sizeof(unsigned int) * co->width * co->height)) == NULL)
     co->status = -1;
   while (co->status == 1)
     {
@@ -129,21 +101,20 @@ void			reciv_img(t_connected *co)
 	}
       if (select(co->max + 1, &fdset, NULL, NULL, NULL) == -1)
 	co->status = -1;
-      recive_img_sock(co, co->master, &fdset, end);
+      recive_img_sock(co, co->master, &fdset);
       tmp = co->clients;
       while (tmp != NULL)
 	{
-	  recive_img_sock(co, tmp, &fdset, end);
+	  recive_img_sock(co, tmp, &fdset);
 	  tmp = tmp->next;
 	}
       if (test_done(co) == 1)
 	{
-	  my_printf(1, "L'obj a bien été reçu. /download avec l'acces root pour le récuperer\n");
-	  write_all_client(co, "L'obj a bien été reçu. /download avec l'acces root pour le recuperer", -1);
+	  my_printf(1, "L'obj a bien été reçu. /download avec l'acces root pour le récupérer\n");
+	  write_all_client(co, "L'obj a bien été reçu. /download avec l'acces root pour le récupérer", -1);
 	  co->status = 0;
 	}
     }
-  while(1);
 }
 
 int			charge_server(t_connected *co)

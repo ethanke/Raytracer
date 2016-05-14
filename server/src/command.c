@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 05:54:51 2016 Gaëtan Léandre
-** Last update Fri May 13 01:59:43 2016 Gaëtan Léandre
+** Last update Sat May 14 09:34:29 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -51,6 +51,9 @@ int			cmd_launch(SOCKET sock, char **tab, t_connected *co)
 	return (0);
       str = my_sprintf("/launch s %s", tab[1]);
       write_client(sock, str);
+      if (co->end != NULL)
+	free(co->end);
+      co->end = NULL;
       free(str);
       co->status = 1;
       return (1);

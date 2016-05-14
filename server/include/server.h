@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May  6 22:41:13 2016 Gaëtan Léandre
-** Last update Sat May 14 06:05:56 2016 Gaëtan Léandre
+** Last update Sat May 14 09:31:10 2016 Gaëtan Léandre
 */
 
 #ifndef			_SERVER_H_
@@ -56,6 +56,7 @@ typedef struct		s_connected
   int			height;
   t_client		*master;
   t_client		*clients;
+  unsigned int		*end;
 }			t_connected;
 
 int			read_client(SOCKET sock, char *buffer);

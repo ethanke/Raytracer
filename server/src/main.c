@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Thu May  5 00:03:54 2016 Gaëtan Léandre
-** Last update Sat May 14 07:17:10 2016 Gaëtan Léandre
+** Last update Sat May 14 09:35:12 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -91,6 +91,7 @@ void			init_connected(t_connected *co, SOCKET sock)
   co->max = sock;
   co->clients = NULL;
   co->master = NULL;
+  co->end = NULL;
   co->status = 0;
 }
 
@@ -160,6 +161,8 @@ int			main()
 	  connected.status = 0;
 	}
     }
+  if (connected.end != NULL)
+    free(connected.end);
   end_co(&connected);
   close(sock);
   return (0);

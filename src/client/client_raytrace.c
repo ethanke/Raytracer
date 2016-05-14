@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May 13 04:44:05 2016 Gaëtan Léandre
-** Last update Sat May 14 08:19:56 2016 Gaëtan Léandre
+** Last update Sat May 14 09:41:05 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -167,6 +167,5 @@ void			client_raytrace(char *str, int *status, SOCKET sock)
     }
   free(str);
   free_tab(tab);
-  while (1);
   *status = 0;
 }
