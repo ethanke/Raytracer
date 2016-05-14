@@ -37,7 +37,9 @@ Scene::Scene(QWidget *parent, int y)
     this->matCount = this->myxml->get_field("scene:material_list:count").toInt();
     while (i <= this->matCount)
     {
-        this->matList.push_back(new Material(i, Color(this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":red")).toLatin1().data()).toFloat() / 255.0,
+        this->matList.push_back(new Material(i, Color(this->myxml->get_field((QString("scene:material_list:mat")
+                                                                              + QString::number(i)
+                                                                              + QString(":red")).toLatin1().data()).toFloat() / 255.0,
                                                       this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":green")).toLatin1().data()).toFloat() / 255.0,
                                                       this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":blue")).toLatin1().data()).toFloat() / 255.0),
                                                       this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":reflect")).toLatin1().data()).toFloat(),
