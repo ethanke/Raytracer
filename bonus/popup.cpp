@@ -15,6 +15,107 @@ void MyPopup::show_it()
     this->show();
 }
 
+void MyPopup::set_ui_addobj()
+{
+    QWidget *mainwindow = this;
+    QGridLayout *layout = new QGridLayout;
+    QGridLayout *mainLayout = new QGridLayout;
+    if (this->typeSelected == 0)
+        set_layout_sphere(mainLayout);
+    this->set_layout_sphere(mainLayout);
+    mainwindow->setLayout(mainLayout);
+    mainwindow->setFixedWidth(600);
+    mainwindow->setFixedHeight(400);
+    if (this->typeSelected == 0)
+     QObject::connect(this->createSph, SIGNAL(clicked(bool)), this, SLOT(createSphere()));
+    mainwindow->show();
+}
+
+void MyPopup::set_layout_sphere(QGridLayout *mainLayout)
+{
+    QLabel *LabelX = new QLabel("Center X :");
+    QLabel *LabelY = new QLabel("Center Y :");
+    QLabel *LabelZ = new QLabel("Center Z :");
+    QLabel *LabelRad = new QLabel("Radius :");
+    QLabel *LabelMat = new QLabel("Material :");
+    this->EditX = new QLineEdit();
+    this->EditY = new QLineEdit();
+    this->EditZ = new QLineEdit();
+    this->EditRad = new QLineEdit();
+    this->SelectMat = new QComboBox();
+    this->createSph = new QPushButton("Create");
+    if (!global_scene->matCount)
+        this->SelectMat->addItem(QString("No material found"));
+    else
+        for (int i = 0; i != global_scene->matCount; i++)
+            this->SelectMat->addItem(QString("Matériaux n°" + QString::number(i)));
+    mainLayout->addWidget(LabelX, 0, 0);
+    mainLayout->addWidget(this->EditX, 0, 1);
+    mainLayout->addWidget(LabelY, 1, 0);
+    mainLayout->addWidget(this->EditY, 1, 1);
+    mainLayout->addWidget(LabelZ, 2, 0);
+    mainLayout->addWidget(this->EditZ, 2, 1);
+    mainLayout->addWidget(LabelRad, 3, 0);
+    mainLayout->addWidget(this->EditRad, 3, 1);
+    mainLayout->addWidget(LabelMat, 4, 0);
+    mainLayout->addWidget(this->SelectMat, 4, 1);
+    mainLayout->addWidget(this->createSph, 5, 1);
+}
+
+void MyPopup::createSphere()
+{
+    Sphere *sphere = new Sphere(Vector3f<float>(this->EditX->text().toFloat(),
+                         this->EditY->text().toFloat(),
+                         this->EditZ->text().toFloat()),
+                this->EditRad->text().toFloat(),
+                global_scene->matList.at(this->SelectMat->currentIndex()));
+    global_scene->objectList.push_back(sphere);
+    global_scene->objectCount += 1;
+    this->mw->refObjTab();
+     this->destroy();
+}
+
+void MyPopup::set_ui_selectobj()
+{
+    QWidget *mainwindow = this;
+    QLabel *typeLabel = new QLabel("Type :\n");
+    QComboBox *typeSelect = new QComboBox();
+    QGridLayout *layout = new QGridLayout;
+    QGridLayout *mainLayout = new QGridLayout;
+    QPushButton *createButton = new QPushButton("Create");
+    QPushButton *cancelButton = new QPushButton("Cancel");
+    typeSelect->addItem("Sphere");
+    typeSelect->addItem("Plan");
+    mainLayout->addWidget(typeLabel, 0, 0);
+    mainLayout->addWidget(typeSelect, 0, 1);
+    mainLayout->addWidget(createButton, 1, 0);
+    mainLayout->addWidget(cancelButton, 1, 1);
+    mainwindow->setLayout(mainLayout);
+    mainwindow->setFixedWidth(300);
+    mainwindow->setFixedHeight(100);
+    QObject::connect(typeSelect, SIGNAL(currentIndexChanged(int)), this, SLOT(editTypeSelect(int)));
+    QObject::connect(cancelButton, SIGNAL(clicked()), this, SLOT(cancelButtonPressed()));
+    QObject::connect(createButton, SIGNAL(clicked()), this, SLOT(createButtonPressed()));
+    mainwindow->show();
+}
+
+void MyPopup::cancelButtonPressed()
+{
+    this->destroy(true);
+}
+
+void MyPopup::editTypeSelect(int nb)
+{
+   this->typeSelected = nb;
+}
+
+void MyPopup::createButtonPressed()
+{
+    MyPopup *popup = new MyPopup(this->mw);
+    popup->set_ui_addobj();
+    this->destroy();
+}
+
 void MyPopup::set_ui_obj(Object *object)
 {
     QWidget *mainwindow = this;
@@ -67,8 +168,8 @@ void MyPopup::set_ui_obj(Object *object)
         EditY->setText(QString::number(object->center.y));
         EditZ->setText(QString::number(object->center.z));
         EditRad->setText(QString::number(sphere->radius));
-        mainwindow->show();
     }
+    mainwindow->show();
 }
 
 void MyPopup::keyPressEvent(QKeyEvent *e)
