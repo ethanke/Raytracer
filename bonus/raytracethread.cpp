@@ -71,7 +71,7 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
         float D2 = L.length2() - LdotRR * LdotRR;
         float dist_to_refract = LdotRR + sqrt(sphere->radius * sphere->radius - D2);
         Vector3f<float> NewPoint = RefractedRay * dist_to_refract + hitPoint;
-        Vector3f<float> NewNormal = (sphere->center - NewPoint) * sphere->radius;
+        Vector3f<float> NewNormal = (sphere->center - NewPoint) / sphere->radius;
         RefractedRay = refract(RefractedRay, NewNormal, obj_touched->material->ior);
         outColor = mix(outColor, raytrace(NewPoint, RefractedRay, depth + 1, coef), obj_touched->material->transparency);
     }
