@@ -31,6 +31,7 @@ public:
     void affObjTab();
     void affMatTab();
     void affLightTab();
+    void refObjTab();
 
     MyXML *xml_file;
 
@@ -72,6 +73,8 @@ private slots:
 
 
     void on_pushButton_3_pressed();
+
+    void on_editButtonObj_2_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -210,7 +210,6 @@ void MainWindow::on_pushButton_3_pressed()
 void MainWindow::affObjTab()
 {
    int i = 0;
-
    while (i < int(global_scene->objectList.size()))
     {
        ui->listObject->insertRow(i);
@@ -219,10 +218,19 @@ void MainWindow::affObjTab()
    }
 }
 
+void MainWindow::refObjTab()
+{
+    int i;
+
+    i = 0;
+    while (ui->listObject->rowCount() > 0)
+        ui->listObject->removeRow(0);
+    this->affObjTab();
+}
+
 void MainWindow::affLightTab()
 {
     int i = 0;
-
     while (i < int(global_scene->matList.size()))
     {
         ui->listMat->insertRow(i);
@@ -235,10 +243,20 @@ void MainWindow::affMatTab()
 {
     int i = 0;
 
-    while (i < global_scene->lightCount)
+    while (i < int(global_scene->lightList.size()))
     {
         ui->listLight->insertRow(i);
         ui->listLight->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->lightList[i]->intensity), 1));
         i++;
+    }
+}
+
+void MainWindow::on_editButtonObj_2_clicked()
+{
+    if (this->objSelect != -1)
+    {
+        global_scene->objectList.erase(global_scene->objectList.begin() + this->objSelect);
+        global_scene->objectCount -= 1;
+        this->refObjTab();
     }
 }

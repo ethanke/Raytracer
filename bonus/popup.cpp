@@ -88,5 +88,5 @@ void MyPopup::setValueObj()
     object->center.z = this->EditZ->text().toFloat();
     object->material = global_scene->matList[this->matList->currentIndex()];
     sphere->radius = this->EditRad->text().toFloat();
-    this->mw->affObjTab();
+    this->mw->refObjTab();
 }
