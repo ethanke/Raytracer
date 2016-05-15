@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Sun May 15 21:05:31 2016 Gaëtan Léandre
+** Last update Sun May 15 22:35:36 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -85,7 +85,7 @@ int			verif_arg(int ac, char **av, char **env, t_prog *prog)
       else if (!(my_strcmp("--cluster", av[i])))
 	    {
 	  prog->cluster = 1;
-      	  return (client(prog));
+      	  return (0);
 	}
       else if (!(my_strcmp("--display_rendu", av[i])))
 	prog->display_rendu = 1;

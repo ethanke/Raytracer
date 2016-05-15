@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Wed May 11 00:37:45 2016 Gaëtan Léandre
-** Last update Sun May 15 20:52:29 2016 Gaëtan Léandre
+** Last update Sun May 15 22:47:12 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -113,7 +113,7 @@ char			*download_cmd(int *status, char **tab, t_prog *prog, SOCKET sock)
 	  write_server(sock, "k");
 	  size = 0;
 	  tmp = 0;
-	  while (size < wait && tmp > 0)
+	  while (size < wait && tmp >= 0)
 	    {
 	      tmp = recv(sock, &grille[size], wait - size , 0);
 	      size += tmp;
@@ -123,6 +123,7 @@ char			*download_cmd(int *status, char **tab, t_prog *prog, SOCKET sock)
 	write_server(sock, "n");
       if (grille != NULL && tmp >= 0)
 	{
+	  my_printf(1, "size %d\n", size);
 	  *status = 3;
 	  return (grille);
 	}
