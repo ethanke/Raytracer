@@ -5,12 +5,12 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Wed May  4 23:49:13 2016
-## Last update Mon May  9 11:09:26 2016
+## Last update Sat May 14 11:58:32 2016 
 ##
 
 NAME		=	server
 
-CFLAGS		=	-I./include -W -Wall -Werror
+CFLAGS		=	-I./include -W -Wall -Werror -g
 
 SPRTFDIR	=	src/my_sprintf
 PRTFDIR		=	src/my_printf

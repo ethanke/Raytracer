@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue May 10 22:52:42 2016 Gaëtan Léandre
-** Last update Fri May 13 05:09:58 2016 Gaëtan Léandre
+** Last update Sat May 14 11:13:31 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -23,7 +23,7 @@ void			push_command(SOCKET sock)
     my_printf(2, "Erreur de commande\n");
 }
 
-char			*recive_command(SOCKET sock, int *status)
+char			*recive_command(SOCKET sock, int *status, t_prog *prog)
 {
   int			recive;
   char			buffer[BUF_SIZE + 1];
@@ -42,7 +42,7 @@ char			*recive_command(SOCKET sock, int *status)
     my_printf(1, "%s\n", buffer);
   else
     {
-      str = exec_command(sock, tab, status);
+      str = exec_command(sock, tab, status, prog);
       free_tab(tab);
     }
   return (str);
@@ -59,7 +59,7 @@ void			recive_launch(SOCKET sock)
   my_printf(1, "%s\n", buffer);
 }
 
-void			set_connections(SOCKET sock)
+int			set_connections(SOCKET sock, t_prog *prog)
 {
   fd_set		fdset;
   int			status;
@@ -75,19 +75,18 @@ void			set_connections(SOCKET sock)
 	  FD_SET(STDIN_FILENO, &fdset);
 	  FD_SET(sock, &fdset);
 	  if (select(sock + 1, &fdset, NULL, NULL, NULL) == -1)
-	    return;
+	    return (-1);
 	  if (FD_ISSET(STDIN_FILENO, &fdset))
 	    push_command(sock);
 	  else if (FD_ISSET(sock, &fdset))
-	    str = recive_command(sock, &status);
+	    str = recive_command(sock, &status, prog);
 	}
       if (status == 2)
-	{
-	  client_raytrace(str, &status, sock);
-	  exit(0);
-	}
+	client_raytrace(str, &status, sock);
+      else if (status == 3)
+	return (status);
     }
-  (void)str;
+  return (status);
 }
 
 SOCKET			init_connection()
@@ -114,11 +113,11 @@ SOCKET			init_connection()
 int			client(t_prog *prog)
 {
   SOCKET		sock;
+  int			status;
 
-  (void)prog;
   if ((sock = init_connection()) == -1)
     return (-1);
-  set_connections(sock);
+  status = set_connections(sock, prog);
   close(sock);
-  return (0);
+  return (status);
 }

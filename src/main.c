@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Sat May 14 03:43:33 2016 Philippe Lefevre
+** Last update Sat May 14 10:54:22 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -83,7 +83,7 @@ int			verif_arg(int ac, char **av, char **env, t_prog *prog)
 	    return (ret);
 	}
       else if (!(my_strcmp("--cluster", av[i])))
-	{
+	    {
 	  prog->cluster = 1;
       	  return (client(prog));
 	}
@@ -107,7 +107,7 @@ int			verif_arg(int ac, char **av, char **env, t_prog *prog)
 	}
       else
 	return (disp_help(av[0]));
-    }
+	}
   return (0);
 }
 
@@ -142,8 +142,7 @@ int			main(int ac, char **av, char **env)
   t_prog		prog;
 
   set_max_heap_size(RT_MAX_RAM);
-  if (verif_arg(ac, av, env, &prog) || create_pix(&prog)
-      || create_win(&prog) || waiting_screen(&prog))
+  if (verif_arg(ac, av, env, &prog))
     return (-1);
   bunny_set_key_response(key);
   if (prog.cluster)
@@ -151,6 +150,8 @@ int			main(int ac, char **av, char **env)
       if (client(&prog) == -1)
 	return (-1);
     }
+  else if (create_pix(&prog) || create_win(&prog) || waiting_screen(&prog))
+    return (-1);
   else
     raytrace_threading(&prog, 0, ((prog.rendu_verticale) ?
 				  (prog.win_size.y) : (prog.win_size.x)));

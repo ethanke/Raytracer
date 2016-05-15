@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:38 2016 victor sousa
-** Last update Fri May 13 05:54:15 2016 Gaëtan Léandre
+** Last update Sat May 14 11:05:44 2016 Gaëtan Léandre
 */
 
 #ifndef			LOADING_H_
@@ -39,5 +39,7 @@ t_light_list		*add_empty_light2(t_light_list *prev);
 t_light_list		*add_empty_light3(t_light_list *prev);
 t_light_list		*add_empty_light4(t_light_list *prev);
 t_mat_list              *add_empty_mat(t_mat_list *prev);
+int			create_pix(t_prog *prog);
+int			create_win(t_prog *prog);
 
 #endif		      /*LOADING_H*/

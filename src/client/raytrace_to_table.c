@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May 14 03:17:37 2016 Gaëtan Léandre
-** Last update Sat May 14 06:15:56 2016 Gaëtan Léandre
+** Last update Sat May 14 11:15:38 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -92,10 +92,5 @@ unsigned int		*raytrace_threading_client(t_prog *prog, int start,
     }
   if (prog->verbose)
     my_putstr("Thread create successfull\n");
-/*  while (prog->display_rendu && (prog->rendu_success > 0))
-    {
-      bunny_blit(&prog->win->buffer, &prog->pix->clipable, &pos);
-      bunny_display(prog->win);
-    }*/
   return (raytrace_end_client(&pass, thread_id, time_beg));
 }

@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun May  8 02:00:53 2016 Gaëtan Léandre
-** Last update Sat May 14 09:41:14 2016 Gaëtan Léandre
+** Last update Sun May 15 04:41:29 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -40,36 +40,33 @@ void			fill_end(t_client *client, unsigned int *tmp,
 void			recive_img_sock(t_connected *co, t_client *client,
 					fd_set *fdset)
 {
-  unsigned int		*grille;
-  int			size;
-  int			wait;
   int			tmp;
 
   if (FD_ISSET(client->sock, fdset))
     {
-      wait = (client->end_x - client->start_x) * co->height;
-      wait *= sizeof(unsigned int);
-      grille = malloc(wait);
-      if (grille != NULL)
+      if (client->grille != NULL)
 	{
-	  size = 0;
-	  while (size < wait && tmp > 0)
-	    {
-	      tmp = recv(client->sock, &grille[size], wait , 0);
-	      size += tmp;
-	    }
+	  tmp = recv(client->sock, &(client->grille)[client->pos],
+		     client->wait - client->pos, 0);
+	  client->pos += tmp >= 0 ? tmp : 0;
 	}
-      if (size <= 0 && client->done < 1)
-	fill_end(client, NULL, co);
-      else if (client->done < 1)
-	fill_end(client, grille, co);
-      client->done = 1;
+      if (client->wait <= client->pos && client->done != 1)
+	{
+	  fill_end(client, (unsigned int *)client->grille, co);
+	  client->done = 1;
+	}
+      else if (tmp <= 0 && client->done != 1)
+	{
+	  fill_end(client, NULL, co);
+	  client->done = -1;
+	}
     }
 }
 
 int			test_done(t_connected *co)
 {
   t_client		*tmp;
+
   if (co->master->done == 0)
     return (0);
   tmp = co->clients;
@@ -132,9 +129,14 @@ int			charge_server(t_connected *co)
   actu_x = 0;
   co->master->start_x = actu_x;
   co->master->end_x = (actu_x + size_x >= co->width) ? co->width : actu_x + size_x;
+  co->master->wait = (co->master->end_x - co->master->start_x) * co->height * sizeof(unsigned int);
+  co->master->grille = malloc(co->master->wait);
+  i = 0;
+  while (co->master->grille != NULL && i < co->master->wait)
+    co->master->grille[i++] = 0;
   actu_x = co->master->end_x;
   str = my_sprintf("%d %d %c", co->master->start_x, co->master->end_x, (co->form == 1 ? 'x' : 'o'));
-  co->master->done = 0;
+  co->master->done = 0 * (co->master->pos = 0);;
   write_client(co->master->sock, str);
   free(str);
   tmp = co->clients;
@@ -144,7 +146,12 @@ int			charge_server(t_connected *co)
       tmp->end_x = (actu_x + size_x >= co->width) ? co->width : actu_x + size_x;
       actu_x = tmp->end_x;
       str = my_sprintf("%d %d %c", tmp->start_x, tmp->end_x, (co->form == 1 ? 'x' : 'o'));
-      tmp->done = 0;
+      tmp->done = 0 * (tmp->pos = 0);
+      tmp->wait = (tmp->end_x - tmp->start_x) * co->height * sizeof(unsigned int);
+      tmp->grille = malloc(tmp->wait);
+      i = 0;
+      while (tmp->grille != NULL && i < tmp->wait)
+	tmp->grille[i++] = 0;
       write_client(tmp->sock, str);
       free(str);
       tmp = tmp->next;

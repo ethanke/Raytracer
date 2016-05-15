@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Wed May 11 00:37:45 2016 Gaëtan Léandre
-** Last update Sat May 14 06:32:53 2016 Gaëtan Léandre
+** Last update Sat May 14 11:21:28 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -92,11 +92,71 @@ int			exit_cmd(int *status, char **tab)
   return (0);
 }
 
-char			*exec_command(SOCKET sock, char **tab, int *status)
+unsigned int		*download_cmd(int *status, char **tab, t_prog *prog, SOCKET sock)
+{
+  unsigned int		*grille;
+  int			size;
+  int			wait;
+  int			tmp;
+
+  if (tab[0] && !my_strcmp(tab[0], "download") && tab[1] && tab[2])
+    {
+      prog->win_size.x = my_getnbr(tab[1]);
+      prog->win_size.y = my_getnbr(tab[2]);
+      wait = my_getnbr(tab[1]) * my_getnbr(tab[2]);
+      wait *= sizeof(unsigned int);
+      grille = malloc(wait);
+      if (grille != NULL)
+	{
+	  size = 0;
+	  while (size < wait && tmp > 0)
+	    {
+	      tmp = recv(sock, &grille[size], wait , 0);
+	      size += tmp;
+	    }
+	}
+      if (grille != NULL && tmp > 0)
+	{
+	  *status = 3;
+	  return (grille);
+	}
+    }
+  return (NULL);
+}
+
+void			cpy_in_pix(t_prog *prog, unsigned int *grille,
+				   int *status)
+{
+  int			i;
+  int			max;
+
+  max = prog->win_size.x * prog->win_size.y;
+  if (create_pix(prog) || create_win(prog))
+    {
+      *status = -1;
+      return;
+    }
+  i = 0;
+  while (i < max)
+    {
+      ((t_color *)prog->pix)[i].full = grille[i];
+      i++;
+    }
+}
+
+char			*exec_command(SOCKET sock, char **tab, int *status, t_prog *prog)
 {
   char			*str;
+  unsigned int		*grille;
 
-  if ((str = launch_cmd(sock, tab, status)) == NULL && exit_cmd(status, tab) == 0)
+  grille = NULL;
+  if ((str = launch_cmd(sock, tab, status)) == NULL && exit_cmd(status, tab) == 0
+      && (grille = download_cmd(status, tab, prog, sock)) == NULL)
     my_printf(2, "Commande recue erronée\n");
+  if (grille != NULL)
+    {
+      cpy_in_pix(prog, grille, status);
+      free(grille);
+    }
   return (str);
 }

@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 05:57:13 2016 Ethan Kerdelhue
-** Last update Mon Apr 25 22:26:26 2016 Victor Sousa
+** Last update Sat May 14 12:23:09 2016 Gaëtan Léandre
 */
 
 
@@ -43,8 +43,9 @@ int		countwords(char *str, char *delim)
     if (!check(str[i], delim))
       {
 	count++;
-	while (str[0] && !check(str[i], delim))
+	while (str[i] && !check(str[i], delim))
 	  i++;
+	i--;
       }
 return (count + 1);
 }
