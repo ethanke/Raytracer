@@ -54,63 +54,53 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
         applyPerlin(hitPoint, Normal, obj_touched->material->bump);
     outColor = obj_touched->getObjectColor(hitPoint);
 
-    if (obj_touched->material->id == 4 || obj_touched->material->id == 1)
+    if (obj_touched->material->id == 4)                     /*  BOULE RAYE */
     {
-        /*  BOULE RAYE MDR */  /* marbre raté 1 */
-        //float noiseCoef = 0.0;
-        //for (int level = 1; level < 10; level ++)
-        //{
-        //    noiseCoef +=  (1.0f / level) * fabsf(float(noise(   level * 0.05 * hitPoint.x * 100 /*RADIUS*/,
-        //                                                        level * 0.05 * hitPoint.y * 100 /*RADIUS*/,
-        //                                                        level * 0.05 * hitPoint.z * 100 /*RADIUS*/)));
-        //}
-        //noiseCoef = 0.5 * sinf((hitPoint.x + hitPoint.y) * 0.05 + noiseCoef) + 0.5;
-        //outColor = (outColor + ((Vector3f<float>( 10, 10, 10) / 25000.0) * noiseCoef + (Vector3f<float>( 200, 200, 200) / 25000.0) * (1.0 - noiseCoef))) / 2.0;
-
-        /*  BOULE RAYE MDR */  /* marbre raté 2 */
-        //double x = hitPoint.x * /*scale*/ 1;
-        //double y = hitPoint.y * /*scale*/ 1;
-        //double z = hitPoint.z * /*scale*/ 1;
-        //double noiseCoef = 0;
-        //
-        //for (int level = 1; level < 10; level ++) {
-        //   noiseCoef +=  (1.0f / level) * fabsf(noise(
-        //      level * 0.05 * x,
-        //      level * 0.15 * y,
-        //      level * 0.05 * z
-        //   ));
-        //}
-        //noiseCoef = 0.5f * sinf((x + y) * 0.05f + noiseCoef) + 0.5f;
-        //outColor = (outColor + ((Vector3f<float>( 10, 10, 10) / 25000.0) * noiseCoef + (Vector3f<float>( 200, 200, 200) / 25000.0) * (1.0 - noiseCoef))) / 2.0;
+        Vector3f<float> scale = hitPoint * 0.25/*period*/;
+        double x = scale.x;
+        double y = scale.y;
+        double z = scale.z;
+        double turbulence = 0;
+        for (int level = 1; level < 10; level ++) {
+           turbulence += (1.0f / level) * fabsf(noise(
+              level * 0.05 * x,
+              level * 0.05 * y,
+              level * 0.05 * z
+           ));
+        }
+        float noise = scale.x + scale.y + scale.z + 0.035/*power*/ * turbulence;
+        float noiseCoef = std::abs(sin(noise * M_PI));
+        outColor = (outColor + ((Vector3f<float>( 10, 10, 10) / 25000.0) * noiseCoef + (Vector3f<float>( 200, 200, 200) / 25000.0) * (1.0 - noiseCoef))) / 2.0;
+    }
 
 
-        /*  TURBULENCE  */
-        //double x = hitPoint.x * /*sclae*/ 0.25;
-        //double y = hitPoint.y * /*sclae*/ 0.25;
-        //double z = hitPoint.z * /*sclae*/ 0.25;
-        //double noiseCoef = 0;
-        //
-        //for (int level = 1; level < 10; level ++) {
-        //   noiseCoef += (1.0f / level) * fabsf(noise(
-        //      level * 0.05 * x,
-        //      level * 0.05 * y,
-        //      level * 0.05 * z
-        //   ));
-        //}
-        //outColor = (outColor + ((Vector3f<float>( 10, 10, 10) / 25000.0) * noiseCoef + (Vector3f<float>( 200, 200, 200) / 25000.0) * (1.0 - noiseCoef))) / 2.0;
+    if (obj_touched->material->id == 1)                     /*  BOULE OEUILLET2 LOL MDR*/
+    {
+        double x = hitPoint.x * /*scale*/ 5;
+        double y = hitPoint.y * /*scale*/ 5;
+        double z = hitPoint.z * /*scale*/ 5;
+        double noiseCoef = 0;
 
-        /*  WOODEN TEST 1 */
-        //double x = hitPoint.x * /*scale*/ 0.0075;
-        //double y = hitPoint.y * /*scale*/ 0.0075;
-        //double z = hitPoint.z * /*scale*/ 0.0075;
-        //double grain = noise(x, y, z) * 20;
-        //grain = grain - (int)grain;
-        //outColor = (outColor + ((Vector3f<float>(94, 65, 19) / 50000.0) * grain + (Vector3f<float>(125, 78, 2) / 50000.0) * (1.0 - grain))) / 2.0;
+        for (int level = 1; level < 10; level ++) {
+           noiseCoef +=  (1.0f / level) * fabsf(noise(
+              level * 0.05 * cos(x),
+              level * 0.15 * cos(y),
+              level * 0.05 * cos(z)
+           ));
+           x *= 2;
+           y *= 2;
+           z *= 2;
+        }
+        noiseCoef = 0.5f * sinf((x - y) * 0.05f + noiseCoef);
+        outColor = (outColor + ((Vector3f<float>( 200, 255, 45) / 25000.0) * noiseCoef + (Vector3f<float>( 50, 50, 255) / 25000.0) * (1.0 - noiseCoef))) / 2.0;
+    }
 
-        /*  LOL GAY PRIDE MDR */
-        double x = hitPoint.x * /*scale*/ 1 * 0.5;
-        double y = hitPoint.y * /*scale*/ 1 * 0.5;
-        double z = hitPoint.z * /*scale*/ 1 * 0.5;
+
+    if (obj_touched->material->id == 5)                     /*  LOL GAY PRIDE MDR */
+    {
+        double x = hitPoint.x * /*scale*/ 100 * 0.5;
+        double y = hitPoint.y * /*scale*/ 100 * 0.5;
+        double z = hitPoint.z * /*scale*/ 100 * 0.5;
         double noiseCoefA = 0;
         double noiseCoefB = 0;
         double noiseCoefC = 0;
@@ -141,6 +131,33 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
         outColor.y = (outColor.y + (0 / 25000.0) * noiseCoefB + (255 / 25000.0) * (1.0 - noiseCoefB)) / 2.0;
         outColor.z = (outColor.z + (0 / 25000.0) * noiseCoefC + (255 / 25000.0) * (1.0 - noiseCoefC)) / 2.0;
     }
+
+    if (obj_touched->material->id == 2)                     /*  TURBULENCE  */
+    {
+        /*  TURBULENCE  */
+        double x = hitPoint.x * /*sclae*/ 10;
+        double y = hitPoint.y * /*sclae*/ 10;
+        double z = hitPoint.z * /*sclae*/ 10;
+        double noiseCoef = 0;
+
+        for (int level = 1; level < 10; level ++) {
+           noiseCoef += (1.0f / level) * fabsf(noise(
+              level * 0.05 * x,
+              level * 0.05 * y,
+              level * 0.05 * z
+           ));
+        }
+        outColor = (outColor + ((Vector3f<float>( 40, 255, 10) / 25000.0) * noiseCoef + (Vector3f<float>( 255, 20, 125) / 25000.0) * (1.0 - noiseCoef))) / 2.0;
+    }
+
+    /*  WOODEN TEST 1 */
+    //double x = hitPoint.x * /*scale*/ 0.5;
+    //double y = hitPoint.y * /*scale*/ 0.5;
+    //double z = hitPoint.z * /*scale*/ 0.5;
+    //double grain = noise(x, y, z) * 20;
+    //grain = grain - floor(grain);
+    //outColor = (outColor + ((Vector3f<float>(94, 65, 19) / 50000.0) * grain + (Vector3f<float>(125, 78, 2) / 50000.0) * (1.0 - grain))) / 2.0;
+
 
 
     if (obj_touched->material->sky > 0)
@@ -176,10 +193,10 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
 
 #define AmbientOcclusion                        1
 #define SoftShadows                             true
-#define GISamples                               1
+#define GISamples                               8
 #define TDRM                                    (2.0 / (float)RAND_MAX)
 #define ODGISamples                             (1.0f / (float)GISamples)
-#define AmbientOcclusionIntensity               1
+#define AmbientOcclusionIntensity               0.5
 #define ODGISamplesMAmbientOcclusionIntensity   (ODGISamples * AmbientOcclusionIntensity)
 
 void RaytraceThread::IlluminatePoint(Object *Object, Vector3f<float> &Point, Vector3f<float> &Normal, Vector3f<float> &Color, Camera &camera)
@@ -196,6 +213,7 @@ void RaytraceThread::IlluminatePoint(Object *Object, Vector3f<float> &Point, Vec
             Color *= (0.5 * (AO + NdotCD));
         else
             Color *= (0.5 * AO);
+        return;
     }
     if(SoftShadows == false)
     {
@@ -245,40 +263,41 @@ Vector3f<float> RaytraceThread::LightIntensity(Object *Object, Vector3f<float> &
     float LightDistance2 = LightDirection.length2();
     float LightDistance = sqrt(LightDistance2);
     LightDirection *= 1.0f / LightDistance;
-    float Attenuation = 0.125 * LightDistance2 + 0.100 * LightDistance + 1.0;
+    float Attenuation = 0.225 * LightDistance2 + 0.300 * LightDistance + 1.0;
     float NdotLD = Normal.dot(LightDirection);
     if(NdotLD > 0.0f)
     {
         if(Shadow(Point, LightDirection, LightDistance) == false)
-            return (Vector3f<float>(175.0) * ((1.0 * AO + 1.0 * NdotLD) / Attenuation));
+            return (Vector3f<float>(225.0) * ((1.0 * AO + 1.0 * NdotLD) / Attenuation));
     }
 
-    return Vector3f<float>(175.0) * (1 * AO / Attenuation);
+    return Vector3f<float>(10.0) * (1 * AO / Attenuation);
 }
 
 float RaytraceThread::AmbientOcclusionFactor(Object *object, Vector3f<float> &Point, Vector3f<float> &Normal)
 {
-  float AO = 0.0f;
+    float AO = 0.0f;
 
-  for (int i = 0; i < GISamples; i++)
-  {
-      Vector3f<float> RandomRay = (Vector3f<float>(TDRM * (float)rand() - 1.0f, TDRM * (float)rand() - 1.0f, TDRM * (float)rand() - 1.0f)).normalize();
-      float NdotRR = Normal.dot(RandomRay);
-      if (NdotRR < 0.0f)
-        {
-          RandomRay = -RandomRay;
-          NdotRR = -NdotRR;
-        }
-      Camera camera;
-      camera.start = Point;
-      camera.direction = RandomRay;
-      float Distance = INFINITY;
-      for (unsigned int obj_i = 0; obj_i < global_scene->objectList.size(); obj_i++)
-          global_scene->objectList.at(obj_i)->hit(camera, Distance);
-      AO += NdotRR / (1.0f + Distance * Distance);
-  }
-
-  return 1.0f - AO * ODGISamplesMAmbientOcclusionIntensity;
+    for (int i = 0; i < GISamples; i++)
+    {
+        Vector3f<float> RandomRay = (Vector3f<float>(TDRM * (float)rand() - 1.0f, TDRM * (float)rand() - 1.0f, TDRM * (float)rand() - 1.0f)).normalize();
+        float NdotRR = Normal.dot(RandomRay);
+        if (NdotRR < 0.0f)
+          {
+            RandomRay = -RandomRay;
+            NdotRR = -NdotRR;
+          }
+        Camera camera;
+        camera.start = Point;
+        camera.direction = RandomRay;
+        float Distance = INFINITY;
+        for (unsigned int obj_i = 0; obj_i < global_scene->objectList.size(); obj_i++)
+            global_scene->objectList.at(obj_i)->hit(camera, Distance);
+        AO += NdotRR / (1.0f + Distance * Distance);
+    }
+    if (global_scene->lightList.size() == 0)
+        return 0.025f - AO * ODGISamplesMAmbientOcclusionIntensity;
+    return 1.0f - AO * ODGISamplesMAmbientOcclusionIntensity;
 }
 
 Vector3f<float> RaytraceThread::reflect(const Vector3f<float> &i, const Vector3f<float> &n)
