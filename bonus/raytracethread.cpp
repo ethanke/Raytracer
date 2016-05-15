@@ -108,47 +108,45 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
         //outColor = (outColor + ((Vector3f<float>(94, 65, 19) / 50000.0) * grain + (Vector3f<float>(125, 78, 2) / 50000.0) * (1.0 - grain))) / 2.0;
 
         /*  LOL GAY PRIDE MDR */
-        //double x = hitPoint.x * /*scale*/ 1 * 0.5;
-        //double y = hitPoint.y * /*scale*/ 1 * 0.5;
-        //double z = hitPoint.z * /*scale*/ 1 * 0.5;
-        //double noiseCoefA = 0;
-        //double noiseCoefB = 0;
-        //double noiseCoefC = 0;
-        //
-        //for (int level = 1; level < 10; level++) {
-        //   noiseCoefA += (1.0f / level) * fabsf(noise(
-        //      level * 0.35 * x,
-        //      level * 0.05 * y,
-        //      level * z
-        //   ));
-        //
-        //   noiseCoefB += (1.0f / level) * fabsf(noise(
-        //      level * x,
-        //      level * 0.35 * y,
-        //      level * 0.05 * z
-        //   ));
-        //
-        //   noiseCoefC += (1.0f / level) * fabsf(noise(
-        //      level * 0.05 * x,
-        //      level * y,
-        //      level * 0.35 * z
-        //   ));
-        //}
-        //noiseCoefA = 0.5f * sinf((x + z) * 0.05f + noiseCoefA) + 0.5f;
-        //noiseCoefB = 0.5f * sinf((y + x) * 0.05f + noiseCoefB) + 0.5f;
-        //noiseCoefC = 0.5f * sinf((z + y) * 0.05f + noiseCoefC) + 0.5f;
-        //outColor.x = (outColor.x + (0 / 25000.0) * noiseCoefA + (255 / 25000.0) * (1.0 - noiseCoefA)) / 2.0;
-        //outColor.y = (outColor.y + (0 / 25000.0) * noiseCoefB + (255 / 25000.0) * (1.0 - noiseCoefB)) / 2.0;
-        //outColor.z = (outColor.z + (0 / 25000.0) * noiseCoefC + (255 / 25000.0) * (1.0 - noiseCoefC)) / 2.0;
+        double x = hitPoint.x * /*scale*/ 1 * 0.5;
+        double y = hitPoint.y * /*scale*/ 1 * 0.5;
+        double z = hitPoint.z * /*scale*/ 1 * 0.5;
+        double noiseCoefA = 0;
+        double noiseCoefB = 0;
+        double noiseCoefC = 0;
+
+        for (int level = 1; level < 10; level++) {
+           noiseCoefA += (1.0f / level) * fabsf(noise(
+              level * 0.35 * x,
+              level * 0.05 * y,
+              level * z
+           ));
+
+           noiseCoefB += (1.0f / level) * fabsf(noise(
+              level * x,
+              level * 0.35 * y,
+              level * 0.05 * z
+           ));
+
+           noiseCoefC += (1.0f / level) * fabsf(noise(
+              level * 0.05 * x,
+              level * y,
+              level * 0.35 * z
+           ));
+        }
+        noiseCoefA = 0.5f * sinf((x + z) * 0.05f + noiseCoefA) + 0.5f;
+        noiseCoefB = 0.5f * sinf((y + x) * 0.05f + noiseCoefB) + 0.5f;
+        noiseCoefC = 0.5f * sinf((z + y) * 0.05f + noiseCoefC) + 0.5f;
+        outColor.x = (outColor.x + (0 / 25000.0) * noiseCoefA + (255 / 25000.0) * (1.0 - noiseCoefA)) / 2.0;
+        outColor.y = (outColor.y + (0 / 25000.0) * noiseCoefB + (255 / 25000.0) * (1.0 - noiseCoefB)) / 2.0;
+        outColor.z = (outColor.z + (0 / 25000.0) * noiseCoefC + (255 / 25000.0) * (1.0 - noiseCoefC)) / 2.0;
     }
 
 
     if (obj_touched->material->sky > 0)
         return (outColor);
 
-    /* lightning */
-        IlluminatePoint(obj_touched, hitPoint, Normal, outColor, camera);
-    /* lightning */
+    IlluminatePoint(obj_touched, hitPoint, Normal, outColor, camera);
 
     if(obj_touched->material->reflect > 0.0f && depth < MAX_DEPTH && coef > 0.0)
     {
@@ -178,7 +176,7 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
 
 #define AmbientOcclusion                        1
 #define SoftShadows                             true
-#define GISamples                               16
+#define GISamples                               1
 #define TDRM                                    (2.0 / (float)RAND_MAX)
 #define ODGISamples                             (1.0f / (float)GISamples)
 #define AmbientOcclusionIntensity               1
@@ -195,13 +193,13 @@ void RaytraceThread::IlluminatePoint(Object *Object, Vector3f<float> &Point, Vec
     {
         float NdotCD = Normal.dot((camera.start - Point).normalize());
         if(NdotCD > 0.0f)
-            Color *= (0.5 * (AO + NdotCD)) / 50;
+            Color *= (0.5 * (AO + NdotCD));
         else
-            Color *= (0.5 * AO) / 50;
+            Color *= (0.5 * AO);
     }
     if(SoftShadows == false)
     {
-        Vector3f<float> LightsIntensitiesSum;
+        Vector3f<float> LightsIntensitiesSum = 0;
 
         for(unsigned int light_i = 0; light_i < global_scene->lightList.size(); light_i++)
             LightsIntensitiesSum += LightIntensity(Object, Point, Normal, global_scene->lightList.at(light_i)->center, global_scene->lightList.at(light_i), AO);
@@ -217,7 +215,7 @@ void RaytraceThread::IlluminatePoint(Object *Object, Vector3f<float> &Point, Vec
             for(int i = 0; i < GISamples; i++)
             {
                 Vector3f<float> RandomRay = Vector3f<float>(TDRM * (float)rand() - 1.0, TDRM * (float)rand() - 1.0, TDRM * (float)rand() - 1.0);
-                Vector3f<float> RandomLightPosition = RandomRay * 50.0 + global_scene->lightList.at(light_i)->center;
+                Vector3f<float> RandomLightPosition = RandomRay * 10.0 + global_scene->lightList.at(light_i)->center;
                 LightsIntensitiesSum += LightIntensity(Object, Point, Normal, RandomLightPosition, global_scene->lightList.at(light_i), AO);
             }
         }
@@ -252,10 +250,10 @@ Vector3f<float> RaytraceThread::LightIntensity(Object *Object, Vector3f<float> &
     if(NdotLD > 0.0f)
     {
         if(Shadow(Point, LightDirection, LightDistance) == false)
-            return (Vector3f<float>(200.0) * ((1.0 * AO + 1.0 * NdotLD) / Attenuation));
+            return (Vector3f<float>(175.0) * ((1.0 * AO + 1.0 * NdotLD) / Attenuation));
     }
 
-  return Vector3f<float>(200.0) * (1 * AO / Attenuation);
+    return Vector3f<float>(175.0) * (1 * AO / Attenuation);
 }
 
 float RaytraceThread::AmbientOcclusionFactor(Object *object, Vector3f<float> &Point, Vector3f<float> &Normal)

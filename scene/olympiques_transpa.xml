@@ -26,7 +26,7 @@
       <red>204</red>
       <green>138</green>
       <blue>34</blue>
-      <reflect>0</reflect>
+      <reflect>10</reflect>
       <transparency>0</transparency>
       <ior>0</ior>
       <bump>0</bump>
@@ -41,7 +41,7 @@
       <reflect>10</reflect>
       <transparency>45</transparency>
       <ior>1</ior>
-      <bump>0.25</bump>
+      <bump>0.35</bump>
       <sky>0</sky>
       <texture>NULL</texture>
     </mat2>
@@ -65,7 +65,7 @@
       <reflect>15</reflect>
       <transparency>0</transparency>
       <ior>0</ior>
-      <bump>0.1</bump>
+      <bump>0.5</bump>
       <sky>0</sky>
       <texture>NULL</texture>
     </mat4>
@@ -77,7 +77,7 @@
       <reflect>10</reflect>
       <transparency>0</transparency>
       <ior>0</ior>
-      <bump>0.9</bump>
+      <bump>0.5</bump>
       <sky>0</sky>
       <texture>NULL</texture>
     </mat5>
@@ -192,7 +192,7 @@
       <type>plan</type>
       <center>
   <x>0</x>
-  <y>-20</y>
+  <y>-21</y>
   <z>0</z>
       </center>
       <dir>

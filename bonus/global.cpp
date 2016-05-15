@@ -92,13 +92,13 @@ void applyPerlin(const Vector3f<float> &_hitPoint, Vector3f<float> &normale, con
     Vector3f<float>	noiseCoef;
     Vector3f<float> hitPoint;
 
-    hitPoint = _hitPoint;
+    hitPoint = _hitPoint * 10;
     noiseCoef.x = noise(0.1 * hitPoint.x, 0.1 * hitPoint.y, 0.1 * hitPoint.z);
     noiseCoef.y = noise(0.1 * hitPoint.y, 0.1 * hitPoint.z, 0.1 * hitPoint.x);
     noiseCoef.z = noise(0.1 * hitPoint.z, 0.1 * hitPoint.x, 0.1 * hitPoint.y);
     normale.x = ((1.0 - bump) * normale.x + bump * noiseCoef.x);
     normale.y = ((1.0 - bump) * normale.y + bump * noiseCoef.y);
-    normale.z = ((1.0 - bump) * normale.z + bump * noiseCoef.z);
+    normale.z = ((1.0 - bump) * normale.z + bump * noiseCoef.z);    
     float temp = normale.length2();
     if (temp == 0.0)
         return;

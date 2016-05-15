@@ -10,7 +10,6 @@
 #include "global.h"
 #include "sphere.h"
 #include "plan.h"
-#include "simplexnoise.hpp"
 
 #define     MAX_DEPTH       10
 

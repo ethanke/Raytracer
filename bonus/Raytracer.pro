@@ -52,7 +52,6 @@ HEADERS  += mainwindow.h \
     global.h \
     plan.h \
     light.h \
-    popup.h \
-    simplexnoise.hpp
+    popup.h
 
 FORMS    += mainwindow.ui
