@@ -32,12 +32,12 @@ bool Sphere::hit(const Camera ray, float &old_dist)
         return (0);
     t0 = B - sqrt(delta);
     t1 = B + sqrt(delta);
-    if (t0 < t1 && (t0 > 0.1) && (t0 < old_dist))
+    if (t0 < t1 && (t0 > 0.01) && (t0 < old_dist))
     {
         old_dist = t0;
         return (1);
     }
-    else if ((t1 > 0.1) && (t1 < old_dist))
+    else if ((t1 > 0.01) && (t1 < old_dist))
     {
         old_dist = t1;
         return (1);

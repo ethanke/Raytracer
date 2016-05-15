@@ -5,16 +5,16 @@
     <x_size>1080</x_size>
     <y_size>720</y_size>
     <cam_pos>
-      <x>-600</x>
-      <y>200</y>
-      <z>-600</z>
+      <x>-60</x>
+      <y>20</y>
+      <z>-60</z>
     </cam_pos>
     <look_at>
       <x>0</x>
       <y>0</y>
       <z>0</z>
     </look_at>
-    <fov>75</fov>
+    <fov>85</fov>
     <alias>1</alias>
     <background>sprites/image/sky1.png</background>
   </view>
@@ -23,10 +23,10 @@
     <count>8</count>
 
     <mat1>
-      <red>25</red>
-      <green>25</green>
-      <blue>255</blue>
-      <reflect>10</reflect>
+      <red>204</red>
+      <green>138</green>
+      <blue>34</blue>
+      <reflect>0</reflect>
       <transparency>0</transparency>
       <ior>0</ior>
       <bump>0</bump>
@@ -39,9 +39,9 @@
       <green>255</green>
       <blue>25</blue>
       <reflect>10</reflect>
-      <transparency>35</transparency>
-      <ior>1.5</ior>
-      <bump>0</bump>
+      <transparency>45</transparency>
+      <ior>1</ior>
+      <bump>0.25</bump>
       <sky>0</sky>
       <texture>NULL</texture>
     </mat2>
@@ -52,7 +52,7 @@
       <blue>50</blue>
       <reflect>0</reflect>
       <transparency>50</transparency>
-      <ior>1.25</ior>
+      <ior>1.5</ior>
       <bump>0</bump>
       <sky>0</sky>
       <texture>NULL</texture>
@@ -65,7 +65,7 @@
       <reflect>15</reflect>
       <transparency>0</transparency>
       <ior>0</ior>
-      <bump>0.05</bump>
+      <bump>0.1</bump>
       <sky>0</sky>
       <texture>NULL</texture>
     </mat4>
@@ -101,7 +101,7 @@
       <reflect>10</reflect>
       <transparency>0</transparency>
       <ior>0</ior>
-      <bump>0</bump>
+      <bump>10</bump>
       <sky>0</sky>
       <texture>NULL</texture>
     </mat7>
@@ -113,7 +113,7 @@
       <reflect>10</reflect>
       <transparency>0</transparency>
       <ior>0</ior>
-      <bump>0</bump>
+      <bump>1</bump>
       <sky>0</sky>
       <texture>NULL</texture>
     </mat8>
@@ -125,55 +125,55 @@
     <obj1>
       <type>sphere</type>
       <center>
-	<x>-225</x>
-	<y>100</y>
-	<z>0</z>
+	      <x>-22.5</x>
+	      <y>10</y>
+	      <z>0</z>
       </center>
-      <radius>100</radius>
+      <radius>10</radius>
       <material_id>1</material_id>
     </obj1>
 
     <obj2>
       <type>sphere</type>
       <center>
-	<x>-112</x>
-	<y>-100</y>
-	<z>0</z>
+	      <x>-11.2</x>
+	      <y>-10</y>
+	      <z>0</z>
       </center>
-      <radius>100</radius>
+      <radius>10</radius>
       <material_id>2</material_id>
     </obj2>
 
     <obj3>
       <type>sphere</type>
       <center>
-  <x></x>
-  <y>100</y>
-  <z>0</z>
+        <x>0</x>
+        <y>10</y>
+        <z>0</z>
       </center>
-      <radius>100</radius>
+      <radius>10</radius>
       <material_id>3</material_id>
     </obj3>
 
     <obj4>
       <type>sphere</type>
       <center>
-	<x>112</x>
-	<y>-100</y>
-	<z>0</z>
+	      <x>11.2</x>
+	      <y>-10</y>
+	      <z>0</z>
       </center>
-      <radius>100</radius>
+      <radius>10</radius>
       <material_id>4</material_id>
     </obj4>
 
     <obj5>
       <type>sphere</type>
       <center>
-	<x>225</x>
-	<y>100</y>
-	<z>0</z>
+	      <x>22.5</x>
+	      <y>10</y>
+	      <z>0</z>
       </center>
-      <radius>100</radius>
+      <radius>10</radius>
       <material_id>5</material_id>
     </obj5>
 
@@ -184,7 +184,7 @@
     <y>0</y>
     <z>0</z>
       </center>
-      <radius>10000</radius>
+      <radius>1000</radius>
       <material_id>6</material_id>
     </obj6>
 
@@ -192,7 +192,7 @@
       <type>plan</type>
       <center>
   <x>0</x>
-  <y>-201</y>
+  <y>-20</y>
   <z>0</z>
       </center>
       <dir>
@@ -204,16 +204,25 @@
       <material_id2>8</material_id2>
     </obj7>
   <light_list>
-    <count>1</count>
+    <count>2</count>
 
     <light1>
       <center>
-        <x>0</x>
-	      <y>350</y>
-	      <z>-350</z>
+        <x>50</x>
+	      <y>50</y>
+	      <z>-50</z>
       </center>
       <intensity>100</intensity>
     </light1>
+
+    <light2>
+      <center>
+        <x>0</x>
+	      <y>55</y>
+	      <z>0</z>
+      </center>
+      <intensity>100</intensity>
+    </light2>
   </light_list>
 
 </scene>

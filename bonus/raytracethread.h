@@ -10,6 +10,7 @@
 #include "global.h"
 #include "sphere.h"
 #include "plan.h"
+#include "simplexnoise.hpp"
 
 #define     MAX_DEPTH       10
 
@@ -25,6 +26,10 @@ class RaytraceThread : public QThread
         Vector3f<float> refract(const Vector3f<float> &i, const Vector3f<float> &n, float eta);
         Vector3f<float> mix(const Vector3f<float> &u, const Vector3f<float> &v, float a);
         float           clamp(const float &lo, const float &hi, const float &v);
+
+        void IlluminatePoint(Object *Object, Vector3f<float> &Point, Vector3f<float> &Normal, Vector3f<float> &Color, Camera &camera);
+        Vector3f<float> LightIntensity(Object *Object, Vector3f<float> &Point, Vector3f<float> &Normal, Vector3f<float> &LightPosition, Light *light, float AO);
+        float AmbientOcclusionFactor(Object *object, Vector3f<float> &Point, Vector3f<float> &Normal);
 
     public:
         RaytraceThread(QMutex* mu, GlWindow *glWin);

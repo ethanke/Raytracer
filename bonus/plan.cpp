@@ -51,7 +51,7 @@ Vector3f<float> Plan::getObjectColor(const Vector3f<float> hitPoint)
         return Vector3f<float>(this->material2->color->r, this->material2->color->g, this->material2->color->b) / 255.0;
 }
 
-#define     SIZE_TILE   150
+#define     SIZE_TILE   10
 bool	Plan::damier(const Vector3f<float> &pos)
 {
   Vector3f<int>tmp;

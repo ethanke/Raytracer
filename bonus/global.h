@@ -10,4 +10,10 @@
 
 extern Scene *global_scene;
 
+double	fade(double t);
+double	lerp(double t, double a, double b);
+double	grad(int hash, double x, double y, double z);
+double	noise(double x, double y, double z);
+void    applyPerlin(const Vector3f<float> &_hitPoint, Vector3f<float> &normale, const float &bump);
+
 #endif // GLOBAL_H
