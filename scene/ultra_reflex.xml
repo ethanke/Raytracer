@@ -6,21 +6,21 @@
     <y_size>720</y_size>
     <cam_pos>
       <x>0</x>
-      <y>200</y>
-      <z>-500</z>
+      <y>10</y>
+      <z>100</z>
     </cam_pos>
     <look_at>
       <x>0</x>
       <y>0</y>
-      <z>-150</z>
+      <z>0</z>
     </look_at>
-    <fov>90</fov>
+    <fov>75</fov>
     <alias>1</alias>
     <background>sprites/image/sky1.png</background>
   </view>
 
   <material_list>
-    <count>3</count>
+    <count>2</count>
 
     <mat1>
       <red>200</red>
@@ -35,49 +35,37 @@
     </mat1>
 
     <mat2>
-      <red>255</red>
-      <green>255</green>
-      <blue>255</blue>
-      <reflect>10</reflect>
+      <red>120</red>
+      <green>112</green>
+      <blue>180</blue>
+      <reflect>75</reflect>
       <transparency>0</transparency>
       <ior>0</ior>
       <bump>0</bump>
       <sky>0</sky>
       <texture>NULL</texture>
     </mat2>
-
-    <mat3>
-      <red>25</red>
-      <green>25</green>
-      <blue>25</blue>
-      <reflect>10</reflect>
-      <transparency>0</transparency>
-      <ior>0</ior>
-      <bump>0</bump>
-      <sky>0</sky>
-      <texture>NULL</texture>
-    </mat3>
   </material_list>
 
   <object_list>
-    <count>2</count>
+    <count>6</count>
 
     <obj1>
       <type>sphere</type>
       <center>
 	      <x>0</x>
 	      <y>0</y>
-	      <z>0</z>
+	      <z>-15</z>
       </center>
-      <radius>100</radius>
-      <material_id>1</material_id>
+      <radius>10</radius>
+      <material_id>2</material_id>
     </obj1>
 
     <obj2>
       <type>plan</type>
       <center>
         <x>0</x>
-        <y>-101</y>
+        <y>-11</y>
         <z>0</z>
       </center>
       <dir>
@@ -86,16 +74,96 @@
         <z>0</z>
       </dir>
       <material_id1>2</material_id1>
-      <material_id2>3</material_id2>
+      <material_id2>2</material_id2>
     </obj2>
+
+    <obj3>
+      <type>plan</type>
+      <center>
+        <x>0</x>
+        <y>40</y>
+        <z>0</z>
+      </center>
+      <dir>
+        <x>0</x>
+        <y>1</y>
+        <z>0</z>
+      </dir>
+      <material_id1>2</material_id1>
+      <material_id2>2</material_id2>
+    </obj3>
+
+    <obj4>
+      <type>plan</type>
+      <center>
+        <x>40</x>
+        <y>0</y>
+        <z>0</z>
+      </center>
+      <dir>
+        <x>1</x>
+        <y>0</y>
+        <z>0</z>
+      </dir>
+      <material_id1>2</material_id1>
+      <material_id2>2</material_id2>
+    </obj4>
+
+    <obj5>
+      <type>plan</type>
+      <center>
+        <x>-40</x>
+        <y>0</y>
+        <z>0</z>
+      </center>
+      <dir>
+        <x>-1</x>
+        <y>0</y>
+        <z>0</z>
+      </dir>
+      <material_id1>2</material_id1>
+      <material_id2>2</material_id2>
+    </obj5>
+
+    <obj6>
+      <type>plan</type>
+      <center>
+        <x>0</x>
+        <y>0</y>
+        <z>-30</z>
+      </center>
+      <dir>
+        <x>0</x>
+        <y>0</y>
+        <z>-1</z>
+      </dir>
+      <material_id1>2</material_id1>
+      <material_id2>2</material_id2>
+    </obj6>
+
+    <obj7>
+      <type>plan</type>
+      <center>
+        <x>0</x>
+        <y>0</y>
+        <z>110</z>
+      </center>
+      <dir>
+        <x>0</x>
+        <y>0</y>
+        <z>1</z>
+      </dir>
+      <material_id1>2</material_id1>
+      <material_id2>2</material_id2>
+    </obj7>
   </object_list>
   <light_list>
-    <count>1</count>
+    <count>2</count>
 
     <light1>
       <center>
-        <x>300</x>
-	      <y>300</y>
+        <x>-39</x>
+	      <y>39</y>
         <z>0</z>
       </center>
       <intensity>100</intensity>
@@ -103,8 +171,8 @@
 
     <light2>
       <center>
-        <x>-350</x>
-	      <y>350</y>
+        <x>39</x>
+	      <y>-10</y>
 	      <z>0</z>
       </center>
       <intensity>100</intensity>
