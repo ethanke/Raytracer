@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 03:36:00 2016 Gaëtan Léandre
-** Last update Fri May 13 03:33:14 2016 Gaëtan Léandre
+** Last update Sun May 15 23:34:06 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -34,13 +34,21 @@ void			write_all_client(t_connected *co, char *buffer,
 {
   t_client		*tmp;
 
+  puts("b");
   if (co->master != NULL && exept != co->master->sock)
-    write_client(co->master->sock, buffer);
+    {
+      puts("z");
+      write_client(co->master->sock, buffer);
+    }
   tmp = co->clients;
   while (tmp)
     {
       if (exept != tmp->sock)
-	write_client(tmp->sock, buffer);
+	{
+	  puts("a");
+	  write_client(tmp->sock, buffer);
+	}
       tmp = tmp->next;
     }
+    puts("b");
 }

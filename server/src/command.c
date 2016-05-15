@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 05:54:51 2016 Gaëtan Léandre
-** Last update Sun May 15 06:05:11 2016 Gaëtan Léandre
+** Last update Sun May 15 23:47:46 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -73,6 +73,8 @@ int			cmd_sudo(SOCKET sock, char **tab, t_connected *co)
       if (co->master)
 	{
 	  co->master->prev = NULL;
+	  if (co->clients)
+	    co->clients->prev = co->master;
 	  co->master->next = co->clients;
 	  co->clients = co->master;
 	}
