@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 05:54:51 2016 Gaëtan Léandre
-** Last update Sat May 14 11:12:40 2016 Gaëtan Léandre
+** Last update Sun May 15 06:05:11 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -104,18 +104,17 @@ int			cmd_sudo(SOCKET sock, char **tab, t_connected *co)
 int			cmd_download(SOCKET sock, char **tab, t_connected *co)
 {
   char			*str;
-  int			i;
+  char			buffer[BUF_SIZE];
 
   if (tab == NULL)
     return (0);
   if (co->master && sock == co->master->sock && my_strcmp(tab[0], "download")
-      && tab[2] == NULL && co->end != NULL)
+      && tab[1] == NULL && co->end != NULL)
     {
       str = my_sprintf("/download %d %d", co->width, co->height);
       write_client(sock, str);
-      i = 0;
-      while (i++ < 2000000000);
-      send(sock, co->end, sizeof(unsigned int) * co->height * co->width, 0);
+      if (read_client(sock, buffer) > 0 && my_strcmp(buffer, "k") == 1)
+	send(sock, co->end, sizeof(unsigned int) * co->height * co->width, 0);
       free(str);
       return (1);
     }
@@ -148,7 +147,7 @@ void			launch_command_client(SOCKET sock, char **tab,
 {
   if ((co->master == NULL || co->master->sock != sock || cmd_exit(tab, co) == 0)
       && cmd_sudo(sock, tab, co) == 0 && cmd_launch(sock, tab, co) == 0
-      && cmd_download(sock, tab, co))
+      && cmd_download(sock, tab, co) == 0)
     write_client(sock, "Commande inconnue");
   free_tab(tab);
 }
