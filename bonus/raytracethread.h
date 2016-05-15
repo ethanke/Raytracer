@@ -11,7 +11,7 @@
 #include "sphere.h"
 #include "plan.h"
 
-#define     MAX_DEPTH       10
+#define     MAX_DEPTH       15
 
 class RaytraceThread : public QThread
 {
