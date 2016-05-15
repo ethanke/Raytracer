@@ -5,7 +5,7 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Sun May  8 02:20:22 2016 Philippe Lefevre
-** Last update Sat May 14 00:47:33 2016 Philippe Lefevre
+** Last update Sat May 14 19:42:45 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -91,7 +91,7 @@ static int		raytrace_end(t_prog *prog, pthread_t thread_id[],
     my_printf(1, "\nRendu en %d heures %d minutes %d secondes\n",
 	      (time_end - time_beg) / 3600, ((time_end - time_beg) % 3600) / 60,
 	      ((time_end - time_beg) % 3600) % 60);
-    bunny_blit(&prog->win->buffer, &prog->pix->clipable, pos);
+  bunny_blit(&prog->win->buffer, &prog->pix->clipable, pos);
   bunny_display(prog->win);
   if (prog->verbose)
     my_putstr("Raytracing multi-threading successfull\n");

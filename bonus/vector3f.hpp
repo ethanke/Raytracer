@@ -69,6 +69,4 @@ class Vector3f
 
 };
 
-
-typedef Vector3f<float> Vector3ff;
 #endif // VECTOR3F_H

@@ -15,6 +15,7 @@
 #include <qwidget.h>
 #include "sphere.h"
 #include "mainwindow.h"
+#include "vector2f.h"
 
 class MyPopup: public QWidget
 {
@@ -27,6 +28,15 @@ public:
     void set_ui_obj(Object *object);
     void keyPressEvent(QKeyEvent *e);
     QWidget *parent;
+    void set_ui_selectobj();
+    void set_ui_addobj();
+    void set_ui_addmat();
+    void set_layout_sphere(QGridLayout *mainLayout);
+    void set_layout_mat(QGridLayout *mainLayout);
+    int typeSelected = 0;
+    /*
+     * 0 : sphere
+     */
 
 private:
     QPushButton *Apply;
@@ -42,8 +52,15 @@ private:
     QComboBox *matList;
     Object *object;
     MainWindow *mw;
+    QComboBox *SelectMat;
+    QPushButton *createSph;
 private slots:
      void setValueObj();
+     void cancelButtonPressed();
+     void createButtonPressed();
+     void editTypeSelect(int nb);
+     void createSphere();
+     void createMaterial();
 
 };
 
