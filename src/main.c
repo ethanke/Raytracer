@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Sat May 14 10:54:22 2016 Gaëtan Léandre
+** Last update Sun May 15 21:05:31 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -144,7 +144,6 @@ int			main(int ac, char **av, char **env)
   set_max_heap_size(RT_MAX_RAM);
   if (verif_arg(ac, av, env, &prog))
     return (-1);
-  bunny_set_key_response(key);
   if (prog.cluster)
     {
       if (client(&prog) == -1)
@@ -155,6 +154,7 @@ int			main(int ac, char **av, char **env)
   else
     raytrace_threading(&prog, 0, ((prog.rendu_verticale) ?
 				  (prog.win_size.y) : (prog.win_size.x)));
+  bunny_set_key_response(key);
   bunny_set_loop_main_function(mainloop);
   bunny_loop(prog.win, 30, &prog);
   free_stuff(&prog);

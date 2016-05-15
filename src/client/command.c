@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Wed May 11 00:37:45 2016 Gaëtan Léandre
-** Last update Sun May 15 06:27:44 2016 Gaëtan Léandre
+** Last update Sun May 15 20:52:29 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -126,8 +126,6 @@ char			*download_cmd(int *status, char **tab, t_prog *prog, SOCKET sock)
 	  *status = 3;
 	  return (grille);
 	}
-      my_printf(1, "%d\n", tmp);
-      exit(1);
     }
   return (NULL);
 }
@@ -147,7 +145,7 @@ void			cpy_in_pix(t_prog *prog, unsigned int *grille,
   i = 0;
   while (i < max)
     {
-      ((t_color *)prog->pix)[i].full = grille[i];
+      ((t_color *)prog->pix->pixels)[i].full = grille[i];
       i++;
     }
 }
