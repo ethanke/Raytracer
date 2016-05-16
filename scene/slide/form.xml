@@ -11,7 +11,7 @@
     </cam_pos>
     <look_at>
       <x>0</x>
-      <y>50</y>
+      <y>100</y>
       <z>0</z>
     </look_at>
     <fov>90</fov>
@@ -20,7 +20,7 @@
   </view>
 
   <material_list>
-    <count>2</count>
+    <count>5</count>
 
     <mat1>
       <red>25</red>
@@ -31,6 +31,36 @@
       <sky>0</sky>
       <texture>NULL</texture>
     </mat1>
+
+    <mat3>
+      <red>255</red>
+      <green>25</green>
+      <blue>25</blue>
+      <reflect>0</reflect>
+      <bump>0</bump>
+      <sky>0</sky>
+      <texture>NULL</texture>
+    </mat3>
+
+    <mat4>
+      <red>25</red>
+      <green>255</green>
+      <blue>255</blue>
+      <reflect>0</reflect>
+      <bump>0</bump>
+      <sky>0</sky>
+      <texture>NULL</texture>
+    </mat4>
+
+    <mat5>
+      <red>255</red>
+      <green>255</green>
+      <blue>25</blue>
+      <reflect>0</reflect>
+      <bump>0</bump>
+      <sky>0</sky>
+      <texture>NULL</texture>
+    </mat5>
 
     <mat2>
       <red>240</red>
@@ -44,7 +74,7 @@
   </material_list>
 
   <object_list>
-    <count>3</count>
+    <count>5</count>
 
     <obj1>
       <type>cone</type>
@@ -82,13 +112,47 @@
     <obj3>
       <type>sphere</type>
       <center>
-        <x>100</x>
+        <x>125</x>
         <y>50</y>
         <z>0</z>
       </center>
       <radius>50</radius>
-      <material_id>2</material_id>
+      <material_id>3</material_id>
     </obj3>
+
+    <obj4>
+      <type>cylinder</type>
+      <center>
+  <x>-125</x>
+  <y>50</y>
+  <z>0</z>
+      </center>
+      <dir>
+  <x>0</x>
+  <y>1</y>
+  <z>0</z>
+      </dir>
+      <radius>50</radius>
+      <height>100</height>
+      <material_id>4</material_id>
+    </obj4>
+
+    <obj5>
+      <type>pill</type>
+      <center>
+  <x>0</x>
+  <y>175</y>
+  <z>0</z>
+      </center>
+      <dir>
+  <x>1</x>
+  <y>0</y>
+  <z>0</z>
+      </dir>
+      <radius>50</radius>
+      <height>100</height>
+      <material_id>5</material_id>
+    </obj5>
   </object_list>
   <light_list>
     <count>5</count>
