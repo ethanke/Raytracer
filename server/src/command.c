@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 05:54:51 2016 Gaëtan Léandre
-** Last update Mon May 16 10:35:23 2016 Philippe Lefevre
+** Last update Mon May 16 12:13:18 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -56,6 +56,30 @@ int			cmd_launch(SOCKET sock, char **tab, t_connected *co)
       co->end = NULL;
       free(str);
       co->status = 1;
+      return (1);
+    }
+  return (0);
+}
+
+int			cmd_name(char **tab, t_connected *co, SOCKET sock)
+{
+  t_client		*client;
+
+  if (my_strcmp(tab[0], "name") && tab[1] && tab[2] == NULL)
+    {
+      if (co->master && sock == co->master->sock)
+      client = co->master;
+      else
+      {
+        client = co->clients;
+        while (client && client->sock != sock)
+          client = client->next;
+        if (client == NULL)
+          return (0);
+      }
+      if (client->name != NULL)
+      free(client->name);
+      client->name = my_strdup(tab[1]);
       return (1);
     }
   return (0);
@@ -148,11 +172,11 @@ void			launch_command_server(char **tab, t_connected *co)
 }
 
 void			launch_command_client(SOCKET sock, char **tab,
-					      t_connected *co)
+                                            t_connected *co)
 {
-  if ((co->master == NULL || co->master->sock != sock
-       || cmd_exit(tab, co) == 0) && cmd_sudo(sock, tab, co) == 0
-      && cmd_launch(sock, tab, co) == 0 && cmd_download(sock, tab, co) == 0)
+  if ((co->master == NULL || co->master->sock != sock || cmd_exit(tab, co) == 0)
+      && cmd_sudo(sock, tab, co) == 0 && cmd_launch(sock, tab, co) == 0
+      && cmd_download(sock, tab, co) == 0 && cmd_name(tab, co, sock) == 0)
     write_client(sock, "Commande inconnue");
   free_tab(tab);
 }
@@ -161,11 +185,21 @@ void			exec_command(t_connected *co)
 {
   char			*str;
   char			**tab;
+  char			*msg;
 
   if ((str = get_next_line(0)) != NULL)
     {
-      tab = str_to_wordtab(str, " ");
+      if ((tab = is_command(str)) != NULL)
       launch_command_server(tab, co);
+      else
+      {
+         msg = my_sprintf("\033[31m%s\033[0m", str);
+         if (msg != NULL)
+           {
+                write_all_client(co, msg, -1);
+              free(msg);
+           }
+      }
       free(str);
     }
 }

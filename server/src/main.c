@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Thu May  5 00:03:54 2016 Gaëtan Léandre
-** Last update Sat May 14 09:35:12 2016 Gaëtan Léandre
+** Last update Mon May 16 12:08:14 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -35,6 +35,7 @@ void			action_client(t_connected *co, fd_set fdset)
   t_client		*tmp;
   char			buffer[BUF_SIZE + 1];
   int			size;
+  char			*str;
   char			**tab;
 
   tmp = co->clients;
@@ -48,8 +49,16 @@ void			action_client(t_connected *co, fd_set fdset)
 	    deco_client(co, tmp);
 	  else if ((tab = is_command(buffer)))
 	    launch_command_client(tmp->sock, tab, co);
-	  else
-	    my_printf(1, "%s\n", buffer);
+	  else if (tmp->name != NULL)
+	    {
+	      str = my_sprintf("<%s> : %s", tmp->name, buffer);
+	      if (str != NULL)
+		{
+		  my_printf(1, "%s\n", str);
+		  write_all_client(co, str, tmp->sock);
+		  free(str);
+		}
+	    }
 	  return;
 	}
       tmp = tmp->next;

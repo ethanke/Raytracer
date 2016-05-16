@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 05:05:50 2016 Gaëtan Léandre
-** Last update Wed May 11 09:57:14 2016 Gaëtan Léandre
+** Last update Mon May 16 11:17:15 2016 Gaëtan Léandre
 */
 
 #ifndef			_UTILS_H_
@@ -26,4 +26,6 @@ void			free_tab(char **tab);
 int			my_strcmp(char *a, char *b);
 char			*reciv_file(int sock);
 int			send_file(int sock, char *file, int siz);
+char			*my_strdup(char *str);
+
 #endif			/* _UTILS_H_ */

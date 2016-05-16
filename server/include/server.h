@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May  6 22:41:13 2016 Gaëtan Léandre
-** Last update Mon May 16 10:27:19 2016 Philippe Lefevre
+** Last update Mon May 16 12:13:31 2016 Gaëtan Léandre
 */
 
 #ifndef			SERVER_H_
@@ -43,6 +43,7 @@ typedef struct		s_client
   int			pos;
   int			wait;
   char			*grille;
+  char			*name;
   char			done;
   SOCKET		sock;
   SOCKADDR_IN		sock_addr;
