@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 05:54:51 2016 Gaëtan Léandre
-** Last update Sun May 15 23:47:46 2016 Gaëtan Léandre
+** Last update Mon May 16 10:35:23 2016 Philippe Lefevre
 */
 
 #include		"server.h"
@@ -68,7 +68,8 @@ int			cmd_sudo(SOCKET sock, char **tab, t_connected *co)
   if (tab == NULL)
     return (0);
   if (my_strcmp(tab[0], "sudo") && tab[1] && my_strcmp(tab[1], PASSWD)
-      && tab[2] == NULL && ((co->master && co->master->sock != sock) || !co->master))
+      && tab[2] == NULL
+      && ((co->master && co->master->sock != sock) || !co->master))
     {
       if (co->master)
 	{
@@ -92,8 +93,10 @@ int			cmd_sudo(SOCKET sock, char **tab, t_connected *co)
 	      if (tmp->next != NULL)
 		tmp->next->prev = tmp->prev;
 	      co->master = tmp;
-	      my_printf(1, "Le pouvoir est renversé, un nouveau joueur s'installe à la tête du serveur!\n");
-	      write_all_client(co, "Le pouvoir est renversé, un nouveau joueur s'installe à la tête du serveur!", -1);
+	      my_printf(1, "Le pouvoir est renversé, un nouveau joueur \
+s'installe à la tête du serveur!\n");
+	      write_all_client(co, "Le pouvoir est renversé, un nouveau \
+joueur s'installe à la tête du serveur!", -1);
 	      return (1);
 	    }
 	  tmp = tmp->next;
@@ -147,9 +150,9 @@ void			launch_command_server(char **tab, t_connected *co)
 void			launch_command_client(SOCKET sock, char **tab,
 					      t_connected *co)
 {
-  if ((co->master == NULL || co->master->sock != sock || cmd_exit(tab, co) == 0)
-      && cmd_sudo(sock, tab, co) == 0 && cmd_launch(sock, tab, co) == 0
-      && cmd_download(sock, tab, co) == 0)
+  if ((co->master == NULL || co->master->sock != sock
+       || cmd_exit(tab, co) == 0) && cmd_sudo(sock, tab, co) == 0
+      && cmd_launch(sock, tab, co) == 0 && cmd_download(sock, tab, co) == 0)
     write_client(sock, "Commande inconnue");
   free_tab(tab);
 }

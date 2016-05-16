@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 03:54:51 2016 Ethan Kerdelhue
-** Last update Mon May 16 07:40:20 2016 Philippe Lefevre
+** Last update Mon May 16 09:35:14 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -90,30 +90,29 @@ int			aff_xml(t_prog *prog)
   return (0);
 }
 
-int			editor()
+int			editor(int ac, char **av)
 {
   t_prog		*prog;
   t_cmd			cmd;
   char			*str;
 
-  if ((prog = malloc(sizeof(t_prog))) == NULL)
-    return (-1);
-  if ((prog->editor = malloc(sizeof(t_editor))) == NULL)
-    return (-1);
-  prog->editor->cmd = init_cmd(&cmd);
-  prog->editor->fd = -1;
-  disp_info();
-  while ((str = get_next_line(0)) != NULL)
+  if (ac == 2 && (!(my_strcmp("--edit", av[1]))))
     {
-      prog->editor->arg = str_to_wordtab(str, " ");
-      if (!(my_strcmp(prog->editor->arg[0], "exit")))
+      if ((prog = malloc(sizeof(t_prog))) == NULL)
+	return (-1);
+      if ((prog->editor = malloc(sizeof(t_editor))) == NULL)
+	return (-1);
+      prog->editor->cmd = init_cmd(&cmd);
+      prog->editor->fd = -1;
+      while (!disp_info() && (str = get_next_line(0)) != NULL)
 	{
+	  prog->editor->arg = str_to_wordtab(str, " ");
 	  free(str);
-	  return (0);
+	  if (prog->editor->arg[0] != NULL
+	      && !(my_strcmp(prog->editor->arg[0], "exit")))
+	    return (-1);
+	  put_error(check_cmd(prog));
 	}
-      put_error(check_cmd(prog));
-      free(str);
-      disp_info();
     }
   return (0);
 }

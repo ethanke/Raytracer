@@ -5,9 +5,8 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 05:57:13 2016 Ethan Kerdelhue
-** Last update Sat May 14 12:23:09 2016 Gaëtan Léandre
+** Last update Mon May 16 09:58:42 2016 Philippe Lefevre
 */
-
 
 #include 	"main.h"
 

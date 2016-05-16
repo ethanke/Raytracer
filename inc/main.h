@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:45:54 2016 victor sousa
-** Last update Thu May 12 12:22:45 2016 Philippe Lefevre
+** Last update Mon May 16 09:37:19 2016 Philippe Lefevre
 */
 
 #ifndef			MAIN_H_
@@ -40,6 +40,10 @@
 # define		NTHREADS	4
 
 t_bunny_response	mainloop(void *p);
+int			disp_help(char *bin);
+int			disp_credit(char **av);
+int			verif_env(char **env);
+int			verif_arg(int ac, char **av, t_prog *prog);
 void			free_stuff(t_prog *prog);
 
 #endif		      /*MAIN_H*/

@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 04:09:19 2016 Ethan Kerdelhue
-** Last update Mon May 16 08:02:33 2016 Philippe Lefevre
+** Last update Mon May 16 09:35:39 2016 Philippe Lefevre
 */
 
 #ifndef			EDITOR_H_
@@ -18,7 +18,7 @@
 # define		ERR_NOSTR		-3
 # define		ERR_NOFD		-4
 
-int			editor(void);
+int			editor(int ac, char **av);
 int			aff_light(int fd, t_light_list *light);
 int			aff_light_list(int fd, t_prog *prog);
 int			aff_mat(int fd, t_mat_list *mat);
@@ -35,7 +35,7 @@ int			count_object(t_prog *prog);
 int			put_error(int error);
 void			free_tab(char **tab);
 int			my_access(char *file);
-void			disp_info();
+int			disp_info();
 int			check_cmd(t_prog *prog);
 int			write_xml(t_prog *prog);
 int			write_fd_xml(int fd, t_prog *prog);

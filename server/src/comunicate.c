@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 03:36:00 2016 Gaëtan Léandre
-** Last update Sun May 15 23:53:40 2016 Gaëtan Léandre
+** Last update Mon May 16 10:29:05 2016 Philippe Lefevre
 */
 
 #include		"server.h"
@@ -25,7 +25,7 @@ int			read_client(SOCKET sock, char *buffer)
 
 void			write_client(SOCKET sock, char *buffer)
 {
-   if(send(sock, buffer, my_strlen(buffer), 0) < 0)
+   if (send(sock, buffer, my_strlen(buffer), 0) < 0)
     my_printf(2, "Erreur de transfers\n");
 }
 

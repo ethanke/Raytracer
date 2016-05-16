@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Wed May 11 01:31:59 2016 Gaëtan Léandre
-** Last update Sat May 14 11:39:19 2016 Gaëtan Léandre
+** Last update Mon May 16 10:36:00 2016 Philippe Lefevre
 */
 
 #include		"server.h"
@@ -34,7 +34,8 @@ void			recive_and_launch(t_connected *co)
   if (co->form == 1)
     {
       tab = str_to_wordtab(str, "\n");
-      if ((get = get_field(tab, "scene:view:x_size")) == NULL || (co->width = my_getnbr(get)) <= 0)
+      if ((get = get_field(tab, "scene:view:x_size")) == NULL
+	  || (co->width = my_getnbr(get)) <= 0)
 	{
 	  free_tab(tab);
 	  if (get != NULL)
@@ -43,7 +44,8 @@ void			recive_and_launch(t_connected *co)
 	  return;
 	}
       free(get);
-      if ((get = get_field(tab, "scene:view:y_size")) == NULL || (co->height = my_getnbr(get)) <= 0)
+      if ((get = get_field(tab, "scene:view:y_size")) == NULL
+	  || (co->height = my_getnbr(get)) <= 0)
 	{
 	  free_tab(tab);
 	  if (get != NULL)

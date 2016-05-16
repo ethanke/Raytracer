@@ -53,6 +53,7 @@ LDFLAGS		=	-L/home/${USER}/.froot/lib		\
 
 ##  MAIN  ##
 SRC		=	$(SRCDIR)/main.c			\
+			$(SRCDIR)/init.c			\
 			$(SRCDIR)/loop.c			\
 			$(SRCDIR)/end.c
 

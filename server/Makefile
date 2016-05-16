@@ -5,12 +5,14 @@
 ## Login   <leandr_g@epitech.net>
 ##
 ## Started on  Wed May  4 23:49:13 2016
-## Last update Sat May 14 11:58:32 2016 
+## Last update Mon May 16 10:26:15 2016 Philippe Lefevre
 ##
 
 NAME		=	server
 
-CFLAGS		=	-I./include -W -Wall -Werror -g
+CFLAGS		=	-W -Wall -Werror -pedantic		\
+			-I./include 				\
+			-g
 
 SPRTFDIR	=	src/my_sprintf
 PRTFDIR		=	src/my_printf
@@ -22,7 +24,7 @@ SRC		=	src/main.c				\
 			src/reciv_img.c				\
 			src/recive_and_launch.c
 
-			## SPRINTF ##
+## SPRINTF ##
 SRC             +=      $(SPRTFDIR)/my_disp_unprintable.c    	\
 	                $(SPRTFDIR)/my_sprintf.c               	\
                         $(SPRTFDIR)/my_sprintf2.c              	\
@@ -54,6 +56,7 @@ SRC		+=	src/get_next_line.c			\
 			src/str_to_wordtab.c			\
 			src/send_file.c				\
 			src/xml/get_field.c			\
+			src/xml/get_field_bis.c			\
 			src/my_getnbr.c
 
 OBJ		=	$(SRC:.c=.o)
@@ -71,3 +74,5 @@ fclean		:	clean
 			rm -rf $(NAME)
 
 re		:	fclean all
+
+.PHONY		:	all clean fclean re

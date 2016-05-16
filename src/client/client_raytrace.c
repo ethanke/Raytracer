@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May 13 04:44:05 2016 Gaëtan Léandre
-** Last update Sun May 15 04:34:49 2016 Gaëtan Léandre
+** Last update Mon May 16 10:02:50 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -57,7 +57,9 @@ int			load_scene_open(t_prog *prog, char *str)
   prog->background_path = my_strcat(prog->background_path, get);
   if (my_strcmp(get, "NULL") == 0)
     {
-      if ((prog->background = create_text_uni(prog->win_size.x, prog->win_size.x, 0xff000000)) == NULL)
+      if ((prog->background = create_text_uni(prog->win_size.x,
+					      prog->win_size.x,
+					      0xff000000)) == NULL)
 	return (-1);
     }
   else
@@ -65,10 +67,12 @@ int			load_scene_open(t_prog *prog, char *str)
       if ((prog->background = load_image(get)) == NULL)
 	return (-1);
       place_into_hitbox(prog->background, prog->background,
-			create_hitbox(0, 0, prog->win_size.x, prog->win_size.y));
+			create_hitbox(0, 0, prog->win_size.x,
+				      prog->win_size.y));
     }
   free(get);
-  prog->cam_fov.y = prog->cam_fov.x * ((prog->win_size.x / prog->win_size.y) / 1.5);
+  prog->cam_fov.y = prog->cam_fov.x * ((prog->win_size.x
+					/ prog->win_size.y) / 1.5);
   if (get_cam_pos(file, prog) == 1 ||
       get_cam_look_at(file, prog) == 1 ||
       load_mat(prog, file) == -1 ||
@@ -83,7 +87,8 @@ int			load_scene_open(t_prog *prog, char *str)
       return (-1);
     }
   dir = normalize(minus_point(prog->look_at, prog->cam_pos));
-  prog->cam_rot.x = RTD(acos(-(dir.z / sqrt(pow(dir.x, 2) + pow(dir.z, 2))))) - 90;
+  prog->cam_rot.x = RTD(acos(-(dir.z / sqrt(pow(dir.x, 2)
+					    + pow(dir.z, 2))))) - 90;
   prog->cam_rot.y = RTD((M_PI / 2 - acos(dir.y)));
   prog->cam_dir = normalize(minus_point(prog->look_at, prog->cam_pos));
   free_tab(file);
@@ -102,12 +107,14 @@ int			load_obj_file_open(t_prog *prog, char *str)
   prog->cam_pos.y = 125;
   prog->cam_pos.z = -500;
   prog->cam_fov.x = 90;
-  prog->cam_fov.y = prog->cam_fov.x * ((prog->win_size.x / prog->win_size.y) / 1.5);
+  prog->cam_fov.y = prog->cam_fov.x * ((prog->win_size.x
+					/ prog->win_size.y) / 1.5);
   prog->look_at.x = 0;
   prog->look_at.y = 0;
   prog->look_at.z = 0;
   dir = normalize(minus_point(prog->look_at, prog->cam_pos));
-  prog->cam_rot.x = RTD(acos(-(dir.z / sqrt(pow(dir.x, 2) + pow(dir.z, 2))))) - 90;
+  prog->cam_rot.x = RTD(acos(-(dir.z / sqrt(pow(dir.x, 2)
+					    + pow(dir.z, 2))))) - 90;
   prog->cam_rot.y = RTD((M_PI / 2 - acos(dir.y)));
   prog->cam_dir = normalize(minus_point(prog->look_at, prog->cam_pos));
   if ((file = str_to_wordtab(str, "\n")) == NULL)
@@ -121,7 +128,8 @@ int			load_obj_file_open(t_prog *prog, char *str)
     return (-1);
   if ((prog->light_list = add_empty_light4(prog->light_list)) == NULL)
     return (-1);
-  if ((prog->background = create_text_uni(prog->win_size.x, prog->win_size.x, 0xff000000)) == NULL)
+  if ((prog->background = create_text_uni(prog->win_size.x, prog->win_size.x,
+					  0xff000000)) == NULL)
     return (-1);
   prog->anti_alias = 1;
   prog->mat_list = NULL;
@@ -155,13 +163,16 @@ void			client_raytrace(char *str, int *status, SOCKET sock)
     return;
   }
   prog.thread_nb = 4;
-  grille = raytrace_threading_client(&prog, my_getnbr(tab[0]), my_getnbr(tab[1]));
+  grille = raytrace_threading_client(&prog, my_getnbr(tab[0]),
+				     my_getnbr(tab[1]));
   my_printf(1, "Envois des calculs\n");
-  if (grille == NULL || send(sock, grille, sizeof(unsigned int) * (my_getnbr(tab[1]) - my_getnbr(tab[0])) * prog.win_size.y, 0) < 0)
+  if (grille == NULL || send(sock, grille, sizeof(unsigned int)
+			     * (my_getnbr(tab[1]) - my_getnbr(tab[0]))
+			     * prog.win_size.y, 0) < 0)
     *status = -1;
   else
     {
-      my_printf(1, "Caluls envoyés, en attente d'une autre information du serveur\n");
+      my_printf(1, "Caluls envoyés, en attente d'une information du serveur\n");
       *status = 0;
       free(grille);
     }

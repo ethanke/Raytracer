@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun May  8 02:00:53 2016 Gaëtan Léandre
-** Last update Sun May 15 04:41:29 2016 Gaëtan Léandre
+** Last update Mon May 16 10:33:26 2016 Philippe Lefevre
 */
 
 #include		"server.h"
@@ -27,7 +27,8 @@ void			fill_end(t_client *client, unsigned int *tmp,
 	  if (tmp == NULL)
 	    co->end[pos + co->width * y] = COLOR_DEF;
 	  else
-	    co->end[pos + co->width * y] = tmp[x + y * (client->end_x - client->start_x)];
+	    co->end[pos + co->width * y] = tmp[x + y
+	      * (client->end_x - client->start_x)];
 	  pos++;
 	  x++;
 	}
@@ -84,7 +85,8 @@ void			reciv_img(t_connected *co)
   fd_set		fdset;
   t_client		*tmp;
 
-  if ((co->end = malloc(sizeof(unsigned int) * co->width * co->height)) == NULL)
+  if ((co->end =
+       malloc(sizeof(unsigned int) * co->width * co->height)) == NULL)
     co->status = -1;
   while (co->status == 1)
     {
@@ -107,8 +109,10 @@ void			reciv_img(t_connected *co)
 	}
       if (test_done(co) == 1)
 	{
-	  my_printf(1, "L'obj a bien été reçu. /download avec l'acces root pour le récupérer\n");
-	  write_all_client(co, "L'obj a bien été reçu. /download avec l'acces root pour le récupérer", -1);
+	  my_printf(1, "L'obj a bien été reçu. /download avec \
+		    l'acces root pour le récupérer\n");
+	  write_all_client(co, "L'obj a bien été reçu. /download \
+			   avec l'acces root pour le récupérer", -1);
 	  co->status = 0;
 	}
     }
@@ -128,26 +132,33 @@ int			charge_server(t_connected *co)
   size_x = co->width / (co->size + 1) + 1;
   actu_x = 0;
   co->master->start_x = actu_x;
-  co->master->end_x = (actu_x + size_x >= co->width) ? co->width : actu_x + size_x;
-  co->master->wait = (co->master->end_x - co->master->start_x) * co->height * sizeof(unsigned int);
-  co->master->grille = malloc(co->master->wait);
+  co->master->end_x =
+    (actu_x + size_x >= co->width) ? co->width : actu_x + size_x;
+  co->master->wait = (co->master->end_x - co->master->start_x)
+    * co->height * sizeof(unsigned int);
+  if ((co->master->grille = malloc(co->master->wait)) == NULL)
+    return (-1);
   i = 0;
   while (co->master->grille != NULL && i < co->master->wait)
     co->master->grille[i++] = 0;
   actu_x = co->master->end_x;
-  str = my_sprintf("%d %d %c", co->master->start_x, co->master->end_x, (co->form == 1 ? 'x' : 'o'));
-  co->master->done = 0 * (co->master->pos = 0);;
+  str = my_sprintf("%d %d %c", co->master->start_x, co->master->end_x,
+		   (co->form == 1 ? 'x' : 'o'));
+  co->master->done = 0 * (co->master->pos = 0);
   write_client(co->master->sock, str);
   free(str);
   tmp = co->clients;
   while (tmp)
     {
       tmp->start_x = actu_x;
-      tmp->end_x = (actu_x + size_x >= co->width) ? co->width : actu_x + size_x;
+      tmp->end_x =
+	(actu_x + size_x >= co->width) ? co->width : actu_x + size_x;
       actu_x = tmp->end_x;
-      str = my_sprintf("%d %d %c", tmp->start_x, tmp->end_x, (co->form == 1 ? 'x' : 'o'));
+      str = my_sprintf("%d %d %c", tmp->start_x, tmp->end_x,
+		       (co->form == 1 ? 'x' : 'o'));
       tmp->done = 0 * (tmp->pos = 0);
-      tmp->wait = (tmp->end_x - tmp->start_x) * co->height * sizeof(unsigned int);
+      tmp->wait =
+	(tmp->end_x - tmp->start_x) * co->height * sizeof(unsigned int);
       tmp->grille = malloc(tmp->wait);
       i = 0;
       while (tmp->grille != NULL && i < tmp->wait)

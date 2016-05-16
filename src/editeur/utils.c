@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 10:07:00 2016 Ethan Kerdelhue
-** Last update Mon May 16 07:04:12 2016 Philippe Lefevre
+** Last update Mon May 16 09:24:46 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -18,7 +18,7 @@ int			put_error(int error)
   if (error == ERR_NOACC)
     my_putstr("Error : No access to this file\n");
   if (error == ERR_NOSTR)
-    my_putstr("\n");
+    my_putstr("");
   if (error == ERR_NOFD)
     my_putstr("Error : you need to open a .xml file before use command\n");
   return (-1);
@@ -44,7 +44,8 @@ int			my_access(char *file)
   return (0);
 }
 
-void			disp_info()
+int			disp_info()
 {
   my_putstr("$> ");
+  return (0);
 }
