@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Mon May 16 10:50:26 2016 Philippe Lefevre
+** Last update Mon May 16 14:03:08 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -66,12 +66,10 @@ char			**my_list_to_wordtab(t_line_list *list)
   return (out);
 }
 
-char			**load_scene_file(char *path)
+char			**load_scene_file(char *path, int i, int fd)
 {
-  int			fd;
   char			*str;
   char			**file;
-  int			i;
   t_line_list		*file_list;
   time_t		time_beg;
   time_t		time_end;
@@ -88,13 +86,9 @@ char			**load_scene_file(char *path)
 	    ((time_end - time_beg) % 3600) % 60);
   if ((file = my_list_to_wordtab(file_list)) == NULL)
     return (NULL);
-  i = 0;
-  while (file[i])
-    {
-      if ((file[i] = epur_str(file[i], " \t\n")) == NULL)
-	return (NULL);
-      i++;
-    }
+  while (file[++i])
+    if ((file[i] = epur_str(file[i], " \t\n")) == NULL)
+      return (NULL);
   close(fd);
   return (file);
 }
@@ -181,7 +175,7 @@ int			load_scene(t_prog *prog, char *scene_path)
   char			*get;
   t_coord		dir;
 
-  if ((file = load_scene_file(scene_path)) == NULL)
+  if ((file = load_scene_file(scene_path, -1, 0)) == NULL)
     return (-1);
   if ((get = get_field(file, "scene:view:x_size")) == NULL)
     {

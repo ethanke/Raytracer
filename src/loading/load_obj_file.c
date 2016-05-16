@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 08:37:20 2016 Victor Sousa
-** Last update Mon May 16 10:57:16 2016 Philippe Lefevre
+** Last update Mon May 16 15:21:18 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -117,7 +117,7 @@ int			load_obj_file(t_prog *prog, char *path)
     RTD(acos(-(dir.z / sqrt(pow(dir.x, 2) + pow(dir.z, 2))))) - 90;
   prog->cam_rot.y = RTD((M_PI / 2 - acos(dir.y)));
   prog->cam_dir = normalize(minus_point(prog->look_at, prog->cam_pos));
-  if ((file = load_scene_file(path)) == NULL)
+  if ((file = load_scene_file(path, -1, 0)) == NULL)
     return (-1);
   prog->light_list = NULL;
   if ((prog->light_list = add_empty_light(prog->light_list)) == NULL)

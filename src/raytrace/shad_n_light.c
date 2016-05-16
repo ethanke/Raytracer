@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 04:01:20 2016 victor sousa
-** Last update Mon May 16 08:19:39 2016 Philippe Lefevre
+** Last update Mon May 16 14:09:28 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -80,9 +80,11 @@ void                    process_shadow(t_prog *prog, t_raycast *rcast)
       rcast->obj_touch->obj != NULL)
     in_shadow = 1;
   if (!in_shadow)
-    rcast->lambert = mult_vector(rcast->light_ray.dir, rcast->normale) * rcast->coef;
+    rcast->lambert =
+      mult_vector(rcast->light_ray.dir, rcast->normale) * rcast->coef;
   else
-    rcast->lambert = (mult_vector(rcast->light_ray.dir, rcast->normale) * rcast->coef) / 2;
+    rcast->lambert =
+      (mult_vector(rcast->light_ray.dir, rcast->normale) * rcast->coef) / 2;
   if (USE_CMYK == 1)
     cmyk_calcul(rcast);
   else

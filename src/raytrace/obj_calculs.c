@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Mon May 16 13:58:42 2016 Philippe Lefevre
+** Last update Mon May 16 17:21:32 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -111,7 +111,7 @@ int 			calc_normale_beg(t_prog *prog, t_raycast *rcast,
   else if (rcast->obj_touch->type == 'y')
     calc_cyl_normale(prog, rcast);
   else if (rcast->obj_touch->type == 'i')
-          calc_circle_normale(prog, rcast);
+    calc_circle_normale(prog, rcast);
   else
     return (-1);
   noiseCoef->x = noise(0.1 * rcast->new_point.x, 0.1
@@ -202,7 +202,7 @@ void			calc_sphere_normale(t_prog *prog, t_raycast *rcast)
       phi = acos(-mult_vector(vn, vp));
       v = phi / M_PI;
       theta = (acos(mult_vector(vp, ve) / sin(phi))) / (2.0 * M_PI);
-      if (vp.z < 0.01 && vp.z > -0.01)
+      if (vp.z < 0.0005 && vp.z > -0.0005)
 	theta = 0;
       if (mult_vector(crossProduct(vn, ve), vp) > 0)
 	u = theta;

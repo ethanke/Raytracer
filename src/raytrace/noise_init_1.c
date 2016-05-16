@@ -5,11 +5,10 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Mon May 16 12:25:04 2016 Philippe Lefevre
-** Last update Mon May 16 12:44:42 2016 Philippe Lefevre
+** Last update Mon May 16 14:08:31 2016 Philippe Lefevre
 */
 
 #include		"main.h"
-
 
 void			noise_init_1(int p[512])
 {

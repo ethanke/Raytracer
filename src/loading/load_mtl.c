@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue May  3 02:15:04 2016 Ethan Kerdelhue
-** Last update Tue May  3 02:57:47 2016 Ethan Kerdelhue
+** Last update Mon May 16 16:47:25 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -97,7 +97,7 @@ int			load_mtl(char *path, t_prog *prog)
   char			*kd;
   char			**tab_color;
 
-  if ((file = load_scene_file(path)) == NULL)
+  if ((file = load_scene_file(path, -1, 0)) == NULL)
     return (-1);
   kd = get_kd(file);
   tab_color = str_to_wordtab(kd, " ");
