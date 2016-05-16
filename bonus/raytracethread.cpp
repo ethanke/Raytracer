@@ -96,7 +96,7 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
     //}
     //
     //
-    //if (obj_touched->material->id == 5)                     /*  LOL GAY PRIDE MDR */
+    //if (obj_touched->material->id == 1)                     /*  LOL GAY PRIDE MDR */
     //{
     //    double x = hitPoint.x * /*scale*/ 100 * 0.5;
     //    double y = hitPoint.y * /*scale*/ 100 * 0.5;
@@ -132,7 +132,7 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
     //    outColor.z = (outColor.z + (0 / 25000.0) * noiseCoefC + (255 / 25000.0) * (1.0 - noiseCoefC)) / 2.0;
     //}
     //
-    //if (obj_touched->material->id == 2)                     /*  TURBULENCE  */
+    //if (obj_touched->material->id == 1)                     /*  TURBULENCE  */
     //{
     //    /*  TURBULENCE  */
     //    double x = hitPoint.x * /*sclae*/ 10;
@@ -149,19 +149,20 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
     //    }
     //    outColor = (outColor + ((Vector3f<float>( 40, 255, 10) / 25000.0) * noiseCoef + (Vector3f<float>( 255, 20, 125) / 25000.0) * (1.0 - noiseCoef))) / 2.0;
     //}
-
-    /*  WOODEN TEST 1 */
-    //double x = hitPoint.x * /*scale*/ 0.5;
-    //double y = hitPoint.y * /*scale*/ 0.5;
-    //double z = hitPoint.z * /*scale*/ 0.5;
-    //double grain = noise(x, y, z) * 20;
-    //grain = grain - floor(grain);
-    //outColor = (outColor + ((Vector3f<float>(94, 65, 19) / 50000.0) * grain + (Vector3f<float>(125, 78, 2) / 50000.0) * (1.0 - grain))) / 2.0;
-
+    //
+    //if (obj_touched->material->id == 1)                     /*  WOODEN TEST 1 */
+    //{
+    //    double x = hitPoint.x * /*scale*/ 0.075 * 0.5;
+    //    double y = hitPoint.y * /*scale*/ 0.075 * 0.5;
+    //    double z = hitPoint.z * /*scale*/ 0.075 * 0.5;
+    //    double grain = noise(x, y, z) * 15;
+    //    grain = grain - floor(grain);
+    //    outColor = (outColor + ((Vector3f<float>(94, 65, 19) / 50000.0) * grain + (Vector3f<float>(125, 78, 2) / 25000.0) * (1.0 - grain))) / 2.0;
+    //}
 
 
     if (obj_touched->material->sky > 0)
-        return (outColor);
+        return (outColor * 0.5);
 
     IlluminatePoint(obj_touched, hitPoint, Normal, outColor, camera);
 
@@ -206,7 +207,7 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
 
 #define AmbientOcclusion                        1
 #define SoftShadows                             true
-#define GISamples                               128
+#define GISamples                               16
 #define TDRM                                    (2.0 / (float)RAND_MAX)
 #define ODGISamples                             (1.0f / (float)GISamples)
 #define AmbientOcclusionIntensity               0.5

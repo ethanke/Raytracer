@@ -52,40 +52,43 @@ Vector3f<float> Sphere::getNormale(const Camera ray, const Vector3f<float> hitPo
 
 Vector3f<float> Sphere::getObjectColor(const Vector3f<float> hitPoint)
 {
-    //if(obj_touched->material->texture.width() > 0 && obj_touched->getObjectType() == QString("sphere"))
-    //{
-    //    Vector3f<float> vn = Vector3f<float>(0, -1, 0);
-    //    vn = vn.normalize();
-    //
-    //    Vector3f<float> ve = Vector3f<float>(-1, 0, 0);
-    //    ve = ve.normalize();
-    //
-    //    Vector3f<float>vp = hitPoint - obj_touched->center;
-    //    vp = vp.normalize();
-    //    float phi = acos(-vn.dot(vp));
-    //    float v = phi / M_PI;
-    //    float u;
-    //    float theta = (acos(vp.dot(ve) / sin(phi))) / (2.0 * M_PI);
-    //    if (vp.z < 0.01 && vp.z > -0.01)
-    //        theta = 0;
-    //    if (vp.cross(vn, ve).dot(vp) > 0)
-    //        u = theta;
-    //    else
-    //        u = 1 - theta;
-    //    v = v * (float)obj_touched->material->texture.height();
-    //    u = u * (float)obj_touched->material->texture.width();
-    //    if (v >= obj_touched->material->texture.height())
-    //        v = 0;
-    //    if (u >= obj_touched->material->texture.width())
-    //        u = 0;
-    //    QColor clrCurrent(obj_touched->material->texture.pixel(u, v));
-    //    outColor.x = (float)clrCurrent.red();
-    //    outColor.y = (float)clrCurrent.green();
-    //    outColor.z = (float)clrCurrent.blue();
-    //
-    //    outColor += outColor / 255.0;
-    //}
-    return (Vector3f<float>(this->material->color->r, this->material->color->g, this->material->color->b) / 255.0);
+    if(this->material->texture->width() > 0)
+    {
+        Vector3f<float> vn = Vector3f<float>(0, -1, 0);
+        vn = vn.normalize();
+
+        Vector3f<float> ve = Vector3f<float>(-1, 0, 0);
+        ve = ve.normalize();
+
+        Vector3f<float>vp = hitPoint - this->center;
+        vp = vp.normalize();
+        float phi = acos(-vn.dot(vp));
+        float v = phi / M_PI;
+        float u;
+        float theta = (acos(vp.dot(ve) / sin(phi))) / (2.0 * M_PI);
+        if (vp.z < 0.001 && vp.z > -0.001)
+            theta = 0;
+        if (vp.cross(vn, ve).dot(vp) > 0)
+            u = theta;
+        else
+            u = 1 - theta;
+        v = v * (float)this->material->texture->height();
+        u = u * (float)this->material->texture->width();
+        if (v >= this->material->texture->height())
+            v = 1;
+        if (u >= this->material->texture->width())
+            u = 1;
+        QColor clrCurrent(this->material->texture->pixel(u, v));
+        Vector3f<float> outColor;
+        outColor.x = (float)clrCurrent.red();
+        outColor.y = (float)clrCurrent.green();
+        outColor.z = (float)clrCurrent.blue();
+
+        outColor = outColor / 255.0 * 0.015;
+        return (outColor);
+    }
+    else
+        return (Vector3f<float>(this->material->color->r, this->material->color->g, this->material->color->b) / 255.0);
 }
 
 QString Sphere::getObjectType()

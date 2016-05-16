@@ -18,7 +18,7 @@ class Material
         float   eior;
         float	reflect;
         float	bump;
-        QImage	texture;
+        QImage	*texture;
 };
 
 #endif // MATERIAL_H

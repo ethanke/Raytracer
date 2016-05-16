@@ -9,7 +9,8 @@ Material::Material()
     this->reflect = 0.0;
     this->transparency = 0.5;
     this->bump = 0.0;
-    this->texture.fill(QColor(0, 0, 0));
+    this->texture = new QImage();
+    this->texture->fill(QColor(0, 0, 0));
 }
 
 Material::Material(const int id, const Color color, const float reflect, const float transparency, const float ior, const float bump, const int sky, QString path)
@@ -26,5 +27,6 @@ Material::Material(const int id, const Color color, const float reflect, const f
     this->bump = bump;
 
     this->sky = sky;
-    this->texture.load(path);
+    this->texture = new QImage();
+    this->texture->load(path);
 }
