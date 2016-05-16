@@ -90,14 +90,18 @@ SRC		+=	$(RAYTRACEDIR)/raytrace.c		\
 			$(RAYTRACEDIR)/raytrace_threading.c	\
 			$(RAYTRACEDIR)/shad_n_light.c		\
 			$(RAYTRACEDIR)/reflect.c		\
-			$(RAYTRACEDIR)/obj_calculs.c
+			$(RAYTRACEDIR)/obj_calculs.c		\
+			$(RAYTRACEDIR)/noise_init_1.c		\
+			$(RAYTRACEDIR)/noise_init_2.c		\
+			$(RAYTRACEDIR)/noise_init_3.c		\
+			$(RAYTRACEDIR)/noise_init_4.c		\
+			$(RAYTRACEDIR)/noise_init_5.c
 
 ##  XML  ##
 SRC		+=	$(XMLDIR)/get_field.c			\
 			$(XMLDIR)/get_field_bis.c
 
 ## PRINTF ##
-
 SRC             +=      $(PRTFDIR)/my_disp_unprintable.c        \
                         $(PRTFDIR)/my_printf.c                  \
                         $(PRTFDIR)/my_printf2.c                 \
