@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:13:22 2016 victor sousa
-** Last update Mon Apr 25 05:54:47 2016 Victor Sousa
+** Last update Mon May 16 17:45:40 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -30,34 +30,40 @@ static int		get_mat_id(t_triangle *t, char **file, int id)
   return (0);
 }
 
+static int		get_point_bis(char *lf, t_point *tmp, char **file)
+{
+  char			*get;
+
+  if ((get = get_field(file, lf)) == NULL)
+    return (1);
+  tmp->x = my_getnbr(get);
+  free(get);
+  lf[26] = 'y';
+  if ((get = get_field(file, lf)) == NULL)
+    return (1);
+  tmp->y = my_getnbr(get);
+  free(get);
+  lf[26] = 'z';
+  if ((get = get_field(file, lf)) == NULL)
+    return (1);
+  tmp->z = my_getnbr(get);
+  free(get);
+  return (0);
+}
+
 static int		get_point(t_triangle *t, char **file, int id, int p_id)
 {
   char			*lf;
-  char			*get;
   t_point		tmp;
 
   if ((lf = malloc(sizeof(char) *
-		   my_strlen("scene:object_list:objX:pX:x")
-		   + 1)) == NULL)
+		   my_strlen("scene:object_list:objX:pX:x") + 1)) == NULL)
     return (1);
   lf[0] = '\0';
   lf = my_strcat(lf, "scene:object_list:objX:pX:x");
   lf[21] = id + 49;
   lf[24] = p_id + 49;
-  if ((get = get_field(file, lf)) == NULL)
-    return (1);
-  tmp.x = my_getnbr(get);
-  free(get);
-  lf[26] = 'y';
-  if ((get = get_field(file, lf)) == NULL)
-    return (1);
-  tmp.y = my_getnbr(get);
-  free(get);
-  lf[26] = 'z';
-  if ((get = get_field(file, lf)) == NULL)
-    return (1);
-  tmp.z = my_getnbr(get);
-  free(get);
+  get_point_bis(lf, &tmp, file);
   free(lf);
   t->angle[p_id].x = tmp.x;
   t->angle[p_id].y = tmp.y;
