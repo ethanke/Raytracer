@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Thu May  5 00:03:54 2016 Gaëtan Léandre
-** Last update Mon May 16 12:08:14 2016 Gaëtan Léandre
+** Last update Mon May 16 12:26:34 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -15,6 +15,7 @@ int			action_master(t_connected *co, fd_set fdset)
   char			buffer[BUF_SIZE + 1];
   int			size;
   char			**tab;
+  char			*str;
 
   if (co->master && FD_ISSET(co->master->sock, &fdset))
     {
@@ -22,8 +23,16 @@ int			action_master(t_connected *co, fd_set fdset)
 	deco_master(co);
       else if ((tab = is_command(buffer)))
 	launch_command_client(co->master->sock, tab, co);
-      else
-	my_printf(1, "%s\n", buffer);
+      else if (co->master->name != NULL)
+	{
+	  str = my_sprintf("\033[34m<%s> : %s\033[0m", co->master->name, buffer);
+	  if (str != NULL)
+	    {
+	      my_printf(1, "%s\n", str);
+	      write_all_client(co, str, co->master->sock);
+	      free(str);
+	    }
+	}
     }
   else
     return (0);
