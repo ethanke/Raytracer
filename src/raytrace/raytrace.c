@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Thu May 12 13:48:56 2016 Philippe Lefevre
+** Last update Mon May 16 10:59:07 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -71,7 +71,8 @@ unsigned int		calcul_pixel(t_prog *prog,
 	    {
 	      i_cmp = -1;
 	      while (++i_cmp < 3)
-		col.argb[i_cmp] = col.argb[i_cmp] / 2 + raycast.out_col.argb[i_cmp] / 2;
+		col.argb[i_cmp] =
+		  col.argb[i_cmp] / 2 + raycast.out_col.argb[i_cmp] / 2;
 	    }
 	  alias_pos.x += 1.0;
 	}

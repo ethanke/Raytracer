@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:55:20 2016 victor sousa
-** Last update Thu May  5 09:38:12 2016 Victor Sousa
+** Last update Mon May 16 10:53:18 2016 Philippe Lefevre
 */
 
 #include	"main.h"
@@ -89,7 +89,8 @@ int			get_mat_reflect(t_mat_list *new, char **file, int id)
   lf[23] = id + 49;
   if ((get = get_field(file, lf)) == NULL)
     {
-      my_printf(1, "Could not find scene:material_list:mat%d:reflect\n", id + 1);
+      my_printf(1, "Could not find scene:material_list:mat%d:reflect\n",
+		id + 1);
       return (-1);
     }
   new->reflect = my_getnbr(get);

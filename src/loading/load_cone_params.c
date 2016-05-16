@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:54:30 2016 Victor Sousa
-** Last update Thu May  5 02:38:01 2016 Victor Sousa
+** Last update Mon May 16 10:52:31 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -92,8 +92,9 @@ static int		get_mat_id(t_cone *c, char **file, int id)
   char			*lf;
   char			*get;
 
- if ((lf = malloc(sizeof(char) *
-		  my_strlen("scene:object_list:objX:material_id") + 1)) == NULL)
+ if ((lf = malloc(sizeof(char)
+		  * my_strlen("scene:object_list:objX:material_id")
+		  + 1)) == NULL)
     return (1);
   lf[0] = '\0';
   lf = my_strcat(lf, "scene:object_list:objX:material_id");
@@ -146,7 +147,8 @@ t_obj_list              *add_cone(t_obj_list *prev, char **file, int id)
     return (NULL);
   if ((c->cap = malloc(sizeof(t_circle))) == NULL)
     return (NULL);
-  c->center = minus_vector(c->center, float_time_vector((float)c->height / 2.0, c->dir));
+  c->center =
+    minus_vector(c->center, float_time_vector((float)c->height / 2.0, c->dir));
   c->cap->plan.center = c->center;
   c->cap->plan.dir.x = c->dir.x;
   c->cap->plan.dir.y = c->dir.y;

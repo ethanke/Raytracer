@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Mon May 16 08:18:27 2016 Philippe Lefevre
+** Last update Mon May 16 11:02:19 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -121,12 +121,18 @@ int			calc_normale(t_prog *prog, t_raycast *rcast)
   else
     return (-1);
 
-  noiseCoef.x = noise(0.1 * rcast->new_point.x, 0.1 * rcast->new_point.y, 0.1 * rcast->new_point.z);
-  noiseCoef.y = noise(0.1 * rcast->new_point.y, 0.1 * rcast->new_point.z, 0.1 * rcast->new_point.x);
-  noiseCoef.z = noise(0.1 * rcast->new_point.z, 0.1 * rcast->new_point.x, 0.1 * rcast->new_point.y);
-  rcast->normale.x = (1.0f - rcast->mat_touch->bump) * rcast->normale.x + rcast->mat_touch->bump * noiseCoef.x;
-  rcast->normale.y = (1.0f - rcast->mat_touch->bump) * rcast->normale.y + rcast->mat_touch->bump * noiseCoef.y;
-  rcast->normale.z = (1.0f - rcast->mat_touch->bump) * rcast->normale.z + rcast->mat_touch->bump * noiseCoef.z;
+  noiseCoef.x = noise(0.1 * rcast->new_point.x, 0.1
+		      * rcast->new_point.y, 0.1 * rcast->new_point.z);
+  noiseCoef.y = noise(0.1 * rcast->new_point.y, 0.1
+		      * rcast->new_point.z, 0.1 * rcast->new_point.x);
+  noiseCoef.z = noise(0.1 * rcast->new_point.z, 0.1
+		      * rcast->new_point.x, 0.1 * rcast->new_point.y);
+  rcast->normale.x = (1.0f - rcast->mat_touch->bump)
+    * rcast->normale.x + rcast->mat_touch->bump * noiseCoef.x;
+  rcast->normale.y = (1.0f - rcast->mat_touch->bump)
+    * rcast->normale.y + rcast->mat_touch->bump * noiseCoef.y;
+  rcast->normale.z = (1.0f - rcast->mat_touch->bump)
+    * rcast->normale.z + rcast->mat_touch->bump * noiseCoef.z;
   pthread_mutex_unlock(&mutex);
   temp = mult_vector(rcast->normale, rcast->normale);
   if (temp == 0.0)
@@ -207,7 +213,8 @@ void			calc_sphere_normale(t_prog *prog, t_raycast *rcast)
 	v = 1;
       if (u >= rcast->mat_touch->texture->width)
         u = 1;
-      rcast->mat_touch->color = rcast->mat_touch->texture->color[(int)v][(int)u];
+      rcast->mat_touch->color =
+	rcast->mat_touch->texture->color[(int)v][(int)u];
     }
 }
 

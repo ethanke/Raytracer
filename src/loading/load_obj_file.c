@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 08:37:20 2016 Victor Sousa
-** Last update Fri May 13 05:54:17 2016 Gaëtan Léandre
+** Last update Mon May 16 10:57:16 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -107,12 +107,14 @@ int			load_obj_file(t_prog *prog, char *path)
   prog->cam_pos.y = 500;
   prog->cam_pos.z = -600;
   prog->cam_fov.x = 90;
-  prog->cam_fov.y = prog->cam_fov.x * ((prog->win_size.x / prog->win_size.y) / 1.5);
+  prog->cam_fov.y =
+    prog->cam_fov.x * ((prog->win_size.x / prog->win_size.y) / 1.5);
   prog->look_at.x = 0;
   prog->look_at.y = 0;
   prog->look_at.z = 0;
   dir = normalize(minus_point(prog->look_at, prog->cam_pos));
-  prog->cam_rot.x = RTD(acos(-(dir.z / sqrt(pow(dir.x, 2) + pow(dir.z, 2))))) - 90;
+  prog->cam_rot.x =
+    RTD(acos(-(dir.z / sqrt(pow(dir.x, 2) + pow(dir.z, 2))))) - 90;
   prog->cam_rot.y = RTD((M_PI / 2 - acos(dir.y)));
   prog->cam_dir = normalize(minus_point(prog->look_at, prog->cam_pos));
   if ((file = load_scene_file(path)) == NULL)
@@ -126,7 +128,9 @@ int			load_obj_file(t_prog *prog, char *path)
     return (-1);
   if ((prog->light_list = add_empty_light4(prog->light_list)) == NULL)
     return (-1);
-  if ((prog->background = create_text_uni(prog->win_size.x, prog->win_size.x, 0xff000000)) == NULL)
+  if ((prog->background =
+       create_text_uni(prog->win_size.x, prog->win_size.x,
+		       0xff000000)) == NULL)
     return (-1);
   prog->anti_alias = 1;
   prog->mat_list = NULL;

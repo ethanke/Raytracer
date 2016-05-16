@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Wed May 11 00:37:45 2016 Gaëtan Léandre
-** Last update Sun May 15 22:47:12 2016 Gaëtan Léandre
+** Last update Mon May 16 10:44:36 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -92,7 +92,8 @@ int			exit_cmd(int *status, char **tab)
   return (0);
 }
 
-char			*download_cmd(int *status, char **tab, t_prog *prog, SOCKET sock)
+char			*download_cmd(int *status, char **tab,
+				      t_prog *prog, SOCKET sock)
 {
   char			*grille;
   int			size;
@@ -151,13 +152,15 @@ void			cpy_in_pix(t_prog *prog, unsigned int *grille,
     }
 }
 
-char			*exec_command(SOCKET sock, char **tab, int *status, t_prog *prog)
+char			*exec_command(SOCKET sock, char **tab, int *status,
+				      t_prog *prog)
 {
   char			*str;
   char			*grille;
 
   grille = NULL;
-  if ((str = launch_cmd(sock, tab, status)) == NULL && exit_cmd(status, tab) == 0
+  if ((str = launch_cmd(sock, tab, status)) == NULL
+      && exit_cmd(status, tab) == 0
       && (grille = download_cmd(status, tab, prog, sock)) == NULL)
     my_printf(2, "Commande recue erronée\n");
   if (grille != NULL)

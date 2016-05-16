@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Fri Apr 29 05:54:30 2016 Victor Sousa
-** Last update Wed May  4 23:18:50 2016 Victor Sousa
+** Last update Mon May 16 10:57:59 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -146,7 +146,9 @@ t_obj_list              *add_cyl(t_obj_list *prev, char **file, int id)
     return (NULL);
   if ((c->cap[0] = malloc(sizeof(t_circle))) == NULL)
     return (NULL);
-  c->cap[0]->plan.center = minus_vector(c->center, float_time_vector((float)c->height / 2.0, c->dir));
+  c->cap[0]->plan.center = minus_vector(c->center,
+					float_time_vector((float)c->height
+							  / 2.0, c->dir));
   c->cap[0]->plan.dir.x = c->dir.x;
   c->cap[0]->plan.dir.y = c->dir.y;
   c->cap[0]->plan.dir.z = c->dir.z;
@@ -154,13 +156,17 @@ t_obj_list              *add_cyl(t_obj_list *prev, char **file, int id)
   c->cap[0]->radius = c->radius;
   if ((c->cap[1] = malloc(sizeof(t_circle))) == NULL)
     return (NULL);
-  c->cap[1]->plan.center = add_vector(c->center, float_time_vector((float)c->height / 2.0, c->dir));
+  c->cap[1]->plan.center = add_vector(c->center,
+				      float_time_vector((float)c->height
+							/ 2.0, c->dir));
   c->cap[1]->plan.dir.x = -c->dir.x;
   c->cap[1]->plan.dir.y = -c->dir.y;
   c->cap[1]->plan.dir.z = -c->dir.z;
   c->cap[1]->material = c->material;
   c->cap[1]->radius = c->radius;
-  c->center = minus_vector(c->center, float_time_vector((float)c->height / 2.0 , c->dir));
+  c->center = minus_vector(c->center,
+			   float_time_vector((float)c->height
+					     / 2.0 , c->dir));
   new->obj = c;
   new->type = 'y';
   new->next = prev;

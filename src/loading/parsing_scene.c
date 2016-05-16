@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Mon May 16 08:25:35 2016 Philippe Lefevre
+** Last update Mon May 16 10:50:26 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -83,8 +83,9 @@ char			**load_scene_file(char *path)
   while ((str = get_next_line_size(fd, 0)) != NULL)
     file_list = add_line_list(file_list, str);
   time_end = time(NULL);
-  my_printf(1, "Open/Read en %d heures %d minutes %d secondes\n", (time_end - time_beg) / 3600,
-	    ((time_end - time_beg) % 3600) / 60, ((time_end - time_beg) % 3600) % 60);
+  my_printf(1, "Open/Read en %d heures %d minutes %d secondes\n",
+	    (time_end - time_beg) / 3600, ((time_end - time_beg) % 3600) / 60,
+	    ((time_end - time_beg) % 3600) % 60);
   if ((file = my_list_to_wordtab(file_list)) == NULL)
     return (NULL);
   i = 0;
@@ -221,7 +222,9 @@ int			load_scene(t_prog *prog, char *scene_path)
   prog->background_path = my_strcat(prog->background_path, get);
   if (my_strcmp(get, "NULL") == 0)
     {
-      if ((prog->background = create_text_uni(prog->win_size.x, prog->win_size.x, 0xff000000)) == NULL)
+      if ((prog->background = create_text_uni(prog->win_size.x,
+					      prog->win_size.x,
+					      0xff000000)) == NULL)
 	return (-1);
     }
   else
@@ -229,10 +232,12 @@ int			load_scene(t_prog *prog, char *scene_path)
       if ((prog->background = load_image(get)) == NULL)
 	return (-1);
       place_into_hitbox(prog->background, prog->background,
-			create_hitbox(0, 0, prog->win_size.x, prog->win_size.y));
+			create_hitbox(0, 0, prog->win_size.x,
+				      prog->win_size.y));
     }
   free(get);
-  prog->cam_fov.y = prog->cam_fov.x * ((prog->win_size.x / prog->win_size.y) / 1.5);
+  prog->cam_fov.y =
+    prog->cam_fov.x * ((prog->win_size.x / prog->win_size.y) / 1.5);
   if (get_cam_pos(file, prog) == 1 ||
       get_cam_look_at(file, prog) == 1 ||
       load_mat(prog, file) == -1 ||
@@ -247,7 +252,8 @@ int			load_scene(t_prog *prog, char *scene_path)
       return (-1);
     }
   dir = normalize(minus_point(prog->look_at, prog->cam_pos));
-  prog->cam_rot.x = RTD(acos(-(dir.z / sqrt(pow(dir.x, 2) + pow(dir.z, 2))))) - 90;
+  prog->cam_rot.x = RTD(acos(-(dir.z / sqrt(pow(dir.x, 2)
+					    + pow(dir.z, 2))))) - 90;
   prog->cam_rot.y = RTD((M_PI / 2 - acos(dir.y)));
   prog->cam_dir = normalize(minus_point(prog->look_at, prog->cam_pos));
   return (0);

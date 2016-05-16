@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May 14 03:17:37 2016 Gaëtan Léandre
-** Last update Sat May 14 11:15:38 2016 Gaëtan Léandre
+** Last update Mon May 16 10:48:38 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -30,7 +30,9 @@ void			*raytrace_horizontale_client(void *p)
     {
       pos.x = prog->start - 1;
       while (++pos.x < prog->stop)
-	pass->grille[pos.x - prog->start + pos.y * (prog->stop - prog->start)] = calcul_pixel(prog, raycast, pos);
+	pass->grille[pos.x - prog->start + pos.y
+		     * (prog->stop - prog->start)] =
+	  calcul_pixel(prog, raycast, pos);
     }
   prog->rendu_success -= (thread_id + 1);
   pthread_exit(NULL);
@@ -40,12 +42,14 @@ int			raytrace_thread_create_client(t_pass *pass, int i,
 						      pthread_t thread_id[])
 {
   pass->prog->rendu_success += i + 1;
-  if (pthread_create(&thread_id[i], NULL, raytrace_horizontale_client, (void *)pass))
+  if (pthread_create(&thread_id[i], NULL,
+		     raytrace_horizontale_client, (void *)pass))
     return (my_printf(2, "Error: can not create thread\n") - 1);
   return (0);
 }
 
-static unsigned int	*raytrace_end_client(t_pass *pass, pthread_t thread_id[],
+static unsigned int	*raytrace_end_client(t_pass *pass,
+					     pthread_t thread_id[],
 					     time_t time_beg)
 {
   int			i;
@@ -58,7 +62,9 @@ static unsigned int	*raytrace_end_client(t_pass *pass, pthread_t thread_id[],
     pthread_join(thread_id[i], NULL);
   time_end = time(NULL);
   if (prog->verbose)
-    my_printf(1, "\nRendu en %d heures %d minutes %d secondes\n", (time_end - time_beg) / 3600, ((time_end - time_beg) % 3600) / 60, ((time_end - time_beg) % 3600) % 60);
+    my_printf(1, "\nRendu en %d heures %d minutes %d secondes\n",
+	      (time_end - time_beg) / 3600, ((time_end - time_beg) % 3600) / 60,
+	      ((time_end - time_beg) % 3600) % 60);
   if (prog->verbose)
     my_putstr("Raytracing multi-threading successfull\n");
   return (pass->grille);
@@ -74,7 +80,8 @@ unsigned int		*raytrace_threading_client(t_prog *prog, int start,
 
   prog->start = start;
   prog->stop = stop;
-  if ((pass.grille = malloc(sizeof(unsigned int) * (stop - start) * prog->win_size.y)) == NULL)
+  if ((pass.grille = malloc(sizeof(unsigned int) * (stop - start)
+			    * prog->win_size.y)) == NULL)
     return (NULL);
   if (prog->verbose)
     my_putstr("\nRaytracing multi-threading started\n");
