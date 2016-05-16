@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 10:04:58 2016 Ethan Kerdelhue
-** Last update Mon May 16 09:28:00 2016 Philippe Lefevre
+** Last update Mon May 16 13:57:10 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -23,6 +23,33 @@ int			quit_editor(t_prog *prog)
   free(prog->editor->cmd);
   my_printf(1, "exit editor!\n");
   return (0);
+}
+
+t_cmd			*init_cmd_end(t_cmd *cmd)
+{
+  cmd[6].index = "add_mat";
+  cmd[6].ptr = &add_mat_s;
+  cmd[6].desc = "ajoute un materiel selon plusieurs paramètres";
+  cmd[7].ptr = &add_light_s;
+  cmd[7].index = "add_light";
+  cmd[7].desc = "ajoute une lumière selon plusieurs paramètres";
+  cmd[8].index = "edit_obj";
+  cmd[8].ptr = &edit_obj;
+  cmd[8].desc = "edite les paramètres de l'objet selectionner";
+  cmd[9].index = "edit_mat";
+  cmd[9].ptr = &edit_mat;
+  cmd[9].desc = "edite les paramètres du matériau selectionner";
+  cmd[10].index = "edit_cam";
+  cmd[10].ptr = &edit_cam;
+  cmd[10].desc = "edite les paramètress de la caméra";
+  cmd[11].index = "edit_light";
+  cmd[11].ptr = &edit_light;
+  cmd[11].desc = "edite les paramètres d'une lumière";
+  cmd[12].index = "exit";
+  cmd[12].ptr = &quit_editor;
+  cmd[12].desc = "quitte le mode edition";
+  cmd[13].index = "END";
+  return (cmd);
 }
 
 t_cmd			*init_cmd(t_cmd *cmd)
@@ -47,29 +74,7 @@ t_cmd			*init_cmd(t_cmd *cmd)
   cmd[5].index = "close_xml";
   cmd[5].ptr = &close_xml;
   cmd[5].desc = "ferme un fichier ouvert";
-  cmd[6].index = "add_mat";
-  cmd[6].ptr = &add_mat_s;
-  cmd[6].desc = "ajoute un materiel selon plusieurs paramètres";
-  cmd[7].ptr = &add_light_s;
-  cmd[7].index = "add_light";
-  cmd[7].desc = "ajoute une lumière selon plusieurs paramètres";
-  cmd[8].index = "edit_obj";
-  cmd[8].ptr = &edit_obj;
-  cmd[8].desc = "edite les paramètres de l'objet selectionner";
-  cmd[9].index = "edit_mat";
-  cmd[9].ptr = &edit_mat;
-  cmd[9].desc = "edite les paramètres du matériau selectionner";
-  cmd[10].index = "edit_cam";
-  cmd[10].ptr = &edit_cam;
-  cmd[10].desc = "edite les paramètress de la caméra";
-  cmd[11].index = "edit_light";
-  cmd[11].ptr = &edit_light;
-  cmd[11].desc = "edite les paramètres d'une lumière";
-  cmd[12].index = "exit";
-  cmd[12].ptr = &quit_editor;
-  cmd[12].desc = "quitte le mode edition";
-  cmd[13].index = "END";
-  return (cmd);
+  return (init_cmd_end(cmd));
 }
 
 int			check_cmd(t_prog *prog)

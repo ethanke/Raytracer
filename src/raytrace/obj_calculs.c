@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Sun Mar 13 20:30:25 2016 victor sousa
-** Last update Mon May 16 13:23:25 2016 Philippe Lefevre
+** Last update Mon May 16 13:58:42 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -191,17 +191,14 @@ void			calc_sphere_normale(t_prog *prog, t_raycast *rcast)
   vn.y = - 1;
   vn.z = 0;
   vn = normalize(vn);
-
   ve.x = -1;
   ve.y = 0;
   ve.z = 0;
   ve = normalize(ve);
-
   vp = minus_vector(rcast->new_point, rcast->sphere->center);
   vp = normalize(vp);
   if (!my_strstr(rcast->mat_touch->texture_path, "NULL"))
     {
-
       phi = acos(-mult_vector(vn, vp));
       v = phi / M_PI;
       theta = (acos(mult_vector(vp, ve) / sin(phi))) / (2.0 * M_PI);
