@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 08:37:20 2016 Victor Sousa
-** Last update Mon May 16 15:21:18 2016 Philippe Lefevre
+** Last update Mon May 16 18:06:17 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -104,7 +104,7 @@ int			load_obj_file(t_prog *prog, char *path)
   prog->win_size.x = 1080;
   prog->win_size.y = 720;
   prog->cam_pos.x = -600;
-  prog->cam_pos.y = 500;
+  prog->cam_pos.y = 200;
   prog->cam_pos.z = -600;
   prog->cam_fov.x = 90;
   prog->cam_fov.y =
