@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 10:08:41 2016 Ethan Kerdelhue
-** Last update Tue Apr 26 10:08:48 2016 Ethan Kerdelhue
+** Last update Mon May 16 07:59:05 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -21,13 +21,12 @@ int			write_fd_xml(int fd, t_prog *prog)
   return (0);
 }
 
-
 int			write_xml(t_prog *prog)
 {
   int			fd;
 
   if (prog->editor->fd == -1)
-    return(put_error(ERR_NOFD));
+    return (put_error(ERR_NOFD));
   if ((fd = open(prog->editor->arg[1], O_WRONLY | O_CREAT, 0666)) == -1)
     {
       my_printf(1, "Error : Could not open specified path.");

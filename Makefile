@@ -18,11 +18,17 @@ RED		=	"\033[0;31m"
 
 SRCDIR		=	src
 
-PRTFDIR		=	src/editeur/my_printf
-SPRTFDIR	=	src/editeur/my_sprintf
-EDITDIR		=	src/editeur
-LOADIR		=	src/loading
-HITDIR		=	src/hit
+RAYTRACEDIR	=	$(SRCDIR)/raytrace
+PRTFDIR		=	$(SRCDIR)/editeur/my_printf
+SPRTFDIR	=	$(SRCDIR)/editeur/my_sprintf
+EDITDIR		=	$(SRCDIR)/editeur
+LOADIR		=	$(SRCDIR)/loading
+XMLDIR		=	$(SRCDIR)/xml
+HITDIR		=	$(SRCDIR)/hit
+UTILSDIR	=	$(SRCDIR)/utils
+IMAGEDIR	=	$(SRCDIR)/image
+CLIENTDIR	=	$(SRCDIR)/client
+OUTPUTDIR	=	$(SRCDIR)/output
 
 INCDIR		=	inc
 LIBDIR		=	lib
@@ -30,7 +36,8 @@ LIBDIR		=	lib
 RM		=	rm -f
 
 CC		=	gcc
-CFLAGS		=	-W -Wall -Wextra -DMACRO -g3 -ggdb \
+CFLAGS		=	-W -Wall -Wextra -DMACRO		\
+ 			-g3 -ggdb				\
 			-I/home/${USER}/.froot/include		\
 			-I$(INCDIR)
 
@@ -45,9 +52,9 @@ LDFLAGS		=	-L/home/${USER}/.froot/lib		\
 			-lm -lpthread
 
 ##  MAIN  ##
-SRC		=	src/main.c				\
-			src/loop.c				\
-			src/end.c
+SRC		=	$(SRCDIR)/main.c			\
+			$(SRCDIR)/loop.c			\
+			$(SRCDIR)/end.c
 
 ## LOADING ##
 SRC		+=	$(LOADIR)/parsing_scene.c		\
@@ -72,24 +79,21 @@ SRC		+=	$(LOADIR)/parsing_scene.c		\
 SRC		+=	$(HITDIR)/hit.c				\
 			$(HITDIR)/sphere.c			\
 			$(HITDIR)/triangle.c			\
-			$(HITDIR)/cone.c				\
-			$(HITDIR)/cube.c				\
+			$(HITDIR)/cone.c			\
+			$(HITDIR)/cube.c			\
 			$(HITDIR)/cylinder.c			\
 			$(HITDIR)/plan.c
 
 ##  RAYTRACE  ##
-SRC		+=	src/raytrace/raytrace.c			\
-			src/raytrace/raytrace_threading.c	\
-			src/raytrace/shad_n_light.c		\
-			src/raytrace/reflect.c			\
-			src/raytrace/obj_calculs.c
+SRC		+=	$(RAYTRACEDIR)/raytrace.c		\
+			$(RAYTRACEDIR)/raytrace_threading.c	\
+			$(RAYTRACEDIR)/shad_n_light.c		\
+			$(RAYTRACEDIR)/reflect.c		\
+			$(RAYTRACEDIR)/obj_calculs.c
 
 ##  XML  ##
-SRC		+=	src/xml/get_field.c			\
-			src/xml/get_field_bis.c
-
-##  EDITEUR  ##
-SRC		+=	src/editeur/editor.c
+SRC		+=	$(XMLDIR)/get_field.c			\
+			$(XMLDIR)/get_field_bis.c
 
 ## PRINTF ##
 
@@ -119,16 +123,24 @@ SRC             +=      $(SPRTFDIR)/my_disp_unprintable.c    	\
 			$(SPRTFDIR)/my_put_fnbr.c		\
 			$(SPRTFDIR)/my_strcat.c
 
-SRC		+=	$(EDITDIR)/aff_light.c			\
+##  EDITEUR  ##
+SRC		+=	$(EDITDIR)/editor.c			\
+			$(EDITDIR)/aff_light.c			\
 			$(EDITDIR)/aff_mat.c			\
 			$(EDITDIR)/add_obj.c			\
+			$(EDITDIR)/add_obj2.c			\
+			$(EDITDIR)/add_obj3.c			\
 			$(EDITDIR)/add_mat.c			\
 			$(EDITDIR)/edit_obj.c			\
+			$(EDITDIR)/edit_obj2.c			\
+			$(EDITDIR)/edit_obj3.c			\
 			$(EDITDIR)/edit_light.c			\
 			$(EDITDIR)/push_func.c			\
+			$(EDITDIR)/push_func2.c			\
 			$(EDITDIR)/edit_cam.c			\
 			$(EDITDIR)/edit_cam_bis.c		\
 			$(EDITDIR)/aff_obj.c			\
+			$(EDITDIR)/aff_obj2.c			\
 			$(EDITDIR)/aff_win.c			\
 			$(EDITDIR)/add_light.c			\
 			$(EDITDIR)/cmd.c			\
@@ -138,45 +150,42 @@ SRC		+=	$(EDITDIR)/aff_light.c			\
 			$(EDITDIR)/write_xml.c
 
 ##  IMAGE  ##
-SRC		+=	src/image/load_image.c			\
-			src/image/disp_image.c			\
-			src/image/hitbox_creator.c
+SRC		+=	$(IMAGEDIR)/load_image.c		\
+			$(IMAGEDIR)/disp_image.c		\
+			$(IMAGEDIR)/hitbox_creator.c
 
 ##  UTILS  ##
-SRC		+=	src/utils/tekpixel.c			\
-			src/utils/my_tablen.c			\
-			src/utils/my_str_to_wordtab.c		\
-			src/utils/str_to_wordtab.c		\
-			src/utils/my_strstr.c			\
-			src/utils/my_atof.c			\
-			src/utils/my_strlen.c			\
-			src/utils/my_strcat.c			\
-			src/utils/my_getnbr.c			\
-			src/utils/my_get_float.c		\
-			src/utils/my_realloc.c			\
-			src/utils/key_handle.c			\
-			src/utils/get_next_line.c		\
-			src/utils/vect_operator.c		\
-			src/utils/vect_operator2.c		\
-			src/utils/wtf.c				\
-			src/utils/epur_str.c
+SRC		+=	$(UTILSDIR)/tekpixel.c			\
+			$(UTILSDIR)/my_tablen.c			\
+			$(UTILSDIR)/my_str_to_wordtab.c		\
+			$(UTILSDIR)/str_to_wordtab.c		\
+			$(UTILSDIR)/my_strstr.c			\
+			$(UTILSDIR)/my_atof.c			\
+			$(UTILSDIR)/my_strlen.c			\
+			$(UTILSDIR)/my_strcat.c			\
+			$(UTILSDIR)/my_getnbr.c			\
+			$(UTILSDIR)/my_get_float.c		\
+			$(UTILSDIR)/my_realloc.c		\
+			$(UTILSDIR)/key_handle.c		\
+			$(UTILSDIR)/get_next_line.c		\
+			$(UTILSDIR)/vect_operator.c		\
+			$(UTILSDIR)/vect_operator2.c		\
+			$(UTILSDIR)/wtf.c			\
+			$(UTILSDIR)/epur_str.c
 
 ##  CLIENT  ##
-SRC		+=	src/client/client.c			\
-			src/client/communicate.c		\
-			src/client/command.c			\
-			src/client/send_file.c			\
-			src/client/client_raytrace.c		\
-			src/client/raytrace_to_table.c
+SRC		+=	$(CLIENTDIR)/client.c			\
+			$(CLIENTDIR)/communicate.c		\
+			$(CLIENTDIR)/command.c			\
+			$(CLIENTDIR)/send_file.c		\
+			$(CLIENTDIR)/client_raytrace.c		\
+			$(CLIENTDIR)/raytrace_to_table.c
 
 ##  OUTPUT  ##
-SRC		+=	src/output/my_putchar.c			\
-			src/output/my_putstr.c			\
-			src/output/my_put_nbr.c			\
-			src/output/my_strlen.c
-
-##  TCORE  ##
-
+SRC		+=	$(OUTPUTDIR)/my_putchar.c		\
+			$(OUTPUTDIR)/my_putstr.c		\
+			$(OUTPUTDIR)/my_put_nbr.c		\
+			$(OUTPUTDIR)/my_strlen.c
 
 OBJ		=	$(SRC:.c=.o)
 
@@ -187,12 +196,12 @@ title		:
 
 $(NAME)		:	$(OBJ)
 			@$(CC) -o $(NAME) $(OBJ) $(LDFLAGS) &&	\
-			$(ECHO) $(GREEN) "[OK]" $(TEAL) $(NAME) $(DEFAULT) ||	\
+			$(ECHO) $(GREEN) "[OK]" $(TEAL) $(NAME) $(DEFAULT) || \
 			$(ECHO) $(RED) "[XX]" $(TEAL) $(NAME) $(DEFAULT)
 
 .c.o		:
-			@$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@ &&		\
-			$(ECHO) $(GREEN) "[OK]" $(TEAL) $< $(DEFAULT) ||	\
+			@$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@ && \
+			$(ECHO) $(GREEN) "[OK]" $(TEAL) $< $(DEFAULT) || \
 			$(ECHO) $(RED) "[XX]" $(TEAL) $< $(DEFAULT)
 
 clean		:

@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 04:09:19 2016 Ethan Kerdelhue
-** Last update Thu May 12 10:56:46 2016 Philippe Lefevre
+** Last update Mon May 16 08:02:33 2016 Philippe Lefevre
 */
 
 #ifndef			EDITOR_H_
@@ -66,7 +66,17 @@ int			add_mat_s(t_prog *prog);
 int			add_light_s(t_prog *prog);
 t_coord			*get_coord(t_coord *tmp);
 int			edit_obj(t_prog *prog);
+int			aff_obj_spec(t_prog *prog, int id);
+t_obj_list		*get_obj_ptr(t_prog *prog, int id);
+t_obj_list		*get_obj_ptr(t_prog *prog, int id);
+int			edit_coord(t_coord *tmp);
+int			check_obj_id(t_prog *prog, int id);
 char			edit_material_id(t_prog *prog, char mat);
+int			edit_sphere(t_prog *prog, t_sphere *sph);
+int			edit_plan(t_prog *prog, t_plan *pla);
+int			edit_triangle(t_prog *prog, t_triangle *tri);
+int			edit_cylindre(t_prog *prog, t_cylin *cyl);
+int			edit_cone(t_prog *prog, t_cone *con);
 int			edit_sphere(t_prog *prog, t_sphere *sph);
 int			edit_mat(t_prog *prog);
 int			edit_cam(t_prog *prog);
@@ -74,5 +84,23 @@ int			edit_point(t_point *tmp);
 int			edit_light(t_prog *prog);
 int			edit_coord(t_coord *tmp);
 char			get_material(t_prog *prog);
+int			add_obj_plan(t_prog *prog);
+int			add_obj_cone(t_prog *prog);
+int			add_obj_cylindre(t_prog *prog);
+int			add_obj_pillule(t_prog *prog);
+int			add_obj_circle(t_prog *prog);
+int			check_material_id(t_prog *prog, char m_id);
+t_coord			*get_coord(t_coord *tmp);
+char			get_material(t_prog *prog);
+int			add_obj_triangle(t_prog *prog);
+int			add_obj_sphere(t_prog *prog);
+int			aff_obj_list(int fd, t_prog *prog);
+int			aff_obj_triangle(int fd, t_obj_list *obj, int i);
+int			aff_obj_sphere(int fd, t_obj_list *obj);
+int			aff_obj_plan(int fd, t_obj_list *obj);
+int			aff_obj_cone(int fd, t_obj_list *obj);
+int			push_cone(t_prog *prog, t_cone con);
+int			push_plan(t_prog *prog, t_plan pla);
+int			push_sphere(t_prog *prog, t_sphere sph);
 
 #endif		      /*EDITOR_H_*/

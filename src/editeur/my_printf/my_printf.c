@@ -5,38 +5,38 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Thu Nov 12 12:27:44 2015 Gaëtan Léandre
-** Last update Tue Apr 26 02:49:16 2016 Ethan Kerdelhue
+** Last update Mon May 16 07:58:11 2016 Philippe Lefevre
 */
 
 #include 		"main.h"
 
+void			va_my_putfnbr(int fd, va_list ap)
+{
+  my_put_fnbr_in(fd, va_arg(ap, double));
+}
+
 t_fonct			*init_struct(t_fonct *tab)
 {
+  char			*flag;
+  int			i;
+
   if ((tab = malloc(12 * sizeof(t_fonct))) == NULL)
     return (NULL);
-  tab[0].flag = 'c';
+  flag = "csiduoxXbSpf";
+  i = -1;
+  while (++i < 12)
+    tab[i].flag = flag[i];
   (tab[0].f) = va_my_putchar;
-  tab[1].flag = 's';
   (tab[1].f) = va_my_putstr;
-  tab[2].flag = 'i';
   (tab[2].f) = va_my_putnbr;
-  tab[3].flag = 'd';
   (tab[3].f) = va_my_putnbr;
-  tab[4].flag = 'u';
   (tab[4].f) = va_my_putunbr;
-  tab[5].flag = 'o';
   (tab[5].f) = va_my_octal;
-  tab[6].flag = 'x';
   (tab[6].f) = va_my_examin;
-  tab[7].flag = 'X';
   (tab[7].f) = va_my_examaj;
-  tab[8].flag = 'b';
   (tab[8].f) = va_my_bin;
-  tab[9].flag = 'S';
   (tab[9].f) = va_my_disp_unp;
-  tab[10].flag = 'p';
   (tab[10].f) = va_my_adress;
-  tab[11].flag = 'f';
   (tab[11].f) = va_my_putfnbr;
   return (tab);
 }

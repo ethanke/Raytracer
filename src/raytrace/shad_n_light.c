@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 04:01:20 2016 victor sousa
-** Last update Thu May  5 03:44:02 2016 Victor Sousa
+** Last update Mon May 16 08:19:39 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -18,10 +18,10 @@ void			argb_calcul(t_raycast *rcast)
   while (++i < 3)
     {
       rcast->out_col.argb[i] =
-      (rcast->out_col.argb[i] +
-       min(rcast->out_col.argb[i] + rcast->lambert
-	   * (rcast->light_list->intensity/ 255.0) *
-	   rcast->mat_touch->color.argb[i], 255)) / 2;
+      (rcast->out_col.argb[i] + min(rcast->out_col.argb[i] + rcast->lambert
+				    * (rcast->light_list->intensity/ 255.0)
+				    * rcast->mat_touch->color.argb[i], 255))
+	/ 2;
     }
 }
 

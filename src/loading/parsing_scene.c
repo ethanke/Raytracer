@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Fri May 13 05:50:39 2016 Gaëtan Léandre
+** Last update Mon May 16 08:25:35 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -24,7 +24,7 @@ t_line_list		*add_line_list(t_line_list *head, char *str)
   else
     {
       tmp = head;
-      while(tmp->next != NULL)
+      while (tmp->next != NULL)
 	tmp = tmp->next;
       tmp->next = new;
       return (head);
@@ -80,7 +80,7 @@ char			**load_scene_file(char *path)
   if ((fd = open(path, O_RDONLY)) == -1)
     return (NULL);
   file_list = NULL;
-  while ((str = get_next_line_size(fd)) != NULL)
+  while ((str = get_next_line_size(fd, 0)) != NULL)
     file_list = add_line_list(file_list, str);
   time_end = time(NULL);
   my_printf(1, "Open/Read en %d heures %d minutes %d secondes\n", (time_end - time_beg) / 3600,

@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed Apr 27 16:18:56 2016 Ethan Kerdelhue
-** Last update Thu May  5 08:07:01 2016 Ethan Kerdelhue
+** Last update Mon May 16 07:50:21 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -30,11 +30,9 @@ int			push_mat(t_prog *prog, t_mat_list mat)
   return (0);
 }
 
-t_color			get_rgb(int flag)
+t_color			get_rgb(int flag, int i, char *str)
 {
   t_color		tmp;
-  char			*str;
-  int			i;
 
   i = RED_CMP;
   while (flag != 1)
@@ -49,9 +47,8 @@ t_color			get_rgb(int flag)
       if (my_getnbr(str) >= 0 || my_getnbr(str) <= 255)
 	{
 	  tmp.argb[i] = my_getnbr(str);
-	  if (i == BLUE_CMP)
+	  if (i++ == BLUE_CMP)
 	    flag = 1;
-	  i++;
 	}
       else
 	my_printf(0, "Error : valeur uniquement entre 0 et 255");
@@ -66,7 +63,7 @@ int			add_mat_s(t_prog *prog)
   char 			*str;
 
   my_printf(0, "Entrez les couleurs RGB :\n");
-  tmp.color = get_rgb(0);
+  tmp.color = get_rgb(0, 0, NULL);
   my_printf(0, "Reflection :\n");
   if ((str = get_next_line(0)) == NULL)
     return (-1);

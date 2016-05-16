@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 04:04:48 2016 victor sousa
-** Last update Thu May 12 16:32:58 2016 Philippe Lefevre
+** Last update Mon May 16 08:15:43 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -21,15 +21,30 @@ void                    process_reflect(t_raycast *rcast)
   rcast->depth++;
 }
 
+int			reflect_touch_sky(t_raycast *rcast, int i_cmp)
+{
+  if (rcast->mat_touch->sky == 1)
+    {
+      i_cmp = -1;
+      while (++i_cmp < 3)
+	rcast->out_col.argb[i_cmp] = rcast->out_col.argb[i_cmp]
+	  * (1 - rcast->coef) + rcast->mat_touch->color.argb[i_cmp]
+      * rcast->coef;
+      rcast->out_col.argb[ALPHA_CMP] = 255;
+      process_reflect(rcast);
+      return (1);
+    }
+  return (0);
+}
+
 int                     reflect_loop(t_prog *prog, t_raycast *rcast)
 {
   float			tmp;
-  int			i_cmp;
 
   rcast->dist = 2000000;
   if ((rcast->obj_touch = hit(prog->obj_list,
-                              &rcast->ray, &rcast->dist)) == NULL ||
-      rcast->obj_touch->obj == NULL)
+			      &rcast->ray, &rcast->dist)) == NULL
+      || rcast->obj_touch->obj == NULL)
     return (-1);
   if (rcast->depth == 0 && rcast->coef == 1.0)
     rcast->out_col.full = 0xFF000000;
@@ -41,18 +56,8 @@ int                     reflect_loop(t_prog *prog, t_raycast *rcast)
   free(rcast->obj_touch);
   tmp = 1.0 / sqrt(tmp);
   rcast->normale = float_time_vector(tmp, rcast->normale);
-  if (rcast->mat_touch->sky == 1)
-    {
-      i_cmp = -1;
-      while (++i_cmp < 3)
-	{
-	  rcast->out_col.argb[i_cmp] = rcast->out_col.argb[i_cmp] * (1 - rcast->coef) +
-	      rcast->mat_touch->color.argb[i_cmp] * rcast->coef;
-	}
-      rcast->out_col.argb[ALPHA_CMP] = 255;
-      process_reflect(rcast);
-      return (0);
-    }
+  if (reflect_touch_sky(rcast, 0))
+    return (0);
   rcast->light_list = prog->light_list;
   while (rcast->light_list != NULL)
     process_light(prog, rcast);

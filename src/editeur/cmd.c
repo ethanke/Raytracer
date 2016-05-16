@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 10:04:58 2016 Ethan Kerdelhue
-** Last update Thu May 12 10:56:28 2016 Philippe Lefevre
+** Last update Mon May 16 07:38:04 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -17,9 +17,18 @@ int			close_xml(t_prog *prog)
   return (0);
 }
 
+int			quit_editor(t_prog *prog)
+{
+  (void) prog;
+  free(prog->editor->cmd);
+  my_printf(1, "exit editor!\n");
+  return (0);
+}
+
 t_cmd			*init_cmd(t_cmd *cmd)
 {
-  cmd = malloc(sizeof(t_cmd) * 20);
+  if ((cmd = malloc(sizeof(t_cmd) * 20)) == NULL)
+    return (NULL);
   cmd[0].index = "help";
   cmd[0].ptr = &aff_help;
   cmd[0].desc = "affiche une aide pour l'utilisateur";
@@ -56,7 +65,10 @@ t_cmd			*init_cmd(t_cmd *cmd)
   cmd[11].index = "edit_light";
   cmd[11].ptr = &edit_light;
   cmd[11].desc = "edite les paramètres d'une lumière";
-  cmd[12].index = "END";
+  cmd[12].index = "exit";
+  cmd[12].ptr = &quit_editor;
+  cmd[12].desc = "quitte le mode edition";
+  cmd[13].index = "END";
   return (cmd);
 }
 

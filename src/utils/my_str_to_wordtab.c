@@ -1,11 +1,11 @@
 /*
 ** my_str_to_wordtab.c for raytracer in /home/sousa_v/rendu/lapin/gfx_raytracer1
-** 
+**
 ** Made by victor sousa
 ** Login   <sousa_v@epitech.net>
-** 
+**
 ** Started on  Tue Feb  9 06:07:29 2016 victor sousa
-** Last update Fri Mar 11 00:17:37 2016 victor sousa
+** Last update Mon May 16 08:26:50 2016 Philippe Lefevre
 */
 
 #include	"main.h"

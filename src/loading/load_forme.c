@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Mon Apr 25 23:38:14 2016 Gaëtan Léandre
-** Last update Wed Apr 27 16:41:54 2016 Victor Sousa
+** Last update Mon May 16 08:21:43 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -36,7 +36,8 @@ int			get_sommet_size(char *str)
   return (j - 1);
 }
 
-t_obj_list		*create_triangle(char *str, t_obj_list *prev, t_vtx_list *list)
+t_obj_list		*create_triangle(char *str, t_obj_list *prev,
+					 t_vtx_list *list)
 {
   t_obj_list            *new;
   t_triangle            *t;
@@ -101,9 +102,9 @@ t_obj_list		*associate_obj(char *str, t_obj_list *prev, t_vtx_list *list)
 
   size = get_sommet_size(str);
   if (size == 3)
-    return(create_triangle(str, prev, list));
+    return (create_triangle(str, prev, list));
   else if (size == 4)
-    return(create_square(str, prev, list));
+    return (create_square(str, prev, list));
   return (NULL);
 }
 

@@ -5,18 +5,18 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 23:01:14 2016 victor sousa
-** Last update Thu May  5 11:56:33 2016 Victor Sousa
+** Last update Mon May 16 06:19:04 2016 Philippe Lefevre
 */
 
-#include	"main.h"
+#include		"main.h"
 
-t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist)
+t_obj_list		*hit(t_obj_list *obj_list, t_ray *ray, float *dist)
 {
-  t_obj_list	*out;
-  t_obj_list	*tmp;
-  t_cylin	*cy;
-  t_cone	*co;
-  t_pill	*pi;
+  t_obj_list		*out;
+  t_obj_list		*tmp;
+  t_cylin		*cy;
+  t_cone		*co;
+  t_pill		*pi;
 
   if ((out = malloc(sizeof(t_obj_list))) == NULL)
     return (NULL);
@@ -57,7 +57,7 @@ t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist)
       if (tmp->type == 'y')
       	{
 	  cy = tmp->obj;
-	  if (hit_cylin(ray, cy, dist))
+	  if (hit_cylin(ray, cy, dist, 0))
       	    {
       	      out->type = tmp->type;
       	      out->obj = cy;
@@ -76,7 +76,7 @@ t_obj_list	*hit(t_obj_list *obj_list, t_ray *ray, float *dist)
       if (tmp->type == 'l')
 	{
 	  pi = tmp->obj;
-	  if (hit_cylin(ray, pi->cylin, dist))
+	  if (hit_cylin(ray, pi->cylin, dist, 0))
 	    {
 	      out->type = 'y';
 	      out->obj = pi->cylin;

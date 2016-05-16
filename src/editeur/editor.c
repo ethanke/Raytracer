@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Mon Apr 25 03:54:51 2016 Ethan Kerdelhue
-** Last update Thu May 12 10:56:07 2016 Philippe Lefevre
+** Last update Mon May 16 07:40:20 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -49,20 +49,28 @@ int			fill_struct(t_prog *prog)
 
 char			*get_type(char c)
 {
-  if (c == 's')
-    return ("sphere");
-  if (c == 't')
-    return ("triangle");
-  if (c == 'p')
-    return ("plan");
-  if (c == 'c')
-    return ("cone");
-  if (c == 'y')
-    return ("cylinder");
-  if (c == 'i')
-    return ("circle");
-  if (c == 'l')
-    return ("pill");
+  char			flag[7];
+  char			*ret[7];
+  int			i;
+
+  flag[0] = 's';
+  ret[0] = "sphere";
+  flag[1] = 't';
+  ret[1] = "triangle";
+  flag[2] = 'p';
+  ret[2] = "plan";
+  flag[3] = 'c';
+  ret[3] = "cone";
+  flag[4] = 'y';
+  ret[4] = "cylinder";
+  flag[5] = 'i';
+  ret[5] = "circle";
+  flag[6] = 'l';
+  ret[6] = "pill";
+  i = -1;
+  while (++i < 7)
+    if (c == flag[i])
+      return (ret[i]);
   return (NULL);
 }
 
@@ -88,14 +96,21 @@ int			editor()
   t_cmd			cmd;
   char			*str;
 
-  prog = malloc(sizeof(t_prog));
-  prog->editor = malloc(sizeof(t_editor));
+  if ((prog = malloc(sizeof(t_prog))) == NULL)
+    return (-1);
+  if ((prog->editor = malloc(sizeof(t_editor))) == NULL)
+    return (-1);
   prog->editor->cmd = init_cmd(&cmd);
   prog->editor->fd = -1;
   disp_info();
   while ((str = get_next_line(0)) != NULL)
     {
       prog->editor->arg = str_to_wordtab(str, " ");
+      if (!(my_strcmp(prog->editor->arg[0], "exit")))
+	{
+	  free(str);
+	  return (0);
+	}
       put_error(check_cmd(prog));
       free(str);
       disp_info();

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 23:13:37 2016 Victor Sousa
-** Last update Wed Apr 27 16:42:00 2016 Victor Sousa
+** Last update Mon May 16 08:20:51 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -62,7 +62,6 @@ t_vtx_list		*add_end_vtx(t_vtx_list *head, t_coord vtx)
       return (head);
     }
 }
-
 
 t_vtx_list		*get_vertex(char **file)
 {

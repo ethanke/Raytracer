@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 09:19:12 2016 Victor Sousa
-** Last update Mon Apr 25 22:37:36 2016 Victor Sousa
+** Last update Mon May 16 08:27:23 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -14,7 +14,7 @@ float			my_get_float(char *str)
 {
   float			number;
   float			demical_digit;
-  float			sign; 
+  float			sign;
   int			tmp;
 
   number = 0.0;

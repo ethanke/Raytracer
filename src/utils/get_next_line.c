@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Mon Jan  4 15:56:23 2016 Gaëtan Léandre
-** Last update Wed May 11 00:00:25 2016 Philippe Lefevre
+** Last update Mon May 16 08:24:30 2016 Philippe Lefevre
 */
 
 #include 		"get_next_line.h"
@@ -104,13 +104,12 @@ char			*get_next_line(const int fd)
   return (text.result);
 }
 
-char			*get_next_line_size(const int fd)
+char			*get_next_line_size(const int fd, int i)
 {
   static char		*buf = NULL;
   struct stat		file_s;
   char			*line;
   static int		curs = 0;
-  int			i;
 
   if (buf == NULL)
     {
