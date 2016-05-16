@@ -5,25 +5,25 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Mon May 16 09:56:39 2016 Philippe Lefevre
+** Last update Mon May 16 18:48:47 2016 Philippe Lefevre
 */
 
 #include		"main.h"
 
 int			disp_help(char *bin)
 {
-  my_printf(1, "Usage: %s scene[.xml|.obj]\n", bin);
-  my_printf(1, "	--thread=nb_thread	Number of thread using. ");
-  my_printf(1, "Default=1\n");
-  my_printf(1, "	--cluster\n");
-  my_printf(1, "	--display_rendu		Rendering in real time\n");
-  my_printf(1, "	--rendu_verticale	Split rendering zone in verticale ");
-  my_printf(1, "mode for the thread. Default is horizontale\n");
-  my_printf(1, "	--verbose		Display all details message ");
-  my_printf(1, "[time|status]\n");
-  my_printf(1, "	--credit		Display credit for author\n");
-  my_printf(1, "	OR\n");
-  my_printf(1, "Usage: %s --edit\n", bin);
+  my_printf(1, "Usage:	%s	scene[.xml|.obj]\n", bin);
+  my_printf(1, "			--thread=nb_thread\n");
+  my_printf(1, "			--display_rendu\n");
+  my_printf(1, "			--rendu_verticale\n");
+  my_printf(1, "			--verbose\n");
+  my_printf(1, "			--quiet\n");
+  my_printf(1, "OR\n");
+  my_printf(1, "	%s	--edit\n", bin);
+  my_printf(1, "OR\n");
+  my_printf(1, "	%s	--cluster\n", bin);
+  my_printf(1, "OR\n");
+  my_printf(1, "	%s	--credit\n", bin);
   return (-1);
 }
 
@@ -73,19 +73,20 @@ int			main(int ac, char **av, char **env)
   t_prog		prog;
 
   set_max_heap_size(RT_MAX_RAM);
-  if (verif_env(env))
+  if (verif_env(env) || (ac < 2) || verif_arg(ac, av, &prog) == -1)
     return (-1);
-  if ((ac < 2) || verif_arg(ac, av, &prog))
-    return (-1);
-  if (prog.cluster)
+  if (prog.opt->cluster)
     {
       if (client(&prog) == -1)
-	return (-1);
+	    {
+	      free(prog.opt);
+	      return (-1);
+	    }
     }
   else if (create_pix(&prog) || create_win(&prog) || waiting_screen(&prog))
     return (-1);
   else
-    raytrace_threading(&prog, 0, ((prog.rendu_verticale) ?
+    raytrace_threading(&prog, 0, ((prog.opt->rendu_vertical) ?
 				  (prog.win_size.y) : (prog.win_size.x)));
   bunny_set_key_response(key);
   bunny_set_loop_main_function(mainloop);

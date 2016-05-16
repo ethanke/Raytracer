@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Sat May 14 00:44:56 2016 Philippe Lefevre
+** Last update Mon May 16 18:37:24 2016 Philippe Lefevre
 */
 
 #ifndef			STRUCT_H_
@@ -181,6 +181,18 @@ typedef struct 		s_editor
   int			fd;
 }			t_editor;
 
+typedef struct          s_opt
+{
+  int			thread_nb;
+  int			rendu_success;
+  int			rendu_display;
+  int			rendu_vertical;
+  int			verbose;
+  int			start;
+  int			stop;
+  char			cluster;
+}			t_opt;
+
 typedef struct          s_prog
 {
   t_bunny_position      win_size;
@@ -197,18 +209,8 @@ typedef struct          s_prog
   t_editor		*editor;
   t_texture		*background;
   char			*background_path;
-  char			cluster;
   int			anti_alias;
-
-  int			thread_nb;
-  int			rendu_success;
-  int			display_rendu;
-  int			rendu_verticale;
-  int			verbose;
-  int			start;
-  int			stop;
-  int			nb_client;
-  int			all_client;
+  t_opt			*opt;
 }                       t_prog;
 
 typedef struct s_cmd

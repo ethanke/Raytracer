@@ -22,26 +22,26 @@ void			*raytrace_horizontale_client(void *p)
   pass = p;
   prog = pass->prog;
   raycast.touch_circle = 0;
-  pos.y = ((prog->win_size.y / prog->thread_nb) * ++thread_id) - 1;
-  end = ((prog->win_size.y / prog->thread_nb) * (thread_id + 1));
-  if (prog->verbose)
+  pos.y = ((prog->win_size.y / prog->opt->thread_nb) * ++thread_id) - 1;
+  end = ((prog->win_size.y / prog->opt->thread_nb) * (thread_id + 1));
+  if (prog->opt->verbose)
     my_printf(1, "Thread number %d : %d to %d\n", thread_id, pos.y, end);
   while (++pos.y < end)
     {
-      pos.x = prog->start - 1;
-      while (++pos.x < prog->stop)
-	pass->grille[pos.x - prog->start + pos.y
-		     * (prog->stop - prog->start)] =
+      pos.x = prog->opt->start - 1;
+      while (++pos.x < prog->opt->stop)
+	pass->grille[pos.x - prog->opt->start + pos.y
+		     * (prog->opt->stop - prog->opt->start)] =
 	  calcul_pixel(prog, raycast, pos);
     }
-  prog->rendu_success -= (thread_id + 1);
+  prog->opt->rendu_success -= (thread_id + 1);
   pthread_exit(NULL);
 }
 
 int			raytrace_thread_create_client(t_pass *pass, int i,
 						      pthread_t thread_id[])
 {
-  pass->prog->rendu_success += i + 1;
+  pass->prog->opt->rendu_success += i + 1;
   if (pthread_create(&thread_id[i], NULL,
 		     raytrace_horizontale_client, (void *)pass))
     return (my_printf(2, "Error: can not create thread\n") - 1);
@@ -58,14 +58,14 @@ static unsigned int	*raytrace_end_client(t_pass *pass,
 
   prog = pass->prog;
   i = -1;
-  while (++i < prog->thread_nb)
+  while (++i < prog->opt->thread_nb)
     pthread_join(thread_id[i], NULL);
   time_end = time(NULL);
-  if (prog->verbose)
+  if (prog->opt->verbose)
     my_printf(1, "\nRendu en %d heures %d minutes %d secondes\n",
 	      (time_end - time_beg) / 3600, ((time_end - time_beg) % 3600) / 60,
 	      ((time_end - time_beg) % 3600) % 60);
-  if (prog->verbose)
+  if (prog->opt->verbose)
     my_putstr("Raytracing multi-threading successfull\n");
   return (pass->grille);
 }
@@ -73,31 +73,31 @@ static unsigned int	*raytrace_end_client(t_pass *pass,
 unsigned int		*raytrace_threading_client(t_prog *prog, int start,
 						   int stop)
 {
-  pthread_t		thread_id[prog->thread_nb];
+  pthread_t		thread_id[prog->opt->thread_nb];
   time_t		time_beg;
   int			i;
   t_pass		pass;
 
-  prog->start = start;
-  prog->stop = stop;
+  prog->opt->start = start;
+  prog->opt->stop = stop;
   if ((pass.grille = malloc(sizeof(unsigned int) * (stop - start)
 			    * prog->win_size.y)) == NULL)
     return (NULL);
-  if (prog->verbose)
+  if (prog->opt->verbose)
     my_putstr("\nRaytracing multi-threading started\n");
   i = -1;
-  if (prog->verbose)
+  if (prog->opt->verbose)
     my_putstr("\nStarting create thread\n");
-  prog->rendu_success = 0;
+  prog->opt->rendu_success = 0;
   pass.prog = prog;
   time_beg = time(NULL);
-  while (++i < prog->thread_nb)
+  while (++i < prog->opt->thread_nb)
     {
       if (raytrace_thread_create_client(&pass, i, thread_id))
 	return (NULL);
       usleep(10000);
     }
-  if (prog->verbose)
+  if (prog->opt->verbose)
     my_putstr("Thread create successfull\n");
   return (raytrace_end_client(&pass, thread_id, time_beg));
 }
