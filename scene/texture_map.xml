@@ -36,7 +36,7 @@
       <red>255</red>
       <green>255</green>
       <blue>25</blue>
-      <reflect>25</reflect>
+      <reflect>400</reflect>
       <bump>0</bump>
       <sky>0</sky>
       <texture>sprites/image/wood.jpg</texture>

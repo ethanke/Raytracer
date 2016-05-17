@@ -5,10 +5,34 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 05:04:52 2016 Gaëtan Léandre
-** Last update Sat May  7 06:33:09 2016 Gaëtan Léandre
+** Last update Mon May 16 11:17:04 2016 Gaëtan Léandre
 */
 
 #include		"utils.h"
+
+int			my_strlen(char *str)
+{
+  int			i;
+
+  i = 0;
+  while (str[i])
+    i++;
+  return (i);
+}
+
+char			*my_strdup(char *str)
+{
+  char			*result;
+  int			i;
+
+  if ((result = malloc(my_strlen(str) + 1)) == NULL)
+    return (NULL);
+  i = -1;
+  while (str[++i])
+    result[i] = str[i];
+  result[i] = '\0';
+  return (result);
+}
 
 int			my_strcmp(char *a, char *b)
 {
@@ -22,16 +46,6 @@ int			my_strcmp(char *a, char *b)
       i++;
     }
   return (1);
-}
-
-int			my_strlen(char *str)
-{
-  int			i;
-
-  i = 0;
-  while (str[i])
-    i++;
-  return (i);
 }
 
 char			**is_command(char *str)

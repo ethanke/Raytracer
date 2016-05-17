@@ -5,17 +5,11 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May  6 22:41:13 2016 Gaëtan Léandre
-** Last update Sat May 14 09:31:10 2016 Gaëtan Léandre
+** Last update Mon May 16 12:13:31 2016 Gaëtan Léandre
 */
 
-#ifndef			_SERVER_H_
-# define		_SERVER_H_
-
-# define		PORT		777
-# define		MAX_CLIENTS	100
-# define		BUF_SIZE	1024
-# define		PASSWD		"bonjour"
-# define		COLOR_DEF	0xFF000000
+#ifndef			SERVER_H_
+# define		SERVER_H_
 
 # include		<sys/types.h>
 # include		<sys/socket.h>
@@ -24,11 +18,18 @@
 # include		<unistd.h>
 # include		<stdio.h>
 # include		<stdlib.h>
+
 # include		"get_next_line.h"
 # include 		"utils.h"
 # include		"my_sprintf.h"
 # include		"my_printf.h"
 # include		"xml.h"
+
+# define		PORT		777
+# define		MAX_CLIENTS	100
+# define		BUF_SIZE	1024
+# define		PASSWD		"bonjour"
+# define		COLOR_DEF	0xFF000000
 
 typedef 		int SOCKET;
 typedef struct 		sockaddr_in SOCKADDR_IN;
@@ -39,6 +40,10 @@ typedef struct		s_client
 {
   int			start_x;
   int			end_x;
+  int			pos;
+  int			wait;
+  char			*grille;
+  char			*name;
   char			done;
   SOCKET		sock;
   SOCKADDR_IN		sock_addr;
@@ -77,4 +82,4 @@ char			*my_strstr(char *str, char *to_find);
 void			recive_and_launch(t_connected *co);
 void			reciv_img(t_connected *co);
 
-#endif			/* _SERVER_H_ */
+#endif			/* SERVER_H_ */
