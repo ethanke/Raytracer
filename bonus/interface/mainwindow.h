@@ -34,6 +34,7 @@ public:
     static void refresh();
     MyXML *xml_file;
     void refObjTab();
+    void refMatTab();
 
 private:
 

@@ -17,16 +17,20 @@ void MyPopup::show_it()
 
 void MyPopup::createMaterial()
 {
-    Material *material = new Material(int(global_scene->matList.size()),
+    Material *material = new Material(this->EditName->text(),
+                                      int(global_scene->matList.size()),
                                       this->ColorCur,
                                       this->reflect->value(),
                                       this->transpa->value(),
                                       this->EditIor->text().toInt(),
-                                      this->bumpstate->value(),
+                                      static_cast<float>(this->bumpstate->value()) / 100.0,
                                       this->sky->isChecked(),
                                       this->path_file);
+    qDebug() << material->bump;
     global_scene->matList.push_back(material);
     global_scene->matCount += 1;
+    this->mw->refMatTab();
+    this->destroy();
     /* transpa; 0 à 100%
      * reflect; 0 à 100%
      * ior; entre 1 et infine
@@ -82,6 +86,7 @@ void MyPopup::set_layout_mat(QGridLayout *mainLayout)
     this->bumpstate->setOrientation(Qt::Horizontal);
     this->bumpstate->setMaximum(100);
     this->LabelBump = new QLabel("0.00");
+    connect(this->bumpstate, SIGNAL(sliderMoved(int)), this, SLOT(EditSliderBump(int)));
     this->reflect = new QSlider();
     this->reflectSlider = new QLabel("0%");
     this->reflect->setOrientation(Qt::Horizontal);
@@ -124,7 +129,7 @@ void MyPopup::set_layout_mat(QGridLayout *mainLayout)
 
 void MyPopup::updatePrevButton(QColor color)
 {
-    this->ColorCur = Color(color.red(), color.green(), color.blue());
+    this->ColorCur = Color(color.red() / 255.0, color.green() / 255.0, color.blue() / 255.0);
     QPalette pal = this->PrevColor->palette();
     pal.setColor(QPalette::Button, QColor(color));
     QBrush tb(Qt::transparent);
@@ -138,6 +143,11 @@ void MyPopup::openColorPicker()
 {
     cp->show();
 }
+void MyPopup::EditSliderBump(int nb)
+{
+    this->LabelBump->setText(QString::number((nb) / 100.0));
+}
+
 void MyPopup::EditSliderReflect(int nb)
 {
     this->reflectSlider->setText(QString::number(nb) + "%");

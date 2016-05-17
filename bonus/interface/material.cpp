@@ -4,6 +4,7 @@
 
 Material::Material()
 {
+    this->name = QString("empty");
     this->id = -1;
     this->color = new Color();
     this->reflect = 0.0;
@@ -15,10 +16,10 @@ Material::Material()
 
 Material::Material(QString name, const int id, const Color color, const float reflect, const float transparency, const float ior, const float bump, const int sky, QString path)
 {
+    this->name = name;
     this->id = id;
     this->color = new Color(color.r, color.g, color.b);
     this->reflect = reflect / 100.0;
-
 
     this->transparency = transparency / 100.0;
     this->ior = ior;

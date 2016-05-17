@@ -84,6 +84,7 @@ private slots:
      void createMaterial();
      void EditSliderReflect(int nb);
      void EditSliderTranspa(int nb);
+     void EditSliderBump(int nb);
      void openColorPicker();
      void updatePrevButton(QColor);
      void selectPathFile();
