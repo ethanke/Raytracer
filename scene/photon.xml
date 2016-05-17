@@ -27,7 +27,7 @@
       <green>138</green>
       <blue>34</blue>
       <reflect>0</reflect>
-      <transparency>100</transparency>
+      <transparency>0</transparency>
       <ior>1</ior>
       <bump>0</bump>
       <sky>0</sky>
@@ -67,19 +67,19 @@
       <type>sphere</type>
       <center>
         <x>12.5</x>
-	      <y>5</y>
-	      <z>0</z>
+	<y>5</y>
+	<z>0</z>
       </center>
       <radius>10</radius>
       <material_id>1</material_id>
     </obj1>
-
+    
     <obj3>
       <type>sphere</type>
       <center>
-	      <x>-12.5</x>
-	      <y>5</y>
-	      <z>0</z>
+	<x>-12.5</x>
+	<y>5</y>
+	<z>0</z>
       </center>
       <radius>10</radius>
       <material_id>2</material_id>

@@ -14,7 +14,7 @@ RaytraceThread::RaytraceThread(QMutex* mu, GlWindow *glWin)
 #define         SEPIA               5
 void RaytraceThread::run()
 {
-    int     mode = SEPIA;
+    int     mode = 1;
 
     Vector2 pos = Vector2(-1, -1);
     Camera  camera = Camera(global_scene->camera->win_size,
@@ -92,7 +92,7 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
         applyPerlin(hitPoint, Normal, obj_touched->material->bump);
     outColor = obj_touched->getObjectColor(hitPoint);
 
-    //if (obj_touched->material->id == 4)                     /*  BOULE RAYE */
+    //if (obj_touched->material->id == 1)                     /*  BOULE RAYE */
     //{
     //    Vector3f<float> scale = hitPoint * 0.25/*period*/;
     //    double x = scale.x;
@@ -134,7 +134,7 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
     //}
     //
     //
-    //if (obj_touched->material->id == 1)                     /*  LOL GAY PRIDE MDR */
+    //if (obj_touched->material->id == 4)                     /*  LOL GAY PRIDE MDR */
     //{
     //    double x = hitPoint.x * /*scale*/ 100 * 0.5;
     //    double y = hitPoint.y * /*scale*/ 100 * 0.5;
@@ -170,33 +170,33 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
     //    outColor.z = (outColor.z + (0 / 25000.0) * noiseCoefC + (255 / 25000.0) * (1.0 - noiseCoefC)) / 2.0;
     //}
     //
-    //if (obj_touched->material->id == 1)                     /*  TURBULENCE  */
-    //{
-    //    /*  TURBULENCE  */
-    //    double x = hitPoint.x * /*sclae*/ 10;
-    //    double y = hitPoint.y * /*sclae*/ 10;
-    //    double z = hitPoint.z * /*sclae*/ 10;
-    //    double noiseCoef = 0;
+    if (obj_touched->material->id == 2)                     /*  TURBULENCE  */
+    {
+        /*  TURBULENCE  */
+        double x = hitPoint.x * /*sclae*/ 10;
+        double y = hitPoint.y * /*sclae*/ 10;
+        double z = hitPoint.z * /*sclae*/ 10;
+        double noiseCoef = 0;
+
+        for (int level = 1; level < 10; level ++) {
+           noiseCoef += (1.0f / level) * fabsf(noise(
+              level * 0.05 * x,
+              level * 0.05 * y,
+              level * 0.05 * z
+           ));
+        }
+        outColor = (outColor + ((Vector3f<float>( 255, 255, 255) / 25000.0) * noiseCoef + (Vector3f<float>( 10, 10, 10) / 25000.0) * (1.0 - noiseCoef))) / 2.0;
+    }
     //
-    //    for (int level = 1; level < 10; level ++) {
-    //       noiseCoef += (1.0f / level) * fabsf(noise(
-    //          level * 0.05 * x,
-    //          level * 0.05 * y,
-    //          level * 0.05 * z
-    //       ));
-    //    }
-    //    outColor = (outColor + ((Vector3f<float>( 40, 255, 10) / 25000.0) * noiseCoef + (Vector3f<float>( 255, 20, 125) / 25000.0) * (1.0 - noiseCoef))) / 2.0;
-    //}
-    //
-    //if (obj_touched->material->id == 1)                     /*  WOODEN TEST 1 */
-    //{
-    //    double x = hitPoint.x * /*scale*/ 0.075 * 0.5;
-    //    double y = hitPoint.y * /*scale*/ 0.075 * 0.5;
-    //    double z = hitPoint.z * /*scale*/ 0.075 * 0.5;
-    //    double grain = noise(x, y, z) * 15;
-    //    grain = grain - floor(grain);
-    //    outColor = (outColor + ((Vector3f<float>(94, 65, 19) / 50000.0) * grain + (Vector3f<float>(125, 78, 2) / 25000.0) * (1.0 - grain))) / 2.0;
-    //}
+    if (obj_touched->material->id == 1)                     /*  WOODEN TEST 1 */
+    {
+        double x = hitPoint.x * /*scale*/ 0.1 * 0.5;
+        double y = hitPoint.y * /*scale*/ 0.1 * 0.5;
+        double z = hitPoint.z * /*scale*/ 0.1 * 0.5;
+        double grain = noise(x, y, z) * 15;
+        grain = grain - floor(grain);
+        outColor = (outColor + ((Vector3f<float>(94, 65, 19) / 50000.0) * grain + (Vector3f<float>(125, 78, 2) / 25000.0) * (1.0 - grain))) / 2.0;
+    }
 
 
     if (obj_touched->material->sky > 0)

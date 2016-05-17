@@ -35,13 +35,13 @@
     </mat1>
 
     <mat2>
-      <red>255</red>
-      <green>255</green>
+      <red>25</red>
+      <green>25</green>
       <blue>25</blue>
       <reflect>5</reflect>
       <transparency>0</transparency>
       <ior>1</ior>
-      <bump>0.25</bump>
+      <bump>0</bump>
       <sky>0</sky>
       <texture>NULL</texture>
     </mat2>
