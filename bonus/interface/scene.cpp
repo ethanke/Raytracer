@@ -1,5 +1,6 @@
 #include "scene.h"
 #include "sphere.h"
+#include "cone.h"
 #include "plan.h"
 #include <qdebug.h>
 
@@ -73,6 +74,17 @@ Scene::Scene(QWidget *parent, int y)
             int             plan_mat_id2 = (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id2")).toLatin1().data())).toInt() - 1;
             Plan *plan_tmp = new Plan(plan_center, plan_dir, this->matList[plan_mat_id], this->matList[plan_mat_id2]);
             this->objectList.push_back(plan_tmp);
+        }
+
+        if (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":type")).toLatin1().data()) == QString("cone"))
+        {
+            Vector3f<float> cone_center  = Vector3f<float>(QString("scene:object_list:obj") + QString::number(i) + QString(":center:"), this->myxml);
+            Vector3f<float> cone_dir     = Vector3f<float>(QString("scene:object_list:obj") + QString::number(i) + QString(":dir:"), this->myxml);
+            float           cone_radius = this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":radius")).toLatin1().data()).toFloat();
+            float           cone_height = this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":height")).toLatin1().data()).toFloat();
+            int             cone_mat_id  = (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id")).toLatin1().data())).toInt() - 1;
+            Cone *cone_tmp = new Cone(cone_center, cone_dir, cone_radius, cone_height, this->matList[cone_mat_id]);
+            this->objectList.push_back(cone_tmp);
         }
 
         i++;

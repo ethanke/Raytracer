@@ -172,7 +172,6 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
     //
     if (obj_touched->material->id == 2)                     /*  TURBULENCE  */
     {
-        /*  TURBULENCE  */
         double x = hitPoint.x * /*sclae*/ 10;
         double y = hitPoint.y * /*sclae*/ 10;
         double z = hitPoint.z * /*sclae*/ 10;
@@ -187,7 +186,7 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
         }
         outColor = (outColor + ((Vector3f<float>( 255, 255, 255) / 25000.0) * noiseCoef + (Vector3f<float>( 10, 10, 10) / 25000.0) * (1.0 - noiseCoef))) / 2.0;
     }
-    //
+
     if (obj_touched->material->id == 1)                     /*  WOODEN TEST 1 */
     {
         double x = hitPoint.x * /*scale*/ 0.1 * 0.5;

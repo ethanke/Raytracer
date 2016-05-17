@@ -5,13 +5,13 @@
     <x_size>1080</x_size>
     <y_size>720</y_size>
     <cam_pos>
-      <x>0</x>
-      <y>20</y>
+      <x>-12.5</x>
+      <y>25</y>
       <z>-60</z>
     </cam_pos>
     <look_at>
-      <x>0</x>
-      <y>0</y>
+      <x>-12.5</x>
+      <y>5</y>
       <z>0</z>
     </look_at>
     <fov>90</fov>
@@ -64,21 +64,27 @@
     <count>3</count>
 
     <obj1>
-      <type>sphere</type>
+      <type>cone</type>
       <center>
-        <x>12.5</x>
-	<y>5</y>
-	<z>0</z>
+    <x>0</x>
+    <y>0</y>
+    <z>0</z>
       </center>
+      <dir>
+    <x>0</x>
+    <y>-1</y>
+    <z>0</z>
+      </dir>
       <radius>10</radius>
-      <material_id>1</material_id>
+      <height>20</height>
+      <material_id>2</material_id>
     </obj1>
-    
+
     <obj3>
       <type>sphere</type>
       <center>
-	<x>-12.5</x>
-	<y>5</y>
+	<x>-25</x>
+	<y>10</y>
 	<z>0</z>
       </center>
       <radius>10</radius>
@@ -89,7 +95,7 @@
       <type>plan</type>
       <center>
   <x>0</x>
-  <y>-6</y>
+  <y>0</y>
   <z>0</z>
       </center>
       <dir>
@@ -107,7 +113,7 @@
 
     <light1>
       <center>
-        <x>30</x>
+        <x>20</x>
 	      <y>40</y>
 	      <z>-30</z>
       </center>

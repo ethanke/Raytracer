@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     global.cpp \
     plan.cpp \
     light.cpp \
-    popup.cpp
+    popup.cpp \
+    cone.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -52,6 +53,7 @@ HEADERS  += mainwindow.h \
     global.h \
     plan.h \
     light.h \
-    popup.h
+    popup.h \
+    cone.h
 
 FORMS    += mainwindow.ui
