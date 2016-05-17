@@ -1,4 +1,5 @@
 #include "raytracethread.h"
+#include "color.h"
 
 RaytraceThread::RaytraceThread(QMutex* mu, GlWindow *glWin)
 {
@@ -6,14 +7,22 @@ RaytraceThread::RaytraceThread(QMutex* mu, GlWindow *glWin)
     this->glWin = glWin;
 }
 
+#define         NORMAL              1
+#define         NEGATIF             2
+#define         GRIS                3
+#define         BLACK_N_WHITE       4
+#define         SEPIA               5
 void RaytraceThread::run()
 {
+    int     mode = SEPIA;
+
     Vector2 pos = Vector2(-1, -1);
     Camera  camera = Camera(global_scene->camera->win_size,
                             global_scene->camera->start,
                             global_scene->camera->look_at,
                             global_scene->camera->fov.x,
                             global_scene->camera->alliasing);
+
     while (++pos.y < this->glWin->size().height())
     {
         pos.x = -1;
@@ -22,9 +31,38 @@ void RaytraceThread::run()
         {
             camera.processDir(pos);
             Vector3f<float> outColor = raytrace(camera.start, camera.direction, 0, 1.0) * 255.0;
-            this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = outColor.x;
-            this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = outColor.y;
-            this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = outColor.z;
+            if (mode == NORMAL)
+            {
+                this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = outColor.x;
+                this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = outColor.y;
+                this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = outColor.z;
+            }
+            if (mode == NEGATIF)
+            {
+                this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = 1 - outColor.x;
+                this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = 1 - outColor.y;
+                this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = 1 - outColor.z;
+            }
+            if (mode == GRIS)
+            {
+                float moyenne = outColor.length() / 3.0;
+                this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = moyenne;
+                this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = moyenne;
+                this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = moyenne;
+            }
+            if (mode == BLACK_N_WHITE)
+            {
+                float moyenne = outColor.length() / 3.0;
+                this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = moyenne > 0.5 ? 1 : 0;
+                this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = moyenne > 0.5 ? 1 : 0;
+                this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = moyenne > 0.5 ? 1 : 0;
+            }
+            if (mode == SEPIA)
+            {
+                this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = (outColor.x * .393) + (outColor.y *.769) + (outColor.z * .189);
+                this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = (outColor.x * .349) + (outColor.y *.686) + (outColor.z * .168);
+                this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = (outColor.x * .272) + (outColor.y *.534) + (outColor.z * .131);
+            }
         }
         mutex->unlock();
         this->glWin->update();
@@ -207,7 +245,7 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
 
 #define AmbientOcclusion                        1
 #define SoftShadows                             true
-#define GISamples                               16
+#define GISamples                               8
 #define TDRM                                    (2.0 / (float)RAND_MAX)
 #define ODGISamples                             (1.0f / (float)GISamples)
 #define AmbientOcclusionIntensity               0.5
@@ -270,6 +308,20 @@ bool RaytraceThread::Shadow(Vector3f<float> &Point, Vector3f<float> &LightDirect
 }
 
 
+void RaytraceThread::compute_photon(float &attenuation, const Vector3f<float> start, const Vector3f<float> lightDir, float _lightDist)
+{
+    Camera          camera;
+    camera.start =  start;
+    camera.direction = lightDir;
+    float lightDist = _lightDist;
+
+    for(unsigned int obj_i = 0; obj_i < global_scene->objectList.size(); obj_i++)
+    {
+        if(global_scene->objectList.at(obj_i)->hit(camera, lightDist) && global_scene->objectList.at(obj_i)->material->transparency > 0)
+            attenuation = attenuation * global_scene->objectList.at(obj_i)->material->transparency;
+    }
+}
+
 Vector3f<float> RaytraceThread::LightIntensity(Object *Object, Vector3f<float> &Point, Vector3f<float> &Normal, Vector3f<float> &LightPosition, Light *light, float AO)
 {
     Vector3f<float> LightDirection = LightPosition - Point;
@@ -282,10 +334,10 @@ Vector3f<float> RaytraceThread::LightIntensity(Object *Object, Vector3f<float> &
     if(NdotLD > 0.0f)
     {
         if(Shadow(Point, LightDirection, LightDistance) == false)
-            return (Vector3f<float>(225.0) * ((1.0 * AO + 1.0 * NdotLD) / Attenuation));
+            return (Vector3f<float>(225.0) * ((AO + NdotLD) / Attenuation));
     }
-
-    return Vector3f<float>(10.0) * (1 * AO / Attenuation);
+    //compute_photon(Attenuation, Point, LightDirection, LightDistance);
+    return Vector3f<float>(10.0) * (AO / Attenuation);
 }
 
 float RaytraceThread::AmbientOcclusionFactor(Object *object, Vector3f<float> &Point, Vector3f<float> &Normal)
