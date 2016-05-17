@@ -5,7 +5,7 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Mon May 16 19:14:12 2016 Philippe Lefevre
-** Last update Mon May 16 19:17:39 2016 Philippe Lefevre
+** Last update Tue May 17 23:03:45 2016 Philippe Lefevre
 */
 
 #include <stdio.h>
@@ -18,73 +18,85 @@
 #endif
 
 #define MEM_SIZE (128)
-#define MAX_SOURCE_SIZE (0x100000)
+#define MAX_BINARY_SIZE (0x100000)
 
 int main()
 {
+  cl_platform_id platform_id = NULL;
   cl_device_id device_id = NULL;
   cl_context context = NULL;
   cl_command_queue command_queue = NULL;
   cl_mem memobj = NULL;
   cl_program program = NULL;
   cl_kernel kernel = NULL;
-  cl_platform_id platform_id = NULL;
   cl_uint ret_num_devices;
   cl_uint ret_num_platforms;
   cl_int ret;
 
-  char string[MEM_SIZE];
+  float mem[MEM_SIZE];
 
   FILE *fp;
-  char fileName[] = "src/main.c";
-  char *source_str;
-  size_t source_size;
+  char fileName[] = "./kernel.clbin";
+  size_t binary_size;
+  char *binary_buf;
+  cl_int binary_status;
+  cl_int i;
 
-  /* Load the source code containing the kernel*/
+  /* Load kernel binary */
   fp = fopen(fileName, "r");
   if (!fp) {
-    fprintf(stderr, "Failed to load kernel.\n");
-    exit(1);
+
+
   }
-  source_str = (char*)malloc(MAX_SOURCE_SIZE);
-  source_size = fread(source_str, 1, MAX_SOURCE_SIZE, fp);
+  binary_buf = (char *)malloc(MAX_BINARY_SIZE);
+  binary_size = fread(binary_buf, 1, MAX_BINARY_SIZE, fp);
   fclose(fp);
 
-  /* Get Platform and Device Info */
+  /* Initialize input data */
+  for (i = 0; i < MEM_SIZE; i++) {
+
+  }
+
+  /* Get platform/device information */
   ret = clGetPlatformIDs(1, &platform_id, &ret_num_platforms);
   ret = clGetDeviceIDs(platform_id, CL_DEVICE_TYPE_DEFAULT, 1, &device_id, &ret_num_devices);
 
-  /* Create OpenCL context */
+  /* Create OpenCL context*/
   context = clCreateContext(NULL, 1, &device_id, NULL, NULL, &ret);
 
-  /* Create Command Queue */
+  /* Create command queue */
   command_queue = clCreateCommandQueue(context, device_id, 0, &ret);
 
-  /* Create Memory Buffer */
-  memobj = clCreateBuffer(context, CL_MEM_READ_WRITE,MEM_SIZE * sizeof(char), NULL, &ret);
+  /* Create memory buffer */
+  memobj = clCreateBuffer(context, CL_MEM_READ_WRITE, MEM_SIZE * sizeof(float), NULL, &ret);
 
-  /* Create Kernel Program from the source */
-  program = clCreateProgramWithSource(context, 1, (const char **)&source_str,
-				      (const size_t *)&source_size, &ret);
+  /* Transfer data over to the memory buffer */
+  ret = clEnqueueWriteBuffer(command_queue, memobj, CL_TRUE, 0, MEM_SIZE * sizeof(float), mem, 0, NULL, NULL);
 
-  /* Build Kernel Program */
-  ret = clBuildProgram(program, 1, &device_id, NULL, NULL, NULL);
+  /* Create kernel program from the kernel binary */
+  program = clCreateProgramWithBinary(context, 1, &device_id, (const size_t *)&binary_size,
+				      (const unsigned char **)&binary_buf, &binary_status, &ret);
 
-  /* Create OpenCL Kernel */
-  kernel = clCreateKernel(program, "hello", &ret);
+  /* Create OpenCL kernel */
+  kernel = clCreateKernel(program, "vecAdd", &ret);
+  printf("err:%d\n", ret);
 
-  /* Set OpenCL Kernel Parameters */
+  /* Set OpenCL kernel arguments */
   ret = clSetKernelArg(kernel, 0, sizeof(cl_mem), (void *)&memobj);
 
-  /* Execute OpenCL Kernel */
-  ret = clEnqueueTask(command_queue, kernel, 0, NULL,NULL);
+  size_t global_work_size[3] = {MEM_SIZE, 0, 0};
+  size_t local_work_size[3] = {MEM_SIZE, 0, 0};
 
-  /* Copy results from the memory buffer */
-  ret = clEnqueueReadBuffer(command_queue, memobj, CL_TRUE, 0,
-			    MEM_SIZE * sizeof(char),string, 0, NULL, NULL);
+  /* Execute OpenCL kernel */
+  ret = clEnqueueNDRangeKernel(command_queue, kernel, 1, NULL, global_work_size, local_work_size, 0, NULL, NULL);
 
-  /* Display Result */
-  puts(string);
+  /* Copy result from the memory buffer */
+  ret = clEnqueueReadBuffer(command_queue, memobj, CL_TRUE, 0, MEM_SIZE * sizeof(float), mem, 0, NULL, NULL);
+
+  /* Display results */
+  for (i=0; i < MEM_SIZE; i++) {
+
+  }
 
   /* Finalization */
   ret = clFlush(command_queue);
@@ -95,7 +107,7 @@ int main()
   ret = clReleaseCommandQueue(command_queue);
   ret = clReleaseContext(context);
 
-  free(source_str);
+  free(binary_buf);
 
   return 0;
 }
