@@ -23,6 +23,7 @@
     <count>2</count>
 
     <mat1>
+      <name>idk</name>
       <red>200</red>
       <green>100</green>
       <blue>25</blue>
@@ -35,6 +36,7 @@
     </mat1>
 
     <mat2>
+      <name>mirroir</name>
       <red>120</red>
       <green>112</green>
       <blue>180</blue>
