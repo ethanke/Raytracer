@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     light.cpp \
     popup.cpp \
     cone.cpp \
-    cylinder.cpp
+    cylinder.cpp \
+    triangle.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -56,6 +57,7 @@ HEADERS  += mainwindow.h \
     light.h \
     popup.h \
     cone.h \
-    cylinder.h
+    cylinder.h \
+    triangle.h
 
 FORMS    += mainwindow.ui

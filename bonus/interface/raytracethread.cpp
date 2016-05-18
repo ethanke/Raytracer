@@ -243,7 +243,7 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
 
 #define AmbientOcclusion                        1
 #define SoftShadows                             true
-#define GISamples                               8
+#define GISamples                               4
 #define TDRM                                    (2.0 / (float)RAND_MAX)
 #define ODGISamples                             (1.0f / (float)GISamples)
 #define AmbientOcclusionIntensity               0.5

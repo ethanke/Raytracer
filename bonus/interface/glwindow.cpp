@@ -50,6 +50,7 @@ void GlWindow::paintGL()
 
 void GlWindow::raytrace_button()
 {
+    glViewport(0, 0, this->size().width(), this->size().height());
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(0.0, global_scene->camera->win_size.x, global_scene->camera->win_size.y, 0.0, -1, 1);

@@ -5,7 +5,7 @@
     <x_size>1080</x_size>
     <y_size>720</y_size>
     <cam_pos>
-      <x>-30</x>
+      <x>0</x>
       <y>25</y>
       <z>-50</z>
     </cam_pos>
@@ -27,7 +27,7 @@
       <red>204</red>
       <green>138</green>
       <blue>34</blue>
-      <reflect>50</reflect>
+      <reflect>10</reflect>
       <transparency>0</transparency>
       <ior>1</ior>
       <bump>0</bump>
