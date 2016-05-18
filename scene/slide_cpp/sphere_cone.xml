@@ -5,12 +5,12 @@
     <x_size>1080</x_size>
     <y_size>720</y_size>
     <cam_pos>
-      <x>-30</x>
+      <x>-12.5</x>
       <y>25</y>
-      <z>-50</z>
+      <z>-60</z>
     </cam_pos>
     <look_at>
-      <x>0</x>
+      <x>-12.5</x>
       <y>5</y>
       <z>0</z>
     </look_at>
@@ -23,11 +23,11 @@
     <count>3</count>
 
     <mat1>
-      <name>yellow marble</name>
+      <name>yellow_brown</name>
       <red>204</red>
       <green>138</green>
       <blue>34</blue>
-      <reflect>50</reflect>
+      <reflect>0</reflect>
       <transparency>0</transparency>
       <ior>1</ior>
       <bump>0</bump>
@@ -40,7 +40,7 @@
       <red>0</red>
       <green>0</green>
       <blue>0</blue>
-      <reflect>10</reflect>
+      <reflect>0</reflect>
       <transparency>0</transparency>
       <ior>0</ior>
       <bump>0</bump>
@@ -60,6 +60,7 @@
       <sky>0</sky>
       <texture>NULL</texture>
     </mat2>
+
   </material_list>
 
   <object_list>
@@ -68,29 +69,29 @@
     <obj1>
       <type>cone</type>
       <center>
-  <x>0</x>
-  <y>0</y>
-  <z>0</z>
+    <x>0</x>
+    <y>0</y>
+    <z>0</z>
       </center>
       <dir>
-  <x>0</x>
-  <y>1</y>
-  <z>0</z>
+    <x>0</x>
+    <y>-1</y>
+    <z>0</z>
       </dir>
-      <radius>7.5</radius>
-      <height>25</height>
+      <radius>10</radius>
+      <height>20</height>
       <material_id>1</material_id>
     </obj1>
 
     <obj3>
       <type>sphere</type>
       <center>
-    <x>20</x>
-    <y>15</y>
-    <z>-20</z>
+	<x>-25</x>
+	<y>10</y>
+	<z>0</z>
       </center>
-      <radius>5</radius>
-      <material_id>2</material_id>
+      <radius>10</radius>
+      <material_id>1</material_id>
     </obj3>
 
     <obj2>
@@ -115,7 +116,7 @@
 
     <light1>
       <center>
-        <x>30</x>
+        <x>20</x>
 	      <y>40</y>
 	      <z>-30</z>
       </center>

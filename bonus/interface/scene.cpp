@@ -1,6 +1,7 @@
 #include "scene.h"
 #include "sphere.h"
 #include "cone.h"
+#include "cylinder.h"
 #include "plan.h"
 #include <qdebug.h>
 
@@ -38,17 +39,16 @@ Scene::Scene(QWidget *parent, int y)
     this->matCount = this->myxml->get_field("scene:material_list:count").toInt();
     while (i <= this->matCount)
     {
-        this->matList.push_back(new Material(QString("Mat_xml") + QString::number(i), i, Color(this->myxml->get_field((QString("scene:material_list:mat")
-                                                                              + QString::number(i)
-                                                                              + QString(":red")).toLatin1().data()).toFloat() / 255.0,
-                                                      this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":green")).toLatin1().data()).toFloat() / 255.0,
-                                                      this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":blue")).toLatin1().data()).toFloat() / 255.0),
-                                                      this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":reflect")).toLatin1().data()).toFloat(),
-                                                      this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":transparency")).toLatin1().data()).toFloat(),
-                                                      this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":ior")).toLatin1().data()).toFloat(),
-                                                      this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":bump")).toLatin1().data()).toFloat(),
-                                                      this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":sky")).toLatin1().data()).toInt(),
-                                                      this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":texture")).toLatin1().data())));
+        this->matList.push_back(new Material(this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":name")).toLatin1().data()), i,
+                                       Color(this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":red")).toLatin1().data()).toFloat() / 255.0,
+                                             this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":green")).toLatin1().data()).toFloat() / 255.0,
+                                             this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":blue")).toLatin1().data()).toFloat() / 255.0),
+                                             this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":reflect")).toLatin1().data()).toFloat(),
+                                             this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":transparency")).toLatin1().data()).toFloat(),
+                                             this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":ior")).toLatin1().data()).toFloat(),
+                                             this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":bump")).toLatin1().data()).toFloat(),
+                                             this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":sky")).toLatin1().data()).toInt(),
+                                             this->myxml->get_field((QString("scene:material_list:mat") + QString::number(i) + QString(":texture")).toLatin1().data())));
         i++;
     }
     qDebug() << "materiaux loaded\n";
@@ -85,6 +85,17 @@ Scene::Scene(QWidget *parent, int y)
             int             cone_mat_id  = (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id")).toLatin1().data())).toInt() - 1;
             Cone *cone_tmp = new Cone(cone_center, cone_dir, cone_radius, cone_height, this->matList[cone_mat_id]);
             this->objectList.push_back(cone_tmp);
+        }
+
+        if (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":type")).toLatin1().data()) == QString("cylinder"))
+        {
+            Vector3f<float> cyl_center  = Vector3f<float>(QString("scene:object_list:obj") + QString::number(i) + QString(":center:"), this->myxml);
+            Vector3f<float> cyl_dir     = Vector3f<float>(QString("scene:object_list:obj") + QString::number(i) + QString(":dir:"), this->myxml);
+            float           cyl_radius = this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":radius")).toLatin1().data()).toFloat();
+            float           cyl_height = this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":height")).toLatin1().data()).toFloat();
+            int             cyl_mat_id  = (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id")).toLatin1().data())).toInt() - 1;
+            Cylinder *cyl_tmp = new Cylinder(cyl_center, cyl_dir, cyl_radius, cyl_height, this->matList[cyl_mat_id]);
+            this->objectList.push_back(cyl_tmp);
         }
 
         i++;
