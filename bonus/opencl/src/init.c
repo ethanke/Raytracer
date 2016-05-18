@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Mon May 16 18:45:34 2016 Philippe Lefevre
+** Last update Wed May 18 02:26:30 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -79,5 +79,7 @@ int			verif_arg(int ac, char **av, t_prog *prog)
       return (disp_help(av[0]));
   if (prog->opt->thread_nb < 1)
     return (my_printf(2, "Number of thread must be positive\n") - 1);
+  if ((prog->out = malloc(sizeof(t_obj_list))) == NULL)
+    return (NULL);
   return (0);
 }

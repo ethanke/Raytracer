@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 23:01:14 2016 victor sousa
-** Last update Mon May 16 17:37:50 2016 Philippe Lefevre
+** Last update Wed May 18 02:24:03 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -106,8 +106,6 @@ t_obj_list		*hit(t_obj_list *obj_list, t_ray *ray, float *dist)
   t_obj_list		*out;
   t_obj_list		*tmp;
 
-  if ((out = malloc(sizeof(t_obj_list))) == NULL)
-    return (NULL);
   out->obj = NULL;
   tmp = obj_list;
   while (tmp != NULL)

@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Mon May 16 18:37:24 2016 Philippe Lefevre
+** Last update Wed May 18 03:07:53 2016 Philippe Lefevre
 */
 
 #ifndef			STRUCT_H_
@@ -201,6 +201,7 @@ typedef struct          s_prog
   t_coord		cam_dir;
   t_bunny_position	cam_fov;
   t_bunny_position	cam_rot;
+  t_obj_list		*out;
   t_obj_list            *obj_list;
   t_mat_list		*mat_list;
   t_light_list		*light_list;
@@ -211,6 +212,8 @@ typedef struct          s_prog
   char			*background_path;
   int			anti_alias;
   t_opt			*opt;
+  char			*string;
+  int			test;
 }                       t_prog;
 
 typedef struct s_cmd
