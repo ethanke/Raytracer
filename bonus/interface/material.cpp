@@ -13,7 +13,7 @@ Material::Material()
     this->texture->fill(QColor(0, 0, 0));
 }
 
-Material::Material(const int id, const Color color, const float reflect, const float transparency, const float ior, const float bump, const int sky, QString path)
+Material::Material(QString name, const int id, const Color color, const float reflect, const float transparency, const float ior, const float bump, const int sky, QString path)
 {
     this->id = id;
     this->color = new Color(color.r, color.g, color.b);
