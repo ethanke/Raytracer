@@ -26,6 +26,7 @@ Scene::Scene(QWidget *parent, int y)
         if (!this->file->open(QIODevice::ReadOnly))
         {
             QMessageBox::information(0, "Error opening file", this->file->errorString());
+            return;
         }
         else
         {
@@ -137,48 +138,59 @@ Scene::Scene(QWidget *parent, int y)
         this->path_file[this->path_file.size() - 4] == '.')
     {
         qDebug("Loading obj file...");
-        Vector3f<float> cam_pos = Vector3f<float>(-50.0, 20.0, -50.0);
+        Vector3f<float> cam_pos = Vector3f<float>(-50.0, 30.0, -50.0);
         Vector3f<float> look_at = Vector3f<float>(0.0, 0.0, 0.0);
         Vector2 size = Vector2(1080, 720);
         this->camera = new Camera(size, cam_pos, look_at, 90.0, 1.0);
-
-        this->matList.push_back(new Material(QString("material 1"), 1, Color(230.0 / 255.0, 123.0 / 255.0, 30.0 / 255.0),
-                                             10.0, 0.0, 0.0, 0.0, 0,""));
+        this->matList.push_back(new Material(QString("material 1"), 1,
+                                             Color(230.0 / 255.0, 123.0 / 255.0, 30.0 / 255.0),
+                                             10.0, 0.0, 0.0, 0.0, 0, "NULL"));
+        //this->lightList.push_back(new Light(Vector3f<float>(30.0, 40.0, 30.0), 110.0));
 
         std::vector<std::string*> coord;
-        std::vector<Vector3f<float>*> vertex;
-        std::ifstream in(this->path_file.toLatin1().data());
-        if(!in.is_open())
+        std::vector<Vector3f<float>> vertex;
+        std::ifstream file(this->path_file.toStdString().c_str(), std::ifstream::in);
+        if(!file.is_open())
             return;
         char buf[256];
 
-        while(!in.eof())
+        while(!file.eof())
         {
-            in.getline(buf,256);
+            file.getline(buf, 256);
             coord.push_back(new std::string(buf));
         }
 
-        for(int i=0;i<coord.size();i++)
+        for(int i = 0;i < coord.size(); i++)
         {
-            if(coord[i]->c_str()[0]=='#')
+            if(coord[i]->c_str()[0] == '#')
                 continue;
-            else if(coord[i]->c_str()[0]=='v' && coord[i]->c_str()[1]==' ')
+            else if(coord[i]->c_str()[0 ]== 'v' && coord[i]->c_str()[1] == ' ')
             {
                 float tmpx,tmpy,tmpz;
                 sscanf(coord[i]->c_str(),"v %f %f %f",&tmpx,&tmpy,&tmpz);
-                vertex.push_back(new Vector3f<float>(tmpx,tmpy,tmpz));
+                vertex.push_back(Vector3f<float>(tmpx,tmpy,tmpz));
             }
-            else if(coord[i]->c_str()[0]=='f')
+        }
+        int flag = 0;
+        for(int i=0; i < coord.size(); i++)
+        {
+            if(coord[i]->c_str()[0] == 'f' && coord[i]->c_str()[1] == ' ')
             {
-                int a,b,c,d;
-                if(count(coord[i]->begin(),coord[i]->end(),' ')==3)
+                int a,b,c,x,y,z;
+                if(count(coord[i]->begin(),coord[i]->end(),' ') == 5)
                 {
-                    sscanf(coord[i]->c_str(),"f %d//%d %d//%d %d//%d",&a,&b,&c,&b,&d,&b);
-                    qDebug() << b << a << c;
-                    Triangle *tri_tmp = new Triangle(*vertex.at(b), *vertex.at(a), *vertex.at(c), this->matList[0]);
+                    flag = 1;
+                    continue;
+                }
+                if(count(coord[i]->begin(),coord[i]->end(),' ') == 4)
+                {
+                    sscanf(coord[i]->c_str(),"f %d/%d %d/%d %d/%d",&a,&x, &b,&y, &c,&z);
+                    Triangle *tri_tmp = new Triangle(vertex.at(a - 1), vertex.at(b - 1), vertex.at(c - 1), this->matList[0]);
                     this->objectList.push_back(tri_tmp);
                 }
             }
         }
+        if (flag)
+            QMessageBox::information(0, "Wrong Obj format", "found some 4vertex face\nWe can't compute that");
     }
 }

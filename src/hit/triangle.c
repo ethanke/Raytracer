@@ -1,11 +1,11 @@
-/*
+ /*
 ** triangle.c for  in /home/sousa_v/rendu/lapin/raytracer_temp/src/hit/
 **
 ** Made by Victor Sousa
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 04:34:58 2016 Victor Sousa
-** Last update Mon May 16 10:10:25 2016 Philippe Lefevre
+** Last update Thu May 19 21:13:35 2016 Victor Sousa
 */
 
 #include		"main.h"
@@ -18,7 +18,7 @@ int			hit_triangle(t_ray *r, t_triangle *tr, float *old_dist)
   t_tri.e2 = minus_vector(tr->angle[2], tr->angle[0]);
   t_tri.h = crossProduct(r->dir, t_tri.e2);
   t_tri.a = mult_vector(t_tri.e1, t_tri.h);
-  if (t_tri.a > -0.00001 && t_tri.a < 0.00001)
+  if (t_tri.a > -0.01 && t_tri.a < 0.01)
     return (0);
   t_tri.f = 1 / t_tri.a;
   t_tri.s = minus_vector(r->start, tr->angle[0]);

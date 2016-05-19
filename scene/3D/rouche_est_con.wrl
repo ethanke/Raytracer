@@ -1,0 +1,82 @@
+#VRML V2.0 utf8
+
+#Created by CINEMA 4D
+
+DEF Cube_1 Transform {
+  rotation 0.281085 0.678598 0.678598 1.096057
+  children [ 
+    Shape {
+      appearance Appearance {
+        material Material {
+        }
+      }
+      geometry DEF FACESET_Cube_1 IndexedFaceSet {
+        ccw FALSE
+        solid FALSE
+        creaseAngle 1.396263
+        coord Coordinate {
+          point [ -10 -10 -10,-10 10 -10,-10 -10 10,-10 10 10,10 -10 10,
+            10 10 10,10 -10 -10,10 10 -10
+          ]
+        }
+        texCoord TextureCoordinate {
+          point [ 0 1,1 0,
+            0 0,0 0,1 1,0 1,1 1,
+            0 0,1 0,1 0,0 1,1 1,
+            1 0,0 0,1 1,0 1,0 0,
+            1 0,0 1,1 1
+          ]
+        }
+        coordIndex [ 0,1,3,2,-1,2,3,5,4,-1,4,5,7,6,-1,
+          6,7,1,0,-1,1,7,5,3,-1,6,0,2,4,-1
+        ]
+        texCoordIndex [ 2,5,11,8,-1,7,10,14,12,-1,13,15,19,17,-1,
+          16,18,4,1,-1,3,18,14,9,-1,16,0,6,12,-1
+        ]
+      }
+    }
+  ]
+}
+DEF Cube Transform {
+  scale 1 1 0.999
+  children [ 
+    Shape {
+      appearance Appearance {
+        material Material {
+        }
+      }
+      geometry DEF FACESET_Cube IndexedFaceSet {
+        ccw FALSE
+        solid FALSE
+        creaseAngle 1.396263
+        coord Coordinate {
+          point [ -10 -10 -10,-10 10 -10,-10 -10 10,-10 10 10,10 -10 10,
+            10 10 10,10 -10 -10,10 10 -10
+          ]
+        }
+        texCoord TextureCoordinate {
+          point [ 1 0,0 0,
+            0 1,0 0,1 1,0 1,1 1,
+            0 0,1 0,1 0,1 1,0 1,
+            1 0,0 0,1 1,0 1,0 0,
+            1 0,1 1,0 1
+          ]
+        }
+        coordIndex [ 0,1,3,-1,2,3,5,-1,4,5,7,-1,6,7,1,-1,
+          1,7,5,-1,6,0,2,-1,0,3,2,-1,2,5,4,-1,
+          4,7,6,-1,6,1,0,-1,1,5,3,-1,6,2,4,-1
+        ]
+        texCoordIndex [ 1,5,10,-1,7,11,14,-1,13,15,18,-1,16,19,4,-1,
+          3,19,14,-1,16,2,6,-1,1,10,8,-1,7,14,12,-1,
+          13,18,17,-1,16,4,0,-1,3,14,9,-1,16,6,12,-1
+        ]
+      }
+    }
+  ]
+}
+DEF Timer TimeSensor {
+  startTime 0
+  stopTime 0
+  cycleInterval 3
+  loop TRUE
+}
