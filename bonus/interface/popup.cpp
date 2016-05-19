@@ -27,6 +27,8 @@ void MyPopup::editMaterial()
     global_scene->matList[this->editId]->updateIor(this->EditIor->text().toInt());
     global_scene->matList[this->editId]->sky = this->sky->isChecked();
     global_scene->matList[this->editId]->updateImage(this->path_file);
+
+
             /*
             global_scene->matList.at(this->editId) = new Material(this->EditName->text(),
                                       int(global_scene->matList.size()) + 1,
