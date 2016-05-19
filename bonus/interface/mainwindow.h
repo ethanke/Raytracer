@@ -84,6 +84,8 @@ private slots:
 
     void on_editButtonObj_5_clicked();
 
+    void on_editButtonObj_6_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

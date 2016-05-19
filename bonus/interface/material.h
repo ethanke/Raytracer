@@ -10,6 +10,9 @@ class Material
         Material();
         Material(QString name, const int id, const Color color, const float reflect, const float transparency, const float ior,  const float bump, const int sky, QString path);
 
+        void updateIor(const float newIior);
+        void updateImage(const QString new_path);
+
         QString name;
         int		id;
         Color	*color;

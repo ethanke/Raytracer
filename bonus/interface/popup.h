@@ -17,6 +17,7 @@
 #include <QSlider>
 #include <qwidget.h>
 #include <QFileDialog>
+#include <QDoubleValidator>
 #include "sphere.h"
 #include "mainwindow.h"
 #include "vector2f.h"
@@ -38,6 +39,8 @@ public:
     void set_layout_sphere(QGridLayout *mainLayout);
     void set_layout_mat(QGridLayout *mainLayout);
     int typeSelected = 0;
+    void set_ui_editmat(int id);
+    void set_layout_editmat(QGridLayout *mainLayout, int id);
     /*
      * 0 : sphere
      */
@@ -68,12 +71,15 @@ private:
     QComboBox *SelectMat;
     QPushButton *createSph;
     QPushButton *createMat;
+    QPushButton *editMat;
     QPushButton *PrevColor;
     QPushButton *getPath;
     QLineEdit *curPath;
     QColorDialog *cp;
     QString path_file;
     Color ColorCur = Color();
+    Color *editColorCur;
+    int editId;
 
 private slots:
      void setValueObj();
@@ -86,9 +92,10 @@ private slots:
      void EditSliderTranspa(int nb);
      void EditSliderBump(int nb);
      void openColorPicker();
-     void updatePrevButton(QColor);
+     void updatePrevButton(QColor color);
      void selectPathFile();
-
+     void refMatListInObj(int nb);
+     void editMaterial();
 };
 
 #else

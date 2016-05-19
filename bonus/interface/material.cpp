@@ -31,3 +31,15 @@ Material::Material(QString name, const int id, const Color color, const float re
     this->texture = new QImage();
     this->texture->load(path);
 }
+
+void Material::updateIor(const float newIior)
+{
+    this->ior = newIior;
+    this->eior = 1.0 / this->ior;
+}
+
+void Material::updateImage(const QString new_path)
+{
+    this->texture = new QImage();
+    this->texture->load(new_path);
+}

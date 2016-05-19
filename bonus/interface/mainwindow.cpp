@@ -278,3 +278,13 @@ void MainWindow::on_editButtonObj_5_clicked()
     popup->set_ui_addmat();
     this->refObjTab();
 }
+
+void MainWindow::on_editButtonObj_6_clicked()
+{
+    if (ui->listMat->currentRow() >= 0)
+    {
+        this->popup = new MyPopup(this);
+        popup->set_ui_editmat(ui->listMat->currentRow());
+        this->refObjTab();
+    }
+}
