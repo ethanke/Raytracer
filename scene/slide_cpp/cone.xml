@@ -5,9 +5,9 @@
     <x_size>1080</x_size>
     <y_size>720</y_size>
     <cam_pos>
-      <x></x>
+      <x>-30</x>
       <y>25</y>
-      <z>-60</z>
+      <z>-50</z>
     </cam_pos>
     <look_at>
       <x>0</x>
@@ -23,10 +23,11 @@
     <count>3</count>
 
     <mat1>
+      <name>yellow marble</name>
       <red>204</red>
       <green>138</green>
       <blue>34</blue>
-      <reflect>0</reflect>
+      <reflect>50</reflect>
       <transparency>0</transparency>
       <ior>1</ior>
       <bump>0</bump>
@@ -35,10 +36,11 @@
     </mat1>
 
     <mat3>
-      <red>204</red>
-      <green>138</green>
-      <blue>34</blue>
-      <reflect>0</reflect>
+      <name>black</name>
+      <red>0</red>
+      <green>0</green>
+      <blue>0</blue>
+      <reflect>10</reflect>
       <transparency>0</transparency>
       <ior>0</ior>
       <bump>0</bump>
@@ -47,9 +49,10 @@
     </mat3>
 
     <mat2>
+      <name>white</name>
       <red>255</red>
       <green>255</green>
-      <blue>25</blue>
+      <blue>255</blue>
       <reflect>10</reflect>
       <transparency>0</transparency>
       <ior>1</ior>
@@ -57,34 +60,44 @@
       <sky>0</sky>
       <texture>NULL</texture>
     </mat2>
-
   </material_list>
 
   <object_list>
-    <count>2</count>
+    <count>3</count>
 
     <obj1>
       <type>cone</type>
       <center>
-    <x>0</x>
-    <y>0</y>
-    <z>0</z>
+  <x>0</x>
+  <y>0</y>
+  <z>0</z>
       </center>
       <dir>
-    <x>0</x>
-    <y>-1</y>
-    <z>0</z>
+  <x>0</x>
+  <y>1</y>
+  <z>0</z>
       </dir>
-      <radius>10</radius>
-      <height>20</height>
-      <material_id>2</material_id>
+      <radius>7.5</radius>
+      <height>25</height>
+      <material_id>1</material_id>
     </obj1>
+
+    <obj3>
+      <type>sphere</type>
+      <center>
+    <x>20</x>
+    <y>15</y>
+    <z>-20</z>
+      </center>
+      <radius>5</radius>
+      <material_id>2</material_id>
+    </obj3>
 
     <obj2>
       <type>plan</type>
       <center>
   <x>0</x>
-  <y>-0.5</y>
+  <y>0</y>
   <z>0</z>
       </center>
       <dir>
@@ -93,7 +106,7 @@
   <z>0</z>
       </dir>
       <material_id1>2</material_id1>
-      <material_id2>2</material_id2>
+      <material_id2>3</material_id2>
     </obj2>
   </object_list>
 
@@ -102,7 +115,7 @@
 
     <light1>
       <center>
-        <x>20</x>
+        <x>30</x>
 	      <y>40</y>
 	      <z>-30</z>
       </center>
