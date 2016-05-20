@@ -5,10 +5,10 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May 14 03:17:37 2016 Gaëtan Léandre
-** Last update Mon May 16 10:48:38 2016 Philippe Lefevre
+** Last update Fri May 20 03:57:12 2016 Gaëtan Léandre
 */
 
-#include		"main.h"
+#include		"client.h"
 
 void			*raytrace_horizontale_client(void *p)
 {
@@ -84,10 +84,10 @@ unsigned int		*raytrace_threading_client(t_prog *prog, int start,
 			    * prog->win_size.y)) == NULL)
     return (NULL);
   if (prog->opt->verbose)
-    my_printf(1, "\nRaytracing multi-threading started\n");
+    my_putstr("\nRaytracing multi-threading started\n");
   i = -1;
   if (prog->opt->verbose)
-    my_printf(1, "\nStarting create thread\n");
+    my_putstr("\nStarting create thread\n");
   prog->opt->rendu_success = 0;
   pass.prog = prog;
   time_beg = time(NULL);
@@ -98,6 +98,6 @@ unsigned int		*raytrace_threading_client(t_prog *prog, int start,
       usleep(10000);
     }
   if (prog->opt->verbose)
-    my_printf(1, "Thread create successfull\n");
+    my_putstr("Thread create successfull\n");
   return (raytrace_end_client(&pass, thread_id, time_beg));
 }

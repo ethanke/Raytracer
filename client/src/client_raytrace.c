@@ -5,10 +5,10 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May 13 04:44:05 2016 Gaëtan Léandre
-** Last update Fri May 20 03:56:07 2016 Gaëtan Léandre
+** Last update Fri May 20 03:56:49 2016 Gaëtan Léandre
 */
 
-#include		"main.h"
+#include		"client.h"
 
 int			load_scene_open(t_prog *prog, char *str)
 {
