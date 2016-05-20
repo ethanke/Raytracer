@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May 13 04:44:05 2016 Gaëtan Léandre
-** Last update Fri May 20 21:28:11 2016 Gaëtan Léandre
+** Last update Fri May 20 21:32:46 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -155,7 +155,6 @@ void			client_raytrace(char *str, int *status, SOCKET sock)
       *status = -1;
       return;
     }
-  printf("%s\n", buffer);
   tab = str_to_wordtab(buffer, " ");
   if ((tab[2][0] == 'x' && load_scene_open(&prog, str) == -1)
     || (tab[2][0] == 'o' && load_obj_file_open(&prog, str) == -1))
