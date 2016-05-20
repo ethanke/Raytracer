@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue May 10 22:52:42 2016 Gaëtan Léandre
-** Last update Mon May 16 12:19:59 2016 Gaëtan Léandre
+** Last update Fri May 20 03:24:19 2016 Gaëtan Léandre
 */
 
 #include		"main.h"
@@ -99,7 +99,7 @@ SOCKET			init_connection()
       my_printf(2, "Erreur de socket\n");
       return (-1);
     }
-  sock_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+  sock_addr.sin_addr.s_addr = inet_addr("93.9.51.53");
   sock_addr.sin_family = AF_INET;
   sock_addr.sin_port = htons(PORT);
   if (connect(sock, (SOCKADDR*)&sock_addr, sizeof(sock_addr)) == -1)
