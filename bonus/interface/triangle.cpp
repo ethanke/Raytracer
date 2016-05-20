@@ -10,7 +10,7 @@ Triangle::Triangle()
     this->point[1].y = 0;
     this->point[1].z = 0;
 
-    this->point[1].x = 0;
+    this->point[2].x = 0;
     this->point[2].y = 0;
     this->point[2].z = 0;
 
@@ -103,7 +103,7 @@ Vector3f<float> Triangle::getNormale(const Camera ray, const Vector3f<float> hit
     Vector3f<float>e1 = this->point[1] - this->point[0];
     Vector3f<float>e2 = this->point[2] - this->point[0];
     Vector3f<float>h = Vector3f<float>::cross(e2, e1);
-    if (h.x >= 0 || h.y >= 0 || h.z >= 0)
+    if (ray.direction.dot(h) >= 0)
         h = Vector3f<float>::cross(e1, e2);
     return h.normalize();
 }
