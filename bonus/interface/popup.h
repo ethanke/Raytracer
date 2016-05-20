@@ -21,6 +21,7 @@
 #include "sphere.h"
 #include "mainwindow.h"
 #include "vector2f.h"
+#include "cylinder.h"
 
 class MyPopup: public QWidget
 {
@@ -53,6 +54,8 @@ private:
     QLabel *matLab;
     QLabel *radLab;
     QLabel *reflectSlider;
+    QLabel *LabDir;
+    QLabel *LabHeight;
     QLabel *transpaSlider;
     QLineEdit *EditRad;
     QLineEdit *EditX;
@@ -60,6 +63,10 @@ private:
     QLineEdit *EditZ;
     QLineEdit *EditName;
     QLineEdit *EditIor;
+    QLineEdit *DirX;
+    QLineEdit *DirY;
+    QLineEdit *Height;
+    QLineEdit *DirZ;
     QSlider *bumpstate;
     QLabel *LabelBump;
     QComboBox *matList;
