@@ -121,7 +121,7 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
     //    for (int level = 1; level < 10; level ++) {
     //       noiseCoef +=  (1.0f / level) * fabsf(noise(
     //          level * 0.05 * cos(x),
-    //          level * 0.15 * cos(y),
+    //          level * 0.15 * sin(y),
     //          level * 0.05 * cos(z)
     //       ));
     //       x *= 2;
@@ -133,41 +133,41 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
     //}
     //
     //
-    //if (obj_touched->material->id == 1)                     /*  LOL GAY PRIDE MDR */
-    //{
-    //    double x = hitPoint.x * /*scale*/ 100 * 0.5;
-    //    double y = hitPoint.y * /*scale*/ 100 * 0.5;
-    //    double z = hitPoint.z * /*scale*/ 100 * 0.5;
-    //    double noiseCoefA = 0;
-    //    double noiseCoefB = 0;
-    //    double noiseCoefC = 0;
-    //
-    //    for (int level = 1; level < 10; level++) {
-    //       noiseCoefA += (1.0f / level) * fabsf(noise(
-    //          level * 0.35 * x,
-    //          level * 0.05 * y,
-    //          level * z
-    //       ));
-    //
-    //       noiseCoefB += (1.0f / level) * fabsf(noise(
-    //          level * x,
-    //          level * 0.35 * y,
-    //          level * 0.05 * z
-    //       ));
-    //
-    //       noiseCoefC += (1.0f / level) * fabsf(noise(
-    //          level * 0.05 * x,
-    //          level * y,
-    //          level * 0.35 * z
-    //       ));
-    //    }
-    //    noiseCoefA = 0.5f * sinf((x + z) * 0.05f + noiseCoefA) + 0.5f;
-    //    noiseCoefB = 0.5f * sinf((y + x) * 0.05f + noiseCoefB) + 0.5f;
-    //    noiseCoefC = 0.5f * sinf((z + y) * 0.05f + noiseCoefC) + 0.5f;
-    //    outColor.x = (outColor.x + (0 / 25000.0) * noiseCoefA + (255 / 25000.0) * (1.0 - noiseCoefA)) / 2.0;
-    //    outColor.y = (outColor.y + (0 / 25000.0) * noiseCoefB + (255 / 25000.0) * (1.0 - noiseCoefB)) / 2.0;
-    //    outColor.z = (outColor.z + (0 / 25000.0) * noiseCoefC + (255 / 25000.0) * (1.0 - noiseCoefC)) / 2.0;
-    //}
+    if (obj_touched->material->id == 1)                     /*  LOL GAY PRIDE MDR */
+    {
+        double x = hitPoint.x * /*scale*/ 10 * 0.5;
+        double y = hitPoint.y * /*scale*/ 10 * 0.5;
+        double z = hitPoint.z * /*scale*/ 10 * 0.5;
+        double noiseCoefA = 0;
+        double noiseCoefB = 0;
+        double noiseCoefC = 0;
+
+        for (int level = 1; level < 10; level++) {
+           noiseCoefA += (1.0f / level) * fabsf(noise(
+              level * 0.35 * x,
+              level * 0.05 * y,
+              level * z
+           ));
+
+           noiseCoefB += (1.0f / level) * fabsf(noise(
+              level * x,
+              level * 0.35 * y,
+              level * 0.05 * z
+           ));
+
+           noiseCoefC += (1.0f / level) * fabsf(noise(
+              level * 0.05 * x,
+              level * y,
+              level * 0.35 * z
+           ));
+        }
+        noiseCoefA = 0.5f * sinf((x + z) * 0.05f + noiseCoefA) + 0.5f;
+        noiseCoefB = 0.5f * sinf((y + x) * 0.05f + noiseCoefB) + 0.5f;
+        noiseCoefC = 0.5f * sinf((z + y) * 0.05f + noiseCoefC) + 0.5f;
+        outColor.x = (outColor.x + (0 / 25000.0) * noiseCoefA + (255 / 25000.0) * (1.0 - noiseCoefA)) / 2.0;
+        outColor.y = (outColor.y + (0 / 25000.0) * noiseCoefB + (255 / 25000.0) * (1.0 - noiseCoefB)) / 2.0;
+        outColor.z = (outColor.z + (0 / 25000.0) * noiseCoefC + (255 / 25000.0) * (1.0 - noiseCoefC)) / 2.0;
+    }
 
     //if (obj_touched->material->id == 2)                     /*  TURBULENCE  */
     //{
@@ -243,7 +243,7 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
 
 #define AmbientOcclusion                        1
 #define SoftShadows                             true
-#define GISamples                               8
+#define GISamples                               1
 #define TDRM                                    (2.0 / (float)RAND_MAX)
 #define ODGISamples                             (1.0f / (float)GISamples)
 #define AmbientOcclusionIntensity               0.5

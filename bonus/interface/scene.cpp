@@ -138,8 +138,8 @@ Scene::Scene(QWidget *parent, int y)
         this->path_file[this->path_file.size() - 4] == '.')
     {
         qDebug("Loading obj file...");
-        Vector3f<float> cam_pos = Vector3f<float>(0.0, 10.0, -50.0);
-        Vector3f<float> look_at = Vector3f<float>(0.0, 0.0, 0.0);
+        Vector3f<float> cam_pos = Vector3f<float>(0.0, 40.0, -50.0);
+        Vector3f<float> look_at = Vector3f<float>(0.0, 20.0, 0.0);
         Vector2 size = Vector2(1080, 720);
         this->camera = new Camera(size, cam_pos, look_at, 90.0, 1.0);
         this->matList.push_back(new Material(QString("material 1"), 1,
