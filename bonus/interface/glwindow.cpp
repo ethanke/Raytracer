@@ -31,6 +31,10 @@ void GlWindow::resizeGL(int width, int height)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(0.0, this->size().width(), this->size().height(), 0.0, -1, 1);
+    for (int i = 0; i < height * width - 10; i++)
+    {
+        this->pixel[i] = Color();
+    }
 }
 
 void GlWindow::paintGL()
@@ -50,6 +54,7 @@ void GlWindow::paintGL()
 
 void GlWindow::raytrace_button()
 {
+    this->resize(global_scene->camera->win_size.x, global_scene->camera->win_size.y);
     glViewport(0, 0, this->size().width(), this->size().height());
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -69,8 +74,6 @@ void GlWindow::save_button()
         for(int j = 0; j < global_scene->camera->win_size.y; j++)
         {
             Color   _color = this->pixel[i + j * this->size().width()].clamp_color();
-            if (_color.r > 1.0 || _color.g > 1.0 || _color.b > 1.0)
-                qDebug() <<_color.r << _color.g << _color.b;
             img.setPixel(i, j, QColor(_color.r * 255,
                                       _color.g * 255,
                                       _color.b * 255).rgba());
