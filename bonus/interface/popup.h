@@ -21,6 +21,8 @@
 #include "sphere.h"
 #include "mainwindow.h"
 #include "vector2f.h"
+#include "plan.h"
+#include "cone.h"
 #include "cylinder.h"
 
 class MyPopup: public QWidget
@@ -70,6 +72,7 @@ private:
     QSlider *bumpstate;
     QLabel *LabelBump;
     QComboBox *matList;
+    QComboBox *matList2;
     QSlider *transpa;
     QSlider *reflect;
     QCheckBox *sky;

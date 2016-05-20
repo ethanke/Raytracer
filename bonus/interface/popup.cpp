@@ -27,7 +27,6 @@ void MyPopup::editMaterial()
     global_scene->matList[this->editId]->updateIor(this->EditIor->text().toInt());
     global_scene->matList[this->editId]->sky = this->sky->isChecked();
     global_scene->matList[this->editId]->updateImage(this->path_file);
-
             /*
             global_scene->matList.at(this->editId) = new Material(this->EditName->text(),
                                       int(global_scene->matList.size()) + 1,
@@ -257,7 +256,6 @@ void MyPopup::set_layout_editmat(QGridLayout *mainLayout, int id)
     this->sky->setChecked((global_scene->matList[id]->sky == 1) ? (true) : (false));
     mainLayout->addWidget(sky, 9, 1);
     mainLayout->addWidget(getPath, 10, 0);
-    //this->curPath->setText(global_scene->matList[id]->path);
     mainLayout->addWidget(curPath, 10, 1);
 }
 
@@ -458,6 +456,74 @@ void MyPopup::set_ui_obj(Object *object)
         EditZ->setText(QString::number(object->center.z));
         EditRad->setText(QString::number(sphere->radius));
     }
+    if (object->getObjectType() == QString("plan"))
+    {
+        Plan *plan = static_cast <Plan *>(object);
+        this->CenterX = new QLabel("Center x :\n", window);
+        this->CenterY = new QLabel("Center y :\n", window);
+        this->CenterZ = new QLabel("Center z :\n", window);
+        this->matLab = new QLabel("Matériaux :", window);
+        this->LabDir = new QLabel("Direction :", window);
+        this->EditX = new QLineEdit();
+        this->EditY = new QLineEdit();
+        this->EditZ = new QLineEdit();
+        this->DirX = new QLineEdit();
+        this->DirY = new QLineEdit();
+        this->DirZ = new QLineEdit();
+        this->Apply = new QPushButton();
+        this->matList = new QComboBox();
+        this->matList2 = new QComboBox();
+        this->EditX->setValidator(new QIntValidator(-99999999, 99999999, this));
+        this->EditY->setValidator(new QIntValidator(-99999999, 99999999, this));
+        this->EditZ->setValidator(new QIntValidator(-99999999, 99999999, this));
+        this->DirX->setPlaceholderText("0 (1 for activate)");
+        this->DirY->setPlaceholderText("0 (1 for activate)");
+        this->DirZ->setPlaceholderText("0 (1 for activate)");
+        QGridLayout *layout = new QGridLayout;
+        QGridLayout *mainLayout = new QGridLayout;
+        layout->addWidget(CenterX, 0, 0);
+        layout->addWidget(CenterY, 1, 0);
+        layout->addWidget(CenterZ, 2, 0);
+        layout->addWidget(EditX, 0, 1);
+        layout->addWidget(EditY, 1, 1);
+        layout->addWidget(EditZ, 2, 1);
+        layout->addWidget(matLab, 3, 0);
+        layout->addWidget(matList, 3, 1);
+        layout->addWidget(matList2, 3, 2);
+        layout->addWidget(LabDir, 4, 0);
+        layout->addWidget(DirX, 5, 0);
+        layout->addWidget(DirY, 5, 1);
+        layout->addWidget(DirZ, 5, 2);
+        layout->addWidget(Apply, 6, 1);
+        int i = 0;
+        this->matList2->addItem(QString("<Same>"));
+        while (i != global_scene->matCount)
+        {
+            this->matList->addItem(global_scene->matList[i]->name);
+            this->matList2->addItem(global_scene->matList[i]->name);
+            i++;
+        }
+        connect(this->matList, SIGNAL(activated(int)), this, SLOT(refMatListInObj(int)));
+        this->matList->setCurrentIndex(object->material->id - 1);
+        qDebug () << object->material->id;
+        this->matList2->setCurrentIndex(plan->material2->id);
+        window->setLayout(layout);
+        window->setFixedSize(450, 280);
+        mainLayout->addWidget(window);
+        mainwindow->setLayout(mainLayout);
+        mainwindow->setFixedWidth(600);
+        mainwindow->setFixedHeight(400);
+        this->Apply->setText(QString("Apply"));
+        QObject::connect(this->Apply, SIGNAL(clicked()), this, SLOT(setValueObj()));
+        EditX->setText(QString::number(object->center.x));
+        EditY->setText(QString::number(object->center.y));
+        EditZ->setText(QString::number(object->center.z));
+        DirX->setText(QString::number(plan->direction.x));
+        DirY->setText(QString::number(plan->direction.y));
+        DirZ->setText(QString::number(plan->direction.z));
+        // Plan::Plan(const Vector3f<float> center, const Vector3f<float> dir
+        //, Material *mat, Material *mat2)
+    }
     if (object->getObjectType() == QString("Cylinder"))
     {
         Cylinder *cylinder = static_cast <Cylinder *>(object);
@@ -532,7 +598,84 @@ void MyPopup::set_ui_obj(Object *object)
         DirX->setText(QString::number(cylinder->direction.x));
         DirY->setText(QString::number(cylinder->direction.y));
         DirZ->setText(QString::number(cylinder->direction.z));
-
+        // Cylinder::Cylinder(const Vector3f<float> center, const Vector3f<float> direction,
+        // const float radius, const float height, Material *mat)
+    }
+    if (object->getObjectType() == QString("cone"))
+    {
+        qDebug() << "ouiiii";
+        Cone *cone = static_cast <Cone *>(object);
+        this->CenterX = new QLabel("Center x :", window);
+        this->CenterY = new QLabel("Center y :", window);
+        this->CenterZ = new QLabel("Center z :", window);
+        this->LabDir = new QLabel("Direction :", window);
+        this->matLab = new QLabel("Matériaux :", window);
+        this->radLab = new QLabel("Radius :", window);
+        this->LabHeight = new QLabel("Height :", window);
+        this->EditX = new QLineEdit();
+        this->EditY = new QLineEdit();
+        this->EditZ = new QLineEdit();
+        this->DirX = new QLineEdit();
+        this->DirY = new QLineEdit();
+        this->DirZ = new QLineEdit();
+        this->Height = new QLineEdit();
+        this->Apply = new QPushButton();
+        this->matList = new QComboBox();
+        this->EditRad = new QLineEdit();
+        this->EditX->setValidator(new QIntValidator(-99999999, 99999999, this));
+        this->EditY->setValidator(new QIntValidator(-99999999, 99999999, this));
+        this->EditZ->setValidator(new QIntValidator(-99999999, 99999999, this));
+        this->DirX->setValidator(new QIntValidator(0, 1, this));
+        this->DirY->setValidator(new QIntValidator(0, 1, this));
+        this->DirZ->setValidator(new QIntValidator(0, 1, this));
+        this->Height->setValidator(new QIntValidator(-99999999, 99999999, this));
+        this->DirX->setPlaceholderText("0 (1 for activate)");
+        this->DirY->setPlaceholderText("0 (1 for activate)");
+        this->DirZ->setPlaceholderText("0 (1 for activate)");
+        this->EditRad->setValidator(new QIntValidator(-99999999, 99999999, this));
+        QGridLayout *layout = new QGridLayout;
+        QGridLayout *mainLayout = new QGridLayout;
+        layout->addWidget(CenterX, 0, 0);
+        layout->addWidget(CenterY, 1, 0);
+        layout->addWidget(CenterZ, 2, 0);
+        layout->addWidget(EditX, 0, 1);
+        layout->addWidget(EditY, 1, 1);
+        layout->addWidget(EditZ, 2, 1);
+        layout->addWidget(matLab, 7, 0);
+        layout->addWidget(matList, 7, 1);
+        layout->addWidget(radLab, 3, 0);
+        layout->addWidget(EditRad, 3, 1);
+        layout->addWidget(LabDir, 5, 0);
+        layout->addWidget(DirX, 6, 0);
+        layout->addWidget(DirY, 6, 1);
+        layout->addWidget(DirZ, 6, 2);
+        layout->addWidget(LabHeight, 4, 0);
+        layout->addWidget(Height, 4, 1);
+        layout->addWidget(Apply, 8, 1);
+        int i = 0;
+        while (i != global_scene->matCount)
+        {
+            this->matList->addItem(global_scene->matList[i]->name);
+            i++;
+        }
+        connect(this->matList, SIGNAL(activated(int)), this, SLOT(refMatListInObj(int)));
+        this->matList->setCurrentIndex(object->material->id - 1);
+        window->setLayout(layout);
+        window->setFixedSize(450, 280);
+        mainLayout->addWidget(window);
+        mainwindow->setLayout(mainLayout);
+        mainwindow->setFixedWidth(600);
+        mainwindow->setFixedHeight(400);
+        this->Apply->setText(QString("Apply"));
+        QObject::connect(this->Apply, SIGNAL(clicked()), this, SLOT(setValueObj()));
+        EditX->setText(QString::number(object->center.x));
+        EditY->setText(QString::number(object->center.y));
+        EditZ->setText(QString::number(object->center.z));
+        EditRad->setText(QString::number(cone->radius));
+        Height->setText(QString::number(cone->height));
+        DirX->setText(QString::number(cone->direction.x));
+        DirY->setText(QString::number(cone->direction.y));
+        DirZ->setText(QString::number(cone->direction.z));
         // Cylinder::Cylinder(const Vector3f<float> center, const Vector3f<float> direction,
         // const float radius, const float height, Material *mat)
     }
@@ -572,6 +715,24 @@ void MyPopup::setValueObj()
         object->material = global_scene->matList[this->matList->currentIndex()];
         sphere->radius = this->EditRad->text().toFloat();
     }
+    if (this->object->getObjectType() == QString("plan"))
+    {
+        Plan *plan = static_cast <Plan *>(this->object);
+        int i = 0;
+        object->center.x = this->EditX->text().toFloat();
+        object->center.y = this->EditY->text().toFloat();
+        object->center.z = this->EditZ->text().toFloat();
+        object->material = global_scene->matList[this->matList->currentIndex()];
+        if (this->matList2->currentIndex())
+            plan->material2 = global_scene->matList[this->matList2->currentIndex() - 1];
+        else
+            plan->material2 = object->material;
+        plan->direction.x = this->DirX->text().toFloat();
+        plan->direction.y = this->DirY->text().toFloat();
+        plan->direction.z = this->DirZ->text().toFloat();
+        qDebug() << plan->material->name;
+        qDebug() << plan->material2->name;
+    }
     if (this->object->getObjectType() == QString("Cylinder"))
     {
         Cylinder *cylinder = static_cast <Cylinder *>(this->object);
@@ -586,6 +747,21 @@ void MyPopup::setValueObj()
         cylinder->direction.y = this->DirY->text().toFloat();
         cylinder->direction.z = this->DirZ->text().toFloat();
     }
+    if (this->object->getObjectType() == QString("cone"))
+    {
+        Cone *cone = static_cast <Cone *>(this->object);
+        int i = 0;
+        object->center.x = this->EditX->text().toFloat();
+        object->center.y = this->EditY->text().toFloat();
+        object->center.z = this->EditZ->text().toFloat();
+        object->material = global_scene->matList[this->matList->currentIndex()];
+        cone->radius = this->EditRad->text().toFloat();
+        cone->height = this->Height->text().toFloat();
+        cone->direction.x = this->DirX->text().toFloat();
+        cone->direction.y = this->DirY->text().toFloat();
+        cone->direction.z = this->DirZ->text().toFloat();
+    }
+
     this->mw->refObjTab();
     this->destroy();
 }

@@ -265,13 +265,6 @@ void MainWindow::on_editButtonObj_4_clicked()
     this->refObjTab();
 }
 
-void MainWindow::on_renderButton_2_clicked()
-{
-    QColorDialog *cp = new QColorDialog();
-    cp->show();
-    qDebug() << cp->getColor().red() << cp->getColor().green() << cp->getColor().blue();
-}
-
 void MainWindow::on_editButtonObj_5_clicked()
 {
     this->popup = new MyPopup(this);
@@ -287,4 +280,9 @@ void MainWindow::on_editButtonObj_6_clicked()
         popup->set_ui_editmat(ui->listMat->currentRow());
         this->refObjTab();
     }
+}
+
+void MainWindow::on_saveButton_clicked()
+{
+
 }

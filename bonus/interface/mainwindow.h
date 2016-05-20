@@ -73,14 +73,11 @@ private slots:
 
     void on_editButtonObj_clicked();
 
-
     void on_pushButton_3_pressed();
 
     void on_editButtonObj_2_clicked();
 
     void on_editButtonObj_4_clicked();
-
-    void on_renderButton_2_clicked();
 
     void on_editButtonObj_5_clicked();
 
