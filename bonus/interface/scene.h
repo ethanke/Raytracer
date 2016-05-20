@@ -28,7 +28,8 @@ class Scene
         QStringList stringlist;
         Camera *camera;
         MyXML *myxml;
-
+        int shadowsampling;
+        int booleansoftshadow;
         std::vector<int>objUsingMarble;
         std::vector<int>objUsingCircle;
         std::vector<int>objUsingWood;
