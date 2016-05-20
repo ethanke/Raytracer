@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May 13 04:44:05 2016 Gaëtan Léandre
-** Last update Fri May 20 03:56:07 2016 Gaëtan Léandre
+** Last update Fri May 20 21:33:27 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -162,6 +162,8 @@ void			client_raytrace(char *str, int *status, SOCKET sock)
     *status = -1;
     return;
   }
+  if ((prog.opt = malloc(sizeof(t_opt))) == NULL)
+    return;
   prog.opt->thread_nb = 4;
   grille = raytrace_threading_client(&prog, my_getnbr(tab[0]),
 				     my_getnbr(tab[1]));
@@ -176,6 +178,7 @@ void			client_raytrace(char *str, int *status, SOCKET sock)
       *status = 0;
       free(grille);
     }
+  free(prog.opt);
   free(str);
   free_tab(tab);
 }
