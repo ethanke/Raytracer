@@ -57,6 +57,31 @@ void GlWindow::raytrace_button()
     this->thread->start();
 }
 
+void GlWindow::save_button()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
+                                "/path/to/file/*.png",
+                                tr("Images *.png"));
+    QPixmap *outPixmap = new QPixmap(global_scene->camera->win_size.x, global_scene->camera->win_size.y);
+    QImage img = outPixmap->toImage();
+    for(int i = 0; i < global_scene->camera->win_size.x; i++)
+    {
+        for(int j = 0; j < global_scene->camera->win_size.y; j++)
+        {
+            Color   _color = this->pixel[i + j * this->size().width()].clamp_color();
+            if (_color.r > 1.0 || _color.g > 1.0 || _color.b > 1.0)
+                qDebug() <<_color.r << _color.g << _color.b;
+            img.setPixel(i, j, QColor(_color.r * 255,
+                                      _color.g * 255,
+                                      _color.b * 255).rgba());
+        }
+    }
+
+    outPixmap = new QPixmap; //Petit changements
+    outPixmap->convertFromImage(img); //Idem
+    outPixmap->save(fileName, "PNG");
+}
+
 void GlWindow::setPixel(const Vector2 pixel_pos, const Color color)
 {
     this->pixel[pixel_pos.x + pixel_pos.y * this->size().width()].r = color.r;

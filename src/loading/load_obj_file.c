@@ -103,14 +103,14 @@ int			load_obj_file(t_prog *prog, char *path)
 
   prog->win_size.x = 1080;
   prog->win_size.y = 720;
-  prog->cam_pos.x = -600;
-  prog->cam_pos.y = 200;
-  prog->cam_pos.z = -600;
+  prog->cam_pos.x = 0;
+  prog->cam_pos.y = 300;
+  prog->cam_pos.z = -90;
   prog->cam_fov.x = 90;
   prog->cam_fov.y =
     prog->cam_fov.x * ((prog->win_size.x / prog->win_size.y) / 1.5);
   prog->look_at.x = 0;
-  prog->look_at.y = 0;
+  prog->look_at.y = 10;
   prog->look_at.z = 0;
   dir = normalize(minus_point(prog->look_at, prog->cam_pos));
   prog->cam_rot.x =

@@ -37,6 +37,7 @@ class GlWindow : public QGLWidget
 
     public slots:
         void raytrace_button();
+        void save_button();
 
     private:
         Scene *scene;

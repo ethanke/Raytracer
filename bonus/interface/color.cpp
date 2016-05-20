@@ -26,8 +26,8 @@ Color Color::clamp_color()
     if (this->b > max)
         max = this->b;
     Color out;
-    out.r = this->r;
-    out.g = this->g;
-    out.b = this->b;
+    out.r = this->r / max;
+    out.g = this->g / max;
+    out.b = this->b / max;
     return (out);
 }

@@ -128,28 +128,6 @@
      <string>Raytrace it!</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>90</y>
-      <width>113</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>1080</width>
-      <height>720</height>
-     </size>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="text">
-     <string>Add Object</string>
-    </property>
-   </widget>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
@@ -922,8 +900,8 @@
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>90</y>
+      <x>40</x>
+      <y>80</y>
       <width>211</width>
       <height>32</height>
      </rect>
@@ -935,20 +913,20 @@
      </size>
     </property>
     <property name="text">
-     <string>Loaod xml magique</string>
+     <string>Laod xml magique</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="renderButton_2">
+   <widget class="QPushButton" name="saveButton">
     <property name="geometry">
      <rect>
-      <x>540</x>
+      <x>570</x>
       <y>70</y>
       <width>120</width>
       <height>40</height>
      </rect>
     </property>
     <property name="text">
-     <string>Raytrace it!</string>
+     <string>Save as .png</string>
     </property>
    </widget>
   </widget>
@@ -958,7 +936,7 @@
      <x>0</x>
      <y>0</y>
      <width>1920</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
@@ -981,6 +959,7 @@
    <container>1</container>
    <slots>
     <slot>raytrace_button()</slot>
+    <slot>save_button()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -1015,6 +994,22 @@
     <hint type="destinationlabel">
      <x>743</x>
      <y>415</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveButton</sender>
+   <signal>clicked()</signal>
+   <receiver>myGlWindow</receiver>
+   <slot>save_button()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>612</x>
+     <y>128</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>711</x>
+     <y>313</y>
     </hint>
    </hints>
   </connection>
