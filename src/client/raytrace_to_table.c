@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May 14 03:17:37 2016 Gaëtan Léandre
-** Last update Fri May 20 21:28:21 2016 Philippe Lefevre
+** Last update Fri May 20 21:56:45 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -91,6 +91,7 @@ unsigned int		*raytrace_threading_client(t_prog *prog, int start,
   prog->opt->rendu_success = 0;
   pass.prog = prog;
   time_beg = time(NULL);
+  printf("%d %d\n", pass.prog->win_size.x, pass.prog->win_size.y);
   while (++i < prog->opt->thread_nb)
       if (raytrace_thread_create_client(&pass, i, thread_id))
 	return (NULL);
