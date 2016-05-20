@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 05:55:56 2016 Gaëtan Léandre
-** Last update Mon May 16 11:59:12 2016 Gaëtan Léandre
+** Last update Fri May 20 19:57:23 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -28,7 +28,6 @@ void			add_client(SOCKET sock, t_connected *co, fd_set fdset)
   tmp = co->clients;
   while (tmp != NULL && tmp->next != NULL)
     tmp = tmp->next;
-  if (tmp == NULL)
   client->prev = tmp;
   if (tmp == NULL)
     co->clients = client;
