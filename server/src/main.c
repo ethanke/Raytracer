@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Thu May  5 00:03:54 2016 Gaëtan Léandre
-** Last update Mon May 16 12:26:34 2016 Gaëtan Léandre
+** Last update Fri May 20 19:45:20 2016 Gaëtan Léandre
 */
 
 #include		"server.h"
@@ -142,8 +142,11 @@ SOCKET			init_connection()
 void			end_co(t_connected *co)
 {
   t_client		*tmp;
+
   if (co->master != NULL)
     {
+      if (co->master->name)
+	free(co->master->name);
       close(co->master->sock);
       free(co->master);
     }
@@ -151,6 +154,8 @@ void			end_co(t_connected *co)
   while (co->clients != NULL)
     {
       tmp = co->clients;
+      if (tmp->name)
+	free(tmp->name);
       co->clients = co->clients->next;
       close(tmp->sock);
       free(tmp);
