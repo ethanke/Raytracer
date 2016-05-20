@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:45:54 2016 victor sousa
-** Last update Mon May 16 18:40:29 2016 Philippe Lefevre
+** Last update Fri May 20 20:15:32 2016 Philippe Lefevre
 */
 
 #ifndef			MAIN_H_
@@ -17,6 +17,8 @@
 # include               <sys/stat.h>
 # include               <fcntl.h>
 # include		<pthread.h>
+# include		<sys/select.h>
+# include		<lapin.h>
 
 # include		"lapin.h"
 # include		"image.h"

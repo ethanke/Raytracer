@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Sat May 14 06:12:31 2016 Gaëtan Léandre
+## Last update Fri May 20 20:09:14 2016 Philippe Lefevre
 ##
 
 NAME		=	raytracer2
@@ -36,12 +36,13 @@ LIBDIR		=	lib
 RM		=	rm -f
 
 CC		=	gcc
-CFLAGS		=	-W -Wall -Wextra -DMACRO		\
- 			-g3 -ggdb				\
+CFLAG		=	-W -Wall -Wextra -ansi -pedantic	\
+			-DMACRO					\
+			-g3 -ggdb				\
 			-I/home/${USER}/.froot/include		\
 			-I$(INCDIR)
 
-LDFLAGS		=	-L/home/${USER}/.froot/lib		\
+LDFLAG		=	-L/home/${USER}/.froot/lib		\
 			-llapin					\
 			-L/usr/local/lib			\
 			-lsfml-audio				\
@@ -201,12 +202,12 @@ title		:
 			@$(ECHO) $(GREEN)Raytracer$(TEAL)2$(DEFAULT)
 
 $(NAME)		:	$(OBJ)
-			@$(CC) -o $(NAME) $(OBJ) $(LDFLAGS) &&	\
+			@$(CC) -o $(NAME) $(OBJ) $(LDFLAG) &&	\
 			$(ECHO) $(GREEN) "[OK]" $(TEAL) $(NAME) $(DEFAULT) || \
 			$(ECHO) $(RED) "[XX]" $(TEAL) $(NAME) $(DEFAULT)
 
 .c.o		:
-			@$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@ && \
+			@$(CC) $(CFLAG) $(LDFLAG) -c $< -o $@ && \
 			$(ECHO) $(GREEN) "[OK]" $(TEAL) $< $(DEFAULT) || \
 			$(ECHO) $(RED) "[XX]" $(TEAL) $< $(DEFAULT)
 

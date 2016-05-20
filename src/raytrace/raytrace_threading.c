@@ -5,7 +5,7 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Sun May  8 02:20:22 2016 Philippe Lefevre
-** Last update Sat May 14 19:42:45 2016 Philippe Lefevre
+** Last update Fri May 20 20:11:52 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -118,11 +118,8 @@ int			raytrace_threading(t_prog *prog, int start,
   prog->opt->rendu_success = 0;
   time_beg = time(NULL);
   while (++i < prog->opt->thread_nb)
-    {
-      if (raytrace_thread_create(prog, i, thread_id))
+    if (raytrace_thread_create(prog, i, thread_id))
 	return (-1);
-      usleep(10000);
-    }
   if (prog->opt->verbose)
     my_putstr("Thread create successfull\n");
   while (prog->opt->rendu_display && (prog->opt->rendu_success > 0))
