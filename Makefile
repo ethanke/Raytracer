@@ -37,7 +37,7 @@ RM		=	rm -f
 
 CC		=	gcc
 CFLAG		=	-W -Wall -Wextra -ansi -pedantic	\
-			-DMACRO					\
+			-DMACRO	-std=c99		\
 			-g3 -ggdb				\
 			-I/home/${USER}/.froot/include		\
 			-I$(INCDIR)
