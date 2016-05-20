@@ -421,7 +421,7 @@ void MyPopup::set_ui_obj(Object *object)
         this->EditX->setValidator(new QIntValidator(-99999999, 99999999, this));
         this->EditY->setValidator(new QIntValidator(-99999999, 99999999, this));
         this->EditZ->setValidator(new QIntValidator(-99999999, 99999999, this));
-        this->EditRad->setValidator(new QIntValidator(-99999999, 99999999, this));
+        this->EditRad->setValidator(new QDoubleValidator(-99999999, 99999999, 5, this));
         QGridLayout *layout = new QGridLayout;
         QGridLayout *mainLayout = new QGridLayout;
         layout->addWidget(CenterX, 0, 0);
@@ -708,7 +708,6 @@ void MyPopup::setValueObj()
     if (this->object->getObjectType() == QString("sphere"))
     {
         Sphere *sphere = static_cast <Sphere *>(this->object);
-        int i = 0;
         object->center.x = this->EditX->text().toFloat();
         object->center.y = this->EditY->text().toFloat();
         object->center.z = this->EditZ->text().toFloat();
@@ -718,7 +717,6 @@ void MyPopup::setValueObj()
     if (this->object->getObjectType() == QString("plan"))
     {
         Plan *plan = static_cast <Plan *>(this->object);
-        int i = 0;
         object->center.x = this->EditX->text().toFloat();
         object->center.y = this->EditY->text().toFloat();
         object->center.z = this->EditZ->text().toFloat();
@@ -736,7 +734,6 @@ void MyPopup::setValueObj()
     if (this->object->getObjectType() == QString("Cylinder"))
     {
         Cylinder *cylinder = static_cast <Cylinder *>(this->object);
-        int i = 0;
         object->center.x = this->EditX->text().toFloat();
         object->center.y = this->EditY->text().toFloat();
         object->center.z = this->EditZ->text().toFloat();
@@ -750,7 +747,6 @@ void MyPopup::setValueObj()
     if (this->object->getObjectType() == QString("cone"))
     {
         Cone *cone = static_cast <Cone *>(this->object);
-        int i = 0;
         object->center.x = this->EditX->text().toFloat();
         object->center.y = this->EditY->text().toFloat();
         object->center.z = this->EditZ->text().toFloat();
@@ -761,7 +757,6 @@ void MyPopup::setValueObj()
         cone->direction.y = this->DirY->text().toFloat();
         cone->direction.z = this->DirZ->text().toFloat();
     }
-
     this->mw->refObjTab();
     this->destroy();
 }

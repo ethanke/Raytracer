@@ -35,6 +35,7 @@ public:
     MyXML *xml_file;
     void refObjTab();
     void refMatTab();
+    void refLightTab();
 
 private:
 
@@ -84,6 +85,8 @@ private slots:
     void on_editButtonObj_6_clicked();
 
     void on_saveButton_clicked();
+
+    void on_loadButton_2_clicked();
 
 private:
     Ui::MainWindow *ui;

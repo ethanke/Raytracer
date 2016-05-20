@@ -34,6 +34,8 @@ MainWindow::MainWindow(QWidget *parent) :
       ui->comboBox_wx->addItem(tab_x[i]);
     for(int i = 0; i < 8; i++)
       ui->comboBox_wy->addItem(tab_y[i]);
+    ui->renderButton->setDisabled(true);
+    ui->saveButton->setDisabled(true);
 }
 
 void MainWindow::CloseWindow()
@@ -57,6 +59,9 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 void MainWindow::on_loadButton_clicked()
 {
     global_scene = new Scene(this, 0);
+
+    ui->saveButton->setDisabled(false);
+    ui->renderButton->setDisabled(false);
     ui->lineEdit_cpx->setReadOnly(false);
     ui->lineEdit_cpy->setReadOnly(false);
     ui->lineEdit_cpz->setReadOnly(false);
@@ -168,6 +173,9 @@ void MainWindow::on_editButtonObj_clicked()
 void MainWindow::on_pushButton_3_pressed()
 {
     global_scene = new Scene(this, 1);
+
+    ui->saveButton->setDisabled(false);
+    ui->renderButton->setDisabled(false);
     ui->lineEdit_cpx->setReadOnly(false);
     ui->lineEdit_cpy->setReadOnly(false);
     ui->lineEdit_cpz->setReadOnly(false);
@@ -212,6 +220,13 @@ void MainWindow::refMatTab()
     while (ui->listMat->rowCount() > 0)
         ui->listMat->removeRow(0);
     this->affMatTab();
+}
+
+void MainWindow::refLightTab()
+{
+    while (ui->listLight->rowCount() > 0)
+        ui->listLight->removeRow(0);
+    this->affLightTab();
 }
 
 void MainWindow::affMatTab()
@@ -285,4 +300,13 @@ void MainWindow::on_editButtonObj_6_clicked()
 void MainWindow::on_saveButton_clicked()
 {
 
+}
+
+void MainWindow::on_loadButton_2_clicked()
+{
+    delete(global_scene);
+    refObjTab();
+    refMatTab();
+    ui->renderButton->setDisabled(true);
+    ui->saveButton->setDisabled(true);
 }
