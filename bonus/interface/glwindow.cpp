@@ -30,7 +30,8 @@ void GlWindow::resizeGL(int width, int height)
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0.0, this->size().width(), this->size().height(), 0.0, -1, 1);
+    glOrtho(0.0, width, height, 0.0, -1, 1);
+    this->pixel = new Color[height * width];
     for (int i = 0; i < height * width - 10; i++)
     {
         this->pixel[i] = Color();
@@ -73,7 +74,7 @@ void GlWindow::save_button()
     {
         for(int j = 0; j < global_scene->camera->win_size.y; j++)
         {
-            Color   _color = this->pixel[i + j * this->size().width()].clamp_color();
+            Color _color = this->pixel[i + j * this->size().width()].clamp_color();
             img.setPixel(i, j, QColor(_color.r * 255,
                                       _color.g * 255,
                                       _color.b * 255).rgba());

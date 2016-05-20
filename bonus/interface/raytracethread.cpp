@@ -64,7 +64,6 @@ void RaytraceThread::run()
                 this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = (outColor.x * .272) + (outColor.y *.534) + (outColor.z * .131);
             }
         }
-        qDebug() << "Line" << pos.y;
         mutex->unlock();
         this->glWin->update();
     }
@@ -244,7 +243,7 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
 
 #define AmbientOcclusion                        1
 #define SoftShadows                             true
-#define GISamples                               4
+#define GISamples                               128
 #define TDRM                                    (2.0 / (float)RAND_MAX)
 #define ODGISamples                             (1.0f / (float)GISamples)
 #define AmbientOcclusionIntensity               0.5
