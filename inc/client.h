@@ -5,13 +5,13 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue May 10 22:56:16 2016 Gaëtan Léandre
-** Last update Sat May 14 11:00:00 2016 Gaëtan Léandre
+** Last update Fri May 20 03:30:48 2016 Gaëtan Léandre
 */
 
 #ifndef			_CLIENT_H_
 # define		_CLIENT_H_
 
-# define		PORT		777
+# define		PORT		666
 # define		BUF_SIZE	1024
 
 # include		<sys/types.h>

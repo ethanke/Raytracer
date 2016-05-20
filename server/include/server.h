@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May  6 22:41:13 2016 Gaëtan Léandre
-** Last update Mon May 16 12:13:31 2016 Gaëtan Léandre
+** Last update Fri May 20 03:31:20 2016 
 */
 
 #ifndef			SERVER_H_
@@ -25,7 +25,7 @@
 # include		"my_printf.h"
 # include		"xml.h"
 
-# define		PORT		777
+# define		PORT		666
 # define		MAX_CLIENTS	100
 # define		BUF_SIZE	1024
 # define		PASSWD		"bonjour"

@@ -64,6 +64,7 @@ void RaytraceThread::run()
                 this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = (outColor.x * .272) + (outColor.y *.534) + (outColor.z * .131);
             }
         }
+        qDebug() << "Line" << pos.y;
         mutex->unlock();
         this->glWin->update();
     }
