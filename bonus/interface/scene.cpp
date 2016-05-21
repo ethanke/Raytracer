@@ -14,6 +14,11 @@ Scene::Scene(QWidget *parent, int y)
     else
         this->path_file = "/Users/ethankerdelhue/Documents/Shared/Raytracer/scene/slide_cpp/waater.xml";
 
+    qDebug() << this->path_file;
+
+    if (this->path_file == "")
+        return;
+
     if (this->path_file[this->path_file.size() - 1] == 'l' &&
         this->path_file[this->path_file.size() - 2] == 'm' &&
         this->path_file[this->path_file.size() - 3] == 'x' &&
