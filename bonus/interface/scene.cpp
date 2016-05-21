@@ -140,8 +140,8 @@ Scene::Scene(QWidget *parent, int y)
         this->path_file[this->path_file.size() - 4] == '.')
     {
         qDebug("Loading obj file...");
-        Vector3f<float> cam_pos = Vector3f<float>(0.0, 40.0, -50.0);
-        Vector3f<float> look_at = Vector3f<float>(0.0, 20.0, 0.0);
+        Vector3f<float> cam_pos = Vector3f<float>(0.0, 25.0, -50.0);
+        Vector3f<float> look_at = Vector3f<float>(0.0, 5.0, 0.0);
         Vector2 size = Vector2(1080, 720);
         this->camera = new Camera(size, cam_pos, look_at, 90.0, 1.0);
         this->matList.push_back(new Material(QString("material 1"), 1,
@@ -162,20 +162,19 @@ Scene::Scene(QWidget *parent, int y)
             coord.push_back(new std::string(buf));
         }
 
+        int flag = 0;
         for(unsigned int i = 0;i < coord.size(); i++)
         {
             if(coord[i]->c_str()[0] == '#')
                 continue;
-            else if(coord[i]->c_str()[0 ]== 'v' && coord[i]->c_str()[1] == ' ')
+
+            if(coord[i]->c_str()[0 ]== 'v' && coord[i]->c_str()[1] == ' ')
             {
                 float tmpx,tmpy,tmpz;
                 sscanf(coord[i]->c_str(),"v %f %f %f",&tmpx,&tmpy,&tmpz);
                 vertex.push_back(Vector3f<float>(tmpx,tmpy,tmpz));
             }
-        }
-        int flag = 0;
-        for(unsigned int i=0; i < coord.size(); i++)
-        {
+
             if(coord[i]->c_str()[0] == 'f' && coord[i]->c_str()[1] == ' ')
             {
                 int a,b,c,x,y,z;
