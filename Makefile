@@ -183,6 +183,8 @@ SRC		+=	$(UTILSDIR)/tekpixel.c			\
 			$(UTILSDIR)/get_next_line.c		\
 			$(UTILSDIR)/vect_operator.c		\
 			$(UTILSDIR)/vect_operator2.c		\
+			$(UTILSDIR)/vect_operator3.c		\
+			$(UTILSDIR)/vect_operator4.c		\
 			$(UTILSDIR)/wtf.c			\
 			$(UTILSDIR)/epur_str.c
 

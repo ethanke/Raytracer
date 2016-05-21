@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 08:37:20 2016 Victor Sousa
-** Last update Sat May 21 04:44:43 2016 Philippe Lefevre
+** Last update Sat May 21 05:05:31 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -58,7 +58,8 @@ int			load_obj_file(t_prog *prog, char *path)
   char			**file;
   t_vtx_list		*vtx_list;
 
-  if (load_obj_file_init(prog) || (file = load_scene_file(path, -1, 0)) == NULL)
+  if (load_obj_file_init(prog)
+      || (file = load_scene_file(path, -1, 0)) == NULL)
     return (-1);
   if (((prog->light_list = add_empty_light(prog->light_list)) == NULL)
       || ((prog->light_list = add_empty_light2(prog->light_list)) == NULL)
