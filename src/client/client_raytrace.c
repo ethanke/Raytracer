@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May 13 04:44:05 2016 Gaëtan Léandre
-** Last update Sat May 21 20:13:52 2016 Philippe Lefevre
+** Last update Sat May 21 20:18:45 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -115,24 +115,19 @@ int			load_obj_file_open(t_prog *prog, char *str)
   if ((file = str_to_wordtab(str, "\n")) == NULL)
     return (-1);
   prog->light_list = NULL;
-  if ((prog->light_list = add_empty_light(prog->light_list)) == NULL)
-    return (-1);
-  if ((prog->light_list = add_empty_light2(prog->light_list)) == NULL)
-    return (-1);
-  if ((prog->light_list = add_empty_light3(prog->light_list)) == NULL)
-    return (-1);
-  if ((prog->light_list = add_empty_light4(prog->light_list)) == NULL)
-    return (-1);
-  if ((prog->background = create_text_uni(prog->win_size.x, prog->win_size.x,
-					  0xff000000)) == NULL)
+  if (((prog->light_list = add_empty_light(prog->light_list)) == NULL)
+      || ((prog->light_list = add_empty_light2(prog->light_list)) == NULL)
+      || ((prog->light_list = add_empty_light3(prog->light_list)) == NULL)
+      || ((prog->light_list = add_empty_light4(prog->light_list)) == NULL)
+      || ((prog->background = create_text_uni(prog->win_size.x,
+					      prog->win_size.x,
+					      0xff000000)) == NULL))
     return (-1);
   prog->anti_alias = 1;
   prog->mat_list = NULL;
-  if ((prog->mat_list = add_empty_mat(prog->mat_list)) == NULL)
-    return (-1);
-  if ((vtx_list = get_vertex(file)) == NULL)
-    return (-1);
-  if ((prog->obj_list = parse_obj_formes(file, vtx_list)) == NULL)
+  if (((prog->mat_list = add_empty_mat(prog->mat_list)) == NULL)
+      || ((vtx_list = get_vertex(file)) == NULL)
+      || ((prog->obj_list = parse_obj_formes(file, vtx_list)) == NULL))
     return (-1);
   free_tab(file);
   return (0);
