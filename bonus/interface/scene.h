@@ -34,6 +34,7 @@ class Scene
         std::vector<int>objUsingCircle;
         std::vector<int>objUsingWood;
         std::vector<int>objUsingGayPride;
+        std::vector<int>objUsingColorCircle;
         std::vector<int>objUsingTurbulence;
 };
 
