@@ -144,10 +144,7 @@ Scene::Scene(QWidget *parent, int y)
         Vector3f<float> look_at = Vector3f<float>(0.0, 5.0, 0.0);
         Vector2 size = Vector2(1080, 720);
         this->camera = new Camera(size, cam_pos, look_at, 90.0, 1.0);
-        this->matList.push_back(new Material(QString("material 1"), 1,
-                                             Color(230.0 / 255.0, 123.0 / 255.0, 30.0 / 255.0),
-                                             10.0, 0.0, 0.0, 0.0, 0, "NULL"));
-        //this->lightList.push_back(new Light(Vector3f<float>(30.0, 40.0, 30.0), 110.0));
+        this->lightList.push_back(new Light(Vector3f<float>(30.0, 40.0, 30.0), 110.0));
 
         std::vector<std::string*> coord;
         std::vector<Vector3f<float>> vertex;
@@ -162,6 +159,7 @@ Scene::Scene(QWidget *parent, int y)
             coord.push_back(new std::string(buf));
         }
 
+        int mat = -1;
         int flag = 0;
         for(unsigned int i = 0;i < coord.size(); i++)
         {
@@ -175,6 +173,16 @@ Scene::Scene(QWidget *parent, int y)
                 vertex.push_back(Vector3f<float>(tmpx,tmpy,tmpz));
             }
 
+            if(coord[i]->c_str()[0] == 'g' && coord[i]->c_str()[1] == ' ')
+            {
+                mat++;
+                this->matList.push_back(new Material(QString("material " + QString::number(mat)), mat,
+                                                     Color((float)(std::rand() % 255) / 255.0,
+                                                           (float)(std::rand() % 255) / 255.0,
+                                                           (float)(std::rand() % 255) / 255.0),
+                                                     10.0, 0.0, 0.0, 0.0, 0, "NULL"));
+            }
+
             if(coord[i]->c_str()[0] == 'f' && coord[i]->c_str()[1] == ' ')
             {
                 int a,b,c,x,y,z;
@@ -186,7 +194,7 @@ Scene::Scene(QWidget *parent, int y)
                 if(count(coord[i]->begin(),coord[i]->end(),' ') == 4)
                 {
                     sscanf(coord[i]->c_str(),"f %d/%d %d/%d %d/%d",&a,&x, &b,&y, &c,&z);
-                    Triangle *tri_tmp = new Triangle(vertex.at(a - 1), vertex.at(b - 1), vertex.at(c - 1), this->matList[0]);
+                    Triangle *tri_tmp = new Triangle(vertex.at(a - 1), vertex.at(b - 1), vertex.at(c - 1), this->matList[mat]);
                     this->objectList.push_back(tri_tmp);
                 }
             }
