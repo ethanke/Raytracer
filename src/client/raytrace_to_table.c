@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May 14 03:17:37 2016 Gaëtan Léandre
-** Last update Sat May 21 20:54:30 2016 Philippe Lefevre
+** Last update Sat May 21 22:07:01 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -22,8 +22,7 @@ void			*raytrace_horizontale_client(void *p)
   pass = p;
   prog = pass->prog;
   raycast.touch_circle = 0;
-  if (thread_id >= (prog->opt->thread_nb - 1))
-    thread_id = -1;
+  thread_id = ((thread_id >= (prog->opt->thread_nb - 1)) ? (-1) : (thread_id));
   pos.y = ((prog->win_size.y / prog->opt->thread_nb) * ++thread_id) - 1;
   end = ((prog->win_size.y / prog->opt->thread_nb) * (thread_id + 1));
   if (prog->opt->verbose)
@@ -94,11 +93,8 @@ unsigned int		*raytrace_threading_client(t_prog *prog, int start,
   pass.prog = prog;
   time_beg = time(NULL);
   while (++i < prog->opt->thread_nb)
-	{
-	  if (raytrace_thread_create_client(&pass, i, thread_id))
-	    return (NULL);
-	  usleep(1000000);
-	}
+    if (raytrace_thread_create_client(&pass, i, thread_id))
+      return (NULL);
   if (prog->opt->verbose)
     my_printf(1, "Thread create successfull\n");
   return (raytrace_end_client(&pass, thread_id, time_beg));

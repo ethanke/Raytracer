@@ -197,8 +197,10 @@ SRC		+=	$(CLIENTDIR)/client.c			\
 			$(CLIENTDIR)/client_init.c		\
 			$(CLIENTDIR)/communicate.c		\
 			$(CLIENTDIR)/command.c			\
+			$(CLIENTDIR)/command2.c			\
 			$(CLIENTDIR)/send_file.c		\
 			$(CLIENTDIR)/client_raytrace.c		\
+			$(CLIENTDIR)/client_raytrace_scene.c	\
 			$(CLIENTDIR)/raytrace_to_table.c
 
 ##  OUTPUT  ##

@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun May  8 03:45:09 2016 Gaëtan Léandre
-** Last update Fri May 20 20:30:47 2016 Gaëtan Léandre
+** Last update Sat May 21 23:10:21 2016 Philippe Lefevre
 */
 
 #include		"client.h"
@@ -24,8 +24,7 @@ char			*reciv_file(SOCKET sock)
   }
   if (size.i == 0 || (file = malloc(size.i + 1)) == NULL)
     return (NULL);
-  tmp = 1;
-  pos = 0;
+  pos = 0 * (tmp = 1);
   while (pos < size.i && tmp > 0)
     {
       tmp = recv(sock, &file[pos], size.i, 0);
@@ -33,7 +32,7 @@ char			*reciv_file(SOCKET sock)
     }
   if (tmp < 0)
     {
-       my_printf(2, "Erreur de réception\n");
+      my_printf(2, "Erreur de réception\n");
       return (NULL);
     }
   file[pos] = '\0';

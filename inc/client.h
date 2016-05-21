@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue May 10 22:56:16 2016 Gaëtan Léandre
-** Last update Sat May 21 20:02:25 2016 Philippe Lefevre
+** Last update Sat May 21 23:19:29 2016 Philippe Lefevre
 */
 
 #ifndef			_CLIENT_H_
@@ -56,5 +56,8 @@ char			*exec_command(SOCKET sock, char **tab, int *status, t_prog *prog);
 void			client_raytrace(char *str, int *status, SOCKET sock);
 unsigned int		*raytrace_threading_client(t_prog *prog, int start,
 						   int stop);
+int			load_scene_open(t_prog *prog, char *str);
+char			*launch_cmd(SOCKET sock, char **tab, int *status);
+int			exit_cmd(int *status, char **tab);
 
 #endif			/* _CLIENT_H_ */
