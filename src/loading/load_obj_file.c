@@ -5,76 +5,10 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 08:37:20 2016 Victor Sousa
-** Last update Mon May 16 18:06:17 2016 Victor Sousa
+** Last update Sat May 21 05:05:31 2016 Philippe Lefevre
 */
 
 #include		"main.h"
-
-t_light_list		*add_empty_light(t_light_list *prev)
-{
-  t_light_list          *new;
-
-  if ((new = malloc(sizeof(t_light_list))) == NULL)
-    return (NULL);
-  new->center.x = 0;
-  new->center.y = 500;
-  new->center.z = 0;
-  new->intensity = 200;
-  new->next = prev;
-  return (new);
-}
-t_light_list		*add_empty_light2(t_light_list *prev)
-{
-  t_light_list          *new;
-
-  if ((new = malloc(sizeof(t_light_list))) == NULL)
-    return (NULL);
-  new->center.x = 0;
-  new->center.y = -500;
-  new->center.z = 0;
-  new->intensity = 200;
-  new->next = prev;
-  return (new);
-}
-t_light_list		*add_empty_light3(t_light_list *prev)
-{
-  t_light_list          *new;
-
-  if ((new = malloc(sizeof(t_light_list))) == NULL)
-    return (NULL);
-  new->center.x = 500;
-  new->center.y = 0;
-  new->center.z = 0;
-  new->intensity = 200;
-  new->next = prev;
-  return (new);
-}
-t_light_list		*add_empty_light4(t_light_list *prev)
-{
-  t_light_list          *new;
-
-  if ((new = malloc(sizeof(t_light_list))) == NULL)
-    return (NULL);
-  new->center.x = -500;
-  new->center.y = 0;
-  new->center.z = 0;
-  new->intensity = 200;
-  new->next = prev;
-  return (new);
-}
-
-t_mat_list              *add_empty_mat(t_mat_list *prev)
-{
-  t_mat_list            *new;
-
-  if ((new = malloc(sizeof(t_mat_list))) == NULL)
-    return (NULL);
-  new->color.full = 0xFFFFAF00;
-  new->reflect = 10;
-  new->id = 1;
-  new->next = prev;
-  return (new);
-}
 
 t_obj_list              *add_fake_triangle(t_obj_list *prev)
 {
@@ -95,10 +29,8 @@ t_obj_list              *add_fake_triangle(t_obj_list *prev)
   return (new);
 }
 
-int			load_obj_file(t_prog *prog, char *path)
+int			load_obj_file_init(t_prog *prog)
 {
-  char			**file;
-  t_vtx_list		*vtx_list;
   t_coord		dir;
 
   prog->win_size.x = 1080;
@@ -108,29 +40,34 @@ int			load_obj_file(t_prog *prog, char *path)
   prog->cam_pos.z = -90;
   prog->cam_fov.x = 90;
   prog->cam_fov.y =
-    prog->cam_fov.x * ((prog->win_size.x / prog->win_size.y) / 1.5);
+  prog->cam_fov.x * ((prog->win_size.x / prog->win_size.y) / 1.5);
   prog->look_at.x = 0;
   prog->look_at.y = 10;
   prog->look_at.z = 0;
   dir = normalize(minus_point(prog->look_at, prog->cam_pos));
   prog->cam_rot.x =
-    RTD(acos(-(dir.z / sqrt(pow(dir.x, 2) + pow(dir.z, 2))))) - 90;
+  RTD(acos(-(dir.z / sqrt(pow(dir.x, 2) + pow(dir.z, 2))))) - 90;
   prog->cam_rot.y = RTD((M_PI / 2 - acos(dir.y)));
   prog->cam_dir = normalize(minus_point(prog->look_at, prog->cam_pos));
-  if ((file = load_scene_file(path, -1, 0)) == NULL)
-    return (-1);
   prog->light_list = NULL;
-  if ((prog->light_list = add_empty_light(prog->light_list)) == NULL)
+  return (0);
+}
+
+int			load_obj_file(t_prog *prog, char *path)
+{
+  char			**file;
+  t_vtx_list		*vtx_list;
+
+  if (load_obj_file_init(prog)
+      || (file = load_scene_file(path, -1, 0)) == NULL)
     return (-1);
-  if ((prog->light_list = add_empty_light2(prog->light_list)) == NULL)
+  if (((prog->light_list = add_empty_light(prog->light_list)) == NULL)
+      || ((prog->light_list = add_empty_light2(prog->light_list)) == NULL)
+      || ((prog->light_list = add_empty_light3(prog->light_list)) == NULL)
+      || ((prog->light_list = add_empty_light4(prog->light_list)) == NULL))
     return (-1);
-  if ((prog->light_list = add_empty_light3(prog->light_list)) == NULL)
-    return (-1);
-  if ((prog->light_list = add_empty_light4(prog->light_list)) == NULL)
-    return (-1);
-  if ((prog->background =
-       create_text_uni(prog->win_size.x, prog->win_size.x,
-		       0xff000000)) == NULL)
+  if ((prog->background = create_text_uni(prog->win_size.x, prog->win_size.x,
+					  0xff000000)) == NULL)
     return (-1);
   prog->anti_alias = 1;
   prog->mat_list = NULL;

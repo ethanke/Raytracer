@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Wed Apr 27 17:06:03 2016 Victor Sousa
-** Last update Tue May  3 01:00:54 2016 Victor Sousa
+** Last update Sat May 21 04:27:11 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -15,8 +15,8 @@ static int		get_mat_id(t_plan *p, char **file, int id)
   char			*lf;
   char			*get;
 
- if ((lf = malloc(sizeof(char) *
-		  my_strlen("scene:object_list:objX:material_id1")
+  if ((lf = malloc(sizeof(char) *
+		   my_strlen("scene:object_list:objX:material_id1")
 		  + 1)) == NULL)
     return (1);
   lf[0] = '\0';
@@ -35,14 +35,20 @@ static int		get_mat_id(t_plan *p, char **file, int id)
   return (0);
 }
 
+static int		get_end(char *get, char *lf)
+{
+  free(get);
+  free(lf);
+  return (0);
+}
+
 static int		get_dir(t_plan *p, char **file, int id)
 {
   char			*lf;
   char			*get;
   t_point		tmp;
 
-  if ((lf = malloc(sizeof(char) *
-		   my_strlen("scene:object_list:objX:dir:x")
+  if ((lf = malloc(sizeof(char) * my_strlen("scene:object_list:objX:dir:x")
 		   + 1)) == NULL)
     return (1);
   lf[0] = '\0';
@@ -61,8 +67,7 @@ static int		get_dir(t_plan *p, char **file, int id)
   if ((get = get_field(file, lf)) == NULL)
     return (1);
   tmp.z = my_getnbr(get);
-  free(get);
-  free(lf);
+  get_end(get, lf);
   p->dir.x = tmp.x;
   p->dir.y = tmp.y;
   p->dir.z = tmp.z;
@@ -75,8 +80,7 @@ static int		get_center(t_plan *p, char **file, int id)
   char			*get;
   t_point		tmp;
 
-  if ((lf = malloc(sizeof(char) *
-		   my_strlen("scene:object_list:objX:center:x")
+  if ((lf = malloc(sizeof(char) * my_strlen("scene:object_list:objX:center:x")
 		   + 1)) == NULL)
     return (1);
   lf[0] = '\0';
@@ -95,8 +99,7 @@ static int		get_center(t_plan *p, char **file, int id)
   if ((get = get_field(file, lf)) == NULL)
     return (1);
   tmp.z = my_getnbr(get);
-  free(get);
-  free(lf);
+  get_end(get, lf);
   p->center.x = tmp.x;
   p->center.y = tmp.y;
   p->center.z = tmp.z;

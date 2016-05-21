@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:38 2016 victor sousa
-** Last update Mon May 16 14:03:34 2016 Philippe Lefevre
+** Last update Sat May 21 04:37:10 2016 Philippe Lefevre
 */
 
 #ifndef			LOADING_H_
@@ -41,5 +41,19 @@ t_light_list		*add_empty_light4(t_light_list *prev);
 t_mat_list              *add_empty_mat(t_mat_list *prev);
 int			create_pix(t_prog *prog);
 int			create_win(t_prog *prog);
+int			get_center_pill(t_cylin *p, char **file, int id);
+int			get_dir_pill(t_cylin *p, char **file, int id);
+int			get_radius_pill(t_cylin *p, char **file, int id);
+int			get_mat_id_pill(t_cylin *p, char **file, int id);
+int			get_center_cyl(t_cylin *p, char **file, int id);
+int			get_dir_cyl(t_cylin *p, char **file, int id);
+int			get_radius_cyl(t_cylin *p, char **file, int id);
+int			get_mat_id_cyl(t_cylin *p, char **file, int id);
+int			get_cone_height_cyl(t_cylin *c, char **file, int id);
+t_light_list		*add_empty_light(t_light_list *prev);
+t_light_list		*add_empty_light2(t_light_list *prev);
+t_light_list		*add_empty_light3(t_light_list *prev);
+t_light_list		*add_empty_light4(t_light_list *prev);
+t_mat_list              *add_empty_mat(t_mat_list *prev);
 
 #endif		      /*LOADING_H*/

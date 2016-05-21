@@ -5,34 +5,10 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue May  3 02:15:04 2016 Ethan Kerdelhue
-** Last update Mon May 16 16:47:25 2016 Philippe Lefevre
+** Last update Sat May 21 03:15:03 2016 Philippe Lefevre
 */
 
 #include		"main.h"
-
-char    *my_strcpy(char *dest, char *src)
-{
-  int   i;
-
-  i = 0;
-  while (src[i])
-    {
-      dest[i] = src[i];
-      i = i + 1;
-    }
-  dest[i] = '\0';
-  return (dest);
-}
-
-char	*my_strdup(char *str)
-{
-  char	*s;
-
-  if ((s = malloc(my_strlen(str))) == NULL)
-      return (NULL);
-  my_strcpy(s, str);
-  return (s);
-}
 
 char			*get_mtl_name(char **file)
 {
