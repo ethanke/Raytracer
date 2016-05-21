@@ -105,6 +105,18 @@ void MyPopup::set_ui_editmat(int id)
     mainwindow->show();
 }
 
+void MyPopup::set_ui_promat(int id)
+{
+    QWidget *mainwindow = this;
+    QGridLayout *mainLayout = new QGridLayout;
+    this->proId = id;
+    this->set_layout_promat(mainLayout, id);
+    mainwindow->setLayout(mainLayout);
+    mainwindow->setFixedWidth(600);
+    mainwindow->setFixedHeight(400);
+    mainwindow->show();
+}
+
 void MyPopup::selectPathFile()
 {
    this->path_file = QFileDialog::getOpenFileName(this, QObject::tr("Open File"),"/path/to/file/", QObject::tr("Files png's only (*.png)"));
@@ -258,6 +270,76 @@ void MyPopup::set_layout_editmat(QGridLayout *mainLayout, int id)
     mainLayout->addWidget(getPath, 10, 0);
     mainLayout->addWidget(curPath, 10, 1);
 }
+
+void MyPopup::set_layout_promat(QGridLayout *mainLayout, int id)
+{
+    this->tabProMat = new QTableWidget();
+    int i = 0;
+    while (i < int(global_scene->objectList.size()))
+     {
+        this->tabProMat->insertRow(i);
+        this->tabProMat->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->objectList[i]->center.x), 1));
+        i++;
+    }
+    connect(this->tabProMat, SIGNAL(itemClicked(QTableWidgetItem)), this, SLOT(selectProMat(QTableWidgetItem)));
+    mainLayout->addWidget(this->tabProMat, 0, 0);
+}
+
+void MyPopup::selectProMat(QTableWidgetItem *item)
+{
+    int i = 0;
+    if (this->proId == 0)
+    {
+        while (i != global_scene->objUsingMarble.size())
+        {
+            if (item->row() == global_scene->objUsingMarble.at(i))
+                return;
+            i++;
+        }
+        global_scene->objUsingMarble.push_back(item->row());
+    }
+    if (this->proId == 1)
+    {
+        while (i != global_scene->objUsingCircle.size())
+        {
+            if (item->row() == global_scene->objUsingCircle.at(i))
+                return;
+            i++;
+        }
+        global_scene->objUsingCircle.push_back(item->row());
+    }
+    if (this->proId == 2)
+    {
+        while (i != global_scene->objUsingWood.size())
+        {
+            if (item->row() == global_scene->objUsingWood.at(i))
+                return;
+            i++;
+        }
+        global_scene->objUsingWood.push_back(item->row());
+    }
+    if (this->proId == 3)
+    {
+        while (i != global_scene->objUsingGayPride.size())
+        {
+            if (item->row() == global_scene->objUsingGayPride.at(i))
+                return;
+            i++;
+        }
+        global_scene->objUsingGayPride.push_back(item->row());
+    }
+    if (this->proId == 4)
+    {
+        while (i != global_scene->objUsingTurbulence.size())
+        {
+            if (item->row() == global_scene->objUsingTurbulence.at(i))
+                return;
+            i++;
+        }
+        global_scene->objUsingTurbulence.push_back(item->row());
+    }
+}
+
 
 void MyPopup::updatePrevButton(QColor color)
 {

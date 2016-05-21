@@ -6,7 +6,6 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    std::srand(time(NULL));
 
     return a.exec();
 }

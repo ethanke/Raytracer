@@ -39,6 +39,9 @@ MainWindow::MainWindow(QWidget *parent) :
       ui->comboBox_wy->addItem(tab_y[i]);
     ui->renderButton->setDisabled(true);
     ui->saveButton->setDisabled(true);
+    ui->comboBox_ao->setDisabled(true);
+    ui->lineEdit_ss->setDisabled(true);
+    ui->listProMat->setDisabled(true);
 }
 
 void MainWindow::CloseWindow()
@@ -93,9 +96,14 @@ void MainWindow::on_loadButton_clicked()
     ui->lineEdit_lax->setText(QString::number(global_scene->camera->look_at.x));
     ui->lineEdit_lay->setText(QString::number(global_scene->camera->look_at.y));
     ui->lineEdit_laz->setText(QString::number(global_scene->camera->look_at.z));
+    ui->comboBox_ao->setDisabled(false);
+    ui->lineEdit_ss->setDisabled(false);
+    ui->lineEdit_ss->setText(QString::number(global_scene->shadowsampling));
+    ui->listProMat->setDisabled(false);
     this->affLightTab();
     this->affObjTab();
     this->affMatTab();
+    this->affProceduralMat();
 }
 
 void MainWindow::on_lineEdit_cpx_editingFinished()
@@ -206,9 +214,14 @@ void MainWindow::on_pushButton_3_pressed()
     ui->lineEdit_lax->setText(QString::number(global_scene->camera->look_at.x));
     ui->lineEdit_lay->setText(QString::number(global_scene->camera->look_at.y));
     ui->lineEdit_laz->setText(QString::number(global_scene->camera->look_at.z));
+    ui->comboBox_ao->setDisabled(false);
+    ui->lineEdit_ss->setDisabled(false);
+    ui->lineEdit_ss->setText(QString::number(global_scene->shadowsampling));
+    ui->listProMat->setDisabled(false);
     this->affLightTab();
     this->affObjTab();
     this->affMatTab();
+    this->affProceduralMat();
 }
 
 void MainWindow::refObjTab()
@@ -318,14 +331,14 @@ void MainWindow::on_comboBox_ao_activated(int index)
 {
     if (index != 1)
     {
-        global_scene->booleansoftshadow = 0;
         ui->label_11->setDisabled(false);
+        global_scene->booleansoftshadow = true;
         ui->lineEdit_ss->setDisabled(false);
     }
     else
     {
-        global_scene->booleansoftshadow = 1;
         ui->label_11->setDisabled(true);
+        global_scene->booleansoftshadow = false;
         ui->lineEdit_ss->setDisabled(true);
     }
 }
@@ -333,4 +346,28 @@ void MainWindow::on_comboBox_ao_activated(int index)
 void MainWindow::on_lineEdit_ss_textChanged(const QString &arg1)
 {
     global_scene->shadowsampling = arg1.toInt();
+}
+
+void MainWindow::affProceduralMat()
+{
+    ui->listProMat->insertRow(0);
+    ui->listProMat->setItem(0, 0, new QTableWidgetItem("Marble", 1));
+    ui->listProMat->insertRow(1);
+    ui->listProMat->setItem(1, 0, new QTableWidgetItem("Circle", 1));
+    ui->listProMat->insertRow(2);
+    ui->listProMat->setItem(2, 0, new QTableWidgetItem("Wood", 1));
+    ui->listProMat->insertRow(3);
+    ui->listProMat->setItem(3, 0, new QTableWidgetItem("GayPride", 1));
+    ui->listProMat->insertRow(4);
+    ui->listProMat->setItem(4, 0, new QTableWidgetItem("Turbulence", 1));
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    if (ui->listProMat->currentRow() >= 0)
+    {
+        this->popup = new MyPopup(this);
+        popup->set_ui_promat(ui->listProMat->currentRow());
+        this->refObjTab();
+    }
 }
