@@ -5,38 +5,43 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Thu Nov 12 12:27:44 2015 Gaëtan Léandre
-** Last update Tue May 10 18:15:04 2016 Gaëtan Léandre
+** Last update Sat May 21 19:47:36 2016 Philippe Lefevre
 */
 
 #include 		"server.h"
+
+static int		init_flag(t_sfonct *tab)
+{
+  tab[0].flag = 'c';
+  tab[1].flag = 's';
+  tab[2].flag = 'i';
+  tab[3].flag = 'd';
+  tab[4].flag = 'u';
+  tab[5].flag = 'o';
+  tab[6].flag = 'x';
+  tab[7].flag = 'X';
+  tab[8].flag = 'b';
+  tab[9].flag = 'S';
+  tab[10].flag = 'p';
+  tab[11].flag = 'f';
+}
 
 static t_sfonct		*init_sstruct(t_sfonct *tab)
 {
   if ((tab = malloc(12 * sizeof(t_sfonct))) == NULL)
     return (NULL);
-  tab[0].flag = 'c';
+  init_flag(tab);
   (tab[0].f) = va_my_putchar_s;
-  tab[1].flag = 's';
   (tab[1].f) = va_my_putstr_s;
-  tab[2].flag = 'i';
   (tab[2].f) = va_my_putnbr_s;
-  tab[3].flag = 'd';
   (tab[3].f) = va_my_putnbr_s;
-  tab[4].flag = 'u';
   (tab[4].f) = va_my_putunbr_s;
-  tab[5].flag = 'o';
   (tab[5].f) = va_my_octal_s;
-  tab[6].flag = 'x';
   (tab[6].f) = va_my_examin_s;
-  tab[7].flag = 'X';
   (tab[7].f) = va_my_examaj_s;
-  tab[8].flag = 'b';
   (tab[8].f) = va_my_bin_s;
-  tab[9].flag = 'S';
   (tab[9].f) = va_my_disp_unp_s;
-  tab[10].flag = 'p';
   (tab[10].f) = va_my_adress_s;
-  tab[11].flag = 'f';
   (tab[11].f) = va_my_putfnbr_s;
   return (tab);
 }

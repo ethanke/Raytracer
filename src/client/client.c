@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue May 10 22:52:42 2016 Gaëtan Léandre
-** Last update Fri May 20 20:14:38 2016 Philippe Lefevre
+** Last update Sat May 21 19:52:21 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -59,13 +59,12 @@ void			recive_launch(SOCKET sock)
   my_printf(1, "%s\n", buffer);
 }
 
-int			set_connections(SOCKET sock, t_prog *prog)
+int			set_connections(SOCKET sock, t_prog *prog,
+					int status)
 {
   fd_set		fdset;
-  int			status;
   char			*str;
 
-  status = 0;
   while (status != -1)
     {
       status = 0;
@@ -117,7 +116,7 @@ int			client(t_prog *prog)
 
   if ((sock = init_connection()) == -1)
     return (-1);
-  status = set_connections(sock, prog);
+  status = set_connections(sock, prog, 0);
   close(sock);
   return (status);
 }
