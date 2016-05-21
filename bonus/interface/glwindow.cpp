@@ -81,8 +81,8 @@ void GlWindow::save_button()
         }
     }
 
-    outPixmap = new QPixmap; //Petit changements
-    outPixmap->convertFromImage(img); //Idem
+    outPixmap = new QPixmap;
+    outPixmap->convertFromImage(img);
     outPixmap->save(fileName, "PNG");
 }
 
