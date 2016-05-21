@@ -71,6 +71,7 @@ SRC		+=	$(LOADIR)/parsing_scene.c		\
 			$(LOADIR)/load_sphere_param.c		\
 			$(LOADIR)/load_triangle_param.c		\
 			$(LOADIR)/load_cone_params.c		\
+			$(LOADIR)/load_cone_params2.c		\
 			$(LOADIR)/load_cyl_params.c		\
 			$(LOADIR)/load_cyl_params2.c		\
 			$(LOADIR)/load_cube_param.c		\

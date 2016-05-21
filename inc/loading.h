@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:38 2016 victor sousa
-** Last update Sat May 21 18:16:06 2016 Philippe Lefevre
+** Last update Sat May 21 18:36:07 2016 Philippe Lefevre
 */
 
 #ifndef			LOADING_H_
@@ -64,5 +64,10 @@ int			get_mat_reflect(t_mat_list *new, char **file, int id);
 int			get_mat_blue(t_mat_list *new, char **file, int id);
 int			get_mat_green(t_mat_list *new, char **file, int id);
 int			get_mat_red(t_mat_list *new, char **file, int id);
+int			get_center_cone(t_cone *c, char **file, int id);
+int			get_dir_cone(t_cone *c, char **file, int id);
+int			get_radius_cone(t_cone *c, char **file, int id);
+int			get_mat_id_cone(t_cone *c, char **file, int id);
+int			get_cone_height_cone(t_cone *c, char **file, int id);
 
 #endif		      /*LOADING_H*/
