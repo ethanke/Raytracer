@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Thu Nov 12 12:27:44 2015 Gaëtan Léandre
-** Last update Sat May 21 19:47:36 2016 Philippe Lefevre
+** Last update Sun May 22 00:01:59 2016 Philippe Lefevre
 */
 
 #include 		"server.h"
@@ -24,6 +24,7 @@ static int		init_flag(t_sfonct *tab)
   tab[9].flag = 'S';
   tab[10].flag = 'p';
   tab[11].flag = 'f';
+  return (0);
 }
 
 static t_sfonct		*init_sstruct(t_sfonct *tab)
@@ -87,11 +88,8 @@ static char			*print_ffct(va_list ap, t_sfonct *tab,
 	}
     }
   else if (fct > -1)
-    {
-      if (wait == 1)
-	result = my_strcatchar(result, ' ');
-      result = my_strcatprint(result, tab[fct].f(ap));
-    }
+    result = ((wait == 1) ? my_strcatchar(result, ' ')
+	      : my_strcatprint(result, tab[fct].f(ap)));
   return (result);
 }
 

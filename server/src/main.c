@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Thu May  5 00:03:54 2016 Gaëtan Léandre
-** Last update Fri May 20 19:45:20 2016 Gaëtan Léandre
+** Last update Sun May 22 01:29:21 2016 Philippe Lefevre
 */
 
 #include		"server.h"
@@ -24,19 +24,31 @@ int			action_master(t_connected *co, fd_set fdset)
       else if ((tab = is_command(buffer)))
 	launch_command_client(co->master->sock, tab, co);
       else if (co->master->name != NULL)
-	{
-	  str = my_sprintf("\033[34m<%s> : %s\033[0m", co->master->name, buffer);
-	  if (str != NULL)
-	    {
-	      my_printf(1, "%s\n", str);
-	      write_all_client(co, str, co->master->sock);
-	      free(str);
-	    }
-	}
+	if ((str = my_sprintf("\033[34m<%s> : %s\033[0m",
+			      co->master->name, buffer)) != NULL)
+	  {
+	    my_printf(1, "%s\n", str);
+	    write_all_client(co, str, co->master->sock);
+	    free(str);
+	  }
     }
   else
     return (0);
   return (1);
+}
+
+void			action_client_bis(t_client *tmp, char buffer[],
+					  t_connected *co)
+{
+  char			*str;
+
+  str = my_sprintf("<%s> : %s", tmp->name, buffer);
+  if (str != NULL)
+    {
+      my_printf(1, "%s\n", str);
+      write_all_client(co, str, tmp->sock);
+      free(str);
+    }
 }
 
 void			action_client(t_connected *co, fd_set fdset)
@@ -44,7 +56,6 @@ void			action_client(t_connected *co, fd_set fdset)
   t_client		*tmp;
   char			buffer[BUF_SIZE + 1];
   int			size;
-  char			*str;
   char			**tab;
 
   tmp = co->clients;
@@ -59,15 +70,7 @@ void			action_client(t_connected *co, fd_set fdset)
 	  else if ((tab = is_command(buffer)))
 	    launch_command_client(tmp->sock, tab, co);
 	  else if (tmp->name != NULL)
-	    {
-	      str = my_sprintf("<%s> : %s", tmp->name, buffer);
-	      if (str != NULL)
-		{
-		  my_printf(1, "%s\n", str);
-		  write_all_client(co, str, tmp->sock);
-		  free(str);
-		}
-	    }
+	    action_client_bis(tmp, buffer, co);
 	  return;
 	}
       tmp = tmp->next;

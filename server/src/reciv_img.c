@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun May  8 02:00:53 2016 Gaëtan Léandre
-** Last update Sat May 21 18:46:48 2016 Philippe Lefevre
+** Last update Sun May 22 01:09:40 2016 Philippe Lefevre
 */
 
 #include		"server.h"
@@ -80,6 +80,24 @@ int			test_done(t_connected *co)
   return (1);
 }
 
+void			reciv_img_end(t_connected *co, fd_set *fdset,
+				      t_client *tmp)
+{
+  while (tmp != NULL)
+    {
+      recive_img_sock(co, tmp, fdset);
+      tmp = tmp->next;
+    }
+  if (test_done(co) == 1)
+    {
+      my_printf(1, "L'obj a bien été reçu. /download avec "
+		"l'acces root pour le récupérer\n");
+      write_all_client(co, "L'obj a bien été reçu. /download "
+		       "avec l'acces root pour le récupérer", -1);
+      co->status = 0;
+    }
+}
+
 void			reciv_img(t_connected *co)
 {
   fd_set		fdset;
@@ -102,35 +120,57 @@ void			reciv_img(t_connected *co)
 	co->status = -1;
       recive_img_sock(co, co->master, &fdset);
       tmp = co->clients;
-      while (tmp != NULL)
-	{
-	  recive_img_sock(co, tmp, &fdset);
-	  tmp = tmp->next;
-	}
-      if (test_done(co) == 1)
-	{
-	  my_printf(1, "L'obj a bien été reçu. /download avec "
-		    "l'acces root pour le récupérer\n");
-	  write_all_client(co, "L'obj a bien été reçu. /download "
-			   "avec l'acces root pour le récupérer", -1);
-	  co->status = 0;
-	}
+      reciv_img_end(co, &fdset, tmp);
     }
+}
+
+void			charge_server_end(t_connected *co,
+					  int size_x, int actu_x)
+{
+  int			i;
+  char			*str;
+  t_client		*tmp;
+
+  tmp = co->clients;
+  while (tmp)
+    {
+      tmp->start_x = actu_x;
+      tmp->end_x =
+      (actu_x + size_x >= co->width) ? co->width : actu_x + size_x;
+      actu_x = tmp->end_x;
+      str = my_sprintf("%d %d %c", tmp->start_x, tmp->end_x,
+		       (co->form == 1 ? 'x' : 'o'));
+      tmp->done = 0 * (tmp->pos = 0);
+      tmp->wait =
+      (tmp->end_x - tmp->start_x) * co->height * sizeof(unsigned int);
+      tmp->grille = malloc(tmp->wait);
+      i = 0;
+      while (tmp->grille != NULL && i < tmp->wait)
+	tmp->grille[i++] = 0;
+      write_client(tmp->sock, str);
+      free(str);
+      tmp = tmp->next;
+    }
+}
+
+void			charge_server_beg(int *i, int *size_x, int *actu_x,
+					  t_connected *co)
+{
+  *i = 0;
+  while (*i++ < 2000000000);
+  my_printf(1, "Envois des consignes aux clients\n");
+  *size_x = co->width / (co->size + 1) + 1;
+  *actu_x = 0;
 }
 
 int			charge_server(t_connected *co)
 {
-  t_client		*tmp;
   char			*str;
   int			size_x;
   int			actu_x;
   int			i;
 
-  i = 0;
-  while (i++ < 2000000000);
-  my_printf(1, "Envois des consignes aux clients\n");
-  size_x = co->width / (co->size + 1) + 1;
-  actu_x = 0;
+  charge_server_beg(&i, &size_x, &actu_x, co);
   co->master->start_x = actu_x;
   co->master->end_x =
     (actu_x + size_x >= co->width) ? co->width : actu_x + size_x;
@@ -147,25 +187,6 @@ int			charge_server(t_connected *co)
   co->master->done = 0 * (co->master->pos = 0);
   write_client(co->master->sock, str);
   free(str);
-  tmp = co->clients;
-  while (tmp)
-    {
-      tmp->start_x = actu_x;
-      tmp->end_x =
-	(actu_x + size_x >= co->width) ? co->width : actu_x + size_x;
-      actu_x = tmp->end_x;
-      str = my_sprintf("%d %d %c", tmp->start_x, tmp->end_x,
-		       (co->form == 1 ? 'x' : 'o'));
-      tmp->done = 0 * (tmp->pos = 0);
-      tmp->wait =
-	(tmp->end_x - tmp->start_x) * co->height * sizeof(unsigned int);
-      tmp->grille = malloc(tmp->wait);
-      i = 0;
-      while (tmp->grille != NULL && i < tmp->wait)
-	tmp->grille[i++] = 0;
-      write_client(tmp->sock, str);
-      free(str);
-      tmp = tmp->next;
-    }
+  charge_server_end(co, size_x, actu_x);
   return (1);
 }

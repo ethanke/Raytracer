@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 05:54:51 2016 Gaëtan Léandre
-** Last update Sat May 21 18:46:02 2016 Philippe Lefevre
+** Last update Sun May 22 00:48:38 2016 Philippe Lefevre
 */
 
 #include		"server.h"
@@ -85,6 +85,31 @@ int			cmd_name(char **tab, t_connected *co, SOCKET sock)
   return (0);
 }
 
+int			cmd_sudo_bis(t_client *tmp, SOCKET sock,
+				     t_connected *co)
+{
+  while (tmp != NULL)
+    {
+      if (tmp->sock == sock)
+	{
+	  if (tmp->prev != NULL)
+	    tmp->prev->next = tmp->next;
+	  else
+	    co->clients = tmp->next;
+	  if (tmp->next != NULL)
+	    tmp->next->prev = tmp->prev;
+	  co->master = tmp;
+	  my_printf(1, "Le pouvoir est renversé, un nouveau joueur "
+		    "s'installe à la tête du serveur!\n");
+	  write_all_client(co, "Le pouvoir est renversé, un nouveau "
+			   "joueur s'installe à la tête du serveur!", -1);
+	  return (1);
+	}
+      tmp = tmp->next;
+    }
+  return (0);
+}
+
 int			cmd_sudo(SOCKET sock, char **tab, t_connected *co)
 {
   t_client		*tmp;
@@ -106,26 +131,7 @@ int			cmd_sudo(SOCKET sock, char **tab, t_connected *co)
       else
 	co->size--;
       tmp = co->clients;
-      while (tmp != NULL)
-	{
-	  if (tmp->sock == sock)
-	    {
-	      if (tmp->prev != NULL)
-		tmp->prev->next = tmp->next;
-	      else
-		co->clients = tmp->next;
-	      if (tmp->next != NULL)
-		tmp->next->prev = tmp->prev;
-	      co->master = tmp;
-	      my_printf(1, "Le pouvoir est renversé, un nouveau joueur "
-			"s'installe à la tête du serveur!\n");
-	      write_all_client(co, "Le pouvoir est renversé, un nouveau "
-			       "joueur s'installe à la tête du serveur!", -1);
-	      return (1);
-	    }
-	  tmp = tmp->next;
-	}
-      return (0);
+      return (cmd_sudo_bis(tmp, sock, co));
     }
   return (0);
 }
@@ -174,7 +180,9 @@ void			launch_command_server(char **tab, t_connected *co)
 void			launch_command_client(SOCKET sock, char **tab,
                                             t_connected *co)
 {
-  if ((co->master == NULL || co->master->sock != sock || cmd_exit(tab, co) == 0)
+  if ((co->master == NULL
+       || co->master->sock != sock
+       || cmd_exit(tab, co) == 0)
       && cmd_sudo(sock, tab, co) == 0 && cmd_launch(sock, tab, co) == 0
       && cmd_download(sock, tab, co) == 0 && cmd_name(tab, co, sock) == 0)
     write_client(sock, "Commande inconnue");

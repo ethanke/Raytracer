@@ -28,7 +28,8 @@ SRC		=	src/main.c				\
 SRC             +=      $(SPRTFDIR)/my_disp_unprintable.c    	\
 	                $(SPRTFDIR)/my_sprintf.c               	\
                         $(SPRTFDIR)/my_sprintf2.c              	\
-		        $(SPRTFDIR)/my_sprintf3.c              	\
+			$(SPRTFDIR)/my_sprintf3.c              	\
+		        $(SPRTFDIR)/my_sprintf4.c              	\
 		        $(SPRTFDIR)/my_put_nbr.c              	\
 		        $(SPRTFDIR)/my_put_u_nbr_base.c        	\
 		        $(SPRTFDIR)/my_put_unbr.c               \

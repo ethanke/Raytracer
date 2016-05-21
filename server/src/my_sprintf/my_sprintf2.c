@@ -5,20 +5,10 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Fri Nov 13 10:51:48 2015 Gaëtan Léandre
-** Last update Tue May 10 18:15:31 2016 Gaëtan Léandre
+** Last update Sat May 21 23:46:52 2016 Philippe Lefevre
 */
 
 #include 		"server.h"
-
-char			*va_my_putchar_s(va_list ap)
-{
-  char			*str;
-
-  if ((str = malloc_and_init()) == NULL)
-    return (NULL);
-  str = my_strcatchar(str, va_arg(ap, int));
-  return (str);
-}
 
 char			*va_my_putstr_s(va_list ap)
 {

@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat Apr  9 01:06:04 2016 Gaëtan Léandre
-** Last update Sat May  7 06:31:44 2016 Gaëtan Léandre
+** Last update Sat May 21 23:44:33 2016 Philippe Lefevre
 */
 
 #include		"utils.h"
@@ -57,29 +57,24 @@ char			**str_to_wordtab(char *str, char *separate)
   int			i;
 
   words = 0;
-  i = 0;
-  while (str[i])
-    {
-      if (i - 1 < 0 || (is_separate(str[i], separate) == 1
-			&& is_separate(str[i - 1], separate) == 0))
-	words++;
-      i++;
-    }
+  i = -1;
+  while (str[++i])
+    if (i - 1 < 0 || (is_separate(str[i], separate) == 1
+		      && is_separate(str[i - 1], separate) == 0))
+      words++;
   if (words == 0 || (tab = malloc(sizeof(char *) * (words + 1))) == NULL)
     return (NULL);
   i = 0;
   words = 0;
   while (str[i])
-    {
-      if (is_separate(str[i], separate) == 0)
-	{
-	  if ((tab[words] = size_word(str, separate, &i)) == NULL)
-	    return (NULL);
-	  words++;
-	}
-      else
-	i++;
-    }
+    if (is_separate(str[i], separate) == 0)
+      {
+	if ((tab[words] = size_word(str, separate, &i)) == NULL)
+	  return (NULL);
+	words++;
+      }
+    else
+      i++;
   tab[words] = NULL;
   return (tab);
 }
