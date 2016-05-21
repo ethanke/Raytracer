@@ -88,6 +88,10 @@ private slots:
 
     void on_loadButton_2_clicked();
 
+    void on_comboBox_ao_activated(int index);
+
+    void on_lineEdit_ss_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
 };

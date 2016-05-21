@@ -106,16 +106,6 @@
      </property>
     </widget>
    </widget>
-   <widget class="GlWindow" name="myGlWindow" native="true">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>130</y>
-      <width>1080</width>
-      <height>720</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton">
     <property name="enabled">
      <bool>true</bool>
@@ -199,7 +189,7 @@
 </string>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <property name="tabBarAutoHide">
      <bool>true</bool>
@@ -574,6 +564,73 @@
       </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_ss">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>460</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string> into 1 to 1024</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>460</y>
+        <width>121</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>10</horstretch>
+        <verstretch>10</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Shadow Sampling :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>420</y>
+        <width>131</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>10</horstretch>
+        <verstretch>10</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Soft Shadow :&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_ao">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>420</y>
+        <width>111</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="currentText">
+       <string/>
       </property>
      </widget>
     </widget>
@@ -1010,38 +1067,6 @@
     <hint type="destinationlabel">
      <x>358</x>
      <y>207</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>renderButton</sender>
-   <signal>clicked()</signal>
-   <receiver>myGlWindow</receiver>
-   <slot>raytrace_button()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>484</x>
-     <y>133</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>743</x>
-     <y>415</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>saveButton</sender>
-   <signal>clicked()</signal>
-   <receiver>myGlWindow</receiver>
-   <slot>save_button()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>612</x>
-     <y>128</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>711</x>
-     <y>313</y>
     </hint>
    </hints>
   </connection>

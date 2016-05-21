@@ -28,6 +28,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->listMat->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->listMat->setColumnWidth(0, ui->listMat->size().width());
     ui->listMat->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->comboBox_ao->addItem("Enabled");
+    ui->comboBox_ao->addItem("Disabled");
+    ui->comboBox_ao->setCurrentIndex(0);
     QString tab_x[] = {"1152", "960", "768", "640", "576", "480", "384", "320"};
     QString tab_y[] = {"720", "600", "480", "400", "360", "300", "240", "300"};
     for(int i = 0; i < 8; i++)
@@ -309,4 +312,25 @@ void MainWindow::on_loadButton_2_clicked()
     refMatTab();
     ui->renderButton->setDisabled(true);
     ui->saveButton->setDisabled(true);
+}
+
+void MainWindow::on_comboBox_ao_activated(int index)
+{
+    if (index != 1)
+    {
+        global_scene->booleansoftshadow = 0;
+        ui->label_11->setDisabled(false);
+        ui->lineEdit_ss->setDisabled(false);
+    }
+    else
+    {
+        global_scene->booleansoftshadow = 1;
+        ui->label_11->setDisabled(true);
+        ui->lineEdit_ss->setDisabled(true);
+    }
+}
+
+void MainWindow::on_lineEdit_ss_textChanged(const QString &arg1)
+{
+    global_scene->shadowsampling = arg1.toInt();
 }
