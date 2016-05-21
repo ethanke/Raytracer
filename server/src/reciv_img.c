@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sun May  8 02:00:53 2016 Gaëtan Léandre
-** Last update Mon May 16 10:33:26 2016 Philippe Lefevre
+** Last update Sat May 21 18:46:48 2016 Philippe Lefevre
 */
 
 #include		"server.h"
@@ -109,10 +109,10 @@ void			reciv_img(t_connected *co)
 	}
       if (test_done(co) == 1)
 	{
-	  my_printf(1, "L'obj a bien été reçu. /download avec \
-		    l'acces root pour le récupérer\n");
-	  write_all_client(co, "L'obj a bien été reçu. /download \
-			   avec l'acces root pour le récupérer", -1);
+	  my_printf(1, "L'obj a bien été reçu. /download avec "
+		    "l'acces root pour le récupérer\n");
+	  write_all_client(co, "L'obj a bien été reçu. /download "
+			   "avec l'acces root pour le récupérer", -1);
 	  co->status = 0;
 	}
     }

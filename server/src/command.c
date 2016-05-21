@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Sat May  7 05:54:51 2016 Gaëtan Léandre
-** Last update Mon May 16 12:13:18 2016 Gaëtan Léandre
+** Last update Sat May 21 18:46:02 2016 Philippe Lefevre
 */
 
 #include		"server.h"
@@ -117,10 +117,10 @@ int			cmd_sudo(SOCKET sock, char **tab, t_connected *co)
 	      if (tmp->next != NULL)
 		tmp->next->prev = tmp->prev;
 	      co->master = tmp;
-	      my_printf(1, "Le pouvoir est renversé, un nouveau joueur \
-s'installe à la tête du serveur!\n");
-	      write_all_client(co, "Le pouvoir est renversé, un nouveau \
-joueur s'installe à la tête du serveur!", -1);
+	      my_printf(1, "Le pouvoir est renversé, un nouveau joueur "
+			"s'installe à la tête du serveur!\n");
+	      write_all_client(co, "Le pouvoir est renversé, un nouveau "
+			       "joueur s'installe à la tête du serveur!", -1);
 	      return (1);
 	    }
 	  tmp = tmp->next;
