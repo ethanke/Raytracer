@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue May 10 22:56:16 2016 Gaëtan Léandre
-** Last update Fri May 20 03:30:48 2016 Gaëtan Léandre
+** Last update Sat May 21 19:29:22 2016 Philippe Lefevre
 */
 
 #ifndef			_CLIENT_H_
@@ -19,7 +19,6 @@
 # include		<netinet/in.h>
 # include		<arpa/inet.h>
 # include		<unistd.h>
-# include		<stdio.h>
 # include		"get_next_line.h"
 # include 		"utils.h"
 

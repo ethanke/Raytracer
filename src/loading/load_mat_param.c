@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:55:20 2016 victor sousa
-** Last update Sat May 21 18:03:50 2016 Philippe Lefevre
+** Last update Sat May 21 19:28:46 2016 Philippe Lefevre
 */
 
 #include	"main.h"
@@ -26,7 +26,9 @@ int			get_mat_bump(t_mat_list *new, char **file, int id)
       my_printf(1, "Could not find scene:material_list:mat%d:bump\n", id + 1);
       return (-1);
     }
+  printf("\nLA VRAIMENT FAUT PAS OUBLIER YA UN VRAI ATOF\n");
   new->bump = atof(get);
+  printf("\nLA VRAIMENT FAUT PAS OUBLIER YA UN VRAI ATOF\n");
   free(get);
   free(lf);
   return (0);
