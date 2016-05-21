@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Wed May 11 00:37:45 2016 Gaëtan Léandre
-** Last update Sat May 21 23:29:07 2016 Philippe Lefevre
+** Last update Sat May 21 23:31:54 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -46,10 +46,9 @@ char			*download_cmd(int *status, char **tab,
 
   if (tab[0] && !my_strcmp(tab[0], "download") && tab[1] && tab[2])
     {
-      my_printf(1, "Reception de l'image.");
+      my_printf(1, "Reception de l'image.\n");
       prog->win_size.x = my_getnbr(tab[1]);
       prog->win_size.y = my_getnbr(tab[2]);
-      my_printf(1, "%d %d\n", prog->win_size.x, prog->win_size.y);
       wait = prog->win_size.x * prog->win_size.y;
       wait *= sizeof(unsigned int);
       grille = malloc(wait);
