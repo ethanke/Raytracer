@@ -286,7 +286,7 @@ void RaytraceThread::applyProceduralTexture(Vector3f<float> &outColor, Vector3f<
 {
     if (procedMat == MARBLE)
     {
-        Vector3f<float> scale = hitPoint * 0.25/*period*/;
+        Vector3f<float> scale = hitPoint * 1/*period*/;
         double x = scale.x;
         double y = scale.y;
         double z = scale.z;
@@ -298,9 +298,8 @@ void RaytraceThread::applyProceduralTexture(Vector3f<float> &outColor, Vector3f<
               level * 0.05 * z
            ));
         }
-        float noise = scale.x + scale.y + scale.z + 0.035/*power*/ * turbulence;
-        float noiseCoef = std::abs(sin(noise * M_PI));
-        outColor = (outColor + ((Vector3f<float>( 10, 10, 10) / 25000.0) * noiseCoef + (Vector3f<float>( 200, 200, 200) / 25000.0) * (1.0 - noiseCoef))) / 2.0;
+        float noiseCoef = sin(/*frequency*/0.5 * (x + /*amplitude*/30 * turbulence));
+        outColor = (outColor + ((Vector3f<float>( 10, 10, 10) / 25000.0) * noiseCoef + (Vector3f<float>( 255, 255, 255) / 25000.0) * (1.0 - noiseCoef))) / 2.0;
     }
 
     if (procedMat == CIRCLE)
