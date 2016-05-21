@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:26:06 2016 victor sousa
-** Last update Thu May  5 11:55:35 2016 Victor Sousa
+** Last update Sat May 21 04:02:13 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -29,44 +29,37 @@ int			while_load_obj(char **file, char *get,
 	}
       if (my_strstr(get, "sphere"))
 	{
-	  if ((prog->obj_list = add_sphere(prog->obj_list, file, i))
-	      == NULL)
+	  if ((prog->obj_list = add_sphere(prog->obj_list, file, i)) == NULL)
 	    return (-1);
 	}
 	else if (my_strstr(get, "triangle"))
 	{
-	  if ((prog->obj_list = add_triangle(prog->obj_list, file, i))
-	      == NULL)
+	  if ((prog->obj_list = add_triangle(prog->obj_list, file, i)) == NULL)
 	    return (-1);
 	}
 	else if (my_strstr(get, "plan"))
   	{
-  	  if ((prog->obj_list = add_plan(prog->obj_list, file, i))
-  	      == NULL)
+  	  if ((prog->obj_list = add_plan(prog->obj_list, file, i)) == NULL)
   	    return (-1);
   	}
       else if (my_strstr(get, "cone"))
 	{
-    	  if ((prog->obj_list = add_cone(prog->obj_list, file, i))
-    	      == NULL)
+    	  if ((prog->obj_list = add_cone(prog->obj_list, file, i)) == NULL)
     	    return (-1);
     	}
       else if (my_strstr(get, "pill"))
 	{
-	  if ((prog->obj_list = add_pill(prog->obj_list, file, i))
-	      == NULL)
+	  if ((prog->obj_list = add_pill(prog->obj_list, file, i)) == NULL)
 	    return (-1);
 	}
       else if (my_strstr(get, "cylinder"))
   	{
-  	  if ((prog->obj_list = add_cyl(prog->obj_list, file, i))
-  	      == NULL)
+  	  if ((prog->obj_list = add_cyl(prog->obj_list, file, i)) == NULL)
   	    return (-1);
   	}
       else if (my_strstr(get, "cube"))
 	{
-	  if ((prog->obj_list = add_cube(prog->obj_list, file, i))
-	      == NULL)
+	  if ((prog->obj_list = add_cube(prog->obj_list, file, i)) == NULL)
 	    return (-1);
 	}
       else

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:05:12 2016 victor sousa
-** Last update Sat May 21 02:14:33 2016 Philippe Lefevre
+** Last update Sat May 21 02:18:45 2016 Philippe Lefevre
 */
 
 #ifndef			RAYTRACE_H_
@@ -96,5 +96,6 @@ double			noise_end(t_noise noise, double x, double y, double z);
 void			calc_sphere_normale_bis(t_raycast *rcast,
 						t_normal_sphere sphere);
 int			damier(t_coord *pos);
+int                     process_light(t_prog *prog, t_raycast *rcast);
 
 #endif		      /*RAYTRACE_H*/

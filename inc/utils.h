@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 05:29:22 2016 victor sousa
-** Last update Sun May  8 09:53:54 2016 Gaëtan Léandre
+** Last update Sat May 21 03:15:40 2016 Philippe Lefevre
 */
 
 #ifndef			UTILS_H_
@@ -33,6 +33,8 @@ int			my_strncmp(char *s1, char *s2, int nb);
 char			*my_itoa(int nb);
 char			*my_strcatpp(char *desc, char *src);
 char			*epur_str(char *str, char *separ);
+char			*my_strcpy(char *dest, char *src);
+char			*my_strdup(char *str);
 
 /* vector operator */
 float                   mult_vector(const t_coord v1, const t_coord v2);

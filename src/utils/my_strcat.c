@@ -5,15 +5,39 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 17:58:27 2016 victor sousa
-** Last update Mon Apr 25 21:05:08 2016 Ethan Kerdelhue
+** Last update Sat May 21 03:15:41 2016 Philippe Lefevre
 */
 
-#include	"main.h"
+#include		"main.h"
 
-char		*my_strcat(char *dest, char *src)
+char			*my_strdup(char *str)
 {
-  int		len;
-  int		i;
+  char			*s;
+
+  if ((s = malloc(my_strlen(str))) == NULL)
+      return (NULL);
+  my_strcpy(s, str);
+  return (s);
+}
+
+char			*my_strcpy(char *dest, char *src)
+{
+  int			i;
+
+  i = 0;
+  while (src[i])
+    {
+      dest[i] = src[i];
+      i = i + 1;
+    }
+  dest[i] = '\0';
+  return (dest);
+}
+
+char			*my_strcat(char *dest, char *src)
+{
+  int			len;
+  int			i;
 
   len = my_strlen(dest);
   i = 0;
@@ -26,11 +50,11 @@ char		*my_strcat(char *dest, char *src)
   return (dest);
 }
 
-char 	*my_strcatpp(char *dest, char *src)
+char			*my_strcatpp(char *dest, char *src)
 {
-  char	*new;
-  int	i;
-  int	j;
+  char			*new;
+  int			i;
+  int			j;
 
   i = -1;
   j = 0;

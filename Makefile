@@ -70,10 +70,13 @@ SRC		+=	$(LOADIR)/parsing_scene.c		\
 			$(LOADIR)/load_triangle_param.c		\
 			$(LOADIR)/load_cone_params.c		\
 			$(LOADIR)/load_cyl_params.c		\
+			$(LOADIR)/load_cyl_params2.c		\
 			$(LOADIR)/load_cube_param.c		\
 			$(LOADIR)/load_pill_params.c		\
+			$(LOADIR)/load_pill_params2.c		\
 			$(LOADIR)/load_plan_params.c		\
 			$(LOADIR)/load_obj_file.c		\
+			$(LOADIR)/load_obj_file2.c		\
 			$(LOADIR)/load_vertex.c			\
 			$(LOADIR)/load_forme.c			\
 			$(LOADIR)/load_screen.c
@@ -90,6 +93,7 @@ SRC		+=	$(HITDIR)/hit.c				\
 SRC		+=	$(RAYTRACEDIR)/raytrace.c		\
 			$(RAYTRACEDIR)/raytrace_threading.c	\
 			$(RAYTRACEDIR)/shad_n_light.c		\
+			$(RAYTRACEDIR)/shad_n_light2.c		\
 			$(RAYTRACEDIR)/reflect.c		\
 			$(RAYTRACEDIR)/obj_calculs.c		\
 			$(RAYTRACEDIR)/obj_calculs2.c		\
