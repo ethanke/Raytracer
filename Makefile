@@ -64,6 +64,7 @@ SRC		+=	$(LOADIR)/parsing_scene.c		\
 			$(LOADIR)/load_mat.c			\
 			$(LOADIR)/load_mtl.c			\
 			$(LOADIR)/load_mat_param.c		\
+			$(LOADIR)/load_mat_param2.c		\
 			$(LOADIR)/load_light.c			\
 			$(LOADIR)/load_obj.c			\
 			$(LOADIR)/load_sphere_param.c		\
@@ -79,6 +80,7 @@ SRC		+=	$(LOADIR)/parsing_scene.c		\
 			$(LOADIR)/load_obj_file2.c		\
 			$(LOADIR)/load_vertex.c			\
 			$(LOADIR)/load_forme.c			\
+			$(LOADIR)/load_forme2.c			\
 			$(LOADIR)/load_screen.c
 
 ##  HIT  ##
