@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue May 10 22:52:42 2016 Gaëtan Léandre
-** Last update Fri May 20 20:14:38 2016 Philippe Lefevre
+** Last update Sat May 21 20:02:10 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -59,13 +59,12 @@ void			recive_launch(SOCKET sock)
   my_printf(1, "%s\n", buffer);
 }
 
-int			set_connections(SOCKET sock, t_prog *prog)
+int			set_connections(SOCKET sock, t_prog *prog,
+					int status)
 {
   fd_set		fdset;
-  int			status;
   char			*str;
 
-  status = 0;
   while (status != -1)
     {
       status = 0;
@@ -89,27 +88,6 @@ int			set_connections(SOCKET sock, t_prog *prog)
   return (status);
 }
 
-SOCKET			init_connection()
-{
-  SOCKET		sock;
-  SOCKADDR_IN		sock_addr;
-
-  if ((sock = socket(AF_INET, SOCK_STREAM, 0)) == -1)
-    {
-      my_printf(2, "Erreur de socket\n");
-      return (-1);
-    }
-  sock_addr.sin_addr.s_addr = inet_addr("93.9.51.53");
-  sock_addr.sin_family = AF_INET;
-  sock_addr.sin_port = htons(PORT);
-  if (connect(sock, (SOCKADDR*)&sock_addr, sizeof(sock_addr)) == -1)
-    {
-      my_printf(2, "Pas de connection\n");
-      return (-1);
-    }
-  return (sock);
-}
-
 int			client(t_prog *prog)
 {
   SOCKET		sock;
@@ -117,7 +95,7 @@ int			client(t_prog *prog)
 
   if ((sock = init_connection()) == -1)
     return (-1);
-  status = set_connections(sock, prog);
+  status = set_connections(sock, prog, 0);
   close(sock);
   return (status);
 }

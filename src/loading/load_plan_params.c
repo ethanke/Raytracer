@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Wed Apr 27 17:06:03 2016 Victor Sousa
-** Last update Sat May 21 04:27:11 2016 Philippe Lefevre
+** Last update Sat May 21 17:48:22 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -35,11 +35,15 @@ static int		get_mat_id(t_plan *p, char **file, int id)
   return (0);
 }
 
-static int		get_end(char *get, char *lf)
+static int		get_end(char *get, char *lf, char **file)
 {
+  int			ret;
+  if ((get = get_field(file, lf)) == NULL)
+    return (1);
+  ret = my_getnbr(get);
   free(get);
   free(lf);
-  return (0);
+  return (ret);
 }
 
 static int		get_dir(t_plan *p, char **file, int id)
@@ -64,10 +68,7 @@ static int		get_dir(t_plan *p, char **file, int id)
   tmp.y = my_getnbr(get);
   free(get);
   lf[27] = 'z';
-  if ((get = get_field(file, lf)) == NULL)
-    return (1);
-  tmp.z = my_getnbr(get);
-  get_end(get, lf);
+  tmp.z = get_end(get, lf, file);
   p->dir.x = tmp.x;
   p->dir.y = tmp.y;
   p->dir.z = tmp.z;
@@ -96,10 +97,7 @@ static int		get_center(t_plan *p, char **file, int id)
   tmp.y = my_getnbr(get);
   free(get);
   lf[30] = 'z';
-  if ((get = get_field(file, lf)) == NULL)
-    return (1);
-  tmp.z = my_getnbr(get);
-  get_end(get, lf);
+  tmp.z = get_end(get, lf, file);
   p->center.x = tmp.x;
   p->center.y = tmp.y;
   p->center.z = tmp.z;

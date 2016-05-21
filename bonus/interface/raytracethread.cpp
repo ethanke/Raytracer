@@ -14,7 +14,7 @@ RaytraceThread::RaytraceThread(QMutex* mu, GlWindow *glWin)
 #define         SEPIA               5
 void RaytraceThread::run()
 {
-    int     mode = 1;
+    int     mode = 3;
 
     Vector2 pos = Vector2(-1, -1);
     Camera  camera = Camera(global_scene->camera->win_size,
@@ -108,6 +108,10 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
     for (unsigned int x = 0; x < global_scene->objUsingTurbulence.size(); x++)
         if (obj_touched_id + 1 == global_scene->objUsingTurbulence.at(x))
             procedMat = TURBULENCE;
+    for (unsigned int x = 0; x < global_scene->objUsingColorCircle.size(); x++)
+        if (obj_touched_id + 1 == global_scene->objUsingColorCircle.at(x))
+            procedMat = COLORCIRCLE;
+
     applyProceduralTexture(outColor, hitPoint, procedMat);
 
     if (obj_touched->material->sky > 0)
@@ -156,9 +160,6 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
 void RaytraceThread::IlluminatePoint(Vector3f<float> &Point, Vector3f<float> &Normal, Vector3f<float> &Color, Camera &camera)
 {
     float AO = 1.0f;
-
-   if(AmbientOcclusion)
-     AO = AmbientOcclusionFactor(Point, Normal);
 
     if(global_scene->lightList.size() == 0)
     {
@@ -282,7 +283,7 @@ void RaytraceThread::applyProceduralTexture(Vector3f<float> &outColor, Vector3f<
 {
     if (procedMat == MARBLE)
     {
-        Vector3f<float> scale = hitPoint * 0.25/*period*/;
+        Vector3f<float> scale = hitPoint * 1/*period*/;
         double x = scale.x;
         double y = scale.y;
         double z = scale.z;
@@ -294,9 +295,8 @@ void RaytraceThread::applyProceduralTexture(Vector3f<float> &outColor, Vector3f<
               level * 0.05 * z
            ));
         }
-        float noise = scale.x + scale.y + scale.z + 0.035/*power*/ * turbulence;
-        float noiseCoef = std::abs(sin(noise * M_PI));
-        outColor = (outColor + ((Vector3f<float>( 10, 10, 10) / 25000.0) * noiseCoef + (Vector3f<float>( 200, 200, 200) / 25000.0) * (1.0 - noiseCoef))) / 2.0;
+        float noiseCoef = sin(/*frequency*/0.5 * (x + /*amplitude*/30 * turbulence));
+        outColor = (outColor + ((Vector3f<float>( 10, 10, 10) / 25000.0) * noiseCoef + (Vector3f<float>( 255, 255, 255) / 25000.0) * (1.0 - noiseCoef))) / 2.0;
     }
 
     if (procedMat == CIRCLE)
@@ -356,6 +356,43 @@ void RaytraceThread::applyProceduralTexture(Vector3f<float> &outColor, Vector3f<
         outColor.y = (outColor.y + (0 / 25000.0) * noiseCoefB + (255 / 25000.0) * (1.0 - noiseCoefB)) / 2.0;
         outColor.z = (outColor.z + (0 / 25000.0) * noiseCoefC + (255 / 25000.0) * (1.0 - noiseCoefC)) / 2.0;
     }
+
+    if (procedMat == COLORCIRCLE)
+    {
+        double x = hitPoint.x * /*scale*/ 100 * 0.5;
+        double y = hitPoint.y * /*scale*/ 100 * 0.5;
+        double z = hitPoint.z * /*scale*/ 100 * 0.5;
+        double noiseCoefA = 0;
+        double noiseCoefB = 0;
+        double noiseCoefC = 0;
+
+        for (int level = 1; level < 10; level++) {
+           noiseCoefA += (1.0f / level) * fabsf(noise(
+              level * 0.35 * x,
+              level * 0.05 * y,
+              level * z
+           ));
+
+           noiseCoefB += (1.0f / level) * fabsf(noise(
+              level * x,
+              level * 0.35 * y,
+              level * 0.05 * z
+           ));
+
+           noiseCoefC += (1.0f / level) * fabsf(noise(
+              level * 0.05 * x,
+              level * y,
+              level * 0.35 * z
+           ));
+        }
+        noiseCoefA = 0.5f * sinf((x + z) * 0.05f + noiseCoefA) + 0.5f;
+        noiseCoefB = 0.5f * sinf((y + x) * 0.05f + noiseCoefB) + 0.5f;
+        noiseCoefC = 0.5f * sinf((z + y) * 0.05f + noiseCoefC) + 0.5f;
+        outColor.x = (outColor.x + (0 / 25000.0) * noiseCoefA + (255 / 25000.0) * (1.0 - noiseCoefA)) / 2.0;
+        outColor.y = (outColor.y + (0 / 25000.0) * noiseCoefB + (255 / 25000.0) * (1.0 - noiseCoefB)) / 2.0;
+        outColor.z = (outColor.z + (0 / 25000.0) * noiseCoefC + (255 / 25000.0) * (1.0 - noiseCoefC)) / 2.0;
+    }
+
 
     if (procedMat == TURBULENCE)
     {

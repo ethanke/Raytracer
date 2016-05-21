@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:38 2016 victor sousa
-** Last update Sat May 21 04:37:10 2016 Philippe Lefevre
+** Last update Sat May 21 18:36:07 2016 Philippe Lefevre
 */
 
 #ifndef			LOADING_H_
@@ -55,5 +55,19 @@ t_light_list		*add_empty_light2(t_light_list *prev);
 t_light_list		*add_empty_light3(t_light_list *prev);
 t_light_list		*add_empty_light4(t_light_list *prev);
 t_mat_list              *add_empty_mat(t_mat_list *prev);
+int			get_sommet_size(char *str);
+t_obj_list		*create_triangle(char *str, t_obj_list *prev,
+					 t_vtx_list *list);
+int			where_are_formes(char **file);
+int			get_mat_sky(t_mat_list *new, char **file, int id);
+int			get_mat_reflect(t_mat_list *new, char **file, int id);
+int			get_mat_blue(t_mat_list *new, char **file, int id);
+int			get_mat_green(t_mat_list *new, char **file, int id);
+int			get_mat_red(t_mat_list *new, char **file, int id);
+int			get_center_cone(t_cone *c, char **file, int id);
+int			get_dir_cone(t_cone *c, char **file, int id);
+int			get_radius_cone(t_cone *c, char **file, int id);
+int			get_mat_id_cone(t_cone *c, char **file, int id);
+int			get_cone_height_cone(t_cone *c, char **file, int id);
 
 #endif		      /*LOADING_H*/

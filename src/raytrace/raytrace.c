@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:01:17 2016 victor sousa
-** Last update Sat May 21 03:54:41 2016 Philippe Lefevre
+** Last update Sat May 21 17:42:09 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -56,11 +56,11 @@ unsigned int		calcul_pixel(t_prog *prog,
   int			i_cmp;
 
   col.full = 0xFF000000;
-  alias_pos.y = pos.y;
-  while (alias_pos.y < pos.y + prog->anti_alias)
+  alias_pos.y = pos.y - 1;
+  while (++alias_pos.y < pos.y + prog->anti_alias)
     {
-      alias_pos.x = pos.x;
-      while (alias_pos.x < pos.x + prog->anti_alias)
+      alias_pos.x = pos.x - 1;
+      while (++alias_pos.x < pos.x + prog->anti_alias)
 	{
 	  init_ray(&prog->win_size, &raycast.ray, &alias_pos, prog);
 	  raytrace_loop(prog, &raycast, pos);
@@ -73,9 +73,7 @@ unsigned int		calcul_pixel(t_prog *prog,
 		col.argb[i_cmp] =
 		  col.argb[i_cmp] / 2 + raycast.out_col.argb[i_cmp] / 2;
 	    }
-	  alias_pos.x += 1.0;
 	}
-      alias_pos.y += 1.0;
     }
   return (col.full);
 }

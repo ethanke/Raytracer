@@ -61,14 +61,17 @@ SRC		=	$(SRCDIR)/main.c			\
 
 ## LOADING ##
 SRC		+=	$(LOADIR)/parsing_scene.c		\
+			$(LOADIR)/parsing_scene2.c		\
 			$(LOADIR)/load_mat.c			\
 			$(LOADIR)/load_mtl.c			\
 			$(LOADIR)/load_mat_param.c		\
+			$(LOADIR)/load_mat_param2.c		\
 			$(LOADIR)/load_light.c			\
 			$(LOADIR)/load_obj.c			\
 			$(LOADIR)/load_sphere_param.c		\
 			$(LOADIR)/load_triangle_param.c		\
 			$(LOADIR)/load_cone_params.c		\
+			$(LOADIR)/load_cone_params2.c		\
 			$(LOADIR)/load_cyl_params.c		\
 			$(LOADIR)/load_cyl_params2.c		\
 			$(LOADIR)/load_cube_param.c		\
@@ -79,6 +82,7 @@ SRC		+=	$(LOADIR)/parsing_scene.c		\
 			$(LOADIR)/load_obj_file2.c		\
 			$(LOADIR)/load_vertex.c			\
 			$(LOADIR)/load_forme.c			\
+			$(LOADIR)/load_forme2.c			\
 			$(LOADIR)/load_screen.c
 
 ##  HIT  ##
@@ -190,6 +194,7 @@ SRC		+=	$(UTILSDIR)/tekpixel.c			\
 
 ##  CLIENT  ##
 SRC		+=	$(CLIENTDIR)/client.c			\
+			$(CLIENTDIR)/client_init.c		\
 			$(CLIENTDIR)/communicate.c		\
 			$(CLIENTDIR)/command.c			\
 			$(CLIENTDIR)/send_file.c		\

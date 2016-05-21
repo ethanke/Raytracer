@@ -5,7 +5,7 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Thu May 12 12:11:50 2016 Philippe Lefevre
-** Last update Thu May 12 12:37:46 2016 Philippe Lefevre
+** Last update Sat May 21 18:40:02 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -22,6 +22,6 @@ int			waiting_screen(t_prog *prog)
   put_image(loading, prog->pix, &pos);
   bunny_blit(&prog->win->buffer, &prog->pix->clipable, &pos);
   bunny_display(prog->win);
-  /* delete t_texture*/
+  free(loading);
   return (0);
 }

@@ -125,7 +125,7 @@ Scene::Scene(QWidget *parent, int y)
             i++;
         }
 
-        this->objUsingGayPride.push_back(1);
+        this->objUsingWood.push_back(1);
 
         qDebug() << "object loaded\n";
 
@@ -149,7 +149,7 @@ Scene::Scene(QWidget *parent, int y)
         Vector3f<float> look_at = Vector3f<float>(0.0, 5.0, 0.0);
         Vector2 size = Vector2(1080, 720);
         this->camera = new Camera(size, cam_pos, look_at, 90.0, 1.0);
-        this->lightList.push_back(new Light(Vector3f<float>(30.0, 40.0, 30.0), 110.0));
+        //this->lightList.push_back(new Light(Vector3f<float>(30.0, 40.0, 30.0), 110.0));
 
         std::vector<std::string*> coord;
         std::vector<Vector3f<float>> vertex;

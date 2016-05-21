@@ -5,10 +5,70 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:26:06 2016 victor sousa
-** Last update Sat May 21 04:02:13 2016 Philippe Lefevre
+** Last update Sat May 21 19:07:33 2016 Philippe Lefevre
 */
 
 #include		"main.h"
+
+int			is_load_obj_3(char *get, char **file,
+				      t_prog *prog, int i)
+{
+  if (my_strstr(get, "cube"))
+    {
+      if ((prog->obj_list = add_cube(prog->obj_list, file, i)) == NULL)
+	return (-1);
+      return (0);
+    }
+  return (-1);
+}
+
+int			is_load_obj_2(char *get, char **file,
+				      t_prog *prog, int i)
+{
+  if (my_strstr(get, "cone"))
+    {
+      if ((prog->obj_list = add_cone(prog->obj_list, file, i)) == NULL)
+	return (-1);
+      return (0);
+    }
+  else if (my_strstr(get, "pill"))
+    {
+      if ((prog->obj_list = add_pill(prog->obj_list, file, i)) == NULL)
+	return (-1);
+      return (0);
+    }
+  else if (my_strstr(get, "cylinder"))
+    {
+      if ((prog->obj_list = add_cyl(prog->obj_list, file, i)) == NULL)
+	return (-1);
+      return (0);
+    }
+  return (is_load_obj_3(get, file, prog, i));
+}
+int			is_load_obj_1(char *get, char **file,
+
+				      t_prog *prog, int i)
+{
+  if (my_strstr(get, "sphere"))
+    {
+      if ((prog->obj_list = add_sphere(prog->obj_list, file, i)) == NULL)
+	return (-1);
+      return (0);
+    }
+  else if (my_strstr(get, "triangle"))
+    {
+      if ((prog->obj_list = add_triangle(prog->obj_list, file, i)) == NULL)
+	return (-1);
+      return (0);
+    }
+  else if (my_strstr(get, "plan"))
+    {
+      if ((prog->obj_list = add_plan(prog->obj_list, file, i)) == NULL)
+	return (-1);
+      return (0);
+    }
+  return (is_load_obj_2(get, file, prog, i));
+}
 
 int			while_load_obj(char **file, char *get,
 				       char *type_lf, t_prog *prog)
@@ -23,46 +83,9 @@ int			while_load_obj(char **file, char *get,
     {
       type_lf[21] = i + 49;
       if ((get = get_field(file, type_lf)) == NULL)
-	{
-	  my_printf(1, "Could not find scene:object_list:obj%d:type\n", i + 1);
-	  return (-1);
-	}
-      if (my_strstr(get, "sphere"))
-	{
-	  if ((prog->obj_list = add_sphere(prog->obj_list, file, i)) == NULL)
-	    return (-1);
-	}
-	else if (my_strstr(get, "triangle"))
-	{
-	  if ((prog->obj_list = add_triangle(prog->obj_list, file, i)) == NULL)
-	    return (-1);
-	}
-	else if (my_strstr(get, "plan"))
-  	{
-  	  if ((prog->obj_list = add_plan(prog->obj_list, file, i)) == NULL)
-  	    return (-1);
-  	}
-      else if (my_strstr(get, "cone"))
-	{
-    	  if ((prog->obj_list = add_cone(prog->obj_list, file, i)) == NULL)
-    	    return (-1);
-    	}
-      else if (my_strstr(get, "pill"))
-	{
-	  if ((prog->obj_list = add_pill(prog->obj_list, file, i)) == NULL)
-	    return (-1);
-	}
-      else if (my_strstr(get, "cylinder"))
-  	{
-  	  if ((prog->obj_list = add_cyl(prog->obj_list, file, i)) == NULL)
-  	    return (-1);
-  	}
-      else if (my_strstr(get, "cube"))
-	{
-	  if ((prog->obj_list = add_cube(prog->obj_list, file, i)) == NULL)
-	    return (-1);
-	}
-      else
+	return (my_printf(1, "Could not find "
+			  "scene:object_list:obj%d:type\n", i + 1) - 1);
+      if (is_load_obj_1(get, file, prog, i))
 	return (-1);
       free(get);
     }
