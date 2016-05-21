@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue May 10 22:52:42 2016 Gaëtan Léandre
-** Last update Sat May 21 19:52:21 2016 Philippe Lefevre
+** Last update Sat May 21 20:02:10 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -86,27 +86,6 @@ int			set_connections(SOCKET sock, t_prog *prog,
 	return (status);
     }
   return (status);
-}
-
-SOCKET			init_connection()
-{
-  SOCKET		sock;
-  SOCKADDR_IN		sock_addr;
-
-  if ((sock = socket(AF_INET, SOCK_STREAM, 0)) == -1)
-    {
-      my_printf(2, "Erreur de socket\n");
-      return (-1);
-    }
-  sock_addr.sin_addr.s_addr = inet_addr("93.9.51.53");
-  sock_addr.sin_family = AF_INET;
-  sock_addr.sin_port = htons(PORT);
-  if (connect(sock, (SOCKADDR*)&sock_addr, sizeof(sock_addr)) == -1)
-    {
-      my_printf(2, "Pas de connection\n");
-      return (-1);
-    }
-  return (sock);
 }
 
 int			client(t_prog *prog)

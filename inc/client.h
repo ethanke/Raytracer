@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Tue May 10 22:56:16 2016 Gaëtan Léandre
-** Last update Sat May 21 19:29:22 2016 Philippe Lefevre
+** Last update Sat May 21 20:02:25 2016 Philippe Lefevre
 */
 
 #ifndef			_CLIENT_H_
@@ -45,6 +45,7 @@ typedef struct		s_pass
   unsigned int		*grille;
 }			t_pass;
 
+SOCKET			init_connection();
 void			write_server(SOCKET sock, char *buffer);
 int			read_server(SOCKET sock, char *buffer);
 int			client(t_prog *prog);

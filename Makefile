@@ -194,6 +194,7 @@ SRC		+=	$(UTILSDIR)/tekpixel.c			\
 
 ##  CLIENT  ##
 SRC		+=	$(CLIENTDIR)/client.c			\
+			$(CLIENTDIR)/client_init.c		\
 			$(CLIENTDIR)/communicate.c		\
 			$(CLIENTDIR)/command.c			\
 			$(CLIENTDIR)/send_file.c		\
