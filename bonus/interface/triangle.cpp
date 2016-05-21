@@ -100,6 +100,7 @@ bool Triangle::hit(const Camera ray, float &old_dist)
 
 Vector3f<float> Triangle::getNormale(const Camera ray, const Vector3f<float> hitPoint)
 {
+    (void)hitPoint;
     Vector3f<float>e1 = this->point[1] - this->point[0];
     Vector3f<float>e2 = this->point[2] - this->point[0];
     Vector3f<float>h = Vector3f<float>::cross(e2, e1);
@@ -110,6 +111,7 @@ Vector3f<float> Triangle::getNormale(const Camera ray, const Vector3f<float> hit
 
 Vector3f<float> Triangle::getObjectColor(const Vector3f<float> hitPoint)
 {
+    (void)hitPoint;
     return (Vector3f<float>(this->material->color->r, this->material->color->g, this->material->color->b) / 255.0);
 }
 

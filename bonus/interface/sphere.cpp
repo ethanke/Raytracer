@@ -47,7 +47,8 @@ bool Sphere::hit(const Camera ray, float &old_dist)
 
 Vector3f<float> Sphere::getNormale(const Camera ray, const Vector3f<float> hitPoint)
 {
-  return (hitPoint - this->center) / this->radius;
+    (void)ray;
+    return (hitPoint - this->center) / this->radius;
 }
 
 Vector3f<float> Sphere::getObjectColor(const Vector3f<float> hitPoint)

@@ -74,12 +74,14 @@ Vector3f<float> Cylinder::getNormale(const Camera ray, const Vector3f<float> hit
 {
     Vector3f<float>	co;
 
-    co = this->center - hitPoint; /* WATCH OUT MINUS */
+    (void)ray;
+    co = this->center - hitPoint;
     return ((this->direction * (co.dot(this->direction) / this->direction.length2())) - co);
 }
 
 Vector3f<float> Cylinder::getObjectColor(const Vector3f<float> hitPoint)
 {
+    (void)hitPoint;
     return (Vector3f<float>(this->material->color->r, this->material->color->g, this->material->color->b) / 255.0);
 }
 

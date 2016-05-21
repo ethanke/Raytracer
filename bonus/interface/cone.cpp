@@ -74,6 +74,7 @@ Vector3f<float> Cone::getNormale(const Camera ray, const Vector3f<float> hitPoin
     Vector3f<float>	top;
     Vector3f<float>	perp;
 
+    (void)ray;
     top = this->center + this->direction * this->height;
     perp = Vector3f<float>::cross(this->direction, top - hitPoint);
     return (Vector3f<float>::cross(top - hitPoint, perp).normalize());
@@ -81,6 +82,7 @@ Vector3f<float> Cone::getNormale(const Camera ray, const Vector3f<float> hitPoin
 
 Vector3f<float> Cone::getObjectColor(const Vector3f<float> hitPoint)
 {
+    (void)hitPoint;
     return (Vector3f<float>(this->material->color->r, this->material->color->g, this->material->color->b) / 255.0);
 }
 

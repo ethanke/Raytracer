@@ -27,7 +27,6 @@ SOURCES += main.cpp\
     vector2f.cpp \
     sphere.cpp \
     material.cpp \
-    image.cpp \
     raytracethread.cpp \
     global.cpp \
     plan.cpp \
@@ -50,7 +49,6 @@ HEADERS  += mainwindow.h \
     vector2f.h \
     sphere.h \
     material.h \
-    image.h \
     raytracethread.h \
     global.h \
     plan.h \

@@ -38,7 +38,9 @@ bool Plan::hit(const Camera ray, float &old_dist)
 
 Vector3f<float> Plan::getNormale(const Camera ray, const Vector3f<float> hitPoint)
 {
-  return (-this->direction);
+    (void)ray;
+    (void)hitPoint;
+    return (-this->direction);
 }
 
 

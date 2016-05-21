@@ -162,7 +162,7 @@ Scene::Scene(QWidget *parent, int y)
             coord.push_back(new std::string(buf));
         }
 
-        for(int i = 0;i < coord.size(); i++)
+        for(unsigned int i = 0;i < coord.size(); i++)
         {
             if(coord[i]->c_str()[0] == '#')
                 continue;
@@ -174,7 +174,7 @@ Scene::Scene(QWidget *parent, int y)
             }
         }
         int flag = 0;
-        for(int i=0; i < coord.size(); i++)
+        for(unsigned int i=0; i < coord.size(); i++)
         {
             if(coord[i]->c_str()[0] == 'f' && coord[i]->c_str()[1] == ' ')
             {
