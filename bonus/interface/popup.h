@@ -18,6 +18,7 @@
 #include <qwidget.h>
 #include <QFileDialog>
 #include <QDoubleValidator>
+#include <QTableWidget>
 #include "sphere.h"
 #include "mainwindow.h"
 #include "vector2f.h"
@@ -44,11 +45,14 @@ public:
     int typeSelected = 0;
     void set_ui_editmat(int id);
     void set_layout_editmat(QGridLayout *mainLayout, int id);
+    void set_ui_promat(int id);
+    void set_layout_promat(QGridLayout *mainLayoun, int id);
     /*
      * 0 : sphere
      */
 
 private:
+    QTableWidget *tabProMat;
     QPushButton *Apply;
     QLabel *CenterX;
     QLabel *CenterY;
@@ -90,6 +94,7 @@ private:
     Color ColorCur = Color();
     Color *editColorCur;
     int editId;
+    int proId;
 
 private slots:
      void setValueObj();
@@ -106,6 +111,7 @@ private slots:
      void selectPathFile();
      void refMatListInObj(int nb);
      void editMaterial();
+     void selectProMat(QTableWidgetItem *item);
 };
 
 #else

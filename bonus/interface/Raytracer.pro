@@ -8,8 +8,6 @@ QT       += core gui
 QT       += xml
 QT       += opengl
 
-LIBS     += -lglut -lGLU
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Raytracer

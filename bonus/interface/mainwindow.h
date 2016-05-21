@@ -36,6 +36,7 @@ public:
     void refObjTab();
     void refMatTab();
     void refLightTab();
+    void affProceduralMat();
 
 private:
 
@@ -91,6 +92,8 @@ private slots:
     void on_comboBox_ao_activated(int index);
 
     void on_lineEdit_ss_textChanged(const QString &arg1);
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::MainWindow *ui;
