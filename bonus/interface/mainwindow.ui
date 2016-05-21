@@ -409,16 +409,6 @@
        <string/>
       </property>
      </widget>
-     <widget class="GlWindow" name="myGlWindow_2" native="true">
-      <property name="geometry">
-       <rect>
-        <x>410</x>
-        <y>240</y>
-        <width>1080</width>
-        <height>720</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_8">
       <property name="geometry">
        <rect>
@@ -1018,6 +1008,16 @@
      <string>Save as .png</string>
     </property>
    </widget>
+   <widget class="GlWindow" name="glWdiget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>150</y>
+      <width>1080</width>
+      <height>720</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -1025,7 +1025,7 @@
      <x>0</x>
      <y>0</y>
      <width>1920</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
@@ -1067,6 +1067,38 @@
     <hint type="destinationlabel">
      <x>358</x>
      <y>207</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>renderButton</sender>
+   <signal>clicked()</signal>
+   <receiver>glWdiget</receiver>
+   <slot>raytrace_button()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>495</x>
+     <y>135</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>575</x>
+     <y>258</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveButton</sender>
+   <signal>clicked()</signal>
+   <receiver>glWdiget</receiver>
+   <slot>save_button()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>625</x>
+     <y>122</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>769</x>
+     <y>237</y>
     </hint>
    </hints>
   </connection>

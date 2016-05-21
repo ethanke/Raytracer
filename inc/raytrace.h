@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Fri Mar 11 01:05:12 2016 victor sousa
-** Last update Mon May 16 12:38:56 2016 Philippe Lefevre
+** Last update Sat May 21 02:14:33 2016 Philippe Lefevre
 */
 
 #ifndef			RAYTRACE_H_
@@ -33,6 +33,17 @@ typedef struct		s_noise
   int			*p;
 }			t_noise;
 
+typedef struct		s_normal_sphere
+{
+  t_coord		vn;
+  t_coord		ve;
+  t_coord		vp;
+  float			phi;
+  float			theta;
+  float 		u;
+  float 		v;
+}			t_normal_sphere;
+
 int                     raytrace(t_prog *prog);
 int                     raytrace_threading(t_prog *prog, int nb_client,
 					   int all_client);
@@ -56,7 +67,8 @@ void			calc_plan_normale(t_prog *prog, t_raycast *rcast);
 void			calc_cone_normale(t_prog *prog, t_raycast *rcast);
 void			calc_cyl_normale(t_prog *prog, t_raycast *rcast);
 void			calc_circle_normale(t_prog *prog, t_raycast *rcast);
-
+double			fade(double t);
+void			noise_init(int p[512]);
 void			noise_init_0(int p[512]);
 void			noise_init_1(int p[512]);
 void			noise_init_2(int p[512]);
@@ -80,5 +92,9 @@ void			noise_init_19(int p[512]);
 void			noise_init_20(int p[512]);
 void			noise_init_21(int p[512]);
 void			noise_init_22(int p[512]);
+double			noise_end(t_noise noise, double x, double y, double z);
+void			calc_sphere_normale_bis(t_raycast *rcast,
+						t_normal_sphere sphere);
+int			damier(t_coord *pos);
 
 #endif		      /*RAYTRACE_H*/
