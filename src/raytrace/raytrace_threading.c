@@ -5,7 +5,7 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Sun May  8 02:20:22 2016 Philippe Lefevre
-** Last update Fri May 20 20:11:52 2016 Philippe Lefevre
+** Last update Sat May 21 01:10:11 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -84,6 +84,11 @@ static int		raytrace_end(t_prog *prog, pthread_t thread_id[],
   time_t		time_end;
 
   i = -1;
+  while (prog->opt->rendu_display && (prog->opt->rendu_success > 0))
+    {
+      bunny_blit(&prog->win->buffer, &prog->pix->clipable, pos);
+      bunny_display(prog->win);
+    }
   while (++i < prog->opt->thread_nb)
     pthread_join(thread_id[i], NULL);
   time_end = time(NULL);
@@ -122,10 +127,5 @@ int			raytrace_threading(t_prog *prog, int start,
 	return (-1);
   if (prog->opt->verbose)
     my_putstr("Thread create successfull\n");
-  while (prog->opt->rendu_display && (prog->opt->rendu_success > 0))
-    {
-      bunny_blit(&prog->win->buffer, &prog->pix->clipable, &pos);
-      bunny_display(prog->win);
-    }
   return (raytrace_end(prog, thread_id, time_beg, &pos));
 }

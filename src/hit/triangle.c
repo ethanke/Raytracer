@@ -1,11 +1,11 @@
- /*
+/*
 ** triangle.c for  in /home/sousa_v/rendu/lapin/raytracer_temp/src/hit/
 **
 ** Made by Victor Sousa
 ** Login   <sousa_v@epitech.eu>
 **
 ** Started on  Mon Apr 25 04:34:58 2016 Victor Sousa
-** Last update Thu May 19 21:13:35 2016 Victor Sousa
+** Last update Fri May 20 23:39:17 2016 Philippe Lefevre
 */
 
 #include		"main.h"

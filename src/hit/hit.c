@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 23:01:14 2016 victor sousa
-** Last update Mon May 16 17:37:50 2016 Philippe Lefevre
+** Last update Sat May 21 00:03:15 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -16,8 +16,7 @@ t_obj_list		*hit_normal_forme(t_obj_list *out, t_obj_list *tmp,
   if ((tmp->type == 's' && hit_sphere(ray, (t_sphere *)tmp->obj, dist))
       || (tmp->type == 't' && hit_triangle(ray, (t_triangle *)tmp->obj, dist))
       || (tmp->type == 'p' && hit_plan(ray, (t_plan *)tmp->obj, dist))
-      || (tmp->type == 'p' && hit_circle(ray, (t_circle *)tmp->obj, dist))
-      || (tmp->type == 'u' && hit_cube(ray, (t_cube *)tmp->obj, dist)))
+      || (tmp->type == 'p' && hit_circle(ray, (t_circle *)tmp->obj, dist)))
     {
       out->type = tmp->type;
       out->obj = tmp->obj;

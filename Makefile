@@ -5,7 +5,7 @@
 ## Login   <sousa_v@epitech.net>
 ##
 ## Started on  Tue Feb  9 01:56:43 2016 victor sousa
-## Last update Fri May 20 20:09:14 2016 Philippe Lefevre
+## Last update Sat May 21 00:55:46 2016 Philippe Lefevre
 ##
 
 NAME		=	raytracer2
@@ -37,7 +37,7 @@ RM		=	rm -f
 
 CC		=	gcc
 CFLAG		=	-W -Wall -Wextra -ansi -pedantic	\
-			-DMACRO	-std=c99		\
+			-DMACRO	-std=c99			\
 			-g3 -ggdb				\
 			-I/home/${USER}/.froot/include		\
 			-I$(INCDIR)
@@ -83,7 +83,6 @@ SRC		+=	$(HITDIR)/hit.c				\
 			$(HITDIR)/sphere.c			\
 			$(HITDIR)/triangle.c			\
 			$(HITDIR)/cone.c			\
-			$(HITDIR)/cube.c			\
 			$(HITDIR)/cylinder.c			\
 			$(HITDIR)/plan.c
 
@@ -93,6 +92,9 @@ SRC		+=	$(RAYTRACEDIR)/raytrace.c		\
 			$(RAYTRACEDIR)/shad_n_light.c		\
 			$(RAYTRACEDIR)/reflect.c		\
 			$(RAYTRACEDIR)/obj_calculs.c		\
+			$(RAYTRACEDIR)/obj_calculs2.c		\
+			$(RAYTRACEDIR)/obj_calculs_normal.c	\
+			$(RAYTRACEDIR)/obj_calculs_normal_sphere.c	\
 			$(RAYTRACEDIR)/noise_init_1.c		\
 			$(RAYTRACEDIR)/noise_init_2.c		\
 			$(RAYTRACEDIR)/noise_init_3.c		\
