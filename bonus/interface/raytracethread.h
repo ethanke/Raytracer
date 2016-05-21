@@ -12,8 +12,8 @@
 #include "plan.h"
 
 
-#define SoftShadows                             true
-#define GISamples                               1
+#define SoftShadows                             global_scene->booleansoftshadow
+#define GISamples                               global_scene->shadowsampling
 
 #define MAX_DEPTH                               10
 

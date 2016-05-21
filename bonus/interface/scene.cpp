@@ -195,4 +195,6 @@ Scene::Scene(QWidget *parent, int y)
         if (flag)
             QMessageBox::information(0, "Wrong Obj format", "found some 4vertex face\nWe can't compute that");
     }
+    this->booleansoftshadow = 1;
+    this->shadowsampling = 4;
 }
