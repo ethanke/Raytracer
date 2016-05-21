@@ -61,6 +61,7 @@ SRC		=	$(SRCDIR)/main.c			\
 
 ## LOADING ##
 SRC		+=	$(LOADIR)/parsing_scene.c		\
+			$(LOADIR)/parsing_scene2.c		\
 			$(LOADIR)/load_mat.c			\
 			$(LOADIR)/load_mtl.c			\
 			$(LOADIR)/load_mat_param.c		\

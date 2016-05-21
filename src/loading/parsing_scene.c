@@ -5,93 +5,10 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Mon May 16 14:03:08 2016 Philippe Lefevre
+** Last update Sat May 21 18:30:24 2016 Philippe Lefevre
 */
 
 #include		"main.h"
-
-t_line_list		*add_line_list(t_line_list *head, char *str)
-{
-  t_line_list		*new;
-  t_line_list		*tmp;
-
-  if ((new = malloc(sizeof(t_line_list))) == NULL)
-    return (NULL);
-  new->str = str;
-  new->next = NULL;
-  if (head == NULL)
-    return new;
-  else
-    {
-      tmp = head;
-      while (tmp->next != NULL)
-	tmp = tmp->next;
-      tmp->next = new;
-      return (head);
-    }
-}
-
-int			list_len(t_line_list *list)
-{
-  int			i;
-  t_line_list		*tmp;
-
-  i = 0;
-  tmp = list;
-  while (tmp != NULL)
-    {
-      i++;
-      tmp = tmp->next;
-    }
-  return (i);
-}
-
-char			**my_list_to_wordtab(t_line_list *list)
-{
-  char			**out;
-  t_line_list		*tmp;
-  int			i;
-
-  if ((out = malloc(sizeof(char *) * (list_len(list) + 1))) == NULL)
-    return (NULL);
-  tmp = list;
-  i = 0;
-  while (tmp != NULL)
-    {
-      out[i] = tmp->str;
-      tmp = tmp->next;
-      i++;
-    }
-  out[i] = '\0';
-  return (out);
-}
-
-char			**load_scene_file(char *path, int i, int fd)
-{
-  char			*str;
-  char			**file;
-  t_line_list		*file_list;
-  time_t		time_beg;
-  time_t		time_end;
-
-  time_beg = time(NULL);
-  if ((fd = open(path, O_RDONLY)) == -1)
-    return (NULL);
-  file_list = NULL;
-  while ((str = get_next_line_size(fd, 0)) != NULL)
-    file_list = add_line_list(file_list, str);
-  time_end = time(NULL);
-  my_printf(1, "Open/Read en %d heures %d minutes %d secondes\n",
-	    (time_end - time_beg) / 3600, ((time_end - time_beg) % 3600) / 60,
-	    ((time_end - time_beg) % 3600) % 60);
-  if ((file = my_list_to_wordtab(file_list)) == NULL)
-    return (NULL);
-  while (file[++i])
-    if ((file[i] = epur_str(file[i], " \t\n")) == NULL)
-      return (NULL);
-  close(fd);
-  return (file);
-}
 
 int			get_cam_pos(char **file, t_prog *prog)
 {
@@ -105,26 +22,17 @@ int			get_cam_pos(char **file, t_prog *prog)
   lf[0] = '\0';
   lf = my_strcat(lf, "scene:view:cam_pos:x");
   if ((get = get_field(file, lf)) == NULL)
-    {
-      my_putstr("Could not find scene:view:cam_pos:x\n");
-      return (-1);
-    }
+    return (my_printf(1, "Could not find scene:view:cam_pos:x\n") - 1);
   prog->cam_pos.x = my_getnbr(get);
   free(get);
   lf[19] = 'y';
   if ((get = get_field(file, lf)) == NULL)
-    {
-      my_putstr("Could not find scene:view:cam_pos:y\n");
-      return (-1);
-    }
+    return (my_printf(1, "Could not find scene:view:cam_pos:y\n") - 1);
   prog->cam_pos.y = my_getnbr(get);
   free(get);
   lf[19] = 'z';
   if ((get = get_field(file, lf)) == NULL)
-    {
-      my_putstr("Could not find scene:view:cam_pos:z\n");
-      return (-1);
-    }
+    return (my_printf(1, "Could not find scene:view:cam_pos:z\n") - 1);
   prog->cam_pos.z = my_getnbr(get);
   free(get);
   free(lf);
@@ -143,73 +51,28 @@ int			get_cam_look_at(char **file, t_prog *prog)
   lf[0] = '\0';
   lf = my_strcat(lf, "scene:view:look_at:x");
   if ((get = get_field(file, lf)) == NULL)
-    {
-      my_putstr("Could not find scene:view:look_at:x\n");
-      return (-1);
-    }
+    return (my_printf(1, "Could not find scene:view:look_at:x\n") - 1);
   prog->look_at.x = my_getnbr(get);
   free(get);
   lf[19] = 'y';
   if ((get = get_field(file, lf)) == NULL)
-    {
-      my_putstr("Could not find scene:view:look_at:y\n");
-      return (-1);
-    }
+    return (my_printf(1, "Could not find scene:view:look_at:y\n") - 1);
   prog->look_at.y = my_getnbr(get);
   free(get);
   lf[19] = 'z';
   if ((get = get_field(file, lf)) == NULL)
-    {
-      my_putstr("Could not find scene:view:look_at:z\n");
-      return (-1);
-    }
+    return (my_printf(1, "Could not find scene:view:look_at:z\n") - 1);
   prog->look_at.z = my_getnbr(get);
   free(get);
   free(lf);
   return (0);
 }
 
-int			load_scene(t_prog *prog, char *scene_path)
+int			load_scene_beg_bis(t_prog *prog, char *get,
+					   char **file)
 {
-  char			**file;
-  char			*get;
-  t_coord		dir;
-
-  if ((file = load_scene_file(scene_path, -1, 0)) == NULL)
-    return (-1);
-  if ((get = get_field(file, "scene:view:x_size")) == NULL)
-    {
-      my_putstr("Could not find scene:view:x_size\n");
-      return (-1);
-    }
-  prog->win_size.x = my_getnbr(get);
-  free(get);
-  if ((get = get_field(file, "scene:view:y_size")) == NULL)
-    {
-      my_putstr("Could not find scene:view:y_size\n");
-      return (-1);
-    }
-  prog->win_size.y = my_getnbr(get);
-  free(get);
-  if ((get = get_field(file, "scene:view:fov")) == NULL)
-    {
-      my_putstr("Could not find scene:view:fov\n");
-      return (-1);
-    }
-  prog->cam_fov.x = my_getnbr(get);
-  free(get);
-  if ((get = get_field(file, "scene:view:alias")) == NULL)
-    {
-      my_putstr("Could not find scene:view:alias\n");
-      return (-1);
-    }
-  prog->anti_alias = my_getnbr(get);
-  free(get);
   if ((get = get_field(file, "scene:view:background")) == NULL)
-    {
-      my_putstr("Could not find scene:view:background\n");
-      return (-1);
-    }
+    return (my_printf(1, "Could not find scene:view:background\n") - 1);
   if ((prog->background_path = malloc(my_strlen(get) + 1)) == NULL)
     return (-1);
   prog->background_path[0] = '\0';
@@ -230,6 +93,41 @@ int			load_scene(t_prog *prog, char *scene_path)
 				      prog->win_size.y));
     }
   free(get);
+  return (0);
+}
+
+int			load_scene_beg(t_prog *prog, char **file)
+{
+  char			*get;
+
+  if ((get = get_field(file, "scene:view:x_size")) == NULL)
+    return (my_printf(1, "Could not find scene:view:x_size\n") - 1);
+  prog->win_size.x = my_getnbr(get);
+  free(get);
+  if ((get = get_field(file, "scene:view:y_size")) == NULL)
+    return (my_printf(1, "Could not find scene:view:y_size\n") - 1);
+  prog->win_size.y = my_getnbr(get);
+  free(get);
+  if ((get = get_field(file, "scene:view:fov")) == NULL)
+    return (my_printf(1, "Could not find scene:view:fov\n") - 1);
+        prog->cam_fov.x = my_getnbr(get);
+  free(get);
+  if ((get = get_field(file, "scene:view:alias")) == NULL)
+    return (my_printf(1, "Could not find scene:view:alias\n") - 1);
+  prog->anti_alias = my_getnbr(get);
+  free(get);
+  return (load_scene_beg_bis(prog, get, file));
+}
+
+int			load_scene(t_prog *prog, char *scene_path)
+{
+  char			**file;
+  t_coord		dir;
+
+  if ((file = load_scene_file(scene_path, -1, 0)) == NULL)
+    return (-1);
+  if (load_scene_beg(prog, file))
+    return (-1);
   prog->cam_fov.y =
     prog->cam_fov.x * ((prog->win_size.x / prog->win_size.y) / 1.5);
   if (get_cam_pos(file, prog) == 1 ||
@@ -241,10 +139,7 @@ int			load_scene(t_prog *prog, char *scene_path)
   if (prog->look_at.x == prog->cam_pos.x &&
       prog->look_at.y == prog->cam_pos.y &&
       prog->look_at.z == prog->cam_pos.z)
-    {
-      my_putstr("Wrong camera placement\n");
-      return (-1);
-    }
+    return (my_printf(1, "Wrong camera placement\n") - 1);
   dir = normalize(minus_point(prog->look_at, prog->cam_pos));
   prog->cam_rot.x = RTD(acos(-(dir.z / sqrt(pow(dir.x, 2)
 					    + pow(dir.z, 2))))) - 90;
