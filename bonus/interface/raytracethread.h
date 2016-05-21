@@ -11,7 +11,23 @@
 #include "sphere.h"
 #include "plan.h"
 
-#define     MAX_DEPTH       10
+
+#define SoftShadows                             true
+#define GISamples                               1
+
+#define MAX_DEPTH                               10
+
+#define AmbientOcclusion                        1
+#define TDRM                                    (2.0 / (float)RAND_MAX)
+#define ODGISamples                             (1.0f / (float)GISamples)
+#define AmbientOcclusionIntensity               1
+#define ODGISamplesMAmbientOcclusionIntensity   (ODGISamples * AmbientOcclusionIntensity)
+
+#define MARBLE                                  1
+#define CIRCLE                                  2
+#define WOOD                                    3
+#define GAYPRIDE                                4
+#define TURBULENCE                              5
 
 class RaytraceThread : public QThread
 {
@@ -26,10 +42,11 @@ class RaytraceThread : public QThread
         Vector3f<float> mix(const Vector3f<float> &u, const Vector3f<float> &v, float a);
         float           clamp(const float &lo, const float &hi, const float &v);
 
-        void IlluminatePoint(Object *Object, Vector3f<float> &Point, Vector3f<float> &Normal, Vector3f<float> &Color, Camera &camera);
-        Vector3f<float> LightIntensity(Object *Object, Vector3f<float> &Point, Vector3f<float> &Normal, Vector3f<float> &LightPosition, Light *light, float AO);
+        void IlluminatePoint(Vector3f<float> &Point, Vector3f<float> &Normal, Vector3f<float> &Color, Camera &camera);
+        Vector3f<float> LightIntensity(Vector3f<float> &Point, Vector3f<float> &Normal, Vector3f<float> &LightPosition, float AO);
         void compute_photon(float &attenuation, const Vector3f<float> start, const Vector3f<float> lightDir, float LightDistance);
-        float AmbientOcclusionFactor(Object *object, Vector3f<float> &Point, Vector3f<float> &Normal);
+        float AmbientOcclusionFactor(Vector3f<float> &Point, Vector3f<float> &Normal);
+        void applyProceduralTexture(Vector3f<float> &outColor, Vector3f<float> hitPoint, const int procedMat);
 
     public:
         RaytraceThread(QMutex* mu, GlWindow *glWin);

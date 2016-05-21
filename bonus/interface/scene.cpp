@@ -120,6 +120,8 @@ Scene::Scene(QWidget *parent, int y)
             i++;
         }
 
+        this->objUsingGayPride.push_back(1);
+
         qDebug() << "object loaded\n";
 
         i = 1;

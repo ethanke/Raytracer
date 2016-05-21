@@ -28,6 +28,12 @@ class Scene
         QStringList stringlist;
         Camera *camera;
         MyXML *myxml;
+
+        std::vector<int>objUsingMarble;
+        std::vector<int>objUsingCircle;
+        std::vector<int>objUsingWood;
+        std::vector<int>objUsingGayPride;
+        std::vector<int>objUsingTurbulence;
 };
 
 #else
