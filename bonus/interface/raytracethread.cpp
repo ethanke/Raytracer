@@ -14,7 +14,7 @@ RaytraceThread::RaytraceThread(QMutex* mu, GlWindow *glWin)
 #define         SEPIA               5
 void RaytraceThread::run()
 {
-    int     mode = 1;
+    int     mode = 3;
 
     Vector2 pos = Vector2(-1, -1);
     Camera  camera = Camera(global_scene->camera->win_size,
@@ -160,9 +160,6 @@ Vector3f<float> RaytraceThread::raytrace(const Vector3f<float> &camStart, const 
 void RaytraceThread::IlluminatePoint(Vector3f<float> &Point, Vector3f<float> &Normal, Vector3f<float> &Color, Camera &camera)
 {
     float AO = 1.0f;
-
-   if(AmbientOcclusion)
-     AO = AmbientOcclusionFactor(Point, Normal);
 
     if(global_scene->lightList.size() == 0)
     {
