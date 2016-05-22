@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May  6 22:41:13 2016 Gaëtan Léandre
-** Last update Fri May 20 03:31:20 2016 
+** Last update Sun May 22 20:11:19 2016 Philippe Lefevre
 */
 
 #ifndef			SERVER_H_
@@ -81,5 +81,22 @@ int			my_getnbr(char *str);
 char			*my_strstr(char *str, char *to_find);
 void			recive_and_launch(t_connected *co);
 void			reciv_img(t_connected *co);
+int			cmd_sudo(SOCKET sock, char **tab, t_connected *co);
+int			cmd_sudo_bis(t_client *tmp, SOCKET sock,
+				     t_connected *co);
+int			cmd_name(char **tab, t_connected *co, SOCKET sock);
+int			cmd_launch(SOCKET sock, char **tab, t_connected *co);
+int			is_valid_file(char *args, t_connected *co);
+void			fill_end(t_client *client, unsigned int *tmp,
+				 t_connected *co);
+void			recive_img_sock(t_connected *co, t_client *client,
+					fd_set *fdset);
+int			test_done(t_connected *co);
+void			init_connected(t_connected *co, SOCKET sock);
+void			get_connections(SOCKET sock, t_connected *co);
+void			action_client(t_connected *co, fd_set fdset);
+void			action_client_bis(t_client *tmp, char buffer[],
+					  t_connected *co);
+int			action_master(t_connected *co, fd_set fdset);
 
 #endif			/* SERVER_H_ */

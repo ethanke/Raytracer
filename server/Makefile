@@ -17,10 +17,13 @@ SPRTFDIR	=	src/my_sprintf
 PRTFDIR		=	src/my_printf
 
 SRC		=	src/main.c				\
+			src/main2.c				\
 			src/comunicate.c			\
 			src/command.c				\
+			src/command2.c				\
 			src/connection.c			\
 			src/reciv_img.c				\
+			src/reciv_img2.c			\
 			src/recive_and_launch.c
 
 ## SPRINTF ##
@@ -41,6 +44,7 @@ SRC             +=      $(PRTFDIR)/my_disp_unprintable.c        \
 			$(PRTFDIR)/my_printf.c                  \
 			$(PRTFDIR)/my_printf2.c                 \
 			$(PRTFDIR)/my_printf3.c                 \
+			$(PRTFDIR)/my_printf4.c                 \
 			$(PRTFDIR)/my_put_nbr.c                 \
 			$(PRTFDIR)/my_put_u_nbr_base.c          \
 			$(PRTFDIR)/my_put_unbr.c                \
