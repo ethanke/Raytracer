@@ -5,7 +5,7 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Sun May 22 02:16:59 2016 Philippe Lefevre
-** Last update Sun May 22 06:55:47 2016 Philippe Lefevre
+** Last update Sun May 22 07:01:19 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -71,5 +71,5 @@ int			export_to_bmp(t_prog *prog)
   free(prog->opt->export_path);
   free(pbitmap);
   free(pixelbuffer);
-  return (0);
+  return (my_printf(1, "Rendu save in %s\n", prog->opt->export_path));
 }
