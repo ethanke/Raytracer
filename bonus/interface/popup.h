@@ -48,6 +48,12 @@ public:
     void set_layout_editmat(QGridLayout *mainLayout, int id);
     void set_ui_promat(int id);
     void set_layout_promat(QGridLayout *mainLayoun, int id);
+    bool isInGayPride(int nb);
+    bool isInCircle(int nb);
+    bool isInMarble(int nb);
+    bool isInColorCircle(int nb);
+    bool isInWood(int nb);
+    bool isInTurbulence(int nb);
     /*
      * 0 : sphere
      */

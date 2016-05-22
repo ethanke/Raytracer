@@ -271,6 +271,66 @@ void MyPopup::set_layout_editmat(QGridLayout *mainLayout, int id)
     mainLayout->addWidget(curPath, 10, 1);
 }
 
+bool MyPopup::isInGayPride(int nb)
+{
+   for (int i = 0; i < global_scene->objUsingGayPride.size(); i++)
+   {
+        if (nb == global_scene->objUsingGayPride.at(i))
+            return (true);
+   }
+   return (false);
+}
+
+bool MyPopup::isInMarble(int nb)
+{
+   for (int i = 0; i < global_scene->objUsingMarble.size(); i++)
+   {
+        if (nb == global_scene->objUsingMarble.at(i))
+            return (true);
+   }
+   return (false);
+}
+
+bool MyPopup::isInColorCircle(int nb)
+{
+   for (int i = 0; i < global_scene->objUsingColorCircle.size(); i++)
+   {
+        if (nb == global_scene->objUsingColorCircle.at(i))
+            return (true);
+   }
+   return (false);
+}
+
+bool MyPopup::isInWood(int nb)
+{
+   for (int i = 0; i < global_scene->objUsingWood.size(); i++)
+   {
+        if (nb == global_scene->objUsingWood.at(i))
+            return (true);
+   }
+   return (false);
+}
+
+bool MyPopup::isInTurbulence(int nb)
+{
+   for (int i = 0; i < global_scene->objUsingTurbulence.size(); i++)
+   {
+        if (nb == global_scene->objUsingTurbulence.at(i))
+            return (true);
+   }
+   return (false);
+}
+
+bool MyPopup::isInCircle(int nb)
+{
+   for (int i = 0; i < global_scene->objUsingCircle.size(); i++)
+   {
+        if (nb == global_scene->objUsingCircle.at(i))
+            return (true);
+   }
+   return (false);
+}
+
 void MyPopup::set_layout_promat(QGridLayout *mainLayout, int id)
 {
     this->tabProMat = new QTableWidget();
@@ -279,11 +339,21 @@ void MyPopup::set_layout_promat(QGridLayout *mainLayout, int id)
     while (i < int(global_scene->objectList.size()))
      {
         this->tabProMat->insertRow(i);
-        this->tabProMat->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->objectList[i]->center.x), 1));
+        if (this->isInGayPride(i + 1) == true)
+            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + "- SELECT", 1));
+        else if (this->isInCircle(i + 1) == true)
+            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + "- SELECT", 1));
+        else if (this->isInColorCircle(i + 1) == true)
+            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + "- SELECT", 1));
+        else if (this->isInMarble(i + 1) == true)
+            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + "- SELECT", 1));
+        else if (this->isInTurbulence(i + 1) == true)
+            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + "- SELECT", 1));
+        else if (this->isInWood(i + 1) == true)
+            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + "- SELECT", 1));
+        else
+            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name, 1));
         i++;
-    }
-    if (this->proId == CIRCLE - 1)
-    {
     }
     connect(this->tabProMat, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(selectProMat(QTableWidgetItem *)));
     mainLayout->addWidget(this->tabProMat, 0, 0);
@@ -430,7 +500,7 @@ void MyPopup::set_ui_addobj()
     mainwindow->setFixedWidth(600);
     mainwindow->setFixedHeight(400);
     if (this->typeSelected == 0)
-     QObject::connect(this->createSph, SIGNAL(clicked(bool)), this, SLOT(createMaterial()));
+     QObject::connect(this->createSph, SIGNAL(clicked(bool)), this, SLOT(createSphere()));
     mainwindow->show();
 }
 
@@ -475,7 +545,7 @@ void MyPopup::createSphere()
                          this->EditY->text().toFloat(),
                          this->EditZ->text().toFloat()),
                 this->EditRad->text().toFloat(),
-                global_scene->matList.at(this->SelectMat->currentIndex()), "created sphere");
+                global_scene->matList.at(this->SelectMat->currentIndex()), QString("created sphere"));
     global_scene->objectList.push_back(sphere);
     global_scene->objectCount += 1;
     this->mw->refObjTab();
