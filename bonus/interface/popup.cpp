@@ -207,14 +207,14 @@ void MyPopup::set_layout_editmat(QGridLayout *mainLayout, int id)
                                    "border-style: outset;"
                                    "border-width: 2px;"
                                    "border-color: black");
-    this->path_file = QString("No file");
+    this->path_file = QString();
     this->EditIor = new QLineEdit();
     this->EditName = new QLineEdit();
     this->editMat = new QPushButton("Edit");
     this->getPath = new QPushButton("Choose file");
     this->curPath = new QLineEdit();
     this->curPath->setDisabled(true);
-    this->curPath->setText(this->path_file);
+    this->curPath->setText(global_scene->matList[id]->texture_path);
     this->curPath->setModified(false);
     this->bumpstate = new QSlider();
     this->bumpstate->setOrientation(Qt::Horizontal);
@@ -714,8 +714,6 @@ void MyPopup::set_ui_obj(Object *object)
         DirX->setText(QString::number(plan->direction.x));
         DirY->setText(QString::number(plan->direction.y));
         DirZ->setText(QString::number(plan->direction.z));
-        // Plan::Plan(const Vector3f<float> center, const Vector3f<float> dir
-        //, Material *mat, Material *mat2)
     }
     if (object->getObjectType() == QString("Cylinder"))
     {
