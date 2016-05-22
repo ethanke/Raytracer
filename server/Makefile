@@ -11,8 +11,7 @@
 NAME		=	server
 
 CFLAGS		=	-W -Wall -Werror -pedantic		\
-			-I./include 				\
-			-g
+			-I./include
 
 SPRTFDIR	=	src/my_sprintf
 PRTFDIR		=	src/my_printf

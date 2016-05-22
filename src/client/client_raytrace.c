@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Fri May 13 04:44:05 2016 Gaëtan Léandre
-** Last update Sat May 21 23:06:09 2016 Philippe Lefevre
+** Last update Sun May 22 19:20:17 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -109,7 +109,7 @@ void			client_raytrace(char *str, int *status, SOCKET sock)
     *status = -1;
   else
     {
-      my_printf(1, "Caluls envoyés, en attente d'une informationserveur\n");
+      my_printf(1, "Caluls envoyés, en attente d'une information serveur\n");
       *status = 0;
       free(grille);
     }
