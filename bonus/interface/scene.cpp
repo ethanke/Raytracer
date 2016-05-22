@@ -14,8 +14,6 @@ Scene::Scene(QWidget *parent, int y)
     else
         this->path_file = "/Users/ethankerdelhue/Documents/Shared/Raytracer/scene/slide_cpp/waater.xml";
 
-    qDebug() << this->path_file;
-
     if (this->path_file == "")
         return;
 
@@ -76,7 +74,8 @@ Scene::Scene(QWidget *parent, int y)
                 Vector3f<float> sphere_center = Vector3f<float>(QString("scene:object_list:obj") + QString::number(i) + QString(":center:"), this->myxml);
                 float           sphere_radius = this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":radius")).toLatin1().data()).toFloat();
                 int             sphere_mat_id = (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id")).toLatin1().data())).toInt() - 1;
-                Sphere *sphere_tmp = new Sphere(sphere_center, sphere_radius, this->matList[sphere_mat_id]);
+                QString         sphere_name   = this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":name")).toLatin1().data());
+                Sphere *sphere_tmp = new Sphere(sphere_center, sphere_radius, this->matList[sphere_mat_id], sphere_name);
                 this->objectList.push_back(sphere_tmp);
             }
 
@@ -86,7 +85,8 @@ Scene::Scene(QWidget *parent, int y)
                 Vector3f<float> plan_dir     = Vector3f<float>(QString("scene:object_list:obj") + QString::number(i) + QString(":dir:"), this->myxml);
                 int             plan_mat_id  = (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id1")).toLatin1().data())).toInt() - 1;
                 int             plan_mat_id2 = (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id2")).toLatin1().data())).toInt() - 1;
-                Plan *plan_tmp = new Plan(plan_center, plan_dir, this->matList[plan_mat_id], this->matList[plan_mat_id2]);
+                QString         Plan_name   = this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":name")).toLatin1().data());
+                Plan *plan_tmp = new Plan(plan_center, plan_dir, this->matList[plan_mat_id], this->matList[plan_mat_id2], Plan_name);
                 this->objectList.push_back(plan_tmp);
             }
 
@@ -97,7 +97,8 @@ Scene::Scene(QWidget *parent, int y)
                 float           cone_radius = this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":radius")).toLatin1().data()).toFloat();
                 float           cone_height = this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":height")).toLatin1().data()).toFloat();
                 int             cone_mat_id  = (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id")).toLatin1().data())).toInt() - 1;
-                Cone *cone_tmp = new Cone(cone_center, cone_dir, cone_radius, cone_height, this->matList[cone_mat_id]);
+                QString         cone_name   = this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":name")).toLatin1().data());
+                Cone *cone_tmp = new Cone(cone_center, cone_dir, cone_radius, cone_height, this->matList[cone_mat_id], cone_name);
                 this->objectList.push_back(cone_tmp);
             }
 
@@ -108,7 +109,8 @@ Scene::Scene(QWidget *parent, int y)
                 float           cyl_radius = this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":radius")).toLatin1().data()).toFloat();
                 float           cyl_height = this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":height")).toLatin1().data()).toFloat();
                 int             cyl_mat_id  = (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id")).toLatin1().data())).toInt() - 1;
-                Cylinder *cyl_tmp = new Cylinder(cyl_center, cyl_dir, cyl_radius, cyl_height, this->matList[cyl_mat_id]);
+                QString         cyl_name   = this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":name")).toLatin1().data());
+                Cylinder *cyl_tmp = new Cylinder(cyl_center, cyl_dir, cyl_radius, cyl_height, this->matList[cyl_mat_id], cyl_name);
                 this->objectList.push_back(cyl_tmp);
             }
 
@@ -119,7 +121,8 @@ Scene::Scene(QWidget *parent, int y)
                 Vector3f<float> point2 = Vector3f<float>(QString("scene:object_list:obj") + QString::number(i) + QString(":point2:"), this->myxml);
                 Vector3f<float> point3  = Vector3f<float>(QString("scene:object_list:obj") + QString::number(i) + QString(":point3:"), this->myxml);
                 int             tri_mat_id  = (this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":material_id")).toLatin1().data())).toInt() - 1;
-                Triangle *tri_tmp = new Triangle(point1, point2, point3, this->matList[tri_mat_id]);
+                QString         tri_name   = this->myxml->get_field((QString("scene:object_list:obj") + QString::number(i) + QString(":name")).toLatin1().data());
+                Triangle *tri_tmp = new Triangle(point1, point2, point3, this->matList[tri_mat_id], tri_name);
                 this->objectList.push_back(tri_tmp);
             }
             i++;
@@ -197,7 +200,7 @@ Scene::Scene(QWidget *parent, int y)
                 if(count(coord[i]->begin(),coord[i]->end(),' ') == 4)
                 {
                     sscanf(coord[i]->c_str(),"f %d/%d %d/%d %d/%d",&a,&x, &b,&y, &c,&z);
-                    Triangle *tri_tmp = new Triangle(vertex.at(a - 1), vertex.at(b - 1), vertex.at(c - 1), this->matList[mat]);
+                    Triangle *tri_tmp = new Triangle(vertex.at(a - 1), vertex.at(b - 1), vertex.at(c - 1), this->matList[mat], QString("obj_face") + QString::number(i));
                     this->objectList.push_back(tri_tmp);
                 }
             }

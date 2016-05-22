@@ -5,16 +5,17 @@ Sphere::Sphere()
     this->center = Vector3f<float>();
     this->radius = 100;
     this->material = new Material();
-
+    this->name = QString("null");
 }
 
-Sphere::Sphere(const Vector3f<float> center, const float radius, Material *mat)
+Sphere::Sphere(const Vector3f<float> center, const float radius, Material *mat, QString name)
 {
     this->center.x = center.x;
     this->center.y = center.y;
     this->center.z = center.z;
     this->radius = radius;
     this->material = mat;
+    this->name = name;
 }
 
 bool Sphere::hit(const Camera ray, float &old_dist)

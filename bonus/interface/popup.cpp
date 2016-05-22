@@ -472,7 +472,7 @@ void MyPopup::createSphere()
                          this->EditY->text().toFloat(),
                          this->EditZ->text().toFloat()),
                 this->EditRad->text().toFloat(),
-                global_scene->matList.at(this->SelectMat->currentIndex()));
+                global_scene->matList.at(this->SelectMat->currentIndex()), "created sphere");
     global_scene->objectList.push_back(sphere);
     global_scene->objectCount += 1;
     this->mw->refObjTab();

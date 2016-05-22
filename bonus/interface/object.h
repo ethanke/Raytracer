@@ -12,6 +12,7 @@ class Object
 
         Vector3f<float> center;
         Material        *material;
+        QString         name;
 
         virtual bool            hit(const Camera ray, float &old_dist) = 0;
         virtual Vector3f<float> getNormale(const Camera ray, const Vector3f<float> hitPoint) = 0;

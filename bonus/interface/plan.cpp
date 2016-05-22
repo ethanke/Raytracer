@@ -6,9 +6,10 @@ Plan::Plan()
     this->direction = Vector3f<float>(0.0, 1.0, 0.0);
     this->material = new Material();
     this->material2 = new Material();
+    this->name = QString("null");
 }
 
-Plan::Plan(const Vector3f<float> center, const Vector3f<float> dir , Material *mat, Material *mat2)
+Plan::Plan(const Vector3f<float> center, const Vector3f<float> dir , Material *mat, Material *mat2, QString name)
 {
     this->center.x = center.x;
     this->center.y = center.y;
@@ -18,6 +19,7 @@ Plan::Plan(const Vector3f<float> center, const Vector3f<float> dir , Material *m
     this->direction.z = dir.z;
     this->material = mat;
     this->material2 = mat2;
+    this->name = name;
 }
 
 bool Plan::hit(const Camera ray, float &old_dist)

@@ -67,6 +67,7 @@
     <count>3</count>
 
     <obj1>
+      <name>cone</name>
       <type>cone</type>
       <center>
     <x>0</x>
@@ -84,6 +85,7 @@
     </obj1>
 
     <obj3>
+      <name>sphere</name>
       <type>sphere</type>
       <center>
 	<x>-25</x>
@@ -95,6 +97,7 @@
     </obj3>
 
     <obj2>
+      <name>plan</name>
       <type>plan</type>
       <center>
   <x>0</x>

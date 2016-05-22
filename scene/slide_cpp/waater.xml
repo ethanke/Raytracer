@@ -131,6 +131,7 @@
     <count>7</count>
 
     <obj1>
+      <name>sphere 1</name>
       <type>sphere</type>
       <center>
 	      <x>-22.5</x>
@@ -142,6 +143,7 @@
     </obj1>
 
     <obj2>
+      <name>sphere 2</name>
       <type>sphere</type>
       <center>
 	      <x>-11.2</x>
@@ -153,6 +155,7 @@
     </obj2>
 
     <obj3>
+      <name>sphere 3</name>
       <type>sphere</type>
       <center>
         <x>0</x>
@@ -164,6 +167,7 @@
     </obj3>
 
     <obj4>
+      <name>sphere 4</name>
       <type>sphere</type>
       <center>
 	      <x>11.2</x>
@@ -175,6 +179,7 @@
     </obj4>
 
     <obj5>
+      <name>sphere 5</name>
       <type>sphere</type>
       <center>
 	      <x>32.5</x>
@@ -186,6 +191,7 @@
     </obj5>
 
     <obj6>
+      <name>eau</name>
       <type>plan</type>
       <center>
   <x>0</x>
@@ -202,6 +208,7 @@
     </obj6>
 
     <obj7>
+      <name>sable</name>
       <type>plan</type>
       <center>
   <x>0</x>
@@ -218,6 +225,7 @@
     </obj7>
 
     <obj7>
+      <name>sphere 5m</name>
       <type>sphere</type>
       <center>
     <x>0</x>

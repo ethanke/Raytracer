@@ -7,10 +7,10 @@ Cone::Cone()
     this->radius = 100;
     this->height = 150;
     this->material = new Material();
-
+    this->name = QString("null");
 }
 
-Cone::Cone(const Vector3f<float> center, const Vector3f<float> direction, const float radius, const float height, Material *mat)
+Cone::Cone(const Vector3f<float> center, const Vector3f<float> direction, const float radius, const float height, Material *mat, QString name)
 {
     this->center.x = center.x;
     this->center.y = center.y;
@@ -21,6 +21,7 @@ Cone::Cone(const Vector3f<float> center, const Vector3f<float> direction, const 
     this->radius = radius;
     this->height = height;
     this->material = mat;
+    this->name = name;
 }
 
 bool Cone::hit(const Camera ray, float &old_dist)

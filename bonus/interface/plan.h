@@ -9,7 +9,7 @@ class Plan : public Object
 {
     public:
         Plan();
-        Plan(const Vector3f<float> center, const Vector3f<float> dir , Material *mat, Material *mat2);
+        Plan(const Vector3f<float> center, const Vector3f<float> dir , Material *mat, Material *mat2, QString name);
         Vector3f<float> direction;
         Material        *material2;
 

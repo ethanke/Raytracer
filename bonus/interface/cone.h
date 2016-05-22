@@ -9,7 +9,7 @@ class Cone : public Object
 {
     public:
         Cone();
-        Cone(const Vector3f<float> center, const Vector3f<float> direction, const float radius, const float height, Material *mat);
+        Cone(const Vector3f<float> center, const Vector3f<float> direction, const float radius, const float height, Material *mat, QString name);
         Vector3f<float> direction;
         float       radius;
         float       height;

@@ -8,10 +8,10 @@ Cylinder::Cylinder()
     this->radius = 100;
     this->height = 150;
     this->material = new Material();
-
+    this->name = QString("null");
 }
 
-Cylinder::Cylinder(const Vector3f<float> center, const Vector3f<float> direction, const float radius, const float height, Material *mat)
+Cylinder::Cylinder(const Vector3f<float> center, const Vector3f<float> direction, const float radius, const float height, Material *mat, QString name)
 {
     this->center.x = center.x;
     this->center.y = center.y;
@@ -22,6 +22,7 @@ Cylinder::Cylinder(const Vector3f<float> center, const Vector3f<float> direction
     this->radius = radius;
     this->height = height;
     this->material = mat;
+    this->name = name;
 }
 
 bool Cylinder::hit(const Camera ray, float &old_dist)

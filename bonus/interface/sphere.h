@@ -9,7 +9,7 @@ class Sphere : public Object
 {
     public:
         Sphere();
-        Sphere(const Vector3f<float> center, const float radius, Material *mat);
+        Sphere(const Vector3f<float> center, const float radius, Material *mat, QString name);
         float       radius;
 
         virtual bool            hit(const Camera ray, float &old_dist);

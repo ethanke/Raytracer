@@ -270,7 +270,7 @@ void MainWindow::affObjTab()
    while (i < int(global_scene->objectList.size()))
     {
        ui->listObject->insertRow(i);
-       ui->listObject->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->objectList[i]->center.x), 1));
+       ui->listObject->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name, 1));
        i++;
    }
 }

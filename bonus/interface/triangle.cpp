@@ -15,9 +15,10 @@ Triangle::Triangle()
     this->point[2].z = 0;
 
     this->material = new Material();
+    this->name = QString("null");
 }
 
-Triangle::Triangle(const Vector3f<float> point1, const Vector3f<float> point2, const Vector3f<float> point3, Material *mat)
+Triangle::Triangle(const Vector3f<float> point1, const Vector3f<float> point2, const Vector3f<float> point3, Material *mat, QString name)
 {
     this->point[0].x = point1.x;
     this->point[0].y = point1.y;
@@ -32,6 +33,7 @@ Triangle::Triangle(const Vector3f<float> point1, const Vector3f<float> point2, c
     this->point[2].z = point3.z;
 
     this->material = mat;
+    this->name = name;
 }
 
 typedef struct		s_hit_triangle
