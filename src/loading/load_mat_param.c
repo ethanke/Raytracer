@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:55:20 2016 victor sousa
-** Last update Sun May 22 17:22:14 2016 Philippe Lefevre
+** Last update Sun May 22 18:57:27 2016 Philippe Lefevre
 */
 
 #include	"main.h"
@@ -27,7 +27,7 @@ void		my_atof_e(int *e, int *c, char *s)
 	  *c = *s++;
 	  sign = -1;
 	}
-      while (my_isnum(c))
+      while (my_isnum(*c))
 	{
 	  i = i * 10 + (*c - '0');
 	  *c = *s++;
