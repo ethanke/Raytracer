@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:45:54 2016 victor sousa
-** Last update Sat May 21 19:27:37 2016 Philippe Lefevre
+** Last update Sun May 22 02:20:00 2016 Philippe Lefevre
 */
 
 #ifndef			MAIN_H_
@@ -34,6 +34,7 @@
 # include		"my_sprintf.h"
 # include		"xml.h"
 # include		"client.h"
+# include		"export.h"
 
 # define		RT_MAX_RAM	(512)
 # define		Deg_To_Rad(ang)	((ang) / 180.0 * M_PI)

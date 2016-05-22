@@ -5,7 +5,7 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Tue Apr 26 01:10:14 2016 Ethan Kerdelhue
-** Last update Mon May 16 18:37:24 2016 Philippe Lefevre
+** Last update Sun May 22 06:47:01 2016 Philippe Lefevre
 */
 
 #ifndef			STRUCT_H_
@@ -191,6 +191,8 @@ typedef struct          s_opt
   int			start;
   int			stop;
   char			cluster;
+  int			export;
+  char			*export_path;
 }			t_opt;
 
 typedef struct          s_prog

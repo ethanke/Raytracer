@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Mon May 16 18:39:27 2016 Philippe Lefevre
+** Last update Sun May 22 06:50:27 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -64,6 +64,13 @@ int			init_rendu(char *arg, t_prog *prog)
   else if (!(my_strcmp("--rendu_vertical", arg)))
     {
       prog->opt->rendu_vertical = 1;
+      return (1);
+    }
+  else if (!(my_strncmp("--export=", arg, 9)))
+    {
+      prog->opt->export = 1;
+      prog->opt->export_path = my_strdup(arg + 9);
+
       return (1);
     }
   return (0);

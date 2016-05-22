@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Mon May 16 18:45:34 2016 Philippe Lefevre
+** Last update Sun May 22 06:47:37 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -52,6 +52,7 @@ t_opt			*init_default_opt(t_prog *prog)
   prog->opt->rendu_display = 0;
   prog->opt->rendu_vertical = 0;
   prog->opt->verbose = 1;
+  prog->opt->export = 0;
   return (prog->opt);
 }
 

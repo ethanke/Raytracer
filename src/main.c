@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Mon May 16 18:48:47 2016 Philippe Lefevre
+** Last update Sun May 22 06:56:34 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -18,6 +18,7 @@ int			disp_help(char *bin)
   my_printf(1, "			--rendu_verticale\n");
   my_printf(1, "			--verbose\n");
   my_printf(1, "			--quiet\n");
+  my_printf(1, "			--export=[path/output.bmp]\n");
   my_printf(1, "OR\n");
   my_printf(1, "	%s	--edit\n", bin);
   my_printf(1, "OR\n");
@@ -88,6 +89,8 @@ int			main(int ac, char **av, char **env)
   else
     raytrace_threading(&prog, 0, ((prog.opt->rendu_vertical) ?
 				  (prog.win_size.y) : (prog.win_size.x)));
+  if (prog.opt->export)
+    export_to_bmp(&prog);
   bunny_set_key_response(key);
   bunny_set_loop_main_function(mainloop);
   bunny_loop(prog.win, 30, &prog);

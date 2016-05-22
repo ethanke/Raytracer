@@ -29,6 +29,7 @@ UTILSDIR	=	$(SRCDIR)/utils
 IMAGEDIR	=	$(SRCDIR)/image
 CLIENTDIR	=	$(SRCDIR)/client
 OUTPUTDIR	=	$(SRCDIR)/output
+EXPORTDIR	=	$(SRCDIR)/export
 
 INCDIR		=	inc
 LIBDIR		=	lib
@@ -208,6 +209,9 @@ SRC		+=	$(OUTPUTDIR)/my_putchar.c		\
 			$(OUTPUTDIR)/my_putstr.c		\
 			$(OUTPUTDIR)/my_put_nbr.c		\
 			$(OUTPUTDIR)/my_strlen.c
+
+##  EXPORT  ##
+SRC		+=	$(EXPORTDIR)/export_to_bmp.c
 
 OBJ		=	$(SRC:.c=.o)
 
