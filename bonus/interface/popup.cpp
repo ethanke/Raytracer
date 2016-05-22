@@ -275,68 +275,108 @@ void MyPopup::set_layout_promat(QGridLayout *mainLayout, int id)
 {
     this->tabProMat = new QTableWidget();
     int i = 0;
+    this->tabProMat->insertColumn(0);
     while (i < int(global_scene->objectList.size()))
      {
         this->tabProMat->insertRow(i);
         this->tabProMat->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->objectList[i]->center.x), 1));
         i++;
     }
-    connect(this->tabProMat, SIGNAL(itemClicked(QTableWidgetItem)), this, SLOT(selectProMat(QTableWidgetItem)));
+    connect(this->tabProMat, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(selectProMat(QTableWidgetItem *)));
     mainLayout->addWidget(this->tabProMat, 0, 0);
+
 }
 
 void MyPopup::selectProMat(QTableWidgetItem *item)
 {
-    int i = 0;
-    if (this->proId == 0)
+    if (this->proId == MARBLE - 1)
     {
-        while (i != global_scene->objUsingMarble.size())
+        for (unsigned int i = 0; i < global_scene->objUsingMarble.size(); i++)
         {
-            if (item->row() == global_scene->objUsingMarble.at(i))
+               if (item->row() == global_scene->objUsingMarble.at(i) - 1)
+            {
+                global_scene->objUsingMarble.erase(global_scene->objUsingMarble.begin() + (item->row()));
+                this->tabProMat->item(item->row(), 0)->setText(QString::number(global_scene->objectList[item->row()]->center.x));
                 return;
-            i++;
+            }
         }
-        global_scene->objUsingMarble.push_back(item->row());
+        global_scene->objUsingMarble.push_back(item->row() + 1);
+        this->tabProMat->item(item->row(), 0)->setText(this->tabProMat->item(item->row(), 0)->text() + " - SELECT");
     }
-    if (this->proId == 1)
+
+    if (this->proId == CIRCLE - 1)
     {
-        while (i != global_scene->objUsingCircle.size())
+        for (unsigned int i = 0; i < global_scene->objUsingCircle.size(); i++)
         {
-            if (item->row() == global_scene->objUsingCircle.at(i))
+               if (item->row() == global_scene->objUsingCircle.at(i) - 1)
+            {
+                global_scene->objUsingCircle.erase(global_scene->objUsingCircle.begin() + (item->row()));
+                this->tabProMat->item(item->row(), 0)->setText(QString::number(global_scene->objectList[item->row()]->center.x));
                 return;
-            i++;
+            }
         }
-        global_scene->objUsingCircle.push_back(item->row());
+        global_scene->objUsingCircle.push_back(item->row() + 1);
+        this->tabProMat->item(item->row(), 0)->setText(this->tabProMat->item(item->row(), 0)->text() + " - SELECT");
     }
-    if (this->proId == 2)
+
+    if (this->proId == WOOD - 1)
     {
-        while (i != global_scene->objUsingWood.size())
+        for (unsigned int i = 0; i < global_scene->objUsingWood.size(); i++)
         {
-            if (item->row() == global_scene->objUsingWood.at(i))
+               if (item->row() == global_scene->objUsingWood.at(i) - 1)
+            {
+                global_scene->objUsingWood.erase(global_scene->objUsingWood.begin() + (item->row()));
+                this->tabProMat->item(item->row(), 0)->setText(QString::number(global_scene->objectList[item->row()]->center.x));
                 return;
-            i++;
+            }
         }
-        global_scene->objUsingWood.push_back(item->row());
+        global_scene->objUsingWood.push_back(item->row() + 1);
+        this->tabProMat->item(item->row(), 0)->setText(this->tabProMat->item(item->row(), 0)->text() + " - SELECT");
     }
-    if (this->proId == 3)
+
+    if (this->proId == GAYPRIDE - 1)
     {
-        while (i != global_scene->objUsingGayPride.size())
+        for (unsigned int i = 0; i < global_scene->objUsingGayPride.size(); i++)
         {
-            if (item->row() == global_scene->objUsingGayPride.at(i))
+               if (item->row() == global_scene->objUsingGayPride.at(i) - 1)
+            {
+                global_scene->objUsingGayPride.erase(global_scene->objUsingGayPride.begin() + (item->row()));
+                this->tabProMat->item(item->row(), 0)->setText(QString::number(global_scene->objectList[item->row()]->center.x));
                 return;
-            i++;
+            }
         }
-        global_scene->objUsingGayPride.push_back(item->row());
+        global_scene->objUsingGayPride.push_back(item->row() + 1);
+        this->tabProMat->item(item->row(), 0)->setText(this->tabProMat->item(item->row(), 0)->text() + " - SELECT");
     }
-    if (this->proId == 4)
+
+    if (this->proId == TURBULENCE - 1)
     {
-        while (i != global_scene->objUsingTurbulence.size())
+        for (unsigned int i = 0; i < global_scene->objUsingTurbulence.size(); i++)
         {
-            if (item->row() == global_scene->objUsingTurbulence.at(i))
+               if (item->row() == global_scene->objUsingTurbulence.at(i) - 1)
+            {
+                global_scene->objUsingTurbulence.erase(global_scene->objUsingTurbulence.begin() + (item->row()));
+                this->tabProMat->item(item->row(), 0)->setText(QString::number(global_scene->objectList[item->row()]->center.x));
                 return;
-            i++;
+            }
         }
-        global_scene->objUsingTurbulence.push_back(item->row());
+        global_scene->objUsingTurbulence.push_back(item->row() + 1);
+        this->tabProMat->item(item->row(), 0)->setText(this->tabProMat->item(item->row(), 0)->text() + " - SELECT");
+    }
+
+    if (this->proId == COLORCIRCLE - 1)
+    {
+        for (unsigned int i = 0; i < global_scene->objUsingColorCircle.size(); i++)
+        {
+               if (item->row() == global_scene->objUsingColorCircle.at(i) - 1)
+            {
+                global_scene->objUsingColorCircle.erase(global_scene->objUsingColorCircle.begin() + (item->row()));
+                this->tabProMat->item(item->row(), 0)->setText(QString::number(global_scene->objectList[item->row()]->center.x));
+                return;
+            }
+        }
+        global_scene->objUsingColorCircle.push_back(item->row() + 1);
+        this->tabProMat->item(item->row(), 0)->setText(this->tabProMat->item(item->row(), 0)->text() + " - SELECT");
     }
 }
 

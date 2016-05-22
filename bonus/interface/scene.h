@@ -30,6 +30,7 @@ class Scene
         MyXML *myxml;
         int shadowsampling;
         int booleansoftshadow;
+        int mode;
         std::vector<int>objUsingMarble;
         std::vector<int>objUsingCircle;
         std::vector<int>objUsingWood;

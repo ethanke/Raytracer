@@ -33,13 +33,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox_ao->setCurrentIndex(0);
     QString tab_x[] = {"1152", "960", "768", "640", "576", "480", "384", "320"};
     QString tab_y[] = {"720", "600", "480", "400", "360", "300", "240", "300"};
+    QString tab_f[] = {"Normal", "Reverse", "Grey", " Black and White", "Sepia"};
     for(int i = 0; i < 8; i++)
       ui->comboBox_wx->addItem(tab_x[i]);
     for(int i = 0; i < 8; i++)
       ui->comboBox_wy->addItem(tab_y[i]);
+    for (int i = 0; i < 5; i++)
+      ui->comboBox_filtre->addItem(tab_f[i]);
     ui->renderButton->setDisabled(true);
     ui->saveButton->setDisabled(true);
     ui->comboBox_ao->setDisabled(true);
+    ui->comboBox_filtre->setDisabled(true);
     ui->lineEdit_ss->setDisabled(true);
     ui->listProMat->setDisabled(true);
 }
@@ -184,7 +188,6 @@ void MainWindow::on_editButtonObj_clicked()
 void MainWindow::on_pushButton_3_pressed()
 {
     global_scene = new Scene(this, 1);
-
     ui->saveButton->setDisabled(false);
     ui->renderButton->setDisabled(false);
     ui->lineEdit_cpx->setReadOnly(false);
@@ -203,6 +206,7 @@ void MainWindow::on_pushButton_3_pressed()
     ui->editButtonObj_6->setEnabled(true);
     ui->horizontalSlider_aa->setDisabled(false);
     ui->horizontalSlider_fov->setDisabled(false);
+    ui->comboBox_filtre->setDisabled(false);
     ui->lineEdit_cpx->setValidator(new QIntValidator(-99999999, 99999999, this));
     ui->lineEdit_cpy->setValidator(new QIntValidator(-99999999, 99999999, this));
     ui->lineEdit_cpz->setValidator(new QIntValidator(-99999999, 99999999, this));
@@ -218,6 +222,8 @@ void MainWindow::on_pushButton_3_pressed()
     ui->lineEdit_ss->setDisabled(false);
     ui->lineEdit_ss->setText(QString::number(global_scene->shadowsampling));
     ui->listProMat->setDisabled(false);
+    global_scene->mode = 1;
+    connect(ui->comboBox_filtre, SIGNAL(currentIndexChanged(int)), this, SLOT(setFiltre(int)));
     this->affLightTab();
     this->affObjTab();
     this->affMatTab();
@@ -360,6 +366,8 @@ void MainWindow::affProceduralMat()
     ui->listProMat->setItem(3, 0, new QTableWidgetItem("GayPride", 1));
     ui->listProMat->insertRow(4);
     ui->listProMat->setItem(4, 0, new QTableWidgetItem("Turbulence", 1));
+    ui->listProMat->insertRow(5);
+    ui->listProMat->setItem(5, 0, new QTableWidgetItem("Color Circle"));
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -370,4 +378,9 @@ void MainWindow::on_pushButton_2_clicked()
         popup->set_ui_promat(ui->listProMat->currentRow());
         this->refObjTab();
     }
+}
+
+void MainWindow::setFiltre(int index)
+{
+    global_scene->mode = index + 1;
 }

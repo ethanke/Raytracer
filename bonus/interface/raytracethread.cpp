@@ -14,7 +14,7 @@ RaytraceThread::RaytraceThread(QMutex* mu, GlWindow *glWin)
 #define         SEPIA               5
 void RaytraceThread::run()
 {
-    int     mode = 3;
+    int     mode = global_scene->mode;
 
     Vector2 pos = Vector2(-1, -1);
     Camera  camera = Camera(global_scene->camera->win_size,

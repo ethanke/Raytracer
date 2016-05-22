@@ -125,8 +125,6 @@ Scene::Scene(QWidget *parent, int y)
             i++;
         }
 
-        this->objUsingWood.push_back(1);
-
         qDebug() << "object loaded\n";
 
         i = 1;

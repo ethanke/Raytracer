@@ -25,6 +25,7 @@
 #include "plan.h"
 #include "cone.h"
 #include "cylinder.h"
+#include "raytracethread.h"
 
 class MyPopup: public QWidget
 {
