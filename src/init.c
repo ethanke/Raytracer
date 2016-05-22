@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Sun May 22 07:32:18 2016 Philippe Lefevre
+** Last update Sun May 22 07:36:38 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -63,7 +63,6 @@ int			verif_export(t_prog *prog)
   if (prog->opt->export == 0)
     return (0);
   size = my_strlen(prog->opt->export_path);
-  my_printf(1, "=====[%s]\n", prog->opt->export_path);
   if (size > 4
       && prog->opt->export_path[size - 1] == 'p'
       && prog->opt->export_path[size - 2] == 'm'

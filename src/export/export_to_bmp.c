@@ -5,7 +5,7 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Sun May 22 02:16:59 2016 Philippe Lefevre
-** Last update Sun May 22 07:34:09 2016 Philippe Lefevre
+** Last update Sun May 22 08:27:01 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -60,11 +60,11 @@ int			export_to_bmp(t_prog *prog)
     return (my_printf(2, "Erreur: cannot create %s file\n",
 		      prog->opt->export_path) - 1);
   export_to_bmp_init(prog, fd, pbitmap);
-  pos.y = 721;
+  pos.y = prog->win_size.y - 1;
   while (--pos.y > 0)
     {
       pos.x = -1;
-      while (++pos.x < 1080)
+      while (++pos.x < prog->win_size.x)
 	export_to_bmp_write(prog, fd, &pos);
     }
   close(fd);
