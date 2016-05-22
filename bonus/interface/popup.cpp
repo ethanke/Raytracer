@@ -17,7 +17,6 @@ void MyPopup::show_it()
 
 void MyPopup::editMaterial()
 {
-    qDebug() << this->EditIor->text().toFloat();
     global_scene->matList[this->editId]->name = this->EditName->text();
     global_scene->matList[this->editId]->color = this->editColorCur;
     global_scene->matList[this->editId]->reflect = static_cast<float>(this->reflect->value()) / 100.0;
@@ -27,30 +26,8 @@ void MyPopup::editMaterial()
     global_scene->matList[this->editId]->updateIor(this->EditIor->text().toInt());
     global_scene->matList[this->editId]->sky = this->sky->isChecked();
     global_scene->matList[this->editId]->updateImage(this->path_file);
-            /*
-            global_scene->matList.at(this->editId) = new Material(this->EditName->text(),
-                                      int(global_scene->matList.size()) + 1,
-                                      this->ColorCur,
-                                      this->reflect->value(),
-                                      this->transpa->value(),
-                                      this->EditIor->text().toInt(),
-                                      static_cast<float>(this->bumpstate->value()) / 100.0,
-                                      this->sky->isChecked(),
-                                      this->path_file);
-            */
     this->mw->refMatTab();
     this->destroy();
-    /*
-     *  transpa; 0 à 100%
-     * reflect; 0 à 100%
-     * ior; entre 1 et infine
-     * bump; float entre 0 et 1
-     * sky; booléen (true / false)
-     * path; chemin de la texture
-     * Material::Material(const int id, const Color color, const float reflect,
-     *
-     *  const float transparency, const float ior, const float bump, const int sky, QString path)
-     */
 }
 
 void MyPopup::createMaterial()
@@ -64,22 +41,10 @@ void MyPopup::createMaterial()
                                       static_cast<float>(this->bumpstate->value()) / 100.0,
                                       this->sky->isChecked(),
                                       this->path_file);
-    qDebug() << material->bump;
     global_scene->matList.push_back(material);
     global_scene->matCount += 1;
     this->mw->refMatTab();
     this->destroy();
-    /*
-     *  transpa; 0 à 100%
-     * reflect; 0 à 100%
-     * ior; entre 1 et infine
-     * bump; float entre 0 et 1
-     * sky; booléen (true / false)
-     * path; chemin de la texture
-     * Material::Material(const int id, const Color color, const float reflect,
-     *
-     *  const float transparency, const float ior, const float bump, const int sky, QString path)
-     */
 }
 
 void MyPopup::set_ui_addmat()
@@ -698,7 +663,6 @@ void MyPopup::set_ui_obj(Object *object)
         }
         connect(this->matList, SIGNAL(activated(int)), this, SLOT(refMatListInObj(int)));
         this->matList->setCurrentIndex(object->material->id - 1);
-        qDebug () << object->material->id;
         this->matList2->setCurrentIndex(plan->material2->id);
         window->setLayout(layout);
         window->setFixedSize(450, 280);
@@ -794,7 +758,6 @@ void MyPopup::set_ui_obj(Object *object)
     }
     if (object->getObjectType() == QString("cone"))
     {
-        qDebug() << "ouiiii";
         Cone *cone = static_cast <Cone *>(object);
         this->CenterX = new QLabel("Center x :", window);
         this->CenterY = new QLabel("Center y :", window);
@@ -919,8 +882,6 @@ void MyPopup::setValueObj()
         plan->direction.x = this->DirX->text().toFloat();
         plan->direction.y = this->DirY->text().toFloat();
         plan->direction.z = this->DirZ->text().toFloat();
-        qDebug() << plan->material->name;
-        qDebug() << plan->material2->name;
     }
     if (this->object->getObjectType() == QString("Cylinder"))
     {

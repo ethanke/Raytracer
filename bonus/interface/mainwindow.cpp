@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    this->is_scene_init = 0;
     ui->setupUi(this);
     ui->lineEdit_cpx->setReadOnly(true);
     ui->lineEdit_cpy->setReadOnly(true);
@@ -109,6 +110,7 @@ void MainWindow::on_loadButton_clicked()
     this->affLightTab();
     this->affObjTab();
     this->affMatTab();
+    this->is_scene_init = 1;
 }
 
 void MainWindow::on_lineEdit_cpx_editingFinished()
@@ -326,11 +328,13 @@ void MainWindow::on_saveButton_clicked()
 
 void MainWindow::on_loadButton_2_clicked()
 {
-    delete(global_scene);
-    refObjTab();
-    refMatTab();
-    ui->renderButton->setDisabled(true);
-    ui->saveButton->setDisabled(true);
+    if (this->is_scene_init == 1)
+    {
+        delete(global_scene);
+        ui->renderButton->setDisabled(true);
+        ui->saveButton->setDisabled(true);
+    }
+    this->is_scene_init = 0;
 }
 
 void MainWindow::on_comboBox_ao_activated(int index)

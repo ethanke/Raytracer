@@ -37,8 +37,7 @@ public:
     void refMatTab();
     void refLightTab();
     void affProceduralMat();
-
-private:
+    int is_scene_init;
 
 protected:
     void keyPressEvent(QKeyEvent *event);
