@@ -10,6 +10,7 @@ Material::Material()
     this->reflect = 0.0;
     this->transparency = 0.5;
     this->bump = 0.0;
+    this->texture_path = "";
     this->texture = new QImage();
     this->texture->fill(QColor(0, 0, 0));
 }
@@ -28,6 +29,7 @@ Material::Material(QString name, const int id, const Color color, const float re
     this->bump = bump;
 
     this->sky = sky;
+    this->texture_path = path;
     this->texture = new QImage();
     this->texture->load(path);
 }

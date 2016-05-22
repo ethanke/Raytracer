@@ -22,6 +22,7 @@ class Material
         float   eior;
         float	reflect;
         float	bump;
+        QString texture_path;
         QImage	*texture;
 };
 
