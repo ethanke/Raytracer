@@ -119,7 +119,7 @@ void MyPopup::set_ui_promat(int id)
 
 void MyPopup::selectPathFile()
 {
-   this->path_file = QFileDialog::getOpenFileName(this, QObject::tr("Open File"),"/path/to/file/", QObject::tr("Files png's only (*.png)"));
+   this->path_file = QFileDialog::getOpenFileName(this, QObject::tr("Open File"),"/path/to/file/", QObject::tr("Image only (*.png *.jpg)"));
    this->curPath->setText(this->path_file);
 }
 
@@ -339,18 +339,18 @@ void MyPopup::set_layout_promat(QGridLayout *mainLayout, int id)
     while (i < int(global_scene->objectList.size()))
      {
         this->tabProMat->insertRow(i);
-        if (this->isInGayPride(i + 1) == true)
-            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + "- SELECT", 1));
-        else if (this->isInCircle(i + 1) == true)
-            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + "- SELECT", 1));
-        else if (this->isInColorCircle(i + 1) == true)
-            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + "- SELECT", 1));
-        else if (this->isInMarble(i + 1) == true)
-            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + "- SELECT", 1));
-        else if (this->isInTurbulence(i + 1) == true)
-            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + "- SELECT", 1));
-        else if (this->isInWood(i + 1) == true)
-            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + "- SELECT", 1));
+        if (this->isInGayPride(i + 1) == true && this->proId == GAYPRIDE - 1)
+            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + " - SELECT", 1));
+        else if (this->isInCircle(i + 1) == true && this->proId == CIRCLE - 1)
+            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + " - SELECT", 1));
+        else if (this->isInColorCircle(i + 1) == true && this->proId == COLORCIRCLE - 1)
+            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + " - SELECT", 1));
+        else if (this->isInMarble(i + 1) == true && this->proId == MARBLE - 1)
+            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + " - SELECT", 1));
+        else if (this->isInTurbulence(i + 1) == true && this->proId == TURBULENCE - 1)
+            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + " - SELECT", 1));
+        else if (this->isInWood(i + 1) == true && this->proId == WOOD - 1)
+            this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name + " - SELECT", 1));
         else
             this->tabProMat->setItem(i, 0, new QTableWidgetItem(global_scene->objectList[i]->name, 1));
         i++;
@@ -562,8 +562,6 @@ void MyPopup::set_ui_selectobj()
     QPushButton *createButton = new QPushButton("Create");
     QPushButton *cancelButton = new QPushButton("Cancel");
     typeSelect->addItem("Sphere");
-    typeSelect->addItem("Plan");
-    typeSelect->addItem("Cylindre");
     mainLayout->addWidget(typeLabel, 0, 0);
     mainLayout->addWidget(typeSelect, 0, 1);
     mainLayout->addWidget(createButton, 1, 0);

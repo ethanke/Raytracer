@@ -70,7 +70,6 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 void MainWindow::on_loadButton_clicked()
 {
     global_scene = new Scene(this, 0);
-
     ui->saveButton->setDisabled(false);
     ui->renderButton->setDisabled(false);
     ui->lineEdit_cpx->setReadOnly(false);
@@ -89,12 +88,12 @@ void MainWindow::on_loadButton_clicked()
     ui->editButtonObj_6->setEnabled(true);
     ui->horizontalSlider_aa->setDisabled(false);
     ui->horizontalSlider_fov->setDisabled(false);
+    ui->comboBox_filtre->setDisabled(false);
     ui->lineEdit_cpx->setValidator(new QIntValidator(-99999999, 99999999, this));
     ui->lineEdit_cpy->setValidator(new QIntValidator(-99999999, 99999999, this));
     ui->lineEdit_cpz->setValidator(new QIntValidator(-99999999, 99999999, this));
     ui->lineEdit_lax->setValidator(new QIntValidator(-99999999, 99999999, this));
     ui->lineEdit_lay->setValidator(new QIntValidator(-99999999, 99999999, this));
-    ui->lineEdit_laz->setValidator(new QIntValidator(-99999999, 99999999, this));
     ui->lineEdit_cpx->setText(QString::number(global_scene->camera->start.x));
     ui->lineEdit_cpy->setText(QString::number(global_scene->camera->start.y));
     ui->lineEdit_cpz->setText(QString::number(global_scene->camera->start.z));
@@ -105,7 +104,6 @@ void MainWindow::on_loadButton_clicked()
     ui->lineEdit_ss->setDisabled(false);
     ui->lineEdit_ss->setText(QString::number(global_scene->shadowsampling));
     ui->listProMat->setDisabled(false);
-    ui->comboBox_filtre->setDisabled(false);
     global_scene->mode = 1;
     connect(ui->comboBox_filtre, SIGNAL(currentIndexChanged(int)), this, SLOT(setFiltre(int)));
     this->affLightTab();
