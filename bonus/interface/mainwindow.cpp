@@ -104,6 +104,8 @@ void MainWindow::on_loadButton_clicked()
     ui->lineEdit_ss->setDisabled(false);
     ui->lineEdit_ss->setText(QString::number(global_scene->shadowsampling));
     ui->listProMat->setDisabled(false);
+    global_scene->mode = 1;
+    connect(ui->comboBox_filtre, SIGNAL(currentIndexChanged(int)), this, SLOT(setFiltre(int)));
     this->affLightTab();
     this->affObjTab();
     this->affMatTab();
