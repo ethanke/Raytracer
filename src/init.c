@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Sun May 22 07:36:38 2016 Philippe Lefevre
+** Last update Sun May 22 16:43:40 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -43,16 +43,26 @@ int			do_cluster(int ac, char **av, t_prog *prog)
   return (0);
 }
 
-t_opt			*init_default_opt(t_prog *prog)
+t_opt			*init_default_opt(char **av, t_prog *prog)
 {
+  int			i;
+
+  i = -1;
   if ((prog->opt = malloc(sizeof(t_opt))) == NULL)
     return (NULL);
   prog->opt->thread_nb = 1;
   prog->opt->cluster = 0;
   prog->opt->rendu_display = 0;
   prog->opt->rendu_vertical = 0;
-  prog->opt->verbose = 1;
+  prog->opt->verbose = 0;
   prog->opt->export = 0;
+  while (av[++i])
+    {
+      if (!(my_strcmp("--verbose", av[i])))
+	prog->opt->verbose = 1;
+      else if (!(my_strcmp("--quiet", av[i])))
+	prog->opt->verbose = 0;
+  }
   return (prog->opt);
 }
 
@@ -77,7 +87,7 @@ int			verif_arg(int ac, char **av, t_prog *prog)
   int			i;
   int			ret;
 
-  if ((prog->opt = init_default_opt(prog)) == NULL)
+  if ((prog->opt = init_default_opt(av, prog)) == NULL)
     return (-1);
   if (do_cluster(ac, av, prog))
     return (1);

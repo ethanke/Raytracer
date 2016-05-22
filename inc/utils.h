@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 05:29:22 2016 victor sousa
-** Last update Sat May 21 03:15:40 2016 Philippe Lefevre
+** Last update Sun May 22 17:22:39 2016 Philippe Lefevre
 */
 
 #ifndef			UTILS_H_
@@ -50,7 +50,7 @@ t_coord                 normalize_p(t_point vec);
 float			min(float a, float b);
 float			max(float a, float b);
 double			my_atof(char *str);
-
+int			my_isnum(char ch);
 /* WTF */
 float			invsqrt(float number);
 

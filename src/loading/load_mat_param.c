@@ -5,10 +5,64 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Thu Mar 10 23:55:20 2016 victor sousa
-** Last update Sat May 21 19:28:46 2016 Philippe Lefevre
+** Last update Sun May 22 17:22:14 2016 Philippe Lefevre
 */
 
 #include	"main.h"
+
+void		my_atof_e(int *e, int *c, char *s)
+{
+  int		sign;
+  int		i;
+
+  if (*c == 'e' || *c == 'E')
+    {
+      sign = 1;
+      i = 0;
+      *c = *s++;
+      if (*c == '+')
+	*c = *s++;
+      else if (*c == '-')
+	{
+	  *c = *s++;
+	  sign = -1;
+	}
+      while (my_isnum(c))
+	{
+	  i = i * 10 + (*c - '0');
+	  *c = *s++;
+	}
+      *e += i * sign;
+    }
+}
+
+double		my_atof_lefevr(char *s)
+{
+  double	a = 0.0;
+  int		e = 0;
+  int		c;
+
+  while ((c = *s++) != '\0' && my_isnum(c))
+    a = a * 10.0 + (c - '0');
+  if (c == '.')
+    while ((c = *s++) != '\0' && my_isnum(c))
+      {
+	a = a * 10.0 + (c - '0');
+	e = e - 1;
+      }
+  my_atof_e(&e, &c, s);
+  while (e > 0)
+    {
+      a *= 10.0;
+      e--;
+    }
+  while (e < 0)
+    {
+      a *= 0.1;
+      e++;
+    }
+  return (a);
+}
 
 int			get_mat_bump(t_mat_list *new, char **file, int id)
 {
@@ -26,9 +80,7 @@ int			get_mat_bump(t_mat_list *new, char **file, int id)
       my_printf(1, "Could not find scene:material_list:mat%d:bump\n", id + 1);
       return (-1);
     }
-  printf("\nLA VRAIMENT FAUT PAS OUBLIER YA UN VRAI ATOF\n");
-  new->bump = atof(get);
-  printf("\nLA VRAIMENT FAUT PAS OUBLIER YA UN VRAI ATOF\n");
+  new->bump = my_atof_lefevr(get);
   free(get);
   free(lf);
   return (0);

@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Sat May 21 18:16:45 2016 Philippe Lefevre
+** Last update Sun May 22 16:55:09 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -66,7 +66,8 @@ char			**my_list_to_wordtab(t_line_list *list)
   return (out);
 }
 
-char			**load_scene_file(char *path, int i, int fd)
+char			**load_scene_file(char *path, int i, int fd,
+					  int verbose)
 {
   char			*str;
   char			**file;
@@ -81,9 +82,10 @@ char			**load_scene_file(char *path, int i, int fd)
   while ((str = get_next_line_size(fd, 0)) != NULL)
     file_list = add_line_list(file_list, str);
   time_end = time(NULL);
-  my_printf(1, "Open/Read en %d heures %d minutes %d secondes\n",
-	    (time_end - time_beg) / 3600, ((time_end - time_beg) % 3600) / 60,
-	    ((time_end - time_beg) % 3600) % 60);
+  if (verbose)
+    my_printf(1, "Open/Read en %d heures %d minutes %d secondes\n",
+	      (time_end - time_beg) / 3600, ((time_end - time_beg) % 3600)
+	      / 60, ((time_end - time_beg) % 3600) % 60);
   if ((file = my_list_to_wordtab(file_list)) == NULL)
     return (NULL);
   while (file[++i])

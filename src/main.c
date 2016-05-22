@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Sun May 22 06:56:34 2016 Philippe Lefevre
+** Last update Sun May 22 17:00:57 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -48,10 +48,10 @@ int			create_pix(t_prog *prog)
   if ((prog->pix = bunny_new_pixelarray(prog->win_size.x, prog->win_size.y))
       == NULL)
     {
-      my_putstr("buffer   creation failed... leaving\n");
+      my_printf(2, "buffer   creation failed... leaving\n");
       return (-1);
     }
-  else
+  else if (prog->opt->verbose)
     my_putstr("buffer  creation successfull\n");
   return (0);
 }
@@ -61,10 +61,10 @@ int			create_win(t_prog *prog)
   if ((prog->win = bunny_start(prog->win_size.x, prog->win_size.y,
 			       false, "Raytracer 2")) == NULL)
     {
-      my_putstr("windows creation failed... leaving\n");
+      my_printf(2, "windows creation failed... leaving\n");
       return (-1);
     }
-  else
+  else if (prog->opt->verbose)
     my_putstr("windows creation successfull\n");
   return (0);
 }

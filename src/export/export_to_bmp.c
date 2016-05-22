@@ -5,7 +5,7 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Sun May 22 02:16:59 2016 Philippe Lefevre
-** Last update Sun May 22 08:27:01 2016 Philippe Lefevre
+** Last update Sun May 22 16:58:49 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -27,6 +27,7 @@ int			export_to_bmp_init(t_prog *prog,
   pbitmap->bitmapinfoheader.xpixelpermeter = _xpixelpermeter ;
   pbitmap->bitmapinfoheader.numcolorspallette = 0;
   write (fd, pbitmap, sizeof(t_bitmap));
+  free(pbitmap);
   return (0);
 }
 
@@ -50,13 +51,11 @@ int			export_to_bmp(t_prog *prog)
 {
   t_bunny_position	pos;
   t_bitmap		*pbitmap;
-  char			*pixelbuffer;
   int			fd;
 
   if (((fd = open(prog->opt->export_path, O_CREAT | O_TRUNC | O_RDWR,
 		  S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) < 0)
-      || ((pbitmap  = malloc(sizeof(t_bitmap))) == NULL)
-      || ((pixelbuffer = malloc(_pixelbytesize)) == NULL))
+      || ((pbitmap  = malloc(sizeof(t_bitmap))) == NULL))
     return (my_printf(2, "Erreur: cannot create %s file\n",
 		      prog->opt->export_path) - 1);
   export_to_bmp_init(prog, fd, pbitmap);
@@ -68,9 +67,8 @@ int			export_to_bmp(t_prog *prog)
 	export_to_bmp_write(prog, fd, &pos);
     }
   close(fd);
-  my_printf(1, "Rendu save in %s\n", prog->opt->export_path);
+  if (prog->opt->verbose)
+    my_printf(1, "Rendu save in %s\n", prog->opt->export_path);
   free(prog->opt->export_path);
-  free(pbitmap);
-  free(pixelbuffer);
   return (0);
 }

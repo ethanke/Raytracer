@@ -5,7 +5,7 @@
 ** Login   <lefevr_h@epitech.net>
 **
 ** Started on  Sun May  8 02:20:22 2016 Philippe Lefevre
-** Last update Sat May 21 01:10:11 2016 Philippe Lefevre
+** Last update Sun May 22 16:44:29 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -115,6 +115,8 @@ int			raytrace_threading(t_prog *prog, int start,
   pos.y = 0;
   prog->opt->start = start;
   prog->opt->stop = stop;
+  bunny_blit(&prog->win->buffer, &prog->pix->clipable, &pos);
+  bunny_display(prog->win);
   if (prog->opt->verbose)
     my_putstr("\nRaytracing multi-threading started\n");
   i = -1;
