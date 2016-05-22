@@ -46,6 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox_filtre->setDisabled(true);
     ui->lineEdit_ss->setDisabled(true);
     ui->listProMat->setDisabled(true);
+    this->affProceduralMat();
 }
 
 void MainWindow::CloseWindow()
@@ -104,12 +105,12 @@ void MainWindow::on_loadButton_clicked()
     ui->lineEdit_ss->setDisabled(false);
     ui->lineEdit_ss->setText(QString::number(global_scene->shadowsampling));
     ui->listProMat->setDisabled(false);
+    ui->comboBox_filtre->setDisabled(false);
     global_scene->mode = 1;
     connect(ui->comboBox_filtre, SIGNAL(currentIndexChanged(int)), this, SLOT(setFiltre(int)));
     this->affLightTab();
     this->affObjTab();
     this->affMatTab();
-    this->affProceduralMat();
 }
 
 void MainWindow::on_lineEdit_cpx_editingFinished()
@@ -229,7 +230,6 @@ void MainWindow::on_pushButton_3_pressed()
     this->affLightTab();
     this->affObjTab();
     this->affMatTab();
-    this->affProceduralMat();
 }
 
 void MainWindow::refObjTab()

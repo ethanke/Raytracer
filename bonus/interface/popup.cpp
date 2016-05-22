@@ -282,6 +282,9 @@ void MyPopup::set_layout_promat(QGridLayout *mainLayout, int id)
         this->tabProMat->setItem(i, 0, new QTableWidgetItem(QString::number(global_scene->objectList[i]->center.x), 1));
         i++;
     }
+    if (this->proId == CIRCLE - 1)
+    {
+    }
     connect(this->tabProMat, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(selectProMat(QTableWidgetItem *)));
     mainLayout->addWidget(this->tabProMat, 0, 0);
 
