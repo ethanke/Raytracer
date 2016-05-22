@@ -14,8 +14,6 @@ RaytraceThread::RaytraceThread(QMutex* mu, GlWindow *glWin)
 #define         SEPIA               5
 void RaytraceThread::run()
 {
-    int     mode = global_scene->mode;
-
     Vector2 pos = Vector2(-1, -1);
     Camera  camera = Camera(global_scene->camera->win_size,
                             global_scene->camera->start,
@@ -31,33 +29,33 @@ void RaytraceThread::run()
         {
             camera.processDir(pos);
             Vector3f<float> outColor = raytrace(camera.start, camera.direction, 0, 1.0) * 255.0;
-            if (mode == NORMAL)
+            if (global_scene->mode == NORMAL)
             {
                 this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = outColor.x;
                 this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = outColor.y;
                 this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = outColor.z;
             }
-            if (mode == NEGATIF)
+            if (global_scene->mode == NEGATIF)
             {
                 this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = 1 - outColor.x;
                 this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = 1 - outColor.y;
                 this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = 1 - outColor.z;
             }
-            if (mode == GRIS)
+            if (global_scene->mode == GRIS)
             {
                 float moyenne = outColor.length() / 3.0;
                 this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = moyenne;
                 this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = moyenne;
                 this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = moyenne;
             }
-            if (mode == BLACK_N_WHITE)
+            if (global_scene->mode == BLACK_N_WHITE)
             {
                 float moyenne = outColor.length() / 3.0;
                 this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = moyenne > 0.5 ? 1 : 0;
                 this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = moyenne > 0.5 ? 1 : 0;
                 this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].b = moyenne > 0.5 ? 1 : 0;
             }
-            if (mode == SEPIA)
+            if (global_scene->mode == SEPIA)
             {
                 this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].r = (outColor.x * .393) + (outColor.y *.769) + (outColor.z * .189);
                 this->glWin->pixel[pos.x + pos.y * this->glWin->size().width()].g = (outColor.x * .349) + (outColor.y *.686) + (outColor.z * .168);
