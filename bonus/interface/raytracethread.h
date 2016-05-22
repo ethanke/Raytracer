@@ -28,6 +28,7 @@
 #define WOOD                                    3
 #define GAYPRIDE                                4
 #define TURBULENCE                              5
+#define test                                    4
 #define COLORCIRCLE                             6
 
 class RaytraceThread : public QThread
