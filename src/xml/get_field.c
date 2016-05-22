@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 05:02:48 2016 victor sousa
-** Last update Wed May 11 14:32:22 2016 Philippe Lefevre
+** Last update Sun May 22 16:45:59 2016 Philippe Lefevre
 */
 
 #include	"main.h"
@@ -20,7 +20,7 @@ char		*get_next_occurence(char *str, char separator)
     i++;
   if ((out = malloc(sizeof(char) * (i + 1))) == NULL)
 	    {
-	      my_printf(1, "Malloc failed..\n");
+	      my_printf(2, "Malloc failed..\n");
 	      return (NULL);
 	    }
   i = 0;
@@ -44,7 +44,7 @@ char		*parse_value(char *str)
     i++;
   if ((out = malloc(sizeof(char) * 2)) == NULL)
     {
-      my_printf(1, "Malloc failed..\n");
+      my_printf(2, "Malloc failed..\n");
       return (NULL);
     }
   j = 0;
@@ -54,7 +54,7 @@ char		*parse_value(char *str)
       out[j++ + 1] = 0;
       if ((out = realloc(out, sizeof(char) * (my_strlen(out) + 2))) == NULL)
 	{
-	  my_printf(1, "Malloc failed..\n");
+	  my_printf(2, "Malloc failed..\n");
 	  return (NULL);
 	}
     }
@@ -81,7 +81,7 @@ char		*get_field(char **scene, char *field)
 
   if ((parent = malloc(8 * (how_much_char(field, ':') + 1))) == NULL)
     {
-      my_printf(1, "Malloc failed..\n");
+      my_printf(2, "Malloc failed..\n");
       return (NULL);
     }
   i = 0;

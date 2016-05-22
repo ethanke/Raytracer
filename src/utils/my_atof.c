@@ -5,12 +5,12 @@
 ** Login   <kerdel_e@epitech.eu>
 **
 ** Started on  Wed Apr 27 14:23:08 2016 Ethan Kerdelhue
-** Last update Thu May  5 02:13:14 2016 Ethan Kerdelhue
+** Last update Sun May 22 17:22:24 2016 Philippe Lefevre
 */
 
 #include	"main.h"
 
-int	my_isnum(char ch)
+int		my_isnum(char ch)
 {
   return ((ch >= '0' && ch <= '9') ? 1 : 0);
 }

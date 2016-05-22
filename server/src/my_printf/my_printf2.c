@@ -5,15 +5,10 @@
 ** Login   <leandr_g@epitech.net>
 **
 ** Started on  Fri Nov 13 10:51:48 2015 Gaëtan Léandre
-** Last update Tue May 10 23:33:58 2016 Gaëtan Léandre
+** Last update Sun May 22 20:12:45 2016 Philippe Lefevre
 */
 
 #include 		"server.h"
-
-void			va_my_putchar(int fd, va_list ap)
-{
-  my_putchar_in(fd, va_arg(ap, int));
-}
 
 void			va_my_putstr(int fd, va_list ap)
 {

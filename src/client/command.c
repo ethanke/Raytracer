@@ -5,7 +5,7 @@
 ** Login   <leandr_g@epitech.eu>
 **
 ** Started on  Wed May 11 00:37:45 2016 Gaëtan Léandre
-** Last update Sat May 21 23:31:54 2016 Philippe Lefevre
+** Last update Sun May 22 19:20:58 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -31,7 +31,6 @@ char			*download_cmd_1(char *grille, SOCKET sock,
     write_server(sock, "n");
   if (grille != NULL && tmp >= 0)
     {
-      my_printf(1, "size %d\n", size);
       *status = 3;
       return (grille);
     }

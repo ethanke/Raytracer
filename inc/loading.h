@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:38 2016 victor sousa
-** Last update Sat May 21 18:36:07 2016 Philippe Lefevre
+** Last update Sun May 22 16:33:34 2016 Philippe Lefevre
 */
 
 #ifndef			LOADING_H_
@@ -13,7 +13,10 @@
 
 # include		"main.h"
 
-char			**load_scene_file(char *path, int i, int fd);
+# define		WAITING_COLOR	0xFFcc3300
+
+char			**load_scene_file(char *path, int i, int fd,
+					  int verbose);
 int			load_scene(t_prog *prog, char *scene_path);
 int			load_obj_file(t_prog *prog, char *path);
 t_vtx_list		*get_vertex(char **file);

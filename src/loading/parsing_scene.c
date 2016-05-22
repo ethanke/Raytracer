@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 04:25:03 2016 victor sousa
-** Last update Sat May 21 18:30:24 2016 Philippe Lefevre
+** Last update Sun May 22 16:33:10 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -124,7 +124,7 @@ int			load_scene(t_prog *prog, char *scene_path)
   char			**file;
   t_coord		dir;
 
-  if ((file = load_scene_file(scene_path, -1, 0)) == NULL)
+  if ((file = load_scene_file(scene_path, -1, 0, prog->opt->verbose)) == NULL)
     return (-1);
   if (load_scene_beg(prog, file))
     return (-1);

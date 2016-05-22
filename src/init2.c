@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Feb  9 01:50:10 2016 victor sousa
-** Last update Sun May 22 07:28:30 2016 Philippe Lefevre
+** Last update Sun May 22 19:02:17 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -17,24 +17,19 @@ int			verif_load(t_prog *prog, char *args)
 
   size = my_strlen(args);
   ret = -1;
-  if (args[size - 1] == 'l' &&
-      args[size - 2] == 'm' &&
-      args[size - 3] == 'x' &&
-      args[size - 4] == '.')
+  if (args[size - 1] == 'l' && args[size - 2] == 'm'
+      && args[size - 3] == 'x' && args[size - 4] == '.')
     ret = load_scene(prog, args);
-  else if (args[size - 1] == 'j' &&
-	   args[size - 2] == 'b' &&
-	   args[size - 3] == 'o' &&
-	   args[size - 4] == '.')
+  else if (args[size - 1] == 'j' && args[size - 2] == 'b'
+	   && args[size - 3] == 'o' && args[size - 4] == '.')
     ret = load_obj_file(prog, args);
   else
     return (0);
   if (ret == -1)
     {
-      my_putstr("scene   loading  failed... leaving\n");
-      return (-1);
+      return (my_printf(2, "scene   loading  failed... leaving\n") - 1);
     }
-  else
+  else if (prog->opt->verbose)
     my_putstr("scene   loading  successfull\n");
   return (1);
 }

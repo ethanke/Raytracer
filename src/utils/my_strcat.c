@@ -5,7 +5,7 @@
 ** Login   <sousa_v@epitech.net>
 **
 ** Started on  Tue Mar  8 17:58:27 2016 victor sousa
-** Last update Sat May 21 03:15:41 2016 Philippe Lefevre
+** Last update Sun May 22 19:02:09 2016 Philippe Lefevre
 */
 
 #include		"main.h"
@@ -14,8 +14,8 @@ char			*my_strdup(char *str)
 {
   char			*s;
 
-  if ((s = malloc(my_strlen(str))) == NULL)
-      return (NULL);
+  if ((s = malloc(my_strlen(str) + 1)) == NULL)
+    return (NULL);
   my_strcpy(s, str);
   return (s);
 }
