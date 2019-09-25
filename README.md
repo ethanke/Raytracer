@@ -1,5 +1,6 @@
 # Raytracer
 
+![alt text](https://raw.githubusercontent.com/ethanke/Raytracer/master/output/reflect_woodend.png)
 
 Projet réaliser avec :  
 - Sousa Victor - Linkedin : https://fr.linkedin.com/in/victor-sousa-1abb64109
