@@ -11,7 +11,7 @@
   
  * Interface en C++ & QT
  * Loading de modèles 3d
- * Système de matériaux avancée applicable a tout objet (Couleurs, bump map, texture...)
+ * Système de matériaux avancée applicable a tous les objets (Couleurs, bump map, texture...)
  * Bruit de Perlin
  * Système de scène
 
