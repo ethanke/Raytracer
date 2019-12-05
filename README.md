@@ -13,7 +13,7 @@
  * Loading de modèles 3d
  * Système de matériaux avancée applicable a tous les objets (Couleurs, bump map, texture...)
  * Bruit de Perlin
- * Système de scène
+ * Système d'object ; scène, lumière, object (square...)
 
 Projet réaliser avec :  
 - Sousa Victor - Linkedin : https://fr.linkedin.com/in/victor-sousa-1abb64109
